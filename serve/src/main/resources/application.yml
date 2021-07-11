@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: ithere-api
+  datasource:
+    name: dataSource
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      connection-init-sql: SET NAMES utf8mb4
+  jackson:
+    locale: zh_CN
+    time-zone: Asia/Shanghai
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+#  autoconfigure:
+#    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+
+mybatis-plus:
+#  mapper-locations: classpath*:/mapper/**/*.xml
+#  type-handlers-package: com.vinka.core.modules.*.dao.typehandler
+#  type-aliases-package: com.vinka.core.modules.*.dao.typehandler
+  configuration:
+    map-underscore-to-camel-case: true
+    log-prefix: dao.
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+ms:
+  spring:
+    exception:
+      resource-paths: i18n/error
+
+#logging:
+#  level:
+#    org.springframework.web: INFO
+#    com.github.binarywang.demo.wx.mp: DEBUG
+#    me.chanjar.weixin: DEBUG
