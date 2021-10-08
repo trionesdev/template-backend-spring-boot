@@ -1,6 +1,6 @@
 package com.ms.rest.handler;
 
-import com.moensun.spring.exception.MSException;
+import com.moensun.commons.exception.MSException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;

@@ -1,11 +1,10 @@
 package com.ms.rest.conf.security;
 
 import com.google.common.collect.Lists;
-import com.ms.core.commons.ctx.OperateContext;
-import com.ms.core.commons.ctx.Operator;
-import com.ms.core.commons.ctx.OperatorRoleEnum;
-import com.ms.rest.conf.security.jwt.JWTFacade;
-import io.jsonwebtoken.Claims;
+import com.moensun.commons.context.operator.OperateContext;
+import com.moensun.commons.context.operator.Operator;
+import com.moensun.commons.context.operator.OperatorRoleEnum;
+import com.ms.core.conf.jwt.JwtFacade;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
@@ -21,17 +20,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
-import static com.ms.rest.conf.security.jwt.ClaimsKeyConstant.OPERATOR_ID;
-import static com.ms.rest.conf.security.jwt.ClaimsKeyConstant.OPERATOR_ROLE;
+import static com.ms.core.conf.jwt.ClaimsKeyConstant.OPERATOR_ID;
+import static com.ms.core.conf.jwt.ClaimsKeyConstant.OPERATOR_ROLE;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Component
 @AllArgsConstructor
-public class JWTAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JWTFacade jwtFacade;
+    private final JwtFacade jwtFacade;
     private final OperateContext operateContext;
 
     @Override
@@ -42,19 +42,19 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         String authorization = request.getHeader(AUTHORIZATION);
         if (StringUtils.isNotBlank(authorization)) {
             authorization = authorization.replace("Bearer ", "");
-            Claims claims = jwtFacade.parse(authorization);
+            Map<String,Object> claims = jwtFacade.parse(authorization);
             if (Objects.nonNull(claims)) {
-                Long operatorId = claims.get(OPERATOR_ID, Long.class);
-                String role = claims.get(OPERATOR_ROLE, String.class);
+                Long operatorId = (Long) claims.get(OPERATOR_ID);
+                String role = (String) claims.get(OPERATOR_ROLE);
                 if (Objects.nonNull(operatorId) && Objects.nonNull(role)) {
                     operator.setOperatorId(operatorId);
                     operator.setOperatorRole(OperatorRoleEnum.getByName(role));
-                    JWTUserDetails userDetails =
-                            JWTUserDetails.builder().token(authorization).operateId(operatorId).role(role)
+                    JwtUserDetails userDetails =
+                            JwtUserDetails.builder().token(authorization).operateId(operatorId).role(role)
                                     .build();
                     List<SimpleGrantedAuthority> authorities = Lists.newArrayList(new SimpleGrantedAuthority(role));
                     Authentication authentication =
-                            new JWTAuthenticationToken(userDetails.getOperateId(), userDetails, authorities);
+                            new JwtAuthenticationToken(userDetails.getOperateId(), userDetails, authorities);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }

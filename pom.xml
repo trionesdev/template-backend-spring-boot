@@ -66,9 +66,9 @@
                 <version>3.0.0</version>
             </dependency>
             <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
-                <version>0.9.1</version>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>9.15.2</version>
             </dependency>
             <!--common utils-->
             <dependency>
@@ -98,26 +98,27 @@
                 <artifactId>fastjson</artifactId>
                 <version>1.2.76</version>
             </dependency>
-            <!--json-->
-
-            <!--moensun-->
-            <dependency>
-                <groupId>com.moensun.spring</groupId>
-                <artifactId>spring-exception-spring-boot-starter</artifactId>
-                <version>1.0.2-RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>com.moensun</groupId>
-                <artifactId>cloud-integration-boot-starter</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <!--moensun-->
-
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.18.20</version>
             </dependency>
+            <!--json-->
+
+            <!--moensun-->
+            <dependency>
+                <groupId>com.moensun.spring.boot</groupId>
+                <artifactId>moensun-boot-starters</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.moensun.spring.boot</groupId>
+                <artifactId>moensun-cloud-integration-spring-boot-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <!--moensun-->
+
+
         </dependencies>
     </dependencyManagement>
 

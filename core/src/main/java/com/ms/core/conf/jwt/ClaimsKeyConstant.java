@@ -1,4 +1,4 @@
-package com.ms.rest.conf.security.jwt;
+package com.ms.core.conf.jwt;
 
 public class ClaimsKeyConstant {
     public static final String OPERATOR_ID = "OPERATOR_ID";

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class JWTUserDetails {
+public class JwtUserDetails {
     private String token;
     private Long operateId;
     private String role;

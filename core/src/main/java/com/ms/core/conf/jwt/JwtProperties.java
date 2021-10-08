@@ -1,4 +1,4 @@
-package com.ms.rest.conf.security.jwt;
+package com.ms.core.conf.jwt;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class JWTProperties {
+public class JwtProperties {
     private String secret;
     private int expiration;
 }

@@ -1,8 +1,8 @@
 package com.ms.core.conf.jackson;
 
-import com.ms.core.conf.jackson.deserializer.InstantDeserializer;
-import com.ms.core.conf.jackson.serializer.InstantSerializer;
-import com.ms.core.conf.jackson.serializer.LongSerializer;
+import com.moensun.commons.core.jackson.deserializer.InstantDeserializer;
+import com.moensun.commons.core.jackson.serializer.InstantSerializer;
+import com.moensun.commons.core.jackson.serializer.LongSerializer;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
