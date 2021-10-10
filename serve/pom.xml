@@ -19,8 +19,8 @@
     <dependencies>
         <dependency>
             <groupId>com.ms</groupId>
-            <artifactId>api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <artifactId>rest</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 
