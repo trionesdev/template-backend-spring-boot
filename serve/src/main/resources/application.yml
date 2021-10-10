@@ -17,6 +17,8 @@ spring:
     multipart:
       max-file-size: 50MB
       max-request-size: 50MB
+  messages:
+    basename: i18n/validation
 #  autoconfigure:
 #    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
 

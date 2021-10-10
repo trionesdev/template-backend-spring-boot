@@ -23,9 +23,9 @@ public class SwaggerConfiguration {
     public Docket swagger() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("default")
-                .apiInfo(new ApiInfoBuilder().title("API").version("1.0.0").build())
+                .apiInfo(new ApiInfoBuilder().title("api").version("1.0.0").build())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.ms.api"))
+                .apis(RequestHandlerSelectors.basePackage("com.ms.rest"))
                 .build()
                 .securitySchemes(securitySchemes());
     }
@@ -33,10 +33,10 @@ public class SwaggerConfiguration {
     @Bean
     public Docket swaggerAdmin() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("admin")
-                .apiInfo(new ApiInfoBuilder().title("vinka admin API").version("1.0.0").build())
+                .groupName("bossRest")
+                .apiInfo(new ApiInfoBuilder().title("boss api").version("1.0.0").build())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.ms.adminapi"))
+                .apis(RequestHandlerSelectors.basePackage("com.ms.bossrest"))
                 .build()
                 .securitySchemes(securitySchemes());
     }

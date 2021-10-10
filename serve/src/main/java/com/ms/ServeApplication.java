@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Slf4j
 @SpringBootApplication
-@MapperScan(value = {"ms.core.modules.*.dao.mapper"})
+@MapperScan(value = {"com.ms.core.modules.*.dao.mapper"})
 //@EnableFeignClients
 public class ServeApplication {
     public static void main(String[] args){
