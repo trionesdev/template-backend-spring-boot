@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JwtUserDetails {
     private String token;
-    private Long operateId;
+    private String operateId;
     private String role;
 }
