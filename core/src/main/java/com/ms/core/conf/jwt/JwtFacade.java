@@ -2,7 +2,7 @@ package com.ms.core.conf.jwt;
 
 
 import com.google.common.collect.Maps;
-import com.moensun.commons.context.operator.OperatorRoleEnum;
+import com.moensun.commons.context.actor.ActorRoleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.ms.core.conf.jwt.ClaimsKeyConstant.OPERATOR_ID;
-import static com.ms.core.conf.jwt.ClaimsKeyConstant.OPERATOR_ROLE;
+import static com.ms.core.conf.jwt.ClaimsKeyConstant.ACTOR_ID;
+import static com.ms.core.conf.jwt.ClaimsKeyConstant.ACTOR_ROLE;
 
 @RequiredArgsConstructor
 @Configuration
@@ -27,8 +27,8 @@ public class JwtFacade {
             return null;
         }
         Map<String, Object> claims = Maps.newHashMap();
-        claims.put(OPERATOR_ID, userId);
-        claims.put(OPERATOR_ROLE, OperatorRoleEnum.USER.name());
+        claims.put(ACTOR_ID, userId);
+        claims.put(ACTOR_ROLE, ActorRoleEnum.USER.name());
         return JwtUtils.generateToken(jwtProperties, String.valueOf(userId), claims);
     }
 
@@ -37,8 +37,8 @@ public class JwtFacade {
             return null;
         }
         Map<String, Object> claims = Maps.newHashMap();
-        claims.put(OPERATOR_ID, userId);
-        claims.put(OPERATOR_ROLE, OperatorRoleEnum.BOSS_USER.name());
+        claims.put(ACTOR_ID, userId);
+        claims.put(ACTOR_ROLE, ActorRoleEnum.BOSS_USER.name());
         return JwtUtils.generateToken(jwtProperties, String.valueOf(userId), claims);
     }
 
@@ -47,8 +47,8 @@ public class JwtFacade {
             return null;
         }
         Map<String, Object> claims = Maps.newHashMap();
-        claims.put(OPERATOR_ID, userId);
-        claims.put(OPERATOR_ROLE, role);
+        claims.put(ACTOR_ID, userId);
+        claims.put(ACTOR_ROLE, role);
         return JwtUtils.generateToken(jwtProperties, String.valueOf(userId), claims);
     }
 

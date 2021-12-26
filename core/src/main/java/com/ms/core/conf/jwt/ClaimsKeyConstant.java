@@ -1,6 +1,6 @@
 package com.ms.core.conf.jwt;
 
 public class ClaimsKeyConstant {
-    public static final String OPERATOR_ID = "OPERATOR_ID";
-    public static final String OPERATOR_ROLE = "OPERATOR_ROLE";
+    public static final String ACTOR_ID = "ACTOR_ID";
+    public static final String ACTOR_ROLE = "ACTOR_ROLE";
 }

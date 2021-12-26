@@ -1,9 +1,8 @@
 package com.ms.rest.conf.security;
 
 import com.google.common.collect.Lists;
-import com.moensun.commons.context.operator.OperateContext;
-import com.moensun.commons.context.operator.Operator;
-import com.moensun.commons.context.operator.OperatorRoleEnum;
+import com.moensun.commons.context.actor.Actor;
+import com.moensun.commons.context.actor.ActorContext;
 import com.ms.core.conf.jwt.JwtFacade;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -23,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.ms.core.conf.jwt.ClaimsKeyConstant.OPERATOR_ID;
-import static com.ms.core.conf.jwt.ClaimsKeyConstant.OPERATOR_ROLE;
+import static com.ms.core.conf.jwt.ClaimsKeyConstant.ACTOR_ID;
+import static com.ms.core.conf.jwt.ClaimsKeyConstant.ACTOR_ROLE;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Component
@@ -32,23 +31,23 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtFacade jwtFacade;
-    private final OperateContext operateContext;
+    private final ActorContext actorContext;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        Operator operator = new Operator();
-        operator.setTime(Instant.now());
+        Actor actor = new Actor();
+        actor.setTime(Instant.now());
         String authorization = request.getHeader(AUTHORIZATION);
         if (StringUtils.isNotBlank(authorization)) {
             authorization = authorization.replace("Bearer ", "");
             Map<String,Object> claims = jwtFacade.parse(authorization);
             if (Objects.nonNull(claims)) {
-                Long operatorId = (Long) claims.get(OPERATOR_ID);
-                String role = (String) claims.get(OPERATOR_ROLE);
+                String operatorId = String.valueOf(claims.get(ACTOR_ID));
+                String role = String.valueOf(claims.get(ACTOR_ROLE));
                 if (Objects.nonNull(operatorId) && Objects.nonNull(role)) {
-                    operator.setOperatorId(operatorId);
-                    operator.setOperatorRole(OperatorRoleEnum.getByName(role));
+                    actor.setActorId(operatorId);
+                    actor.setRole(role);
                     JwtUserDetails userDetails =
                             JwtUserDetails.builder().token(authorization).operateId(operatorId).role(role)
                                     .build();
@@ -59,8 +58,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         }
-        operateContext.setOperator(operator);
+        actorContext.setActor(actor);
         filterChain.doFilter(request, response);
-        operateContext.resetOperator();
+        actorContext.resetActor();
     }
 }
