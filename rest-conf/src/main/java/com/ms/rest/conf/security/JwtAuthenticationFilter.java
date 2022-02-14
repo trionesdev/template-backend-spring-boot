@@ -1,9 +1,6 @@
 package com.ms.rest.conf.security;
 
 import com.google.common.collect.Lists;
-import com.moensun.commons.context.operator.OperateContext;
-import com.moensun.commons.context.operator.Operator;
-import com.moensun.commons.context.operator.OperatorRoleEnum;
 import com.ms.core.conf.jwt.JwtFacade;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;

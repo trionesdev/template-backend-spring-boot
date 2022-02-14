@@ -2,7 +2,7 @@ package com.ms.core.conf.jwt;
 
 
 import com.google.common.collect.Maps;
-import com.moensun.commons.context.operator.OperatorRoleEnum;
+import com.moensun.commons.context.actor.ActorRoleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +28,7 @@ public class JwtFacade {
         }
         Map<String, Object> claims = Maps.newHashMap();
         claims.put(OPERATOR_ID, userId);
-        claims.put(OPERATOR_ROLE, OperatorRoleEnum.USER.name());
+        claims.put(OPERATOR_ROLE, ActorRoleEnum.USER.name());
         return JwtUtils.generateToken(jwtProperties, String.valueOf(userId), claims);
     }
 
@@ -38,7 +38,7 @@ public class JwtFacade {
         }
         Map<String, Object> claims = Maps.newHashMap();
         claims.put(OPERATOR_ID, userId);
-        claims.put(OPERATOR_ROLE, OperatorRoleEnum.BOSS_USER.name());
+        claims.put(OPERATOR_ROLE, ActorRoleEnum.BOSS_USER.name());
         return JwtUtils.generateToken(jwtProperties, String.valueOf(userId), claims);
     }
 
