@@ -1,13 +1,14 @@
 package com.ms.rest.modules.user.controller.impl;
 
 import com.ms.rest.modules.user.controller.ro.UserRO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@Api(tags = {"用户"})
+@Tag(name = "用户")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "users")
@@ -18,7 +19,7 @@ public class UserController {
 
     }
 
-    @ApiOperation(value = "新增或修改")
+    @Operation(summary = "新增或修改")
     @PutMapping
     public void upsert(@Validated @RequestBody UserRO args){
 
