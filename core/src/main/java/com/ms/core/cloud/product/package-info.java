@@ -1,1 +1,0 @@
-package com.ms.core.cloud.product;
