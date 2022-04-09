@@ -7,8 +7,8 @@
     <modules>
         <module>core</module>
         <module>rest-backend</module>
-        <module>rest-conf</module>
         <module>serve</module>
+        <module>infrastructure</module>
     </modules>
 
     <groupId>com.ms</groupId>
