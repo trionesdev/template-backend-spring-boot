@@ -1,7 +1,7 @@
 package ms.com;
 
-import com.ms.infrastructure.conf.jwt.JwtProperties;
-import com.ms.infrastructure.conf.jwt.JwtUtils;
+import ms.triones.infrastructure.conf.jwt.JwtProperties;
+import ms.triones.infrastructure.conf.jwt.JwtUtils;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
