@@ -18,3 +18,5 @@
 位置 ms.triones.infrastructure.conf.jackson
 #### 配置mybatis-plus
 位置 ms.triones.infrastructure.conf.mybatisplus
+
+## 依赖
