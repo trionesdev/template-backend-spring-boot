@@ -12,9 +12,9 @@
 例如，需要添加一个pay的服务。则在新的工程下，将第一级的backend改为pay即可。 ms.triones.backend -> ms.triones.pay
 
 ## 基础配置
-### 配置swagger
+#### 配置swagger
 在infrastructure 模块下 ms.triones.infrastructure.conf.swagger.SwaggerConfiguration 进行配置
-### 配置jackson
+#### 配置jackson
 位置 ms.triones.infrastructure.conf.jackson
-### 配置mybatis-plus
+#### 配置mybatis-plus
 位置 ms.triones.infrastructure.conf.mybatisplus
