@@ -1,4 +1,4 @@
-FROM java:8u111-jre-alpine
+FROM ccr.ccs.tencentyun.com/moensun-dev/amazoncorretto:11.0.17-alpine3.16
 MAINTAINER "bane" <fengxiaotx@163.com>
 ENV container docker
 ENV TZ=Asia/Shanghai
