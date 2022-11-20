@@ -15,22 +15,22 @@ public class SwaggerConfiguration {
     @Bean
     public GroupedOpenApi backendApi() {
         return GroupedOpenApi.builder()
-                .group("IT-HERE Backend API")
+                .group("Triones Backend API")
                 .pathsToMatch("/api/**")
-                .packagesToScan("net.ithere.rest.backend")
+                .packagesToScan("ms.triones.backend.rest.backend")
                 .addOpenApiCustomiser(authorizationOpenApiCustomiser())
                 .build();
     }
 
-    @Bean
-    public GroupedOpenApi bossApi() {
-        return GroupedOpenApi.builder()
-                .group("IT-HERE Boss API")
-                .pathsToMatch("/boss-api/**")
-                .packagesToScan("net.ithere.rest.boss")
-                .addOpenApiCustomiser(authorizationOpenApiCustomiser())
-                .build();
-    }
+//    @Bean
+//    public GroupedOpenApi bossApi() {
+//        return GroupedOpenApi.builder()
+//                .group("Triones Boss API")
+//                .pathsToMatch("/boss-api/**")
+//                .packagesToScan("net.ithere.rest.boss")
+//                .addOpenApiCustomiser(authorizationOpenApiCustomiser())
+//                .build();
+//    }
 
     public OpenApiCustomiser authorizationOpenApiCustomiser() {
         return openApi -> openApi.schemaRequirement("AUTHORIZATION", new SecurityScheme().type(SecurityScheme.Type.APIKEY)
