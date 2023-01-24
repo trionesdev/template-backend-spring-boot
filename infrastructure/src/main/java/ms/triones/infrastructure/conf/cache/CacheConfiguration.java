@@ -3,6 +3,10 @@ package ms.triones.infrastructure.conf.cache;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +25,10 @@ import java.util.Objects;
 
 @Configuration
 @EnableCaching
+@RequiredArgsConstructor
+@EnableConfigurationProperties({CacheProperties.class})
 public class CacheConfiguration {
+    private final CacheProperties cacheProperties;
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
@@ -41,15 +48,29 @@ public class CacheConfiguration {
 
     @Bean
     public CacheManager cacheManager(RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate) {
-        return RedisCacheManager.RedisCacheManagerBuilder
+        RedisCacheManager.RedisCacheManagerBuilder cacheManagerBuilder = RedisCacheManager.RedisCacheManagerBuilder
                 .fromConnectionFactory(Objects.requireNonNull(redisTemplate.getConnectionFactory()))
-                .cacheDefaults(cacheConfiguration(redisTemplate, 3600L))
-                .withCacheConfiguration("verify-code", cacheConfiguration(stringRedisTemplate, 900L))
-                .transactionAware()
-                .build();
+                .cacheDefaults(buildCacheConfiguration(redisTemplate, cacheProperties.getDefaultTtl()))
+                .transactionAware();
+        if (MapUtils.isNotEmpty(cacheProperties.getCacheNames())) {
+            cacheProperties.getCacheNames().forEach((k, v) -> {
+                RedisCacheConfiguration cacheConfiguration;
+                switch (v.getValueSerializer()) {
+                    case JSON:
+                        cacheConfiguration = buildCacheConfiguration(redisTemplate, v.getTtl());
+                        break;
+                    case STRING:
+                    default:
+                        cacheConfiguration = buildCacheConfiguration(stringRedisTemplate, v.getTtl());
+                        break;
+                }
+                cacheManagerBuilder.withCacheConfiguration(k, cacheConfiguration);
+            });
+        }
+        return cacheManagerBuilder.build();
     }
 
-    private <T> RedisCacheConfiguration cacheConfiguration(RedisTemplate<String, T> redisTemplate, Long seconds) {
+    private <T> RedisCacheConfiguration buildCacheConfiguration(RedisTemplate<String, T> redisTemplate, Long seconds) {
         return RedisCacheConfiguration
                 .defaultCacheConfig()
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisTemplate.getStringSerializer()))
