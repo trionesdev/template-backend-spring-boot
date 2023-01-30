@@ -55,10 +55,10 @@
             <artifactId>guava</artifactId>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>io.github.openfeign</groupId>-->
-<!--            <artifactId>feign-jackson</artifactId>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.github.openfeign</groupId>-->
+        <!--            <artifactId>feign-jackson</artifactId>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>com.moensun.spring.boot</groupId>
@@ -75,6 +75,10 @@
         <dependency>
             <groupId>com.moensun.spring.boot</groupId>
             <artifactId>moensun-mybatis-plus-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.moensun.spring.boot</groupId>
+            <artifactId>moensun-security-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.qcloud</groupId>
