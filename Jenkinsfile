@@ -9,7 +9,6 @@ pipeline{
     stages {
         stage('Clone') {
             steps{
-                checkout scm
                sh '''
                curl -X POST \
                 'https://oapi.dingtalk.com/robot/send?access_token='''+DING_DING_TOKEN+'''' \
@@ -26,6 +25,7 @@ pipeline{
 
                 '
                '''
+               checkout scm
             }
         }
         stage('Env') {
@@ -71,44 +71,6 @@ pipeline{
            steps{
                sh "helm upgrade --install  --namespace ${env.ENV} --create-namespace --set image.tag=${env.TAG} ${HELM_NAME} kubernetes/chart -f kubernetes/env/${ENV}.yaml"
            }
-           post {
-             failure {
-                  sh '''
-                  curl -X POST \
-                   'https://oapi.dingtalk.com/robot/send?access_token='''+DING_DING_TOKEN+'''' \
-                   -H 'Content-Type: application/json' \
-                   -d '
-
-                   {
-                      "msgtype": "markdown",
-                      "markdown": {
-                          "title":"Jenkins工程构建失败",
-                          "text": "##### 构建<font color=Red>失败</font> \n > 服务： '''+HELM_NAME+''' \n\n > 分支： '''+GIT_BRANCH+'''"
-                      }
-                   }
-
-                   '
-                  '''
-             }
-             success {
-                  sh '''
-                  curl -X POST \
-                   'https://oapi.dingtalk.com/robot/send?access_token='''+DING_DING_TOKEN+'''' \
-                   -H 'Content-Type: application/json' \
-                   -d '
-
-                   {
-                      "msgtype": "markdown",
-                      "markdown": {
-                          "title":"Jenkins工程构建成功",
-                          "text": "##### 构建<font color=Green>成功</font> \n > 服务： '''+HELM_NAME+''' \n\n > 分支： '''+GIT_BRANCH+'''"
-                      }
-                   }
-
-                   '
-                  '''
-             }
-           }
        }
        stage('Uninstall Helm App') {
            when {
@@ -118,5 +80,43 @@ pipeline{
                 sh "helm uninstall ${HELM_NAME} --namespace ${env.ENV}"
            }
        }
+    }
+    post {
+      failure {
+           sh '''
+           curl -X POST \
+            'https://oapi.dingtalk.com/robot/send?access_token='''+DING_DING_TOKEN+'''' \
+            -H 'Content-Type: application/json' \
+            -d '
+
+            {
+               "msgtype": "markdown",
+               "markdown": {
+                   "title":"Jenkins工程构建失败",
+                   "text": "##### 构建<font color=Red>失败</font> \n > 服务： '''+HELM_NAME+''' \n\n > 分支： '''+GIT_BRANCH+'''"
+               }
+            }
+
+            '
+           '''
+      }
+      success {
+           sh '''
+           curl -X POST \
+            'https://oapi.dingtalk.com/robot/send?access_token='''+DING_DING_TOKEN+'''' \
+            -H 'Content-Type: application/json' \
+            -d '
+
+            {
+               "msgtype": "markdown",
+               "markdown": {
+                   "title":"Jenkins工程构建成功",
+                   "text": "##### 构建<font color=Green>成功</font> \n > 服务： '''+HELM_NAME+''' \n\n > 分支： '''+GIT_BRANCH+'''"
+               }
+            }
+
+            '
+           '''
+      }
     }
 }
