@@ -19,139 +19,17 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <springdoc.version>1.6.5</springdoc.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.6.3</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2021.0.0</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- database -->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.20</version>
-            </dependency>
-            <dependency>
-                <groupId>org.redisson</groupId>
-                <artifactId>redisson-spring-boot-starter</artifactId>
-                <version>3.15.4</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-ui</artifactId>
-                <version>${springdoc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-webmvc-core</artifactId>
-                <version>${springdoc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-security</artifactId>
-                <version>${springdoc.version}</version>
-            </dependency>
-            <!-- database -->
-            <dependency>
-                <groupId>dev.akkinoc.spring.boot</groupId>
-                <artifactId>orika-spring-boot-starter</artifactId>
-                <version>2.2.3</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nimbusds</groupId>
-                <artifactId>nimbus-jose-jwt</artifactId>
-                <version>9.15.2</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>5.8.11</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct</artifactId>
-                <version>1.5.3.Final</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-processor</artifactId>
-                <version>1.5.3.Final</version>
-            </dependency>
-            <!--common utils-->
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-collections4</artifactId>
-                <version>4.4</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>30.1.1-jre</version>
-            </dependency>
-            <!--common utils-->
-            <!--json-->
-            <dependency>
-                <groupId>io.github.openfeign</groupId>
-                <artifactId>feign-jackson</artifactId>
-                <version>11.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.20</version>
-            </dependency>
-            <!--json-->
-
-            <!--moensun-->
-            <dependency>
-                <groupId>com.moensun.spring.boot</groupId>
-                <artifactId>moensun-boot-starters</artifactId>
+                <groupId>ms.triones</groupId>
+                <artifactId>triones-dependencies</artifactId>
                 <version>1.0-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>com.moensun.spring.boot</groupId>
-                <artifactId>moensun-cloud-integration-spring-boot-starters</artifactId>
-                <version>1.0-SNAPSHOT</version>
-                <type>pom</type>
-                <scope>import</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-dependencies</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.moensun.spring.boot</groupId>
-                <artifactId>moensun-weixin-spring-boot-starters</artifactId>
-                <version>1.0-SNAPSHOT</version>
-                <type>pom</type>
-                <scope>import</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-dependencies</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <!--moensun-->
-
-
         </dependencies>
     </dependencyManagement>
 
@@ -188,8 +66,8 @@
 
     <repositories>
         <repository>
-            <id>moensun-repository</id>
-            <url>http://nexus.moensun.com/repository/maven-public</url>
+            <id>ms-repository</id>
+            <url>https://nexus.moensun.com/repository/maven-public</url>
             <layout>default</layout>
             <releases>
                 <enabled>true</enabled>
@@ -203,8 +81,8 @@
     </repositories>
     <pluginRepositories>
         <pluginRepository>
-            <id>moensun-repository</id>
-            <url>http://nexus.moensun.com/repository/maven-public</url>
+            <id>ms-repository</id>
+            <url>https://nexus.moensun.com/repository/maven-public</url>
             <layout>default</layout>
             <releases>
                 <enabled>true</enabled>
