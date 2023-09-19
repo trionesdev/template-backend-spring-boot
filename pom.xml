@@ -3,23 +3,49 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <artifactId>triones-backend</artifactId>
+    <groupId>ms.triones.backend</groupId>
+    <version>1.0-SNAPSHOT</version>
+
     <parent>
         <groupId>ms.triones</groupId>
         <artifactId>triones-spring-boot-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
-    <packaging>pom</packaging>
+
     <modules>
+        <module>infrastructure</module>
         <module>core</module>
         <module>rest-backend</module>
         <module>serve</module>
-        <module>infrastructure</module>
     </modules>
 
-    <artifactId>triones-backend</artifactId>
-    <groupId>ms.triones.backend</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>ms.triones.backend</groupId>
+                <artifactId>infrastructure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ms.triones.backend</groupId>
+                <artifactId>core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ms.triones.backend</groupId>
+                <artifactId>rest-backend</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <repositories>
         <repository>
@@ -51,5 +77,4 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
 </project>

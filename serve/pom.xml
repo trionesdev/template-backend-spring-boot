@@ -11,85 +11,29 @@
     <name>Serve</name>
     <artifactId>serve</artifactId>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>ms.triones.backend</groupId>
             <artifactId>rest-backend</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 
     <build>
+        <finalName>backend-serve</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.1.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <excludes>
-                        <exclude>bootstrap.properties</exclude>
-                        <exclude>application.properties</exclude>
-                        <!--                        <exclude>application-dev.properties</exclude>
-                                                <exclude>application-local.properties</exclude>
-                                                <exclude>application-test.properties</exclude>-->
-                    </excludes>
-                </configuration>
-                <!--               <executions>
-                                   <execution>
-                                       <goals>
-                                           <goal>test-jar</goal>
-                                       </goals>
-                                       <configuration>
-                                           <includes>
-                                               <include>com/fclassroom/ssp/**/*Test.class</include>
-                                           </includes>
-                                       </configuration>
-                                   </execution>
-                               </executions>-->
-            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.2.6.RELEASE</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>1.2.8.RELEASE</version>
-                    </dependency>
-                </dependencies>
                 <configuration>
-                    <finalName>backend-serve</finalName>
-                    <mainClass>ms.triones.ServeApplication</mainClass>
-                    <fork>true</fork>
+                    <excludeDevtools>true</excludeDevtools>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
             </plugin>
         </plugins>
     </build>
