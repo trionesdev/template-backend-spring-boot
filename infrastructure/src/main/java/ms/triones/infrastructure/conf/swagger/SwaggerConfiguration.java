@@ -22,16 +22,6 @@ public class SwaggerConfiguration {
                 .build();
     }
 
-//    @Bean
-//    public GroupedOpenApi bossApi() {
-//        return GroupedOpenApi.builder()
-//                .group("Triones Boss API")
-//                .pathsToMatch("/boss-api/**")
-//                .packagesToScan("net.ithere.rest.boss")
-//                .addOpenApiCustomiser(authorizationOpenApiCustomiser())
-//                .build();
-//    }
-
     public OpenApiCustomiser authorizationOpenApiCustomiser() {
         return openApi -> openApi.schemaRequirement("AUTHORIZATION", new SecurityScheme().type(SecurityScheme.Type.APIKEY)
                         .in(SecurityScheme.In.HEADER)
