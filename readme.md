@@ -13,7 +13,7 @@
 
 ## 基础配置
 ### 配置swagger
-在infrastructure 模块下 ms.triones.infrastructure.conf.swagger.SwaggerConfiguration 进行配置
+在infrastructure 模块下 swagger.conf.ms.triones.backend.infrastructure.SwaggerConfiguration 进行配置
 ### 配置jackson
 位置 ms.triones.infrastructure.conf.jackson
 ### 配置mybatis-plus
