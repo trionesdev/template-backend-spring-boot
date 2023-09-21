@@ -29,6 +29,13 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
 
+springdoc:
+  show-actuator: false
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
 ms:
   spring:
     exception:
