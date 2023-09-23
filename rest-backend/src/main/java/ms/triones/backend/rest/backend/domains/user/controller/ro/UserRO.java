@@ -1,4 +1,4 @@
-package ms.triones.backend.rest.backend.modules.user.controller.ro;
+package ms.triones.backend.rest.backend.domains.user.controller.ro;
 
 import lombok.Data;
 
