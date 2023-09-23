@@ -1,6 +1,6 @@
-package ms.triones.backend.rest.backend.modules.user.controller.impl;
+package ms.triones.backend.rest.backend.domains.user.controller.impl;
 
-import ms.triones.backend.rest.backend.modules.user.controller.ro.UserRO;
+import ms.triones.backend.rest.backend.domains.user.controller.ro.UserRO;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
