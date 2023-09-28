@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ithere-api
+    name: triones-backend
   datasource:
     name: dataSource
     type: com.zaxxer.hikari.HikariDataSource
