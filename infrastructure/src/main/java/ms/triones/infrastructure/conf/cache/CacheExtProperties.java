@@ -8,15 +8,14 @@ import java.util.Map;
 
 @Data
 @RequiredArgsConstructor
-@ConfigurationProperties(prefix = "spring.cache")
-public class CacheProperties {
-    private Long defaultTtl = 3600L;
+@ConfigurationProperties(prefix = "spring.cache.ext")
+public class CacheExtProperties {
     private Map<String, CacheItem> cacheNames;
 
     @Data
     @RequiredArgsConstructor
     public static class CacheItem {
-        private Long ttl;
+        private Long timeToLeave;
         private ValueSerializerEnum valueSerializer;
     }
 
