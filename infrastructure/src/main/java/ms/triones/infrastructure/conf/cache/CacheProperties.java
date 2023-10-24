@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Data
 @RequiredArgsConstructor
-@ConfigurationProperties(prefix = "ms.cache")
+@ConfigurationProperties(prefix = "spring.cache")
 public class CacheProperties {
     private Long defaultTtl = 3600L;
     private Map<String, CacheItem> cacheNames;
