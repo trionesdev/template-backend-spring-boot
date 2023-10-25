@@ -9,7 +9,7 @@ import java.util.Map;
 @Data
 @RequiredArgsConstructor
 @ConfigurationProperties(prefix = "spring.cache.ext")
-public class CacheExtProperties {
+public class SpringCacheExtProperties {
     private Map<String, CacheItem> cacheNames;
 
     @Data

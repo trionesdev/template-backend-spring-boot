@@ -26,10 +26,10 @@ import java.util.Objects;
 @Configuration
 @EnableCaching
 @RequiredArgsConstructor
-@EnableConfigurationProperties({CacheExtProperties.class})
-public class CacheConfiguration {
+@EnableConfigurationProperties({SpringCacheExtProperties.class})
+public class SpringRedisCacheConfiguration {
     private final CacheProperties cacheProperties;
-    private final CacheExtProperties cacheExtProperties;
+    private final SpringCacheExtProperties cacheExtProperties;
     private final ObjectMapper objectMapper;
 
     @Bean
@@ -71,7 +71,7 @@ public class CacheConfiguration {
         };
     }
 
-    private <T> RedisCacheConfiguration buildCacheConfiguration(RedisTemplate<String, T> redisTemplate, CacheExtProperties.CacheItem item) {
+    private <T> RedisCacheConfiguration buildCacheConfiguration(RedisTemplate<String, T> redisTemplate, SpringCacheExtProperties.CacheItem item) {
         RedisCacheConfiguration redisCacheConfiguration = defaultRedisCacheConfiguration();
         redisCacheConfiguration.serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisTemplate.getStringSerializer()));
         redisCacheConfiguration.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(redisTemplate.getValueSerializer()));
