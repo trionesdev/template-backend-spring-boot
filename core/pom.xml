@@ -39,8 +39,8 @@
 
 
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -59,12 +59,6 @@
         <!--            <groupId>io.github.openfeign</groupId>-->
         <!--            <artifactId>feign-jackson</artifactId>-->
         <!--        </dependency>-->
-
-        <dependency>
-            <groupId>com.qcloud</groupId>
-            <artifactId>cos_api</artifactId>
-            <version>5.6.52</version>
-        </dependency>
 
         <dependency>
             <groupId>ms.triones.backend</groupId>
