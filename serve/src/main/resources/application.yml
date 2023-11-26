@@ -58,10 +58,9 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
 
-ms:
-  spring:
-    exception:
-      resource-paths: i18n/error
+triones:
+  exception:
+    resource-paths: i18n/error
 
 #logging:
 #  level:
