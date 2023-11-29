@@ -63,6 +63,7 @@
             <artifactId>springdoc-openapi-security</artifactId>
         </dependency>
 
+        <!--        triones-->
         <dependency>
             <groupId>com.moensun.boot</groupId>
             <artifactId>triones-spring-boot-starter</artifactId>
@@ -75,5 +76,6 @@
             <groupId>com.moensun.boot</groupId>
             <artifactId>triones-security-spring-boot-starter</artifactId>
         </dependency>
+        <!--        triones-->
     </dependencies>
 </project>
