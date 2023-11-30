@@ -1,4 +1,4 @@
-package ms.triones.backend.infrastructure.conf.mybatisplus;
+package ms.triones.backend.infrastructure.conf.mybatisplus.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.moensun.commons.context.actor.ActorContext;
@@ -11,7 +11,6 @@ import java.time.Instant;
 @Component
 @RequiredArgsConstructor
 public class MPMetaObjectHandler implements MetaObjectHandler {
-
     private final ActorContext actorContext;
 
     @Override

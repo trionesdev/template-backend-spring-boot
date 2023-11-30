@@ -1,4 +1,4 @@
-package ms.triones.backend.rest.modules.user.controller.query;
+package ms.triones.backend.rest.domains.user.controller.query;
 
 import lombok.Data;
 
