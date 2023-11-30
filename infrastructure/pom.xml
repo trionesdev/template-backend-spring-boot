@@ -79,26 +79,20 @@
             <artifactId>springdoc-openapi-security</artifactId>
         </dependency>
 
+        <!--        triones-->
         <dependency>
-            <groupId>com.moensun.spring.boot</groupId>
-            <artifactId>moensun-core-spring-boot-starter</artifactId>
+            <groupId>com.moensun.boot</groupId>
+            <artifactId>triones-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.moensun.spring.boot</groupId>
-            <artifactId>moensun-context-spring-boot-starter</artifactId>
+            <groupId>com.moensun.boot</groupId>
+            <artifactId>triones-mybatis-plus-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.moensun.spring.boot</groupId>
-            <artifactId>moensun-exception-spring-boot-starter</artifactId>
+            <groupId>com.moensun.boot</groupId>
+            <artifactId>triones-security-spring-boot-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.moensun.spring.boot</groupId>
-            <artifactId>moensun-mybatis-plus-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.moensun.spring.boot</groupId>
-            <artifactId>moensun-security-spring-boot-starter</artifactId>
-        </dependency>
+        <!--        triones-->
 
         <dependency>
             <groupId>com.nimbusds</groupId>

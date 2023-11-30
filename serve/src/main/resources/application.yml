@@ -1,6 +1,6 @@
 spring:
   application:
-    name: tirones-backend-api
+    name: triones-backend
   datasource:
     name: dataSource
     type: com.zaxxer.hikari.HikariDataSource
@@ -36,10 +36,9 @@ springdoc:
   swagger-ui:
     enabled: true
 
-ms:
-  spring:
-    exception:
-      resource-paths: i18n/error
+triones:
+  exception:
+    resource-paths: i18n/error
 
 #logging:
 #  level:

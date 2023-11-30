@@ -1,7 +1,7 @@
 package ms.triones.backend.infrastructure.handler;
 
 import com.moensun.commons.exception.ErrorResponse;
-import com.moensun.commons.exception.MSException;
+import com.moensun.commons.exception.TrionesException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 @ResponseBody
 public class ApiExceptionHandler {
 
-    @ExceptionHandler(value = {MSException.class})
-    public ErrorResponse msEx(HttpServletResponse response, MSException ex) {
+    @ExceptionHandler(value = {TrionesException.class})
+    public ErrorResponse msEx(HttpServletResponse response, TrionesException ex) {
         if (log.isErrorEnabled()) {
             log.error(ex.getMessage(), ex);
         }

@@ -1,4 +1,4 @@
-package ms.triones.backend.core.modules.user.dao.domain.enums;
+package ms.triones.backend.core.domains.user.dao.domain.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
