@@ -18,6 +18,8 @@ spring:
       max-request-size: 50MB
   messages:
     basename: i18n/validation
+  cache:
+    type: caffeine
 
 mybatis-plus:
   configuration:
@@ -41,7 +43,5 @@ triones:
     resource-paths: i18n/error
 
 #logging:
-#  level:
-#    org.springframework.web: INFO
-#    com.github.binarywang.demo.wx.mp: DEBUG
-#    me.chanjar.weixin: DEBUG
+#  file:
+#    name: /var/log/application/${spring.application.name}

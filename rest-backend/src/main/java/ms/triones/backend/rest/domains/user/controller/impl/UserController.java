@@ -1,15 +1,15 @@
-package ms.triones.backend.rest.modules.user.controller.impl;
+package ms.triones.backend.rest.domains.user.controller.impl;
 
 import com.moensun.commons.core.page.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import ms.triones.backend.core.modules.user.dao.criteria.UserCriteria;
-import ms.triones.backend.rest.modules.user.controller.query.UserQuery;
-import ms.triones.backend.rest.modules.user.controller.ro.UserCreateRO;
-import ms.triones.backend.rest.modules.user.controller.ro.UserUpdateRO;
-import ms.triones.backend.rest.modules.user.controller.vo.UserVO;
-import ms.triones.backend.rest.modules.user.support.mapper.UserConvertMapper;
+import ms.triones.backend.rest.domains.user.controller.query.UserQuery;
+import ms.triones.backend.rest.domains.user.controller.ro.UserCreateRO;
+import ms.triones.backend.rest.domains.user.controller.ro.UserUpdateRO;
+import ms.triones.backend.rest.domains.user.controller.vo.UserVO;
+import ms.triones.backend.rest.domains.user.support.mapper.UserConvertMapper;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static ms.triones.backend.rest.modules.user.support.UserConstants.USER_URI;
+import static ms.triones.backend.rest.domains.user.support.UserConstants.USER_URI;
 
 @Tag(name = "用户")
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package ms.triones.backend.rest.modules.user.support;
+package ms.triones.backend.rest.domains.user.support;
 
 
 import static ms.triones.backend.rest.support.RestConstants.CONTEXT_PATH;
