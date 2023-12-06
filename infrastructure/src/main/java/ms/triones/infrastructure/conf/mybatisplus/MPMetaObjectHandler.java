@@ -1,7 +1,7 @@
 package ms.triones.infrastructure.conf.mybatisplus;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.moensun.commons.context.actor.ActorContext;
+import com.trionesdev.commons.context.actor.ActorContext;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
