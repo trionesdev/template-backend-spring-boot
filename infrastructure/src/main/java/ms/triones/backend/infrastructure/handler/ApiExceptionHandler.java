@@ -1,7 +1,7 @@
 package ms.triones.backend.infrastructure.handler;
 
-import com.moensun.commons.exception.ErrorResponse;
-import com.moensun.commons.exception.TrionesException;
+import com.trionesdev.commons.exception.ErrorResponse;
+import com.trionesdev.commons.exception.TrionesException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;

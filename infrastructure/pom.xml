@@ -100,15 +100,15 @@
 
         <!-- triones -->
         <dependency>
-            <groupId>com.moensun.boot</groupId>
+            <groupId>com.trionesdev.boot</groupId>
             <artifactId>triones-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.moensun.boot</groupId>
+            <groupId>com.trionesdev.boot</groupId>
             <artifactId>triones-mybatis-plus-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.moensun.boot</groupId>
+            <groupId>com.trionesdev.boot</groupId>
             <artifactId>triones-security-spring-boot-starter</artifactId>
         </dependency>
         <!-- triones -->
