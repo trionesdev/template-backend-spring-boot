@@ -1,8 +1,8 @@
 package ms.triones.backend.infrastructure.conf.jackson;
 
-import com.moensun.commons.core.jackson.deserializer.InstantDeserializer;
-import com.moensun.commons.core.jackson.serializer.InstantSerializer;
-import com.moensun.commons.core.jackson.serializer.LongSerializer;
+import com.trionesdev.commons.core.jackson.deserializer.InstantDeserializer;
+import com.trionesdev.commons.core.jackson.serializer.InstantSerializer;
+import com.trionesdev.commons.core.jackson.serializer.LongSerializer;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
