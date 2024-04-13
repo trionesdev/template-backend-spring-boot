@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>ms.triones.backend</groupId>
-            <artifactId>rest-backend</artifactId>
+            <artifactId>rest-backend-core</artifactId>
         </dependency>
     </dependencies>
 

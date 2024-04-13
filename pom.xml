@@ -18,9 +18,9 @@
 
     <modules>
         <module>infrastructure</module>
-        <module>core</module>
-        <module>rest-backend</module>
         <module>serve</module>
+        <module>domain</module>
+        <module>interface</module>
     </modules>
 
     <properties>
@@ -37,12 +37,12 @@
             </dependency>
             <dependency>
                 <groupId>ms.triones.backend</groupId>
-                <artifactId>core</artifactId>
+                <artifactId>domain-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>ms.triones.backend</groupId>
-                <artifactId>rest-backend</artifactId>
+                <artifactId>rest-backend-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
