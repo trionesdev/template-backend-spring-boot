@@ -3,18 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>triones-backend</artifactId>
+        <artifactId>interface</artifactId>
         <groupId>ms.triones.backend</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <name>RestBackend</name>
-    <artifactId>rest-backend</artifactId>
+    <artifactId>rest-backend-core</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>ms.triones.backend</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>domain-core</artifactId>
         </dependency>
     </dependencies>
 </project>
