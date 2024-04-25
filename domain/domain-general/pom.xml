@@ -17,4 +17,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>ms.triones.backend</groupId>
+            <artifactId>infrastructure</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
