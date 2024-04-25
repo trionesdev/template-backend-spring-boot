@@ -4,10 +4,9 @@ spring:
   datasource:
     name: dataSource
     type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.postgresql.Driver
     hikari:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      connection-init-sql: SET NAMES utf8mb4
+      driver-class-name: org.postgresql.Driver
   jackson:
     locale: zh_CN
     time-zone: Asia/Shanghai
@@ -19,36 +18,10 @@ spring:
       max-request-size: 50MB
   messages:
     basename: i18n/validation
-  redis:
-    redisson:
-      config: |
-        singleServerConfig:
-          idleConnectionTimeout: 10000
-          connectTimeout: ${spring.redis.connect-timeout:10000}
-          timeout: ${spring.redis.timeout:3000}
-          retryAttempts: 3
-          retryInterval: 1500
-          password: ${spring.redis.password:null}
-          subscriptionsPerConnection: 1
-          clientName: null
-          address: "redis://${spring.redis.host}:${spring.redis.port}"
-          subscriptionConnectionMinimumIdleSize: 0
-          subscriptionConnectionPoolSize: 50
-          connectionMinimumIdleSize: ${spring.redis.pool.min-idle:0}
-          connectionPoolSize: ${spring.redis.pool.max-idle:8}
-          database: ${spring.redis.database:0}
-          dnsMonitoringInterval: ${spring.redis.pool.time-between-eviction-runs:5000}
-        threads: 16
-        nettyThreads: 32
-        codec: !<org.redisson.codec.MarshallingCodec> {}
-        transportMode: "NIO"
-#  autoconfigure:
-#    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  cache:
+    type: caffeine
 
 mybatis-plus:
-#  mapper-locations: classpath*:/mapper/**/*.xml
-#  type-handlers-package: com.vinka.core.modules.*.dao.typehandler
-#  type-aliases-package: com.vinka.core.modules.*.dao.typehandler
   configuration:
     map-underscore-to-camel-case: true
     log-prefix: dao.
@@ -58,12 +31,17 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
 
+springdoc:
+  show-actuator: false
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
 triones:
   exception:
     resource-paths: i18n/error
 
 #logging:
-#  level:
-#    org.springframework.web: INFO
-#    com.github.binarywang.demo.wx.mp: DEBUG
-#    me.chanjar.weixin: DEBUG
+#  file:
+#    name: /var/log/application/${spring.application.name}
