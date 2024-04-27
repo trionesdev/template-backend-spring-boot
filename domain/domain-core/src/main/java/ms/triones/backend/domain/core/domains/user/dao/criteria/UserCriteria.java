@@ -1,4 +1,4 @@
-package ms.triones.backend.core.modules.user.dao.criteria;
+package ms.triones.backend.domain.core.domains.user.dao.criteria;
 
 import lombok.Data;
 
