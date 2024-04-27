@@ -4,7 +4,7 @@ import com.trionesdev.commons.core.page.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import ms.triones.backend.core.modules.user.dao.criteria.UserCriteria;
+import ms.triones.backend.domain.core.domains.user.dao.criteria.UserCriteria;
 import ms.triones.backend.rest.domains.user.controller.query.UserQuery;
 import ms.triones.backend.rest.domains.user.controller.ro.UserCreateRO;
 import ms.triones.backend.rest.domains.user.controller.ro.UserUpdateRO;

@@ -1,6 +1,6 @@
 package ms.triones.backend.rest.domains.user.support.mapper;
 
-import ms.triones.backend.core.modules.user.dao.criteria.UserCriteria;
+import ms.triones.backend.domain.core.domains.user.dao.criteria.UserCriteria;
 import ms.triones.backend.rest.domains.user.controller.query.UserQuery;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
