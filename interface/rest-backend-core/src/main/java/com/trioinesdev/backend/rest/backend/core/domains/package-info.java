@@ -1,0 +1,1 @@
+package com.trioinesdev.backend.rest.backend.core.domains;
