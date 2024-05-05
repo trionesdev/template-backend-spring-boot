@@ -1,0 +1,1 @@
+package com.trionesdev.backend.domain.core.internal.constant;
