@@ -4,19 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>ms.triones.backend</groupId>
-        <artifactId>triones-backend</artifactId>
+        <artifactId>triones-light-mes</artifactId>
+        <groupId>com.trionesdev.mes</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>interface</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>rest-backend-general</module>
-        <module>rest-backend-core</module>
+        <module>rest-backend</module>
     </modules>
 
     <properties>
+        <skip.deploy>true</skip.deploy>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,1 +1,0 @@
-package com.trionesdev.backend.rest.backend.general.domains;
