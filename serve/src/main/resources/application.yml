@@ -1,6 +1,6 @@
 spring:
   application:
-    name: triones-backend
+    name: light-mes-backend
   datasource:
     name: dataSource
     type: com.zaxxer.hikari.HikariDataSource
