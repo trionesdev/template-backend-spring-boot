@@ -20,4 +20,5 @@ public class ManufactureReport extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
+    private String orderId;
 }

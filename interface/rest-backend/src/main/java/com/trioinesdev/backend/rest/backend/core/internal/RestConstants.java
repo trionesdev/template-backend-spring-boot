@@ -1,5 +1,0 @@
-package com.trioinesdev.backend.rest.backend.core.internal;
-
-public class RestConstants {
-    public final static String CONTEXT_PATH="api/";
-}
