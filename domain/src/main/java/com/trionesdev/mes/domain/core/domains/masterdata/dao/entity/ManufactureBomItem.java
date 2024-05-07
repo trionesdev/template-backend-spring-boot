@@ -10,6 +10,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
+
 /**
  * 生产BOM详情
  */
@@ -19,10 +21,13 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "md_manufacture_bom_item")
-public class ManufactureBomItem  extends BaseLogicEntity {
+public class ManufactureBomItem extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
     private String bomId;
     private String productCode;
+    private BigDecimal unitUsage;
+    private String processCode;
+    private String remark;
 }
