@@ -3,7 +3,7 @@ package com.trionesdev.mes.domain.core.domains.masterdata.service.impl;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.Unit;
 import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.UnitManager;
-import com.trionesdev.mes.domain.core.dto.UnitDTO;
+import com.trionesdev.mes.domain.core.dto.masterdata.UnitDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

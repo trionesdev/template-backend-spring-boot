@@ -1,7 +1,8 @@
 package com.trionesdev.mes.domain.core.provider.ssp.masterdata.impl;
 
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.UnitService;
-import com.trionesdev.mes.domain.core.dto.UnitDTO;
+import com.trionesdev.mes.domain.core.dto.masterdata.TechnologyDTO;
+import com.trionesdev.mes.domain.core.dto.masterdata.UnitDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,5 +17,8 @@ public class MasterDataProvider {
         return unitService.findList();
     }
 
+    public List<TechnologyDTO> getTechnologyList() {
+        return null;
+    }
 
 }

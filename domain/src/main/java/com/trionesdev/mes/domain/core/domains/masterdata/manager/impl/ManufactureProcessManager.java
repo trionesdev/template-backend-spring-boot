@@ -13,6 +13,18 @@ import java.util.List;
 public class ManufactureProcessManager {
     private final ManufactureProcessDAO manufactureProcessDAO;
 
+    public void create(ManufactureProcess manufactureProcess) {
+        manufactureProcessDAO.save(manufactureProcess);
+    }
+
+    public void deleteById(String id) {
+        manufactureProcessDAO.removeById(id);
+    }
+
+    public void updateById(ManufactureProcess manufactureProcess) {
+        manufactureProcessDAO.updateById(manufactureProcess);
+    }
+
     public List<ManufactureProcess> findListByCodes(Collection<String> codes) {
         return manufactureProcessDAO.selectListByCodes(codes);
     }

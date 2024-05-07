@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.dto;
+package com.trionesdev.mes.domain.core.dto.masterdata;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +15,7 @@ public class TechnologyDTO {
     private String id;
     private String code;
     private String name;
+    private List<String> processCodes;
     private List<Process> processes;
 
     @Data

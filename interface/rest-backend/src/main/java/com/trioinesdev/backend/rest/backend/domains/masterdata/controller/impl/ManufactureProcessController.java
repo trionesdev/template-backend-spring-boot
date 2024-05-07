@@ -1,10 +1,9 @@
 package com.trioinesdev.backend.rest.backend.domains.masterdata.controller.impl;
 
-import com.trioinesdev.backend.rest.backend.domains.masterdata.controller.ro.TechnologyCreateRO;
+import com.trioinesdev.backend.rest.backend.domains.masterdata.controller.ro.ManufactureProcessCreateRO;
 import com.trioinesdev.backend.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
 import com.trioinesdev.backend.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
-import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.TechnologyService;
-import com.trionesdev.mes.domain.core.dto.masterdata.TechnologyDTO;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.ManufactureProcess;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -14,19 +13,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "工艺")
+@Tag(name = "生产工艺")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(MasterDataRestConstants.MASTER_DATA_PATH)
-public class TechnologyController {
+public class ManufactureProcessController {
     private final MasterDataBeRestBeanConvert masterDataBeRestBeanConvert;
-    private final TechnologyService technologyService;
 
-    @Operation(summary = "创建工艺")
-    @PostMapping("technologies")
-    public void createTechnology(@Validated @RequestBody TechnologyCreateRO args) {
-        TechnologyDTO technologyDTO = masterDataBeRestBeanConvert.from(args);
-        technologyService.createTechnology(technologyDTO);
+    @Operation(summary = "创建生产工序")
+    @PostMapping("manufacture-processes")
+    public void create(@Validated @RequestBody ManufactureProcessCreateRO args) {
+        ManufactureProcess manufactureProcess = masterDataBeRestBeanConvert.from(args);
+
     }
-
 }

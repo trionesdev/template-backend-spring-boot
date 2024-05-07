@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.dto;
+package com.trionesdev.mes.domain.core.dto.masterdata;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UnitDTO {
+public class ProductDefinitionDTO {
     private String id;
     private String name;
+    private String code;
 }
