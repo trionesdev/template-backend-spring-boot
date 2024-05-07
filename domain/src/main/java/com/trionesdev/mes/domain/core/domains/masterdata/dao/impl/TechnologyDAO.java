@@ -7,23 +7,23 @@ import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.Technology
 import org.springframework.stereotype.Repository;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.Technology;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.TechnologyPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.mapper.TechnologyMapper;
 
 import java.util.List;
 
 @Repository
-public class TechnologyDAO extends ServiceImpl<TechnologyMapper, Technology> {
-    private LambdaQueryWrapper<Technology> buildQueryWrapper(TechnologyCriteria criteria) {
-        LambdaQueryWrapper<Technology> queryWrapper = new LambdaQueryWrapper<>();
+public class TechnologyDAO extends ServiceImpl<TechnologyMapper, TechnologyPO> {
+    private LambdaQueryWrapper<TechnologyPO> buildQueryWrapper(TechnologyCriteria criteria) {
+        LambdaQueryWrapper<TechnologyPO> queryWrapper = new LambdaQueryWrapper<>();
         return queryWrapper;
     }
 
-    public List<Technology> selectList(TechnologyCriteria criteria) {
+    public List<TechnologyPO> selectList(TechnologyCriteria criteria) {
         return baseMapper.selectList(buildQueryWrapper(criteria));
     }
 
-    public PageInfo<Technology> selectPage(TechnologyCriteria criteria) {
+    public PageInfo<TechnologyPO> selectPage(TechnologyCriteria criteria) {
         return MpPageUtils.of(baseMapper.selectPage(MpPageUtils.page(criteria),buildQueryWrapper(criteria)));
     }
 

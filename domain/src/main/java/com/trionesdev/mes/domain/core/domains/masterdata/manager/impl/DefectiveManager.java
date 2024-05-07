@@ -1,6 +1,6 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.manager.impl;
 
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.Defective;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.DefectivePO;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.impl.DefectiveDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.Optional;
 public class DefectiveManager {
     private final DefectiveDAO defectiveDAO;
 
-    public void create(Defective defective) {
+    public void create(DefectivePO defective) {
         defectiveDAO.save(defective);
     }
 
@@ -21,15 +21,15 @@ public class DefectiveManager {
         defectiveDAO.removeById(id);
     }
 
-    public void updateById(Defective defective) {
+    public void updateById(DefectivePO defective) {
         defectiveDAO.updateById(defective);
     }
 
-    public Optional<Defective> findById(String id) {
+    public Optional<DefectivePO> findById(String id) {
         return Optional.ofNullable(defectiveDAO.getById(id));
     }
 
-    public List<Defective> findList() {
+    public List<DefectivePO> findList() {
         return defectiveDAO.list();
     }
 

@@ -1,6 +1,6 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.service.impl;
 
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.Unit;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.UnitPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.UnitManager;
 import com.trionesdev.mes.domain.core.dto.masterdata.UnitDTO;
@@ -16,7 +16,7 @@ public class UnitService {
     private final MasterDataBeanConvert masterDataBeanConvert;
     private final UnitManager unitManager;
 
-    public void create(Unit unit) {
+    public void create(UnitPO unit) {
         unitManager.create(unit);
     }
 
@@ -24,7 +24,7 @@ public class UnitService {
         unitManager.deleteById(id);
     }
 
-    public void updateById(Unit unit) {
+    public void updateById(UnitPO unit) {
         unitManager.updateById(unit);
     }
 
