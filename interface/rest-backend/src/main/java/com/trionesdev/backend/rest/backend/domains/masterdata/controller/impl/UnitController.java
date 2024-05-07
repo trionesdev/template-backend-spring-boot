@@ -1,8 +1,8 @@
-package com.trioinesdev.backend.rest.backend.domains.masterdata.controller.impl;
+package com.trionesdev.backend.rest.backend.domains.masterdata.controller.impl;
 
-import com.trioinesdev.backend.rest.backend.domains.masterdata.controller.ro.UnitCreateRO;
-import com.trioinesdev.backend.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
-import com.trioinesdev.backend.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
+import com.trionesdev.backend.rest.backend.domains.masterdata.controller.ro.UnitCreateRO;
+import com.trionesdev.backend.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
+import com.trionesdev.backend.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.UnitService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
