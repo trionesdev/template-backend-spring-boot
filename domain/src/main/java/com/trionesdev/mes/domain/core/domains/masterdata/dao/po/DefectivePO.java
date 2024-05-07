@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.domains.masterdata.dao.entity;
+package com.trionesdev.mes.domain.core.domains.masterdata.dao.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -10,24 +10,17 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.math.BigDecimal;
-
-/**
- * 生产BOM详情
- */
 @EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "md_manufacture_bom_item")
-public class ManufactureBomItem extends BaseLogicEntity {
+@TableName(value = "md_defective")
+public class DefectivePO extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
-    private String bomId;
-    private String productCode;
-    private BigDecimal unitUsage;
-    private String processCode;
-    private String remark;
+    private String name;
+    private String code;
+    private String definition;
 }

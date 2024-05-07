@@ -1,6 +1,6 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.manager.impl;
 
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.Unit;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.UnitPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.impl.UnitDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.Optional;
 public class UnitManager {
     private final UnitDAO unitDAO;
 
-    public void create(Unit unit) {
+    public void create(UnitPO unit) {
         unitDAO.save(unit);
     }
 
@@ -21,15 +21,15 @@ public class UnitManager {
         unitDAO.removeById(id);
     }
 
-    public void updateById(Unit unit) {
+    public void updateById(UnitPO unit) {
         unitDAO.updateById(unit);
     }
 
-    public Optional<Unit> findById(String id) {
+    public Optional<UnitPO> findById(String id) {
         return Optional.ofNullable(unitDAO.getById(id));
     }
 
-    public List<Unit> findList() {
+    public List<UnitPO> findList() {
         return unitDAO.list();
     }
 

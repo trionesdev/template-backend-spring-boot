@@ -7,7 +7,7 @@ import com.trionesdev.backend.rest.backend.domains.masterdata.internal.MasterDat
 import com.trionesdev.backend.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ProductDefinitionCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.ProductDefinition;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ProductDefinitionPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ProductDefinitionService;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,7 +47,7 @@ public class ProductDefinitionController {
     @Operation(summary = "根据ID更新产品定义")
     @PutMapping("product-definitions/{id}")
     public void updateById(@PathVariable("id") String id, @Validated @RequestBody ProductDefinitionUpdateRO args) {
-        ProductDefinition productDefinition = masterDataBeRestBeanConvert.from(args);
+        ProductDefinitionPO productDefinition = masterDataBeRestBeanConvert.from(args);
         productDefinition.setId(id);
         productDefinitionService.updateById(productDefinition);
     }

@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.domains.masterdata.dao.entity;
+package com.trionesdev.mes.domain.core.domains.masterdata.dao.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "md_manufacture_process")
-public class ManufactureProcess extends BaseLogicEntity {
+public class ManufactureProcessPO extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;

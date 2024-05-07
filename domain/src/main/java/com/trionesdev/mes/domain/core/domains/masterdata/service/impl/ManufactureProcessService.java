@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ManufactureProcessCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.ManufactureProcess;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ManufactureProcessPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.ManufactureProcessManager;
 import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
@@ -21,7 +21,7 @@ public class ManufactureProcessService {
     private final MasterDataBeanConvert masterDataBeanConvert;
     private final ManufactureProcessManager manufactureProcessManager;
 
-    public void create(ManufactureProcess manufactureProcess) {
+    public void create(ManufactureProcessPO manufactureProcess) {
         manufactureProcessManager.create(manufactureProcess);
     }
 
@@ -29,7 +29,7 @@ public class ManufactureProcessService {
         manufactureProcessManager.deleteById(id);
     }
 
-    public void updateById(ManufactureProcess manufactureProcess) {
+    public void updateById(ManufactureProcessPO manufactureProcess) {
         manufactureProcessManager.updateById(manufactureProcess);
     }
 
@@ -38,7 +38,7 @@ public class ManufactureProcessService {
     }
 
     public List<ManufactureProcessDTO> findList(ManufactureProcessCriteria criteria) {
-        List<ManufactureProcess> list = manufactureProcessManager.findList(criteria);
+        List<ManufactureProcessPO> list = manufactureProcessManager.findList(criteria);
         if (CollectionUtil.isEmpty(list)) {
             return Collections.emptyList();
         }
@@ -46,7 +46,7 @@ public class ManufactureProcessService {
     }
 
     public PageInfo<ManufactureProcessDTO> findPage(ManufactureProcessCriteria criteria) {
-        PageInfo<ManufactureProcess> pageInfo = manufactureProcessManager.findPage(criteria);
+        PageInfo<ManufactureProcessPO> pageInfo = manufactureProcessManager.findPage(criteria);
         return PageUtils.of(pageInfo, masterDataBeanConvert.manufactureProcessesEntityToDto(pageInfo.getRows()));
     }
 }

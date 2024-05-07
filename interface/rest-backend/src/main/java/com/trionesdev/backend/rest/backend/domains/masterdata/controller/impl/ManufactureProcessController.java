@@ -7,7 +7,7 @@ import com.trionesdev.backend.rest.backend.domains.masterdata.internal.MasterDat
 import com.trionesdev.backend.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ManufactureProcessCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.ManufactureProcess;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ManufactureProcessPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ManufactureProcessService;
 import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,7 +35,7 @@ public class ManufactureProcessController {
     @Operation(summary = "创建生产工序")
     @PostMapping("manufacture-processes")
     public void create(@Validated @RequestBody ManufactureProcessCreateRO args) {
-        ManufactureProcess manufactureProcess = masterDataBeRestBeanConvert.from(args);
+        ManufactureProcessPO manufactureProcess = masterDataBeRestBeanConvert.from(args);
         manufactureProcessService.create(manufactureProcess);
     }
 
@@ -48,7 +48,7 @@ public class ManufactureProcessController {
     @Operation(summary = "根据ID更新生产工序")
     @PutMapping("manufacture-processes/{id}")
     public void updateById(@PathVariable("id") String id, @Validated @RequestBody ManufactureProcessUpdateRO args) {
-        ManufactureProcess manufactureProcess = masterDataBeRestBeanConvert.from(args);
+        ManufactureProcessPO manufactureProcess = masterDataBeRestBeanConvert.from(args);
         manufactureProcess.setId(id);
         manufactureProcessService.updateById(manufactureProcess);
     }

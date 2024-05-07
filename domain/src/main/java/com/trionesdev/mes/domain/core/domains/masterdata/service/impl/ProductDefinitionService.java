@@ -3,7 +3,7 @@ package com.trionesdev.mes.domain.core.domains.masterdata.service.impl;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ProductDefinitionCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.ProductDefinition;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ProductDefinitionPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.ProductDefinitionManager;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
@@ -19,7 +19,7 @@ public class ProductDefinitionService {
     private final MasterDataBeanConvert masterDataBeanConvert;
     private final ProductDefinitionManager productDefinitionManager;
 
-    public void create(ProductDefinition productDefinition) {
+    public void create(ProductDefinitionPO productDefinition) {
         productDefinitionManager.create(productDefinition);
     }
 
@@ -27,7 +27,7 @@ public class ProductDefinitionService {
         productDefinitionManager.deleteById(id);
     }
 
-    public void updateById(ProductDefinition productDefinition) {
+    public void updateById(ProductDefinitionPO productDefinition) {
         productDefinitionManager.updateById(productDefinition);
     }
 
@@ -40,7 +40,7 @@ public class ProductDefinitionService {
     }
 
     public PageInfo<ProductDefinitionDTO> findPage(ProductDefinitionCriteria criteria) {
-        PageInfo<ProductDefinition> page = productDefinitionManager.findPage(criteria);
+        PageInfo<ProductDefinitionPO> page = productDefinitionManager.findPage(criteria);
         return PageUtils.of(page, masterDataBeanConvert.productDefinitionsEntityToDto(page.getRows()));
     }
 

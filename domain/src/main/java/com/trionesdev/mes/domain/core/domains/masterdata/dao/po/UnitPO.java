@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.domains.masterdata.dao.entity;
+package com.trionesdev.mes.domain.core.domains.masterdata.dao.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -15,11 +15,11 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "md_technological_process")
-public class TechnologicalProcess extends BaseLogicEntity {
+@TableName(value = "md_unit")
+public class UnitPO extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
-    private String technologicalId;
-    private String processCode;
+    private String name;
+    private String remark;
 }

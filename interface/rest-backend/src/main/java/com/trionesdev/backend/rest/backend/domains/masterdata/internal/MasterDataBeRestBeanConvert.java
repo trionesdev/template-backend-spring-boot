@@ -10,9 +10,9 @@ import com.trionesdev.backend.rest.backend.domains.masterdata.controller.ro.Tech
 import com.trionesdev.backend.rest.backend.domains.masterdata.controller.ro.UnitCreateRO;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ManufactureProcessCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ProductDefinitionCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.ManufactureProcess;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.ProductDefinition;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.entity.Unit;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ManufactureProcessPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ProductDefinitionPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.UnitPO;
 import com.trionesdev.mes.domain.core.dto.masterdata.TechnologyDTO;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -25,21 +25,21 @@ import org.mapstruct.Named;
 public interface MasterDataBeRestBeanConvert {
 
     //region unit
-    Unit from(UnitCreateRO args);
+    UnitPO from(UnitCreateRO args);
     //endregion
 
     //region production definition
-    ProductDefinition from(ProductDefinitionCreateRO args);
+    ProductDefinitionPO from(ProductDefinitionCreateRO args);
 
-    ProductDefinition from(ProductDefinitionUpdateRO args);
+    ProductDefinitionPO from(ProductDefinitionUpdateRO args);
 
     ProductDefinitionCriteria from(ProductDefinitionQuery args);
     //endregion
 
     //region manufacture process
-    ManufactureProcess from(ManufactureProcessCreateRO args);
+    ManufactureProcessPO from(ManufactureProcessCreateRO args);
 
-    ManufactureProcess from(ManufactureProcessUpdateRO args);
+    ManufactureProcessPO from(ManufactureProcessUpdateRO args);
 
     ManufactureProcessCriteria from(ManufactureProcessQuery args);
     //endregion
