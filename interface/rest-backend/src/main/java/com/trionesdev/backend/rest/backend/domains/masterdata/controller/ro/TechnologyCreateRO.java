@@ -1,4 +1,4 @@
-package com.trioinesdev.backend.rest.backend.domains.masterdata.controller.ro;
+package com.trionesdev.backend.rest.backend.domains.masterdata.controller.ro;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

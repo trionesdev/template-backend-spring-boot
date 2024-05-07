@@ -1,8 +1,8 @@
-package com.trioinesdev.backend.rest.backend.domains.masterdata.controller.impl;
+package com.trionesdev.backend.rest.backend.domains.masterdata.controller.impl;
 
-import com.trioinesdev.backend.rest.backend.domains.masterdata.controller.ro.TechnologyCreateRO;
-import com.trioinesdev.backend.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
-import com.trioinesdev.backend.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
+import com.trionesdev.backend.rest.backend.domains.masterdata.controller.ro.TechnologyCreateRO;
+import com.trionesdev.backend.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
+import com.trionesdev.backend.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.TechnologyService;
 import com.trionesdev.mes.domain.core.dto.masterdata.TechnologyDTO;
 import io.swagger.v3.oas.annotations.Operation;
