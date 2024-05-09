@@ -1,10 +1,10 @@
-package com.trionesdev.backend.rest.backend.domains.masterdata.controller.impl;
+package com.trionesdev.mes.rest.backend.domains.masterdata.controller.impl;
 
-import com.trionesdev.backend.rest.backend.domains.masterdata.controller.ro.TechnologyCreateRO;
-import com.trionesdev.backend.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
-import com.trionesdev.backend.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
+import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.TechnologyCreateRO;
+import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
+import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
+import com.trionesdev.mes.domain.core.domains.masterdata.entity.Technology;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.TechnologyService;
-import com.trionesdev.mes.domain.core.dto.masterdata.TechnologyDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class TechnologyController {
     @Operation(summary = "创建工艺")
     @PostMapping("technologies")
     public void createTechnology(@Validated @RequestBody TechnologyCreateRO args) {
-        TechnologyDTO technologyDTO = masterDataBeRestBeanConvert.from(args);
+        Technology technologyDTO = masterDataBeRestBeanConvert.from(args);
         technologyService.createTechnology(technologyDTO);
     }
 

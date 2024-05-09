@@ -41,7 +41,8 @@ springdoc:
 triones:
   exception:
     resource-paths: i18n/error
-
+  security:
+    exclude-matchers: /**
 #logging:
 #  file:
 #    name: /var/log/application/${spring.application.name}
