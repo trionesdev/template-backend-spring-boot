@@ -1,5 +1,7 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.manager.impl;
 
+import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.UnitCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.UnitPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.impl.UnitDAO;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,10 @@ public class UnitManager {
 
     public List<UnitPO> findList() {
         return unitDAO.list();
+    }
+
+    public PageInfo<UnitPO> findPage(UnitCriteria criteria) {
+        return unitDAO.selectPage(criteria);
     }
 
 }

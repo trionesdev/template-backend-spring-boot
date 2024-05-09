@@ -1,19 +1,14 @@
-package com.trionesdev.backend.rest.backend.domains.masterdata.internal;
+package com.trionesdev.mes.rest.backend.domains.masterdata.internal;
 
-import com.trionesdev.backend.rest.backend.domains.masterdata.controller.query.ManufactureProcessQuery;
-import com.trionesdev.backend.rest.backend.domains.masterdata.controller.query.ProductDefinitionQuery;
-import com.trionesdev.backend.rest.backend.domains.masterdata.controller.ro.ManufactureProcessCreateRO;
-import com.trionesdev.backend.rest.backend.domains.masterdata.controller.ro.ManufactureProcessUpdateRO;
-import com.trionesdev.backend.rest.backend.domains.masterdata.controller.ro.ProductDefinitionCreateRO;
-import com.trionesdev.backend.rest.backend.domains.masterdata.controller.ro.ProductDefinitionUpdateRO;
-import com.trionesdev.backend.rest.backend.domains.masterdata.controller.ro.TechnologyCreateRO;
-import com.trionesdev.backend.rest.backend.domains.masterdata.controller.ro.UnitCreateRO;
+import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ManufactureProcessQuery;
+import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ProductDefinitionQuery;
+import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.*;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ManufactureProcessCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ProductDefinitionCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ManufactureProcessPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ProductDefinitionPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.UnitPO;
-import com.trionesdev.mes.domain.core.dto.masterdata.TechnologyDTO;
+import com.trionesdev.mes.domain.core.domains.masterdata.entity.Technology;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -26,6 +21,7 @@ public interface MasterDataBeRestBeanConvert {
 
     //region unit
     UnitPO from(UnitCreateRO args);
+    UnitPO from(UnitUpdateRO args);
     //endregion
 
     //region production definition
@@ -45,6 +41,6 @@ public interface MasterDataBeRestBeanConvert {
     //endregion
 
     //region technology
-    TechnologyDTO from(TechnologyCreateRO args);
+    Technology from(TechnologyCreateRO args);
     //endregion
 }
