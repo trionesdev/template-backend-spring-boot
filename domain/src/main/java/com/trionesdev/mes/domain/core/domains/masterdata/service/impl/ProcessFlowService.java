@@ -1,16 +1,21 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.google.common.collect.Maps;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.TechnologyCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureProcessPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProcessFlowItemPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow;
+import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow.Item;
+import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow.ItemType;
+import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.ManufactureProcessManager;
-import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.TechnologyManager;
-import com.trionesdev.mes.domain.core.dto.masterdata.TechnologyDTO;
+import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.ProcessFlowManager;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ProcessFlowCriteria;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureProcessPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProcessFlowPO;
+import com.trionesdev.mes.domain.core.dto.masterdata.ProcessFlowDTO;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.MapUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -23,50 +28,88 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class ProcessFlowService {
-    private final TechnologyManager technologyManager;
+    private final MasterDataBeanConvert masterDataBeanConvert;
+    private final ProcessFlowManager processFlowManager;
     private final ManufactureProcessManager manufactureProcessManager;
 
-    public void createTechnology(ProcessFlow technology) {
-        technologyManager.createTechnology(technology);
+    public void createProcessFlow(ProcessFlow technology) {
+        processFlowManager.createProcessFlow(technology);
     }
 
-    public void deleteTechnologyById(String id) {
-        technologyManager.deleteTechnologyById(id);
+    public void deleteProcessFlowById(String id) {
+        processFlowManager.deleteProcessFlowById(id);
     }
 
-    public void updateTechnologyById(ProcessFlow technology) {
-        technologyManager.updateTechnologyById(technology);
+    public void updateProcessFlowById(ProcessFlow technology) {
+        processFlowManager.updateProcessFlowById(technology);
     }
 
-    public Optional<TechnologyDTO> findTechnologyById(String id) {
-        return technologyManager.findTechnologyById(id);
+    public Optional<ProcessFlowDTO> findProcessFlowById(String id) {
+        return processFlowManager.findById(id).map(processFlow -> {
+            Set<String> processCodes = processFlow.getItems().stream().filter(item -> item.getType() == ItemType.PROCESS).map(Item::getCode).collect(Collectors.toSet());
+            Set<String> flowCodes = processFlow.getItems().stream().filter(item -> item.getType() == ItemType.FLOW).map(Item::getCode).collect(Collectors.toSet());
+
+            ProcessFlowDTO processFlowDTO = masterDataBeanConvert.entityToDto(processFlow);
+            if (CollectionUtil.isNotEmpty(processCodes)) {
+                Map<String, ManufactureProcessPO> processMap = manufactureProcessManager.findListByCodes(processCodes).stream().collect(Collectors.toMap(ManufactureProcessPO::getCode, process -> process));
+                processFlowDTO.getItems().stream().filter(item -> item.getType() == ItemType.PROCESS).forEach(item -> {
+                    item.setName(Optional.ofNullable(processMap.get(item.getCode())).map(ManufactureProcessPO::getName).orElse(null));
+                });
+            }
+            if (CollectionUtil.isNotEmpty(flowCodes)) {
+                Map<String, ProcessFlowPO> flowMap = processFlowManager.findRecordsByCodes(flowCodes).stream().collect(Collectors.toMap(ProcessFlowPO::getCode, process -> process));
+                processFlowDTO.getItems().stream().filter(item -> item.getType() == ItemType.FLOW).forEach(item -> {
+                    item.setName(Optional.ofNullable(flowMap.get(item.getCode())).map(ProcessFlowPO::getName).orElse(null));
+                });
+            }
+            return processFlowDTO;
+        });
     }
 
-    public List<ManufactureProcessPO> findTechnologyProcesses(String id) {
-        List<ProcessFlowItemPO> processes = technologyManager.findProcessByTechnologyId(id);
-        if (CollectionUtil.isEmpty(processes)) {
+    public List<ProcessFlowDTO> findProcessFlowList(ProcessFlowCriteria criteria) {
+        List<ProcessFlow> processFlows = processFlowManager.findProcessFlowList(criteria);
+        return assembleProcessFlowDtoBatch(processFlows);
+    }
+
+    public PageInfo<ProcessFlowDTO> findProcessFlowPage(ProcessFlowCriteria criteria) {
+        PageInfo<ProcessFlow> pageInfo = processFlowManager.findProcessFlowPage(criteria);
+        return PageUtils.of(pageInfo, assembleProcessFlowDtoBatch(pageInfo.getRows()));
+    }
+
+    public List<ProcessFlowDTO> assembleProcessFlowDtoBatch(List<ProcessFlow> processFlows) {
+        if (CollectionUtil.isEmpty(processFlows)) {
             return Collections.emptyList();
         }
-        Set<String> processCodes = processes.stream().map(ProcessFlowItemPO::getProcessCode).collect(Collectors.toSet());
-        Map<String, ManufactureProcessPO> processMap = manufactureProcessManager.findListByCodes(processCodes).stream().collect(Collectors.toMap(ManufactureProcessPO::getCode, p -> p, (p1, p2) -> p1));
-        return processes.stream().map(p -> processMap.get(p.getProcessCode())).collect(Collectors.toList());
-    }
+        Set<String> processCodes = processFlows.stream().flatMap(processFlow -> processFlow.getItems().stream().filter(item -> item.getType() == ItemType.PROCESS).map(Item::getCode)).collect(Collectors.toSet());
+        Set<String> flowCodes = processFlows.stream().flatMap(processFlow -> processFlow.getItems().stream().filter(item -> item.getType() == ItemType.FLOW).map(Item::getCode)).collect(Collectors.toSet());
+        Map<String, ManufactureProcessPO> processMap = Maps.newHashMap();
 
-    public PageInfo<TechnologyDTO> findTechnologyPage(TechnologyCriteria criteria) {
-        PageInfo<TechnologyDTO> technologies = technologyManager.findPage(criteria);
-        return PageUtils.of(technologies, assembleTechnologyDTOBatch(technologies.getRows()));
-    }
-
-    private List<TechnologyDTO> assembleTechnologyDTOBatch(List<TechnologyDTO> technologies) {
-        if (CollectionUtil.isEmpty(technologies)) {
-            return Collections.emptyList();
+        if (CollectionUtil.isNotEmpty(processCodes)) {
+            processMap = manufactureProcessManager.findListByCodes(processCodes).stream().collect(Collectors.toMap(ManufactureProcessPO::getCode, process -> process));
         }
-        Set<String> processCodes = technologies.stream().map(TechnologyDTO::getProcessCodes).flatMap(List::stream).collect(Collectors.toSet());
-        Map<String, ManufactureProcessPO> processMap = manufactureProcessManager.findListByCodes(processCodes).stream().collect(Collectors.toMap(ManufactureProcessPO::getCode, p -> p, (p1, p2) -> p1));
-        return technologies.stream().peek(t -> {
-            List<TechnologyDTO.Process> processes = t.getProcessCodes().stream().map(tCode -> Optional.ofNullable(processMap.get(tCode)).map(p -> TechnologyDTO.Process.builder().code(p.getCode()).name(p.getName()).build()).orElse(null)).collect(Collectors.toList());
-            t.setProcesses(processes);
+        Map<String, ProcessFlowPO> flowMap = Maps.newHashMap();
+        if (CollectionUtil.isNotEmpty(flowCodes)) {
+            flowMap = processFlowManager.findRecordsByCodes(flowCodes).stream().collect(Collectors.toMap(ProcessFlowPO::getCode, process -> process));
+        }
+        Map<String, ManufactureProcessPO> finalProcessMap = processMap;
+        Map<String, ProcessFlowPO> finalFlowMap = flowMap;
+        return processFlows.stream().map(processFlow -> {
+            ProcessFlowDTO processFlowDTO = masterDataBeanConvert.entityToDto(processFlow);
+            if (MapUtils.isNotEmpty(finalProcessMap)) {
+                processFlowDTO.getItems().forEach(item -> {
+                    if (item.getType() == ItemType.PROCESS) {
+                        item.setName(Optional.ofNullable(finalProcessMap.get(item.getCode())).map(ManufactureProcessPO::getName).orElse(null));
+                    }
+                });
+            }
+            if (MapUtils.isNotEmpty(finalFlowMap)) {
+                processFlowDTO.getItems().forEach(item -> {
+                    if (item.getType() == ItemType.FLOW) {
+                        item.setName(Optional.ofNullable(finalFlowMap.get(item.getCode())).map(ProcessFlowPO::getName).orElse(null));
+                    }
+                });
+            }
+            return processFlowDTO;
         }).collect(Collectors.toList());
     }
-
 }

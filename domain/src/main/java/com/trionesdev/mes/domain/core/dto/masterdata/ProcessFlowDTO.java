@@ -1,29 +1,32 @@
 package com.trionesdev.mes.domain.core.dto.masterdata;
 
+import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow.ItemType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TechnologyDTO {
+public class ProcessFlowDTO {
     private String id;
     private String code;
     private String name;
-    private List<String> processCodes;
-    private List<Process> processes;
+    private List<Item> items;
 
     @Data
     @SuperBuilder
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Process {
+    public static class Item {
+        private ItemType type;
         private String code;
+        private BigDecimal ratio;
         private String name;
     }
 }
