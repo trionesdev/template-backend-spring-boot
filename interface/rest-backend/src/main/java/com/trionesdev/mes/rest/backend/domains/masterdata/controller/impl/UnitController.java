@@ -1,8 +1,8 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.UnitCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.UnitPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.UnitCriteria;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.UnitPO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.UnitCreateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.UnitUpdateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
@@ -25,7 +25,8 @@ public class UnitController {
     @Operation(summary = "创建单位")
     @PostMapping("units")
     public void create(@Validated @RequestBody UnitCreateRO args) {
-        unitService.create(masterDataBeRestBeanConvert.from(args));
+        UnitPO unit = masterDataBeRestBeanConvert.from(args);
+        unitService.create(unit);
     }
 
     @Operation(summary = "根据ID删除单位")

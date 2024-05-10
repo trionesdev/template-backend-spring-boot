@@ -6,8 +6,8 @@ import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ProductD
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ProductDefinitionCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ProductDefinitionPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ProductDefinitionCriteria;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProductDefinitionPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ProductDefinitionService;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
 import io.swagger.v3.oas.annotations.Operation;

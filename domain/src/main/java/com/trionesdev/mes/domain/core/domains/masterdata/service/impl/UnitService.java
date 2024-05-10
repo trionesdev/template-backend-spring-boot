@@ -1,8 +1,8 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.service.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.UnitCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.UnitPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.UnitCriteria;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.UnitPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.UnitManager;
 import com.trionesdev.mes.domain.core.dto.masterdata.UnitDTO;
@@ -31,7 +31,7 @@ public class UnitService {
     }
 
     public Optional<UnitDTO> findById(String id) {
-        return unitManager.findById(id).map(masterDataBeanConvert::entityToDto);
+        return unitManager.findById(id).map(masterDataBeanConvert::poToDto);
     }
 
     public List<UnitDTO> findList() {

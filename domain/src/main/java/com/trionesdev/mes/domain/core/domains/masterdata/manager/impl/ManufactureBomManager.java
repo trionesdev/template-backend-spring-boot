@@ -1,14 +1,14 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.manager.impl;
 
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.impl.ManufactureBomDAO;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.impl.ManufactureBomItemDAO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.impl.ManufactureBomRepository;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.impl.ManufactureBomItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class ManufactureBomManager {
-    private final ManufactureBomDAO manufactureBomDAO;
-    private final ManufactureBomItemDAO manufactureBomItemDAO;
+    private final ManufactureBomRepository manufactureBomDAO;
+    private final ManufactureBomItemRepository manufactureBomItemDAO;
 
 }

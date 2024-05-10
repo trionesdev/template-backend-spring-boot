@@ -1,1 +1,1 @@
-package com.trionesdev.backend.domain.core.dto;
+package com.trionesdev.mes.domain.core.dto;

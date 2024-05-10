@@ -1,9 +1,9 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.manager.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ManufactureProcessCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ManufactureProcessPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.impl.ManufactureProcessDAO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ManufactureProcessCriteria;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureProcessPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.impl.ManufactureProcessRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class ManufactureProcessManager {
-    private final ManufactureProcessDAO manufactureProcessDAO;
+    private final ManufactureProcessRepository manufactureProcessDAO;
 
     public void create(ManufactureProcessPO manufactureProcess) {
         manufactureProcessDAO.save(manufactureProcess);

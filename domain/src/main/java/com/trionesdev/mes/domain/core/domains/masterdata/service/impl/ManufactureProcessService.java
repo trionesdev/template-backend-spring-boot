@@ -3,8 +3,8 @@ package com.trionesdev.mes.domain.core.domains.masterdata.service.impl;
 import cn.hutool.core.collection.CollectionUtil;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ManufactureProcessCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ManufactureProcessPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ManufactureProcessCriteria;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureProcessPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.ManufactureProcessManager;
 import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
@@ -34,7 +34,7 @@ public class ManufactureProcessService {
     }
 
     public Optional<ManufactureProcessDTO> findById(String id) {
-        return manufactureProcessManager.findById(id).map(masterDataBeanConvert::entityToDto);
+        return manufactureProcessManager.findById(id).map(masterDataBeanConvert::poToDto);
     }
 
     public List<ManufactureProcessDTO> findList(ManufactureProcessCriteria criteria) {
