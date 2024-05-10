@@ -3,6 +3,7 @@ package com.trionesdev.mes.rest.backend.domains.masterdata.controller.impl;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.UnitCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.UnitPO;
+import com.trionesdev.mes.domain.core.dto.masterdata.UnitDTO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.UnitCreateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.UnitUpdateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
@@ -13,6 +14,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "单位")
 @RequiredArgsConstructor
@@ -41,6 +44,18 @@ public class UnitController {
         UnitPO unit = masterDataBeRestBeanConvert.from(args);
         unit.setId(id);
         unitService.updateById(unit);
+    }
+
+    @Operation(summary = "根据ID查询单位")
+    @GetMapping("units/{id}")
+    public UnitDTO findById(@PathVariable("id") String id) {
+        return unitService.findById(id).orElse(null);
+    }
+
+    @Operation(summary = "查询单位列表")
+    @GetMapping("units/list")
+    public List<UnitDTO> findList() {
+        return unitService.findList();
     }
 
     @Operation(summary = "查询单位列表(分页)")

@@ -1,4 +1,4 @@
-package com.trionesdev.infrastructure.conf.spring.convert;
+package com.trionesdev.mes.infrastructure.conf.spring.convert;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.convert.converter.Converter;

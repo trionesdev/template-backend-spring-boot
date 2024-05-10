@@ -1,4 +1,4 @@
-package com.trionesdev.infrastructure.conf.jackson;
+package com.trionesdev.mes.infrastructure.conf.jackson;
 
 import com.trionesdev.commons.core.jackson.deserializer.InstantDeserializer;
 import com.trionesdev.commons.core.jackson.serializer.InstantSerializer;

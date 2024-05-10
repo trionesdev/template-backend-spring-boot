@@ -1,4 +1,4 @@
-package com.trionesdev.infrastructure.conf.mybatisplus.handler;
+package com.trionesdev.mes.infrastructure.conf.mybatisplus.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.trionesdev.commons.context.actor.ActorContext;

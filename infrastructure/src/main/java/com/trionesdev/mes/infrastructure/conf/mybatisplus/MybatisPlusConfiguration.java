@@ -1,4 +1,4 @@
-package com.trionesdev.infrastructure.conf.mybatisplus;
+package com.trionesdev.mes.infrastructure.conf.mybatisplus;
 
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;

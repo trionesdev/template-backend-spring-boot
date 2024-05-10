@@ -1,4 +1,4 @@
-package com.trionesdev.infrastructure.conf.swagger;
+package com.trionesdev.mes.infrastructure.conf.swagger;
 
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
