@@ -3,12 +3,12 @@ package com.trionesdev.mes.domain.core.domains.masterdata.manager.impl;
 import cn.hutool.core.collection.CollectionUtil;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.TechnologyCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.TechnologicalProcessPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.TechnologyPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.impl.TechnologicalProcessDAO;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.impl.TechnologyDAO;
-import com.trionesdev.mes.domain.core.domains.masterdata.entity.Technology;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.TechnologyCriteria;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProcessFlowItemPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProcessFlowPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.impl.ProcessFlowItemRepository;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.impl.ProcessFlowRepository;
+import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow;
 import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.dto.masterdata.TechnologyDTO;
 import lombok.RequiredArgsConstructor;
@@ -26,15 +26,15 @@ import java.util.stream.Collectors;
 @Service
 public class TechnologyManager {
     private final MasterDataBeanConvert masterDataBeanConvert;
-    private final TechnologyDAO technologyDAO;
-    private final TechnologicalProcessDAO technologicalProcessDAO;
+    private final ProcessFlowRepository technologyDAO;
+    private final ProcessFlowItemRepository technologicalProcessDAO;
 
     @Transactional
-    public void createTechnology(Technology technology) {
-        TechnologyPO technologyEntity = masterDataBeanConvert.entityToPo(technology);
+    public void createTechnology(ProcessFlow technology) {
+        ProcessFlowPO technologyEntity = masterDataBeanConvert.entityToPo(technology);
         technologyDAO.save(technologyEntity);
         if (CollectionUtil.isNotEmpty(technology.getProcess())) {
-            List<TechnologicalProcessPO> technologicalProcesses = technology.getProcess().stream().map(process -> TechnologicalProcessPO.builder().technologicalId(technologyEntity.getId())
+            List<ProcessFlowItemPO> technologicalProcesses = technology.getProcess().stream().map(process -> ProcessFlowItemPO.builder().technologicalId(technologyEntity.getId())
                     .processCode(process.getCode())
                     .build()).collect(Collectors.toList());
             technologicalProcessDAO.saveBatch(technologicalProcesses);
@@ -48,13 +48,13 @@ public class TechnologyManager {
     }
 
     @Transactional
-    public void updateTechnologyById(Technology technology) {
+    public void updateTechnologyById(ProcessFlow technology) {
         Objects.requireNonNull(technology.getId(), "id can not be null");
-        TechnologyPO technologyEntity = masterDataBeanConvert.entityToPo(technology);
+        ProcessFlowPO technologyEntity = masterDataBeanConvert.entityToPo(technology);
         technologyDAO.updateById(technologyEntity);
         technologicalProcessDAO.deleteByTechnologicalId(technologyEntity.getId());
         if (CollectionUtil.isNotEmpty(technology.getProcess())) {
-            List<TechnologicalProcessPO> technologicalProcesses = technology.getProcess().stream().map(process -> TechnologicalProcessPO.builder().technologicalId(technologyEntity.getId())
+            List<ProcessFlowItemPO> technologicalProcesses = technology.getProcess().stream().map(process -> ProcessFlowItemPO.builder().technologicalId(technologyEntity.getId())
                     .processCode(process.getCode())
                     .build()).collect(Collectors.toList());
             technologicalProcessDAO.saveBatch(technologicalProcesses);
@@ -64,18 +64,18 @@ public class TechnologyManager {
     public Optional<TechnologyDTO> findTechnologyById(String id) {
         return Optional.ofNullable(technologyDAO.getById(id)).map(t -> {
             TechnologyDTO technologyDTO = masterDataBeanConvert.entityToDto(t);
-            List<String> processCodes = technologicalProcessDAO.selectListByTechnologicalId(t.getId()).stream().map(TechnologicalProcessPO::getProcessCode).collect(Collectors.toList());
+            List<String> processCodes = technologicalProcessDAO.selectListByTechnologicalId(t.getId()).stream().map(ProcessFlowItemPO::getProcessCode).collect(Collectors.toList());
             technologyDTO.setProcessCodes(processCodes);
             return technologyDTO;
         });
     }
 
-    private List<TechnologyDTO> transformToDtoBatch(List<TechnologyPO> technologies) {
+    private List<TechnologyDTO> transformToDtoBatch(List<ProcessFlowPO> technologies) {
         if (CollectionUtil.isEmpty(technologies)) {
             return Collections.emptyList();
         }
-        Map<String, List<String>> technologicalProcessMap = technologicalProcessDAO.selectListByTechnologicalIds(technologies.stream().map(TechnologyPO::getId).collect(Collectors.toList()))
-                .stream().collect(Collectors.groupingBy(TechnologicalProcessPO::getTechnologicalId, Collectors.mapping(TechnologicalProcessPO::getProcessCode, Collectors.toList())));
+        Map<String, List<String>> technologicalProcessMap = technologicalProcessDAO.selectListByTechnologicalIds(technologies.stream().map(ProcessFlowPO::getId).collect(Collectors.toList()))
+                .stream().collect(Collectors.groupingBy(ProcessFlowItemPO::getTechnologicalId, Collectors.mapping(ProcessFlowItemPO::getProcessCode, Collectors.toList())));
         return technologies.stream().map(t -> {
             TechnologyDTO technologyDTO = masterDataBeanConvert.entityToDto(t);
             technologyDTO.setProcessCodes(technologicalProcessMap.get(t.getId()));
@@ -88,11 +88,11 @@ public class TechnologyManager {
     }
 
     public PageInfo<TechnologyDTO> findPage(TechnologyCriteria criteria) {
-        PageInfo<TechnologyPO> pageInfo = technologyDAO.selectPage(criteria);
+        PageInfo<ProcessFlowPO> pageInfo = technologyDAO.selectPage(criteria);
         return PageUtils.of(pageInfo, transformToDtoBatch(pageInfo.getRows()));
     }
 
-    public List<TechnologicalProcessPO> findProcessByTechnologyId(String id) {
+    public List<ProcessFlowItemPO> findProcessByTechnologyId(String id) {
         return technologicalProcessDAO.selectListByTechnologicalId(id);
     }
 

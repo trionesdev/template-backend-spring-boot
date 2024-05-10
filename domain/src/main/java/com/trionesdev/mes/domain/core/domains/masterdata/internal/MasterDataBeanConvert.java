@@ -1,10 +1,10 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.internal;
 
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ManufactureProcessPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ProductDefinitionPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.TechnologyPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.UnitPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.entity.Technology;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureProcessPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProductDefinitionPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProcessFlowPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.UnitPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow;
 import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.TechnologyDTO;
@@ -22,7 +22,7 @@ import java.util.List;
 public interface MasterDataBeanConvert {
 
     //region unit
-    UnitDTO entityToDto(UnitPO unit);
+    UnitDTO poToDto(UnitPO unit);
 
     List<UnitDTO> unitsEntityToDto(List<UnitPO> unit);
     //endregion
@@ -30,22 +30,22 @@ public interface MasterDataBeanConvert {
     //region production definition
     ProductDefinitionDTO entityToDto(ProductDefinitionPO productDefinition);
 
-    List<ProductDefinitionDTO> productDefinitionsEntityToDto(List<ProductDefinitionPO> productDefinition);
+    List<ProductDefinitionDTO> productDefinitionsPoToDto(List<ProductDefinitionPO> productDefinition);
     //endregion
 
     //region manufacture process
-    ManufactureProcessDTO entityToDto(ManufactureProcessPO manufactureProcess);
+    ManufactureProcessDTO poToDto(ManufactureProcessPO manufactureProcess);
 
     List<ManufactureProcessDTO> manufactureProcessesEntityToDto(List<ManufactureProcessPO> manufactureProcess);
     //endregion
 
 
     //region technology
-    TechnologyDTO entityToDto(TechnologyPO technology);
+    TechnologyDTO entityToDto(ProcessFlowPO technology);
 
-    List<TechnologyDTO> technologiesEntityToDto(List<TechnologyPO> technology);
+    List<TechnologyDTO> technologiesEntityToDto(List<ProcessFlowPO> technology);
 
-    TechnologyPO entityToPo(Technology technology);
+    ProcessFlowPO entityToPo(ProcessFlow technology);
     //endregion
 
 }

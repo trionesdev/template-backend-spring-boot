@@ -1,7 +1,7 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.manager.impl;
 
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.DefectivePO;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.impl.DefectiveDAO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.DefectivePO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.impl.DefectiveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class DefectiveManager {
-    private final DefectiveDAO defectiveDAO;
+    private final DefectiveRepository defectiveDAO;
 
     public void create(DefectivePO defective) {
         defectiveDAO.save(defective);

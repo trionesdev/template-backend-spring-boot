@@ -3,12 +3,12 @@ package com.trionesdev.mes.rest.backend.domains.masterdata.internal;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ManufactureProcessQuery;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ProductDefinitionQuery;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.*;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ManufactureProcessCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.criteria.ProductDefinitionCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ManufactureProcessPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.ProductDefinitionPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.UnitPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.entity.Technology;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ManufactureProcessCriteria;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ProductDefinitionCriteria;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureProcessPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProductDefinitionPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.UnitPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -41,6 +41,6 @@ public interface MasterDataBeRestBeanConvert {
     //endregion
 
     //region technology
-    Technology from(TechnologyCreateRO args);
+    ProcessFlow from(ProcessFlowCreateRO args);
     //endregion
 }
