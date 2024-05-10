@@ -6,8 +6,8 @@ import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProcessFl
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.UnitPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow;
 import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
+import com.trionesdev.mes.domain.core.dto.masterdata.ProcessFlowDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
-import com.trionesdev.mes.domain.core.dto.masterdata.TechnologyDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.UnitDTO;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -40,12 +40,12 @@ public interface MasterDataBeanConvert {
     //endregion
 
 
-    //region technology
-    TechnologyDTO entityToDto(ProcessFlowPO technology);
+    //region process flow
+    ProcessFlowDTO entityToDto(ProcessFlow processFlow);
 
-    List<TechnologyDTO> technologiesEntityToDto(List<ProcessFlowPO> technology);
+    ProcessFlowPO entityToPo(ProcessFlow processFlow);
 
-    ProcessFlowPO entityToPo(ProcessFlow technology);
+    ProcessFlow poToEntity(ProcessFlowPO processFlowPO);
     //endregion
 
 }

@@ -11,6 +11,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
@@ -24,5 +26,6 @@ public class ProcessFlowItemPO extends BaseLogicPO {
     private String flowId;
     private ProcessFlow.ItemType type;
     private String code;
+    private BigDecimal ratio;
 
 }

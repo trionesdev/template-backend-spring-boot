@@ -1,6 +1,8 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.internal;
 
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ProcessFlowCriteria;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ManufactureProcessQuery;
+import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ProcessFlowQuery;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ProductDefinitionQuery;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.*;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ManufactureProcessCriteria;
@@ -21,6 +23,7 @@ public interface MasterDataBeRestBeanConvert {
 
     //region unit
     UnitPO from(UnitCreateRO args);
+
     UnitPO from(UnitUpdateRO args);
     //endregion
 
@@ -42,5 +45,9 @@ public interface MasterDataBeRestBeanConvert {
 
     //region technology
     ProcessFlow from(ProcessFlowCreateRO args);
+
+    ProcessFlow from(ProcessFlowUpdateRO args);
+
+    ProcessFlowCriteria from(ProcessFlowQuery args);
     //endregion
 }

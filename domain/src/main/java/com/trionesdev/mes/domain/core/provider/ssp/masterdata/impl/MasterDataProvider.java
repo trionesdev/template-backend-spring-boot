@@ -3,8 +3,8 @@ package com.trionesdev.mes.domain.core.provider.ssp.masterdata.impl;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ProductDefinitionCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ProductDefinitionService;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.UnitService;
+import com.trionesdev.mes.domain.core.dto.masterdata.ProcessFlowDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
-import com.trionesdev.mes.domain.core.dto.masterdata.TechnologyDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.UnitDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.masterdata.MasterDataProviderBeanConvert;
 import com.trionesdev.mes.domain.core.provider.ssp.masterdata.arg.GetProductDefinitionsArg;
@@ -29,7 +29,7 @@ public class MasterDataProvider {
         return productDefinitionService.findList(criteria);
     }
 
-    public List<TechnologyDTO> getTechnologyList() {
+    public List<ProcessFlowDTO> getTechnologyList() {
         return null;
     }
 

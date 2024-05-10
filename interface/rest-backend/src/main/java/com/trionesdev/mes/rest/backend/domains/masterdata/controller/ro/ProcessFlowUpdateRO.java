@@ -1,10 +1,12 @@
-package com.trionesdev.mes.domain.core.domains.masterdata.entity;
+package com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro;
 
+import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -12,9 +14,8 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProcessFlow {
-    private String id;
-    private String code;
+public class ProcessFlowUpdateRO {
+    @NotBlank
     private String name;
     private List<Item> items;
 
@@ -23,13 +24,8 @@ public class ProcessFlow {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Item {
-        private ItemType type;
+        private ProcessFlow.ItemType type;
         private String code;
         private BigDecimal ratio;
     }
-
-    public enum ItemType {
-        PROCESS, FLOW
-    }
-
 }

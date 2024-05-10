@@ -24,7 +24,7 @@ public class ProcessFlowCreateRO {
     @SuperBuilder
     @AllArgsConstructor
     @NoArgsConstructor
-    private static class Item {
+    public static class Item {
         private ProcessFlow.ItemType type;
         private String code;
         private BigDecimal ratio;
