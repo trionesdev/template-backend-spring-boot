@@ -1,6 +1,6 @@
-package com.trionesdev.infrastructure.conf.spring;
+package com.trionesdev.mes.infrastructure.conf.spring;
 
-import com.trionesdev.infrastructure.conf.spring.convert.StringToInstantConverter;
+import com.trionesdev.mes.infrastructure.conf.spring.convert.StringToInstantConverter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

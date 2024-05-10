@@ -1,4 +1,4 @@
-package com.trionesdev.infrastructure.conf.cache;
+package com.trionesdev.mes.infrastructure.conf.cache;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;

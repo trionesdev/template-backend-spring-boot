@@ -1,4 +1,4 @@
-package com.trionesdev.infrastructure.handler;
+package com.trionesdev.mes.infrastructure.handler;
 
 import com.trionesdev.commons.exception.ErrorResponse;
 import com.trionesdev.commons.exception.TrionesException;
