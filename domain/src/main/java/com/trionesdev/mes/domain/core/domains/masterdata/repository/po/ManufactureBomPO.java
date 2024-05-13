@@ -23,6 +23,5 @@ public class ManufactureBomPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
-    private String code;
     private String productCode;
 }

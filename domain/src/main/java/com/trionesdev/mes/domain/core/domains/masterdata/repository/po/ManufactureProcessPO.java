@@ -12,6 +12,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -26,6 +27,7 @@ public class ManufactureProcessPO extends BaseLogicPO {
     private String tenantId;
     private String code;
     private String name;
+    private BigDecimal ratio;
     @TableField(typeHandler = StringCollectionTypeHandler.class)
     private List<String> defectiveCodes; //不良品项
 }
