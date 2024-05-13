@@ -5,7 +5,7 @@ import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.mes.domain.core.domains.masterdata.entity.ManufactureBom;
 import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ManufactureBomCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.mapper.ManufactureBomManager;
+import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.ManufactureBomManager;
 import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureBomDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
