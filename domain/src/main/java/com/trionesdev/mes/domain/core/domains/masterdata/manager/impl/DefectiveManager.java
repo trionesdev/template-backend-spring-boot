@@ -1,5 +1,7 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.manager.impl;
 
+import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.DefectiveCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.DefectivePO;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.impl.DefectiveRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +31,12 @@ public class DefectiveManager {
         return Optional.ofNullable(defectiveDAO.getById(id));
     }
 
-    public List<DefectivePO> findList() {
-        return defectiveDAO.list();
+    public List<DefectivePO> findList(DefectiveCriteria criteria) {
+        return defectiveDAO.selectList(criteria);
+    }
+
+    public PageInfo<DefectivePO> findPage(DefectiveCriteria criteria) {
+        return defectiveDAO.selectPage(criteria);
     }
 
 }

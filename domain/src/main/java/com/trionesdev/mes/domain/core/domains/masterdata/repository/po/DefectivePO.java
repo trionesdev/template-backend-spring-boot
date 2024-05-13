@@ -22,5 +22,4 @@ public class DefectivePO extends BaseLogicPO {
     private String tenantId;
     private String name;
     private String code;
-    private String definition;
 }
