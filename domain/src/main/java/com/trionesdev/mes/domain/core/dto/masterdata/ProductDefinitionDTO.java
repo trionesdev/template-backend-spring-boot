@@ -18,7 +18,7 @@ public class ProductDefinitionDTO {
     private String unit;
     private String specification;
     private String type;
-    private String technologicalCode; //工艺路线
+    private String processFlowCode; //工艺路线
     private String defaultSupplierCode;
     private Integer maxInventory;
     private Integer minInventory;
