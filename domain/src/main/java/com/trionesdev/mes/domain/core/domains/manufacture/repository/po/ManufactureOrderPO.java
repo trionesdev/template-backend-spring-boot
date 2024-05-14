@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.domains.manufacture.dao.entity;
+package com.trionesdev.mes.domain.core.domains.manufacture.repository.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "manufacture_order")
-public class ManufactureOrder extends BaseLogicEntity {
+public class ManufactureOrderPO extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
