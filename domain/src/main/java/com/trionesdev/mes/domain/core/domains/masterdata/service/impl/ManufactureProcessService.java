@@ -1,6 +1,7 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.StrUtil;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ManufactureProcessCriteria;
@@ -8,6 +9,7 @@ import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.Manufactu
 import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.ManufactureProcessManager;
 import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
+import com.trionesdev.mes.domain.core.provider.ssp.custom.impl.CustomProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,12 @@ import java.util.Optional;
 public class ManufactureProcessService {
     private final MasterDataBeanConvert masterDataBeanConvert;
     private final ManufactureProcessManager manufactureProcessManager;
+    private final CustomProvider customProvider;
 
     public void create(ManufactureProcessPO manufactureProcess) {
+        if (StrUtil.isBlank(manufactureProcess.getCode())){
+            manufactureProcess.setCode(customProvider.generateCode("MANUFACTURE_PROCESS"));
+        }
         manufactureProcessManager.create(manufactureProcess);
     }
 

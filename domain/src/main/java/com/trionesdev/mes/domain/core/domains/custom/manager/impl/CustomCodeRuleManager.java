@@ -6,7 +6,6 @@ import com.trionesdev.mes.domain.core.domains.custom.repository.impl.CustomCodeR
 import com.trionesdev.mes.domain.core.domains.custom.repository.impl.CustomCodeSerialNumberRepository;
 import com.trionesdev.mes.domain.core.domains.custom.repository.po.CustomCodeRulePO;
 import com.trionesdev.mes.domain.core.domains.custom.repository.po.CustomCodeSerialNumberPO;
-import com.trionesdev.mes.domain.core.dto.custom.CustomCodeRuleDTO;
 import com.trionesdev.mes.domain.core.domains.custom.internal.enums.TimeFormatTypeEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,9 @@ public class CustomCodeRuleManager {
     public List<CustomCodeRule> defaultRules() {
         return ListUtil.of(
                 CustomCodeRule.builder().name("基础数据/产品定义").identifier("PRODUCT_DEFINITION").prefix("PD").timeFormatType(TimeFormatTypeEnum.YYYY_MM_DD).serialNumberDigits(4).build(),
-                CustomCodeRule.builder().name("基础数据/不良品项").identifier("DEFECTIVE").prefix("BLP").timeFormatType(TimeFormatTypeEnum.YYYY_MM_DD).serialNumberDigits(4).build()
+                CustomCodeRule.builder().name("基础数据/不良品项").identifier("DEFECTIVE").prefix("BLP").timeFormatType(TimeFormatTypeEnum.YYYY_MM_DD).serialNumberDigits(4).build(),
+                CustomCodeRule.builder().name("基础数据/工序").identifier("MANUFACTURE_PROCESS").prefix("GX").timeFormatType(TimeFormatTypeEnum.YYYY_MM_DD).serialNumberDigits(4).build(),
+                CustomCodeRule.builder().name("基础数据/工艺路线").identifier("PROCESS_FLOW").prefix("GYLX").timeFormatType(TimeFormatTypeEnum.YYYY_MM_DD).serialNumberDigits(4).build()
         );
     }
 
