@@ -1,5 +1,6 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ProductDefinitionCriteria;
@@ -7,6 +8,7 @@ import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProductDe
 import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.ProductDefinitionManager;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
+import com.trionesdev.mes.domain.core.provider.ssp.custom.impl.CustomProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,12 @@ import java.util.Optional;
 public class ProductDefinitionService {
     private final MasterDataBeanConvert masterDataBeanConvert;
     private final ProductDefinitionManager productDefinitionManager;
+    private final CustomProvider customProvider;
 
     public void create(ProductDefinitionPO productDefinition) {
+        if (StrUtil.isBlank(productDefinition.getCode())) {
+            productDefinition.setCode(customProvider.generateCode("PRODUCT_DEFINITION"));
+        }
         productDefinitionManager.create(productDefinition);
     }
 

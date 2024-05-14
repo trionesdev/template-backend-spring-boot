@@ -1,6 +1,7 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Maps;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
@@ -14,6 +15,7 @@ import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.Pro
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureProcessPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProcessFlowPO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProcessFlowDTO;
+import com.trionesdev.mes.domain.core.provider.ssp.custom.impl.CustomProvider;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.stereotype.Service;
@@ -31,9 +33,13 @@ public class ProcessFlowService {
     private final MasterDataBeanConvert masterDataBeanConvert;
     private final ProcessFlowManager processFlowManager;
     private final ManufactureProcessManager manufactureProcessManager;
+    private final CustomProvider customProvider;
 
-    public void createProcessFlow(ProcessFlow technology) {
-        processFlowManager.createProcessFlow(technology);
+    public void createProcessFlow(ProcessFlow processFlow) {
+        if (StrUtil.isBlank(processFlow.getCode())) {
+            processFlow.setCode(customProvider.generateCode("PROCESS_FLOW"));
+        }
+        processFlowManager.createProcessFlow(processFlow);
     }
 
     public void deleteProcessFlowById(String id) {
