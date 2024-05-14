@@ -17,8 +17,8 @@ import java.math.BigDecimal;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "manufacture_order_bom")
-public class ManufactureOrderBomPO extends BaseLogicPO {
+@TableName(value = "manufacture_order_material")
+public class ManufactureOrderMaterialPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
