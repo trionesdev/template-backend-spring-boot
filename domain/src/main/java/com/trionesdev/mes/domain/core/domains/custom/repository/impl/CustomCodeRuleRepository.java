@@ -7,4 +7,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CustomCodeRuleRepository extends ServiceImpl<CustomCodeRuleMapper, CustomCodeRulePO> {
+
+    public CustomCodeRulePO selectByIdentifier(String identifier) {
+        return lambdaQuery()
+                .eq(CustomCodeRulePO::getIdentifier, identifier)
+                .one();
+    }
+
 }

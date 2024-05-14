@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.domains.custom.dto;
+package com.trionesdev.mes.domain.core.dto.custom;
 
 import com.trionesdev.mes.domain.core.domains.custom.internal.enums.TimeFormatTypeEnum;
 import lombok.AllArgsConstructor;
