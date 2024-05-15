@@ -24,7 +24,7 @@ public class ProductDefinitionPO extends BaseLogicPO {
     private String tenantId;
     private String code;
     private String name;
-    private String unit;
+    private String unitId;
     private String specification;
     private String type;
     private String processFlowCode; //工艺路线

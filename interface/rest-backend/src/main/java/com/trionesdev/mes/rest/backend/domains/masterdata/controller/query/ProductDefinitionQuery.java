@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class ProductDefinitionQuery {
     private String code;
+    private String type;
 }
