@@ -15,7 +15,7 @@ public class ProductDefinitionDTO {
     private String id;
     private String code;
     private String name;
-    private String unit;
+    private String unitId;
     private String specification;
     private String type;
     private String processFlowCode; //工艺路线
@@ -24,5 +24,5 @@ public class ProductDefinitionDTO {
     private Integer minInventory;
     private BigDecimal unitCost; //成本单价
     private BigDecimal unitPrice; //销售单价
-
+    private UnitDTO unit;
 }

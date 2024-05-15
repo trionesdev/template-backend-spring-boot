@@ -7,36 +7,41 @@ import com.trionesdev.mes.domain.core.domains.masterdata.repository.impl.UnitRep
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class UnitManager {
-    private final UnitRepository unitDAO;
+    private final UnitRepository unitRepository;
 
     public void create(UnitPO unit) {
-        unitDAO.save(unit);
+        unitRepository.save(unit);
     }
 
     public void deleteById(String id) {
-        unitDAO.removeById(id);
+        unitRepository.removeById(id);
     }
 
     public void updateById(UnitPO unit) {
-        unitDAO.updateById(unit);
+        unitRepository.updateById(unit);
     }
 
     public Optional<UnitPO> findById(String id) {
-        return Optional.ofNullable(unitDAO.getById(id));
+        return Optional.ofNullable(unitRepository.getById(id));
     }
 
     public List<UnitPO> findList() {
-        return unitDAO.list();
+        return unitRepository.list();
     }
 
     public PageInfo<UnitPO> findPage(UnitCriteria criteria) {
-        return unitDAO.selectPage(criteria);
+        return unitRepository.selectPage(criteria);
+    }
+
+    public List<UnitPO> findListByIds(Collection<String> ids){
+        return unitRepository.listByIds(ids);
     }
 
 }
