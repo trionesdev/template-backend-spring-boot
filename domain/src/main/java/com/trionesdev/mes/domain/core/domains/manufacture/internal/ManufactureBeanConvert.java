@@ -4,6 +4,7 @@ import com.trionesdev.mes.domain.core.domains.manufacture.entity.ManufactureOrde
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.po.ManufactureOrderMaterialPO;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.po.ManufactureOrderPO;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.po.ManufactureOrderTaskPO;
+import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderDTO;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -27,4 +28,7 @@ public interface ManufactureBeanConvert {
     List<ManufactureOrder.Task> tasksPoToEntity(List<ManufactureOrderTaskPO> tasks);
 
     List<ManufactureOrder.Material> materialsPoToEntity(List<ManufactureOrderMaterialPO> materials);
+
+
+    ManufactureOrderDTO entityToDto(ManufactureOrder manufactureOrder);
 }
