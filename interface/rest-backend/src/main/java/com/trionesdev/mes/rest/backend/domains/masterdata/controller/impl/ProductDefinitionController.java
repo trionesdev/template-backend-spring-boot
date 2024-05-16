@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Tag(name = "产品定义")
 @RequiredArgsConstructor
 @RestController
@@ -56,6 +58,13 @@ public class ProductDefinitionController {
     @GetMapping("product-definitions/{id}")
     public ProductDefinitionDTO findById(@PathVariable("id") String id) {
         return productDefinitionService.findById(id).orElse(null);
+    }
+
+    @Operation(summary = "查询产品定义列表")
+    @GetMapping("product-definitions/list")
+    public List<ProductDefinitionDTO> findList(ProductDefinitionQuery query) {
+        ProductDefinitionCriteria criteria = masterDataBeRestBeanConvert.from(query);
+        return productDefinitionService.findList(criteria);
     }
 
     @Operation(summary = "分页查询产品定义")
