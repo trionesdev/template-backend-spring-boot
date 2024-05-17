@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.trionesdev.commons.mybatisplus.po.BaseLogicPO;
+import com.trionesdev.commons.mybatisplus.po.BasePO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +22,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "md_manufacture_bom_item")
-public class ManufactureBomItemPO extends BaseLogicPO {
+public class ManufactureBomItemPO extends BasePO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;

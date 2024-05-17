@@ -10,7 +10,7 @@ public class ProductDefinitionCreateRO {
     private String code;
     @NotBlank
     private String name;
-    private String unit;
+    private String unitId;
     private String specification;
     @NotBlank
     private String type;
