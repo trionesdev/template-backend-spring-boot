@@ -2,6 +2,7 @@ package com.trionesdev.mes.domain.core.domains.masterdata.internal;
 
 import com.trionesdev.mes.domain.core.domains.masterdata.entity.ManufactureBom;
 import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProductBom;
+import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProductDefinition;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.*;
 import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow;
 import com.trionesdev.mes.domain.core.dto.masterdata.*;
@@ -27,6 +28,10 @@ public interface MasterDataBeanConvert {
     ProductDefinitionDTO entityToDto(ProductDefinitionPO productDefinition);
 
     List<ProductDefinitionDTO> productDefinitionsPoToDto(List<ProductDefinitionPO> productDefinition);
+
+    ProductDefinition poToEntity(ProductDefinitionPO productDefinitionPO);
+
+    ProductDefinitionDTO entityToDto(ProductDefinition productDefinition);
     //endregion
 
     //region manufacture process
@@ -62,7 +67,11 @@ public interface MasterDataBeanConvert {
 
     ProductBom.Material poToEntity(ProductMaterialPO material);
 
-    ProductBomDTO bomEntityToDto(ProductDefinitionPO productDefinition);
+    ProductBomDTO bomEntityToDto(ProductDefinition productDefinition);
+
+    ProductMaterialDTO poToDto(ProductMaterialPO material);
+
+    ProductMaterialDTO.Product productEntityToDto(ProductDefinition productDefinition);
     //endregion
 
 }

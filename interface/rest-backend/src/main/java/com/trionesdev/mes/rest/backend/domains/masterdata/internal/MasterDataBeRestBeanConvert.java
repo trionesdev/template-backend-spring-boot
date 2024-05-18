@@ -1,6 +1,7 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.internal;
 
 import com.trionesdev.mes.domain.core.domains.masterdata.entity.ManufactureBom;
+import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProductBom;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.DefectiveCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ProcessFlowCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.DefectivePO;
@@ -63,7 +64,7 @@ public interface MasterDataBeRestBeanConvert {
     DefectiveCriteria from(DefectiveQuery args);
     //endregion
 
-    ManufactureBom from(ManufactureBomCreateRO args);
+    ProductBom from(ProductBomCreateRO args);
 
-    ManufactureBom from(ManufactureBomUpdateRO args);
+    ProductBom from(ProductBomUpdateRO args);
 }

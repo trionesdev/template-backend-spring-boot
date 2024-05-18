@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.dto.masterdata;
+package com.trionesdev.mes.domain.core.domains.masterdata.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,8 +11,9 @@ import java.math.BigDecimal;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductBomDTO {
+public class ProductDefinition {
     private String id;
+    private String tenantId;
     private String code;
     private String name;
     private String unitId;
@@ -24,9 +25,8 @@ public class ProductBomDTO {
     private Integer minInventory;
     private BigDecimal unitCost; //成本单价
     private BigDecimal unitPrice; //销售单价
-    private ProductDefinitionDTO.Unit unit;
-    private ProductDefinitionDTO.ProcessFlow processFlow;
-
+    private Unit unit;
+    private ProcessFlow processFlow;
 
     @Data
     @SuperBuilder
@@ -45,5 +45,4 @@ public class ProductBomDTO {
         private String code;
         private String name;
     }
-
 }

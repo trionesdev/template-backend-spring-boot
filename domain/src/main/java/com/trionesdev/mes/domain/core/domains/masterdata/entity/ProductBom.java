@@ -1,6 +1,5 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.entity;
 
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProductMaterialPO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,16 +26,6 @@ public class ProductBom {
         private BigDecimal unitUsage;
         private String processCode;
         private String remark;
-
-        public ProductMaterialPO toPo() {
-            return ProductMaterialPO.builder()
-                    .materialCode(materialCode)
-                    .unitUsage(unitUsage)
-                    .processCode(processCode)
-                    .remark(remark)
-                    .build();
-        }
-
     }
 
 }

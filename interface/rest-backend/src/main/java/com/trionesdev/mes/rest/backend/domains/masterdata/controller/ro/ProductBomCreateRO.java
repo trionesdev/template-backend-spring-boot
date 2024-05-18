@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-public class ManufactureBomUpdateRO {
+public class ProductBomCreateRO {
     private String productCode;
     private List<Material> materials;
 
