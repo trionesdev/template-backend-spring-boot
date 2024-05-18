@@ -1,7 +1,7 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.controller.impl;
 
 import com.trionesdev.mes.domain.core.domains.masterdata.entity.ManufactureBom;
-import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ManufactureBomService;
+import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ProductBomService;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ManufactureBomCreateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(MasterDataRestConstants.MASTER_DATA_PATH)
 public class ManufactureBomController {
     private final MasterDataBeRestBeanConvert convert;
-    private final ManufactureBomService manufactureBomService;
+    private final ProductBomService manufactureBomService;
 
     @Operation(summary = "创建物料清单")
     @PostMapping("manufacture-bom")

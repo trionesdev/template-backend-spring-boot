@@ -3,7 +3,7 @@ package com.trionesdev.mes.domain.core.domains.masterdata.repository.po;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.trionesdev.commons.mybatisplus.po.BaseLogicPO;
+import com.trionesdev.commons.mybatisplus.po.BasePO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,25 +12,22 @@ import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
+/**
+ * 生产BOM详情
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "master_data_product_definition")
-public class ProductDefinitionPO extends BaseLogicPO {
+@TableName(value = "master_data_product_material")
+public class ProductMaterialPO extends BasePO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
-    private String code;
-    private String name;
-    private String unitId;
-    private String specification;
-    private String type;
-    private String processFlowCode; //工艺路线
-    private String defaultSupplierCode;
-    private Integer maxInventory;
-    private Integer minInventory;
-    private BigDecimal unitCost; //成本单价
-    private BigDecimal unitPrice; //销售单价
+    private String productCode;
+    private String materialCode;
+    private BigDecimal unitUsage;
+    private String processCode;
+    private String remark;
 }
