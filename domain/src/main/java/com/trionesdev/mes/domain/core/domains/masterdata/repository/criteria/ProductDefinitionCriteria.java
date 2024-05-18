@@ -15,4 +15,5 @@ import lombok.experimental.SuperBuilder;
 public class ProductDefinitionCriteria extends PageCriteria {
     private String code;
     private String name;
+    private Boolean hasBom;
 }

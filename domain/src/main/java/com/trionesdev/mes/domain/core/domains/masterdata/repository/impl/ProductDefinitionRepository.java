@@ -20,6 +20,7 @@ public class ProductDefinitionRepository extends ServiceImpl<ProductDefinitionMa
         if (Objects.nonNull(criteria)) {
             queryWrapper.eq(StrUtil.isNotBlank(criteria.getCode()), ProductDefinitionPO::getCode, criteria.getCode())
                     .eq(StrUtil.isNotBlank(criteria.getName()), ProductDefinitionPO::getName, criteria.getName())
+                    .exists(Objects.nonNull(criteria.getHasBom()), "select product_code from master_data_product_material where master_data_product_definition.code=master_data_product_material.product_code")
             ;
         }
         return queryWrapper;

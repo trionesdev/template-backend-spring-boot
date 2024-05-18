@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "md_process_flow_item")
+@TableName(value = "master_data_process_flow_item")
 public class ProcessFlowItemPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

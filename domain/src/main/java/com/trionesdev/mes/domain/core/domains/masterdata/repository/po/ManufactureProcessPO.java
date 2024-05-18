@@ -20,7 +20,7 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "md_manufacture_process")
+@TableName(value = "master_data_manufacture_process")
 public class ManufactureProcessPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

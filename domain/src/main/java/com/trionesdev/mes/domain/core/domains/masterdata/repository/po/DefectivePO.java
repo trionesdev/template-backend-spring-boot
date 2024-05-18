@@ -15,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "md_defective")
+@TableName(value = "master_data_defective")
 public class DefectivePO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

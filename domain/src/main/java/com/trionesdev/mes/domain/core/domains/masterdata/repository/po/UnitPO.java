@@ -15,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "md_unit")
+@TableName(value = "master_data_unit")
 public class UnitPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

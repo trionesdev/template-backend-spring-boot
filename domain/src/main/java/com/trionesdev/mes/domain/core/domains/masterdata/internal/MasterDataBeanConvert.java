@@ -1,18 +1,10 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.internal;
 
 import com.trionesdev.mes.domain.core.domains.masterdata.entity.ManufactureBom;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureBomItemPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureBomPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureProcessPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProductDefinitionPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProcessFlowPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.UnitPO;
+import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProductBom;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.*;
 import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow;
-import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureBomDTO;
-import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
-import com.trionesdev.mes.domain.core.dto.masterdata.ProcessFlowDTO;
-import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
-import com.trionesdev.mes.domain.core.dto.masterdata.UnitDTO;
+import com.trionesdev.mes.domain.core.dto.masterdata.*;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -59,12 +51,18 @@ public interface MasterDataBeanConvert {
 
     ManufactureBomItemPO entityToPo(ManufactureBom.Material material);
 
-    ManufactureBom.Material poToEntity(ManufactureBomItemPO manufactureBomItemPO);
+//    ManufactureBom.Material poToEntity(ManufactureBomItemPO manufactureBomItemPO);
 
     ManufactureBomDTO entityToDto(ManufactureBom manufactureBom);
 
     List<ManufactureBomDTO> manufactureBomListEntityToDto(List<ManufactureBom> manufactureProcess);
 
+
+    ProductMaterialPO entityToPo(ProductBom.Material material);
+
+    ProductBom.Material poToEntity(ProductMaterialPO material);
+
+    ProductBomDTO bomEntityToDto(ProductDefinitionPO productDefinition);
     //endregion
 
 }
