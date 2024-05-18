@@ -10,6 +10,7 @@ import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProductDe
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.mapper.ProductDefinitionMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +25,10 @@ public class ProductDefinitionRepository extends ServiceImpl<ProductDefinitionMa
             ;
         }
         return queryWrapper;
+    }
+
+    public List<ProductDefinitionPO> selectListByCodes(Collection<String> codes) {
+        return baseMapper.selectList(new LambdaQueryWrapper<ProductDefinitionPO>().in(ProductDefinitionPO::getCode, codes));
     }
 
     public List<ProductDefinitionPO> selectList(ProductDefinitionCriteria criteria) {
