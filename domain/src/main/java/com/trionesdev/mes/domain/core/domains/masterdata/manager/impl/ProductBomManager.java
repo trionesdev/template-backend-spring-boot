@@ -49,6 +49,9 @@ public class ProductBomManager {
         productMaterialRepository.saveBatch(materials);
     }
 
+    public List<ProductMaterialPO> findByProductCode(String productCode) {
+        return productMaterialRepository.findByProductCode(productCode);
+    }
 
     public List<ProductMaterialPO> findByProductCodes(Collection<String> productCodes) {
         return productMaterialRepository.findByProductCodes(productCodes);

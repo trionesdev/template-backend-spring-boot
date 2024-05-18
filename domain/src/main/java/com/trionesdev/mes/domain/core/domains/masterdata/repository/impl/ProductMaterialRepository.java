@@ -1,6 +1,7 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.repository.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.mapper.ProductMaterialMapper;
@@ -22,7 +23,11 @@ public class ProductMaterialRepository extends ServiceImpl<ProductMaterialMapper
         if (CollectionUtil.isEmpty(productCodes)) {
             return Collections.emptyList();
         }
-        return baseMapper.selectList(new LambdaUpdateWrapper<ProductMaterialPO>().in(ProductMaterialPO::getProductCode, productCodes));
+        return baseMapper.selectList(new LambdaQueryWrapper<ProductMaterialPO>().in(ProductMaterialPO::getProductCode, productCodes));
+    }
+
+    public List<ProductMaterialPO> findByProductCode(String productCode) {
+        return baseMapper.selectList(new LambdaQueryWrapper<ProductMaterialPO>().eq(ProductMaterialPO::getProductCode, productCode));
     }
 
 }
