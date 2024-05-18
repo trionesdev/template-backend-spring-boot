@@ -40,7 +40,7 @@ public class ProductBomService {
     }
 
     public List<ProductMaterialDTO> findProductMaterials(String productCode) {
-        List<ProductMaterialPO> productMaterials = productBomManager.findByProductCodes(Collections.singletonList(productCode));
+        List<ProductMaterialPO> productMaterials = productBomManager.findByProductCode(productCode);
         return assembleMaterialDtoBatch(productMaterials);
     }
 
@@ -54,11 +54,11 @@ public class ProductBomService {
         if (CollectionUtil.isEmpty(records)) {
             return Collections.emptyList();
         }
-        Set<String> productCodes = records.stream().map(ProductMaterialPO::getProductCode).collect(Collectors.toSet());
-        Map<String, ProductDefinition> productDefinitionMap = productDefinitionManager.findByCodes(productCodes).stream().collect(Collectors.toMap(ProductDefinition::getCode, v -> v));
+        Set<String> materialCodes = records.stream().map(ProductMaterialPO::getMaterialCode).collect(Collectors.toSet());
+        Map<String, ProductDefinition> productDefinitionMap = productDefinitionManager.findByCodes(materialCodes).stream().collect(Collectors.toMap(ProductDefinition::getCode, v -> v));
         return records.stream().map(record -> {
             ProductMaterialDTO dto = convert.poToDto(record);
-            Optional.ofNullable(productDefinitionMap.get(record.getProductCode())).ifPresent(product -> {
+            Optional.ofNullable(productDefinitionMap.get(record.getMaterialCode())).ifPresent(product -> {
                 dto.setProduct(convert.productEntityToDto(product));
             });
             return dto;
