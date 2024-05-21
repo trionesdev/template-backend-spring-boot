@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.domains.warehouse.dao.entity;
+package com.trionesdev.mes.domain.core.domains.warehouse.repository.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -15,8 +15,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "warehouse_outbound_order")
-public class OutboundOrder extends BaseLogicEntity {
+@TableName(value = "warehouse_inventory")
+public class Inventory extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
