@@ -1,9 +1,9 @@
-package com.trionesdev.mes.domain.core.domains.warehouse.dao.entity;
+package com.trionesdev.mes.domain.core.domains.warehouse.repository.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.trionesdev.commons.mybatisplus.entity.BaseLogicEntity;
+import com.trionesdev.commons.mybatisplus.po.BaseLogicPO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,9 +15,11 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "warehouse_inventory")
-public class Inventory extends BaseLogicEntity {
+@TableName(value = "warehouse_warehouse")
+public class WarehousePO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
+    private String code;
+    private String name;
 }

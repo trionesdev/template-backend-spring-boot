@@ -28,7 +28,8 @@ public class CustomCodeRuleManager {
                 CustomCodeRule.builder().name("基础数据/不良品项").identifier("DEFECTIVE").prefix("BLP").timeFormatType(TimeFormatTypeEnum.YYYY_MM_DD).serialNumberDigits(4).build(),
                 CustomCodeRule.builder().name("基础数据/工序").identifier("MANUFACTURE_PROCESS").prefix("GX").timeFormatType(TimeFormatTypeEnum.YYYY_MM_DD).serialNumberDigits(4).build(),
                 CustomCodeRule.builder().name("基础数据/工艺路线").identifier("PROCESS_FLOW").prefix("GYLX").timeFormatType(TimeFormatTypeEnum.YYYY_MM_DD).serialNumberDigits(4).build(),
-                CustomCodeRule.builder().name("生产管理/工单").identifier("MANUFACTURE_ORDER").prefix("GD").timeFormatType(TimeFormatTypeEnum.YYYY_MM_DD).serialNumberDigits(4).build()
+                CustomCodeRule.builder().name("生产管理/工单").identifier("MANUFACTURE_ORDER").prefix("GD").timeFormatType(TimeFormatTypeEnum.YYYY_MM_DD).serialNumberDigits(4).build(),
+                CustomCodeRule.builder().name("仓库管理/仓库").identifier("WAREHOUSE").prefix("CK").timeFormatType(TimeFormatTypeEnum.YYYY_MM_DD).serialNumberDigits(4).build()
         );
     }
 
