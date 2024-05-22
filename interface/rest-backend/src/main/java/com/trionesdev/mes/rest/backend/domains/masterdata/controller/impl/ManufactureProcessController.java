@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Tag(name = "生产工艺")
 @RequiredArgsConstructor
 @RestController
@@ -57,6 +59,13 @@ public class ManufactureProcessController {
     @GetMapping("manufacture-processes/{id}")
     public ManufactureProcessDTO findById(@PathVariable("id") String id) {
         return manufactureProcessService.findById(id).orElse(null);
+    }
+
+    @Operation(summary = "查询生产工序列表")
+    @GetMapping("manufacture-processes/list")
+    public List<ManufactureProcessDTO> findList(ManufactureProcessQuery query) {
+        ManufactureProcessCriteria manufactureProcessCriteria = masterDataBeRestBeanConvert.from(query);
+        return manufactureProcessService.findList(manufactureProcessCriteria);
     }
 
     @Operation(summary = "分页查询生产工序")
