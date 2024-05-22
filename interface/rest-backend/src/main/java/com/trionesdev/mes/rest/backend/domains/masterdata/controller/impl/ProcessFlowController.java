@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Tag(name = "工艺")
 @RequiredArgsConstructor
 @RestController
@@ -57,6 +59,13 @@ public class ProcessFlowController {
     @GetMapping("process-flows/{id}")
     public ProcessFlowDTO findProcessFlowById(@PathVariable String id) {
         return processFlowService.findProcessFlowById(id).orElse(null);
+    }
+
+    @Operation(summary = "查询工艺列表")
+    @GetMapping("process-flows/list")
+    public List<ProcessFlowDTO> findProcessFlowList(ProcessFlowQuery query) {
+        ProcessFlowCriteria criteria = masterDataBeRestBeanConvert.from(query);
+        return processFlowService.findProcessFlowList(criteria);
     }
 
     @Operation(summary = "分页查询工艺")
