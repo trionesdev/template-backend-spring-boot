@@ -1,10 +1,13 @@
 package com.trionesdev.mes.domain.core.domains.warehouse.manager.impl;
 
+import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.mes.domain.core.domains.warehouse.repository.criteria.WarehouseCriteria;
 import com.trionesdev.mes.domain.core.domains.warehouse.repository.impl.WarehouseRepository;
 import com.trionesdev.mes.domain.core.domains.warehouse.repository.po.WarehousePO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -27,4 +30,13 @@ public class WarehouseManager {
     public Optional<WarehousePO> findById(String id) {
         return Optional.ofNullable(warehouseRepository.getById(id));
     }
+
+    public List<WarehousePO> findList(WarehouseCriteria criteria) {
+        return warehouseRepository.selectList(criteria);
+    }
+
+    public PageInfo<WarehousePO> findPage(WarehouseCriteria criteria) {
+        return warehouseRepository.selectPage(criteria);
+    }
+
 }
