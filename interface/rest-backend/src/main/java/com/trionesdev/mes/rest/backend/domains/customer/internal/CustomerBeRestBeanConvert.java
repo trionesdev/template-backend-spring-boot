@@ -1,9 +1,6 @@
 package com.trionesdev.mes.rest.backend.domains.customer.internal;
 
-import org.mapstruct.Builder;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 
 import com.trionesdev.mes.domain.core.domains.customer.repository.criteria.CustomerCriteria;
 import com.trionesdev.mes.domain.core.domains.customer.repository.po.CustomerPO;

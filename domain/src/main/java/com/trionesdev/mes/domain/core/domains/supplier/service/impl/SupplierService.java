@@ -7,7 +7,6 @@ import com.trionesdev.mes.domain.core.domains.supplier.internal.SupplierBeanConv
 import com.trionesdev.mes.domain.core.domains.supplier.manager.impl.SupplierManager;
 import com.trionesdev.mes.domain.core.domains.supplier.repository.criteria.SupplierCriteria;
 import com.trionesdev.mes.domain.core.domains.supplier.repository.po.SupplierPO;
-import com.trionesdev.mes.domain.core.dto.customer.CustomerDTO;
 import com.trionesdev.mes.domain.core.dto.supplier.SupplierDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.custom.impl.CustomProvider;
 import lombok.RequiredArgsConstructor;
