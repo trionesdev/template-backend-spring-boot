@@ -1,6 +1,5 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.internal;
 
-import com.trionesdev.mes.domain.core.domains.masterdata.entity.ManufactureBom;
 import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProductBom;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.DefectiveCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ProcessFlowCriteria;
