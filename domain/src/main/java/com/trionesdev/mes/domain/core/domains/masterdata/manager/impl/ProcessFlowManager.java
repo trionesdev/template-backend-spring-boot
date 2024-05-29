@@ -76,6 +76,15 @@ public class ProcessFlowManager {
         });
     }
 
+    public Optional<ProcessFlow> findByCode(String code) {
+        return Optional.ofNullable(processFlowRepository.selectByCode(code)).map(processFlowPO -> {
+            ProcessFlow processFlow = masterDataBeanConvert.poToEntity(processFlowPO);
+            List<ProcessFlow.Item> items = processFlowItemRepository.selectListByFlowId(processFlowPO.getId()).stream().map(item -> ProcessFlow.Item.builder().code(item.getCode()).type(item.getType()).ratio(item.getRatio()).build()).collect(Collectors.toList());
+            processFlow.setItems(items);
+            return processFlow;
+        });
+    }
+
     public List<ProcessFlow> findProcessFlowList(ProcessFlowCriteria criteria) {
         List<ProcessFlowPO> records = processFlowRepository.selectList(criteria);
         return assembleProcessFlow(records);

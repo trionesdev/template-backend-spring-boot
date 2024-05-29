@@ -24,6 +24,10 @@ public class SupplierRepository extends ServiceImpl<SupplierMapper, SupplierPO> 
         return queryWrapper;
     }
 
+    public SupplierPO selectByCode(String code) {
+        return this.getOne(new LambdaQueryWrapper<SupplierPO>().eq(SupplierPO::getCode, code));
+    }
+
     public List<SupplierPO> selectList(SupplierCriteria criteria) {
         return this.list(buildQueryWrapper(criteria));
     }

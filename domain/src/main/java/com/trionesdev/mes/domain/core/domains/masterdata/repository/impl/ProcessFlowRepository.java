@@ -20,6 +20,10 @@ public class ProcessFlowRepository extends ServiceImpl<ProcessFlowMapper, Proces
         return queryWrapper;
     }
 
+    public ProcessFlowPO selectByCode(String code) {
+        return baseMapper.selectOne(new LambdaQueryWrapper<ProcessFlowPO>().eq(ProcessFlowPO::getCode, code));
+    }
+
     public List<ProcessFlowPO> selectList(ProcessFlowCriteria criteria) {
         return baseMapper.selectList(buildQueryWrapper(criteria));
     }
