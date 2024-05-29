@@ -42,7 +42,16 @@ public class SupplierService {
         return supplierManager.findById(id).map(this::assemble);
     }
 
-    public PageInfo<SupplierDTO> queryCustomerPage(SupplierCriteria criteria) {
+    public Optional<SupplierDTO> querySupplierByCode(String code) {
+        return supplierManager.findByCode(code).map(this::assemble);
+    }
+
+    public List<SupplierDTO> querySupplierList(SupplierCriteria criteria) {
+        List<SupplierPO> suppliers = supplierManager.findList(criteria);
+        return assembleBatch(suppliers);
+    }
+
+    public PageInfo<SupplierDTO> querySupplierPage(SupplierCriteria criteria) {
         PageInfo<SupplierPO> page = supplierManager.findPage(criteria);
         return PageUtils.of(page, assembleBatch(page.getRows()));
     }

@@ -26,6 +26,7 @@ public class ProductDefinitionDTO {
     private BigDecimal unitPrice; //销售单价
     private Unit unit;
     private ProcessFlow processFlow;
+    private Supplier defaultSupplier;
 
 
     @Data
@@ -42,6 +43,13 @@ public class ProductDefinitionDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class ProcessFlow {
+        private String code;
+        private String name;
+    }
+
+    @Data
+    @SuperBuilder
+    public static class Supplier {
         private String code;
         private String name;
     }

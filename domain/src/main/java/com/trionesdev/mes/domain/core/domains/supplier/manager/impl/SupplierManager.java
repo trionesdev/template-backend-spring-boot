@@ -31,7 +31,11 @@ public class SupplierManager {
         return Optional.ofNullable(customerRepository.getById(id));
     }
 
-    List<SupplierPO> findList(SupplierCriteria criteria) {
+    public Optional<SupplierPO> findByCode(String code) {
+        return Optional.ofNullable(customerRepository.selectByCode(code));
+    }
+
+    public List<SupplierPO> findList(SupplierCriteria criteria) {
         return customerRepository.selectList(criteria);
     }
 
