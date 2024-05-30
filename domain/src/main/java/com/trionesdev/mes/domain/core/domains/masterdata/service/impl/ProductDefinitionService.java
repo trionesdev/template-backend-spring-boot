@@ -51,9 +51,15 @@ public class ProductDefinitionService {
     public Optional<ProductDefinitionDTO> findById(String id) {
         return productDefinitionManager.findById(id).map(pd -> {
             ProductDefinitionDTO dto = convert.entityToDto(pd);
-            unitManager.findById(pd.getUnitId()).ifPresent(unit -> dto.setUnit(ProductDefinitionDTO.Unit.builder().id(unit.getId()).name(unit.getName()).build()));
-            processFlowManager.findByCode(pd.getProcessFlowCode()).ifPresent(processFlow -> dto.setProcessFlow(ProductDefinitionDTO.ProcessFlow.builder().code(processFlow.getCode()).name(processFlow.getName()).build()));
-            Optional.ofNullable(supplierProvider.querySupplierByCode(pd.getDefaultSupplierCode())).ifPresent(supplier -> dto.setDefaultSupplier(ProductDefinitionDTO.Supplier.builder().code(supplier.getCode()).name(supplier.getName()).build()));
+            if (StrUtil.isNotBlank(pd.getUnitId())) {
+                unitManager.findById(pd.getUnitId()).ifPresent(unit -> dto.setUnit(ProductDefinitionDTO.Unit.builder().id(unit.getId()).name(unit.getName()).build()));
+            }
+            if (StrUtil.isNotBlank(pd.getProcessFlowCode())) {
+                processFlowManager.findByCode(pd.getProcessFlowCode()).ifPresent(processFlow -> dto.setProcessFlow(ProductDefinitionDTO.ProcessFlow.builder().code(processFlow.getCode()).name(processFlow.getName()).build()));
+            }
+            if (StrUtil.isNotBlank(pd.getDefaultSupplierCode())) {
+                Optional.ofNullable(supplierProvider.querySupplierByCode(pd.getDefaultSupplierCode())).ifPresent(supplier -> dto.setDefaultSupplier(ProductDefinitionDTO.Supplier.builder().code(supplier.getCode()).name(supplier.getName()).build()));
+            }
             return dto;
         });
     }

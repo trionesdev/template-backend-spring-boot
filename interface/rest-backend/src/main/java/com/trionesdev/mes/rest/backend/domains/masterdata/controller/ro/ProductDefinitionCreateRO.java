@@ -13,7 +13,7 @@ public class ProductDefinitionCreateRO {
     private String specification;
     @NotBlank
     private String type;
-    private String technologicalCode; //工艺路线
+    private String processFlowCode; //工艺路线
     private String defaultSupplierCode;
     private Integer maxInventory;
     private Integer minInventory;
