@@ -10,6 +10,7 @@ import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.Defective
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.mapper.DefectiveMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +27,11 @@ public class DefectiveRepository extends ServiceImpl<DefectiveMapper, DefectiveP
     public List<DefectivePO> selectList(DefectiveCriteria criteria) {
         return this.list(buildQueryWrapper(criteria).orderByDesc(DefectivePO::getCreatedAt));
     }
+
+    public List<DefectivePO> selectListByCodes(Collection<String> codes) {
+        return this.list(new LambdaQueryWrapper<DefectivePO>().in(DefectivePO::getCode, codes));
+    }
+
 
     public PageInfo<DefectivePO> selectPage(DefectiveCriteria criteria) {
         return MpPageUtils.of(baseMapper.selectPage(MpPageUtils.page(criteria), buildQueryWrapper(criteria).orderByDesc(DefectivePO::getCreatedAt)));

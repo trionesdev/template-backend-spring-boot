@@ -1,5 +1,6 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.manager.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.DefectiveCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.DefectivePO;
@@ -7,6 +8,8 @@ import com.trionesdev.mes.domain.core.domains.masterdata.repository.impl.Defecti
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +32,13 @@ public class DefectiveManager {
 
     public Optional<DefectivePO> findById(String id) {
         return Optional.ofNullable(defectiveDAO.getById(id));
+    }
+
+    public List<DefectivePO> findListByCodes(Collection<String> codes) {
+        if (CollectionUtil.isEmpty(codes)){
+            return Collections.emptyList();
+        }
+        return defectiveDAO.selectListByCodes(codes);
     }
 
     public List<DefectivePO> findList(DefectiveCriteria criteria) {
