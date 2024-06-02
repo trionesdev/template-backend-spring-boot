@@ -28,10 +28,11 @@ public class ManufactureOrderTaskPO extends BaseLogicEntity {
     private String id;
     private String tenantId;
     private String orderId;
-    private String processCode;
-    private BigDecimal planQuantity;
-    private BigDecimal goodQuantity;
-    private BigDecimal defectiveQuantity;
+    private String processCode; //工序名称
+    private BigDecimal ratio; //配比
+    private BigDecimal planQuantity; //计划数量
+    private BigDecimal goodQuantity; //良品数量
+    private BigDecimal defectiveQuantity; //不良品数量
     @TableField(typeHandler = StringCollectionTypeHandler.class)
     private List<String> defectiveCodes;
     private Instant planStartTime;
