@@ -31,4 +31,5 @@ public class ManufactureOrderPO extends BaseLogicPO {
     private Instant planEndTime;
     private Instant actualStartTime;
     private Instant actualEndTime;
+    private String status;
 }

@@ -1,5 +1,6 @@
 package com.trionesdev.mes.domain.core.domains.manufacture.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -27,15 +28,36 @@ public class ManufactureOrder {
 
 
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Task {
         private String processCode;
         private BigDecimal ratio; //配比
         private BigDecimal planQuantity;
+        private BigDecimal goodQuantity; //良品数量
+        private BigDecimal defectiveQuantity; //不良品数量
         private Instant planStartTime;
         private Instant planEndTime;
+        private Instant actualStartTime;
+        private Instant actualEndTime;
+        private List<Defective> defectives;
     }
 
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Defective {
+        private String code;
+        private String name;
+        private BigDecimal quantity;
+    }
+
+    @Data
+    @SuperBuilder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Material {
         private String productCode;
         private BigDecimal unitUsage; //单位用量
