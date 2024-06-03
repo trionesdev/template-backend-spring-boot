@@ -27,6 +27,10 @@ public class ProductDefinitionRepository extends ServiceImpl<ProductDefinitionMa
         return queryWrapper;
     }
 
+    public ProductDefinitionPO selectByCode(String code) {
+        return baseMapper.selectOne(new LambdaQueryWrapper<ProductDefinitionPO>().eq(ProductDefinitionPO::getCode, code));
+    }
+
     public List<ProductDefinitionPO> selectListByCodes(Collection<String> codes) {
         return baseMapper.selectList(new LambdaQueryWrapper<ProductDefinitionPO>().in(ProductDefinitionPO::getCode, codes));
     }

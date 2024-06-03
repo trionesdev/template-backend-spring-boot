@@ -49,19 +49,11 @@ public class ProductDefinitionService {
     }
 
     public Optional<ProductDefinitionDTO> findById(String id) {
-        return productDefinitionManager.findById(id).map(pd -> {
-            ProductDefinitionDTO dto = convert.entityToDto(pd);
-            if (StrUtil.isNotBlank(pd.getUnitId())) {
-                unitManager.findById(pd.getUnitId()).ifPresent(unit -> dto.setUnit(ProductDefinitionDTO.Unit.builder().id(unit.getId()).name(unit.getName()).build()));
-            }
-            if (StrUtil.isNotBlank(pd.getProcessFlowCode())) {
-                processFlowManager.findByCode(pd.getProcessFlowCode()).ifPresent(processFlow -> dto.setProcessFlow(ProductDefinitionDTO.ProcessFlow.builder().code(processFlow.getCode()).name(processFlow.getName()).build()));
-            }
-            if (StrUtil.isNotBlank(pd.getDefaultSupplierCode())) {
-                Optional.ofNullable(supplierProvider.querySupplierByCode(pd.getDefaultSupplierCode())).ifPresent(supplier -> dto.setDefaultSupplier(ProductDefinitionDTO.Supplier.builder().code(supplier.getCode()).name(supplier.getName()).build()));
-            }
-            return dto;
-        });
+        return productDefinitionManager.findById(id).map(this::assemble);
+    }
+
+    public Optional<ProductDefinitionDTO> findByCode(String code) {
+        return productDefinitionManager.findByCode(code).map(this::assemble);
     }
 
     public List<ProductDefinitionDTO> findList(ProductDefinitionCriteria criteria) {
@@ -72,6 +64,23 @@ public class ProductDefinitionService {
     public PageInfo<ProductDefinitionDTO> findPage(ProductDefinitionCriteria criteria) {
         PageInfo<ProductDefinition> page = productDefinitionManager.findPage(criteria);
         return PageUtils.of(page, assembleBatch(page.getRows()));
+    }
+
+    private ProductDefinitionDTO assemble(ProductDefinitionPO pd) {
+        if (pd == null) {
+            return null;
+        }
+        ProductDefinitionDTO dto = convert.entityToDto(pd);
+        if (StrUtil.isNotBlank(pd.getUnitId())) {
+            unitManager.findById(pd.getUnitId()).ifPresent(unit -> dto.setUnit(ProductDefinitionDTO.Unit.builder().id(unit.getId()).name(unit.getName()).build()));
+        }
+        if (StrUtil.isNotBlank(pd.getProcessFlowCode())) {
+            processFlowManager.findByCode(pd.getProcessFlowCode()).ifPresent(processFlow -> dto.setProcessFlow(ProductDefinitionDTO.ProcessFlow.builder().code(processFlow.getCode()).name(processFlow.getName()).build()));
+        }
+        if (StrUtil.isNotBlank(pd.getDefaultSupplierCode())) {
+            Optional.ofNullable(supplierProvider.querySupplierByCode(pd.getDefaultSupplierCode())).ifPresent(supplier -> dto.setDefaultSupplier(ProductDefinitionDTO.Supplier.builder().code(supplier.getCode()).name(supplier.getName()).build()));
+        }
+        return dto;
     }
 
     private List<ProductDefinitionDTO> assembleBatch(List<ProductDefinition> records) {

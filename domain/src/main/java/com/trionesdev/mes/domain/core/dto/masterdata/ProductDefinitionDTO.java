@@ -24,6 +24,7 @@ public class ProductDefinitionDTO {
     private Integer minInventory;
     private BigDecimal unitCost; //成本单价
     private BigDecimal unitPrice; //销售单价
+    private BigDecimal inventory = BigDecimal.ZERO;
     private Unit unit;
     private ProcessFlow processFlow;
     private Supplier defaultSupplier;

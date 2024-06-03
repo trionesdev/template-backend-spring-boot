@@ -60,6 +60,12 @@ public class ProductDefinitionController {
         return productDefinitionService.findById(id).orElse(null);
     }
 
+    @Operation(summary = "根据Code查询产品定义")
+    @GetMapping("product-definitions/code/{code}")
+    public ProductDefinitionDTO findByCode(@PathVariable("code") String code) {
+        return productDefinitionService.findByCode(code).orElse(null);
+    }
+
     @Operation(summary = "查询产品定义列表")
     @GetMapping("product-definitions/list")
     public List<ProductDefinitionDTO> findList(ProductDefinitionQuery query) {
