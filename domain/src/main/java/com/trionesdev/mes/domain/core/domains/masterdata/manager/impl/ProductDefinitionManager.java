@@ -41,6 +41,10 @@ public class ProductDefinitionManager {
         return Optional.ofNullable(productDefinitionDAO.getById(id));
     }
 
+    public Optional<ProductDefinitionPO> findByCode(String code) {
+        return Optional.ofNullable(productDefinitionDAO.selectByCode(code));
+    }
+
     public List<ProductDefinition> findByCodes(Collection<String> codes) {
         return assembleEntityBatch(productDefinitionDAO.selectListByCodes(codes));
     }
