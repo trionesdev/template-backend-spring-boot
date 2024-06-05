@@ -33,7 +33,7 @@ public class ManufactureOrder {
     @AllArgsConstructor
     public static class Task {
         private String processCode;
-        private BigDecimal ratio; //配比
+        private BigDecimal ratio;
         private BigDecimal planQuantity;
         private BigDecimal goodQuantity; //良品数量
         private BigDecimal defectiveQuantity; //不良品数量
