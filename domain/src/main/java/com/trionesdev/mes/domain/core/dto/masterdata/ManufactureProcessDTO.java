@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -15,6 +16,7 @@ public class ManufactureProcessDTO {
     private String id;
     private String code;
     private String name;
+    private BigDecimal ratio;
     private List<String> defectiveCodes;
     private List<Defective> defectives;
 

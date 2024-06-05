@@ -1,6 +1,7 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.controller.impl;
 
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ManufactureProcessQuery;
+import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ProcessesByFlowIdsQuery;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ManufactureProcessCreateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ManufactureProcessUpdateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
@@ -79,6 +80,14 @@ public class ManufactureProcessController {
         manufactureProcessCriteria.setPageNum(pageNum);
         manufactureProcessCriteria.setPageSize(pageSize);
         return manufactureProcessService.findPage(manufactureProcessCriteria);
+    }
+
+    @Operation(summary = "根据工艺IDS查询工序列表")
+    @PostMapping("manufacture-processes/by-flow-ids")
+    public List<ManufactureProcessDTO> findProcessesByFlowIds(@RequestBody ProcessesByFlowIdsQuery query) {
+        ManufactureProcessCriteria criteria = new ManufactureProcessCriteria();
+        criteria.setFlowIds(query.getFlowIds());
+        return manufactureProcessService.findList(criteria);
     }
 
 }
