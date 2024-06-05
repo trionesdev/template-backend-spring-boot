@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.Collection;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
@@ -14,4 +16,5 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class ManufactureProcessCriteria  extends PageCriteria {
     private String code;
+    private Collection<String> flowIds;
 }

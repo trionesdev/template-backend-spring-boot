@@ -1,5 +1,6 @@
 package com.trionesdev.mes.domain.core.domains.masterdata.repository.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -20,7 +21,12 @@ public class ManufactureProcessRepository extends ServiceImpl<ManufactureProcess
     private LambdaQueryWrapper<ManufactureProcessPO> buildQueryWrapper(ManufactureProcessCriteria criteria) {
         LambdaQueryWrapper<ManufactureProcessPO> queryWrapper = new LambdaQueryWrapper<>();
         if (Objects.nonNull(criteria)) {
-            queryWrapper.eq(StrUtil.isNotBlank(criteria.getCode()), ManufactureProcessPO::getCode, criteria.getCode());
+            queryWrapper.eq(StrUtil.isNotBlank(criteria.getCode()), ManufactureProcessPO::getCode, criteria.getCode())
+                    .exists(CollectionUtil.isNotEmpty(criteria.getFlowIds()), "     select * from master_data_process_flow_item\n" +
+                            "             where master_data_process_flow_item.is_deleted=false\n" +
+                            "             and    master_data_manufacture_process.code=master_data_process_flow_item.code\n" +
+                            "             and master_data_process_flow_item.flow_id in ('" + StrUtil.join(",", criteria.getFlowIds()) + "') ");
+
         }
         return queryWrapper;
     }

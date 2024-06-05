@@ -14,6 +14,7 @@ import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.ProcessFlo
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ProcessFlowCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureProcessPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProcessFlowPO;
+import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProcessFlowDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.custom.impl.CustomProvider;
 import lombok.RequiredArgsConstructor;
@@ -82,7 +83,7 @@ public class ProcessFlowService {
         return PageUtils.of(pageInfo, assembleProcessFlowDtoBatch(pageInfo.getRows()));
     }
 
-    public List<ProcessFlowDTO> assembleProcessFlowDtoBatch(List<ProcessFlow> processFlows) {
+    private List<ProcessFlowDTO> assembleProcessFlowDtoBatch(List<ProcessFlow> processFlows) {
         if (CollectionUtil.isEmpty(processFlows)) {
             return Collections.emptyList();
         }
@@ -118,4 +119,6 @@ public class ProcessFlowService {
             return processFlowDTO;
         }).collect(Collectors.toList());
     }
+
+
 }
