@@ -15,4 +15,10 @@ public interface ManufactureBeBeanConvert {
     ManufactureOrder from(ManufactureOrderCreateRO args);
 
     ManufactureOrder from(ManufactureOrderUpdateRO args);
+
+    ManufactureOrder.Task from(ManufactureOrderCreateRO.Task args);
+
+    ManufactureOrder.Material from(ManufactureOrderCreateRO.Material args);
+
+    ManufactureOrder.Task from(ManufactureOrderUpdateRO.Task args);
 }

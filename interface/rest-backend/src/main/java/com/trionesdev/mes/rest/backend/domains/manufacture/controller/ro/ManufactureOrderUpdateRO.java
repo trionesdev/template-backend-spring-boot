@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 
 @Data
 public class ManufactureOrderUpdateRO {
@@ -17,6 +18,23 @@ public class ManufactureOrderUpdateRO {
     private BigDecimal planQuantity; //计划数量
     private Instant planStartTime;
     private Instant planEndTime;
-    private Instant actualStartTime;
-    private Instant actualEndTime;
+    private List<ManufactureOrderCreateRO.Task> tasks;
+    private List<ManufactureOrderCreateRO.Material> materials;
+
+    @Data
+    public static class Task {
+        private String processCode;
+        private BigDecimal ratio;
+        private BigDecimal planQuantity;
+        private Instant planStartTime;
+        private Instant planEndTime;
+    }
+
+    @Data
+    public static class Material {
+        private String materialCode;
+        private String processCode;
+        private BigDecimal unitUsage; //单位用量
+        private String remark;
+    }
 }
