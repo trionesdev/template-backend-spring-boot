@@ -56,9 +56,9 @@ public interface MasterDataBeRestBeanConvert {
     //endregion
 
     //region defective
-    DefectivePO from(DefectiveCreateRO args);
+    DefectivePO from(DefectiveRO.Create args);
 
-    DefectivePO from(DefectiveUpdateRO args);
+    DefectivePO from(DefectiveRO.Update args);
 
     DefectiveCriteria from(DefectiveQuery args);
     //endregion
