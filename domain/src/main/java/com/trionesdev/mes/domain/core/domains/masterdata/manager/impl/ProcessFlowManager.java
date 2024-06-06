@@ -113,4 +113,11 @@ public class ProcessFlowManager {
         }).collect(Collectors.toList());
     }
 
+    public List<ProcessFlowItemPO> findFlowItemsByFlowIds(List<String> flowIds) {
+        if (CollectionUtil.isEmpty(flowIds)) {
+            return Collections.emptyList();
+        }
+        return processFlowItemRepository.selectListByFlowIds(flowIds);
+    }
+
 }
