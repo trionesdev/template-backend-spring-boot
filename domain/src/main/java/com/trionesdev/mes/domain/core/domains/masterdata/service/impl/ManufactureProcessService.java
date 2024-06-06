@@ -5,11 +5,13 @@ import cn.hutool.core.util.StrUtil;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.DefectiveManager;
+import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.ProcessFlowManager;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ManufactureProcessCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.DefectivePO;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureProcessPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.ManufactureProcessManager;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProcessFlowItemPO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.custom.impl.CustomProvider;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 public class ManufactureProcessService {
     private final MasterDataBeanConvert convert;
     private final ManufactureProcessManager manufactureProcessManager;
+    private final ProcessFlowManager processFlowManager;
     private final DefectiveManager defectiveManager;
     private final CustomProvider customProvider;
 
@@ -69,7 +72,7 @@ public class ManufactureProcessService {
             return Collections.emptyList();
         }
         Set<String> defectiveCodes = records.stream().map(ManufactureProcessPO::getDefectiveCodes)
-                .flatMap(codes->{
+                .flatMap(codes -> {
                     if (CollectionUtil.isEmpty(codes)) {
                         return new ArrayList<String>().stream();
                     }
@@ -84,4 +87,16 @@ public class ManufactureProcessService {
             return dto;
         }).collect(Collectors.toList());
     }
+
+    public List<ManufactureProcessDTO> findFlowsProcesses(List<String> flowIds) {
+        List<ProcessFlowItemPO> flowItems = processFlowManager.findFlowItemsByFlowIds(flowIds);
+        if (CollectionUtil.isEmpty(flowItems)) {
+            return Collections.emptyList();
+        }
+        Set<String> processCodes = flowItems.stream().map(ProcessFlowItemPO::getCode).collect(Collectors.toSet());
+        var processes = assembleBatch(manufactureProcessManager.findListByCodes(processCodes));
+        var processesMap = processes.stream().collect(Collectors.toMap(ManufactureProcessDTO::getCode, v -> v, (v1, v2) -> v1));
+        return flowItems.stream().map(item -> processesMap.get(item.getCode())).collect(Collectors.toList());
+    }
+
 }

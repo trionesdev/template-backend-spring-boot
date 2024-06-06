@@ -85,9 +85,7 @@ public class ManufactureProcessController {
     @Operation(summary = "根据工艺IDS查询工序列表")
     @PostMapping("manufacture-processes/by-flow-ids")
     public List<ManufactureProcessDTO> findProcessesByFlowIds(@RequestBody ProcessesByFlowIdsQuery query) {
-        ManufactureProcessCriteria criteria = new ManufactureProcessCriteria();
-        criteria.setFlowIds(query.getFlowIds());
-        return manufactureProcessService.findList(criteria);
+        return manufactureProcessService.findFlowsProcesses(query.getFlowIds());
     }
 
 }
