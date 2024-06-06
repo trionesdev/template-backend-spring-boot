@@ -5,8 +5,7 @@ import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.Def
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.DefectivePO;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.DefectiveService;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.DefectiveQuery;
-import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.DefectiveCreateRO;
-import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.DefectiveUpdateRO;
+import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.DefectiveRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,7 +34,7 @@ public class DefectiveController {
 
     @Operation(summary = "创建不良品项")
     @PostMapping("defectives")
-    public void create(@Validated @RequestBody DefectiveCreateRO args) {
+    public void create(@Validated @RequestBody DefectiveRO.Create args) {
         DefectivePO po = convert.from(args);
         defectiveService.create(po);
     }
@@ -48,7 +47,7 @@ public class DefectiveController {
 
     @Operation(summary = "根据ID更新不良品项")
     @PutMapping("defectives/{id}")
-    public void updateById(@PathVariable String id, @Validated @RequestBody DefectiveUpdateRO args) {
+    public void updateById(@PathVariable String id, @Validated @RequestBody DefectiveRO.Update args) {
         DefectivePO po = convert.from(args);
         po.setId(id);
         defectiveService.updateById(po);

@@ -1,8 +1,7 @@
 package com.trionesdev.mes.rest.backend.domains.manufacture.controller.impl;
 
 import com.trionesdev.mes.domain.core.domains.manufacture.service.impl.ManufactureOrderService;
-import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureOrderCreateRO;
-import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureOrderUpdateRO;
+import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureOrderRO;
 import com.trionesdev.mes.rest.backend.domains.manufacture.internal.ManufactureBeBeanConvert;
 import com.trionesdev.mes.rest.backend.domains.manufacture.internal.ManufactureConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +20,7 @@ public class ManufactureOrderController {
 
     @Operation(summary = "创建生产工单")
     @PostMapping("orders")
-    public void createOrder(@Validated @RequestBody ManufactureOrderCreateRO args) {
+    public void createOrder(@Validated @RequestBody ManufactureOrderRO.Create args) {
         var order = convert.from(args);
         manufactureOrderService.createManufactureOrder(order);
     }
@@ -34,7 +33,7 @@ public class ManufactureOrderController {
 
     @Operation(summary = "根据ID修改生产工单")
     @PutMapping("orders/{id}")
-    public void updateOrderById(@PathVariable String id, @Validated @RequestBody ManufactureOrderUpdateRO args) {
+    public void updateOrderById(@PathVariable String id, @Validated @RequestBody ManufactureOrderRO.Update args) {
         var order = convert.from(args);
         order.setId(id);
         manufactureOrderService.updateManufactureOrderById(order);
