@@ -60,6 +60,7 @@ public class ManufactureOrder {
     @AllArgsConstructor
     public static class Material {
         private String productCode;
+        private String processCode;
         private BigDecimal unitUsage; //单位用量
     }
 }

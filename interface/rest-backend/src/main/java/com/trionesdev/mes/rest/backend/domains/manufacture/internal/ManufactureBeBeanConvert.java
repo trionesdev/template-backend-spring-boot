@@ -1,6 +1,8 @@
 package com.trionesdev.mes.rest.backend.domains.manufacture.internal;
 
 import com.trionesdev.mes.domain.core.domains.manufacture.entity.ManufactureOrder;
+import com.trionesdev.mes.domain.core.domains.manufacture.repository.criteria.ManufactureOrderCriteria;
+import com.trionesdev.mes.rest.backend.domains.manufacture.controller.query.ManufactureOrderQuery;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureOrderRO;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -11,6 +13,7 @@ import org.mapstruct.Named;
         builder = @Builder(disableBuilder = true))
 @Named("manufactureBeBeanConvert")
 public interface ManufactureBeBeanConvert {
+    //region manufacture order
     ManufactureOrder from(ManufactureOrderRO.Create args);
 
     ManufactureOrder from(ManufactureOrderRO.Update args);
@@ -18,4 +21,7 @@ public interface ManufactureBeBeanConvert {
     ManufactureOrder.Task from(ManufactureOrderRO.Task args);
 
     ManufactureOrder.Material from(ManufactureOrderRO.Material args);
+
+    ManufactureOrderCriteria from(ManufactureOrderQuery args);
+    //endregion
 }

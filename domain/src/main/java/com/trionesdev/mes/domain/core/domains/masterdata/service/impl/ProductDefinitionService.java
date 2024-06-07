@@ -18,6 +18,7 @@ import com.trionesdev.mes.domain.core.provider.ssp.supplier.impl.SupplierProvide
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -64,6 +65,11 @@ public class ProductDefinitionService {
     public PageInfo<ProductDefinitionDTO> findPage(ProductDefinitionCriteria criteria) {
         PageInfo<ProductDefinition> page = productDefinitionManager.findPage(criteria);
         return PageUtils.of(page, assembleBatch(page.getRows()));
+    }
+
+    public List<ProductDefinitionDTO> findProductsByCodes(Collection<String> codes) {
+        var products = productDefinitionManager.findByCodes(codes);
+        return assembleBatch(products);
     }
 
     private ProductDefinitionDTO assemble(ProductDefinitionPO pd) {

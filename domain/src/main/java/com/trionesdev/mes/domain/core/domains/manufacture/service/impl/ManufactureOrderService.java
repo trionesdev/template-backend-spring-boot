@@ -1,5 +1,6 @@
 package com.trionesdev.mes.domain.core.domains.manufacture.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
@@ -8,12 +9,13 @@ import com.trionesdev.mes.domain.core.domains.manufacture.internal.ManufactureBe
 import com.trionesdev.mes.domain.core.domains.manufacture.manager.impl.ManufactureOrderManager;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.criteria.ManufactureOrderCriteria;
 import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderDTO;
+import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.custom.impl.CustomProvider;
+import com.trionesdev.mes.domain.core.provider.ssp.masterdata.impl.MasterDataProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 public class ManufactureOrderService {
     private final ManufactureBeanConvert convert;
     private final ManufactureOrderManager manufactureOrderManager;
+    private final MasterDataProvider masterDataProvider;
     private final CustomProvider customProvider;
 
     public void createManufactureOrder(ManufactureOrder order) {
@@ -49,6 +52,18 @@ public class ManufactureOrderService {
     }
 
     private List<ManufactureOrderDTO> assembleBatch(List<ManufactureOrder> records) {
-        return records.stream().map(convert::entityToDto).collect(Collectors.toList());
+        if (CollectionUtil.isEmpty(records)) {
+            return Collections.emptyList();
+        }
+        Set<String> productCodes = records.stream().map(ManufactureOrder::getProductCode).collect(Collectors.toSet());
+        Map<String, ProductDefinitionDTO> productsMap = masterDataProvider.getProductsByCodes(productCodes).stream().collect(Collectors.toMap(ProductDefinitionDTO::getCode, v -> v, (v1, v2) -> v1));
+
+        return records.stream().map(order -> {
+            var dto = convert.entityToDto(order);
+            dto.setProduct(
+                    Optional.ofNullable(productsMap.get(order.getProductCode())).map(product -> ManufactureOrderDTO.Product.builder().code(product.getCode()).name(product.getName()).build()).orElse(null)
+            );
+            return dto;
+        }).collect(Collectors.toList());
     }
 }

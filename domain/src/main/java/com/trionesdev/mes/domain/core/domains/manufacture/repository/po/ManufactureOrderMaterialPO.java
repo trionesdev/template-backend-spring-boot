@@ -24,5 +24,6 @@ public class ManufactureOrderMaterialPO extends BaseLogicPO {
     private String tenantId;
     private String orderId;
     private String productCode;
+    private String processCode;
     private BigDecimal unitUsage;
 }
