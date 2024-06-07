@@ -1,6 +1,9 @@
 package com.trionesdev.mes.rest.backend.domains.manufacture.controller.impl;
 
+import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.mes.domain.core.domains.manufacture.service.impl.ManufactureOrderService;
+import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderDTO;
+import com.trionesdev.mes.rest.backend.domains.manufacture.controller.query.ManufactureOrderQuery;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureOrderRO;
 import com.trionesdev.mes.rest.backend.domains.manufacture.internal.ManufactureBeBeanConvert;
 import com.trionesdev.mes.rest.backend.domains.manufacture.internal.ManufactureConstants;
@@ -37,6 +40,25 @@ public class ManufactureOrderController {
         var order = convert.from(args);
         order.setId(id);
         manufactureOrderService.updateManufactureOrderById(order);
+    }
+
+    @Operation(summary = "根据ID获取工单详情")
+    @GetMapping(value = "orders/{id}")
+    public ManufactureOrderDTO findOrderById(@PathVariable String id) {
+        return manufactureOrderService.findManufactureOrderById(id).orElse(null);
+    }
+
+    @Operation(summary = "查询工单列表分页")
+    @GetMapping(value = "orders/page")
+    public PageInfo<ManufactureOrderDTO> findOrdersPage(
+            @RequestParam(value = "pageNum") Integer pageNum,
+            @RequestParam(value = "pageSize") Integer pageSize,
+            ManufactureOrderQuery query
+    ) {
+        var manufactureOrderCriteria = convert.from(query);
+        manufactureOrderCriteria.setPageNum(pageNum);
+        manufactureOrderCriteria.setPageSize(pageSize);
+        return manufactureOrderService.findManufactureOrderPage(manufactureOrderCriteria);
     }
 
 }

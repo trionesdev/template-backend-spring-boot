@@ -1,7 +1,10 @@
 package com.trionesdev.mes.domain.core.dto.manufacture;
 
 import com.trionesdev.mes.domain.core.dto.masterdata.DefectiveDTO;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -12,8 +15,18 @@ public class ManufactureOrderDTO {
     private String id;
     private String code;
     private String productCode;
+    private Product product;
     private List<Task> tasks;
     private List<Material> materials;
+
+    @Data
+    @SuperBuilder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Product {
+        private String code;
+        private String name;
+    }
 
 
     @Data

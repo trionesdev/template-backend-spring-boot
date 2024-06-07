@@ -52,7 +52,7 @@ public class ManufactureOrderManager {
 
     @Transactional
     public void create(ManufactureOrder order) {
-        ManufactureOrderPO orderPO = convert.entityToPo(order);
+        var orderPO = convert.entityToPo(order);
         manufactureOrderRepository.save(orderPO);
         order.setId(orderPO.getId());
         saveOrderRelations(order);
@@ -76,16 +76,26 @@ public class ManufactureOrderManager {
 
     public Optional<ManufactureOrder> findById(String id) {
         return Optional.ofNullable(manufactureOrderRepository.getById(id)).map(t -> {
-            ManufactureOrder order = convert.poToEntity(t);
-            order.setTasks(convert.tasksPoToEntity(manufactureOrderTaskRepository.selectListByOrderId(id)));
-            order.setMaterials(convert.materialsPoToEntity(manufactureOrderMaterialRepository.selectListByOrderId(id)));
-            return order;
+            return orderAssemble(t);
         });
     }
 
     public PageInfo<ManufactureOrder> findPage(ManufactureOrderCriteria criteria) {
         PageInfo<ManufactureOrderPO> page = manufactureOrderRepository.selectPage(criteria);
         return PageUtils.of(page, assembleBatch(page.getRows()));
+    }
+
+    public ManufactureOrder orderAssemble(ManufactureOrderPO order) {
+        var orderEntity = convert.poToEntity(order);
+        orderEntity.setTasks(
+                manufactureOrderTaskRepository.selectListByOrderId(order.getId()).stream().map(task -> {
+                    return convert.taskPoToEntity(task);
+                }).collect(Collectors.toList())
+        );
+        orderEntity.setMaterials(manufactureOrderMaterialRepository.selectListByOrderId(order.getId()).stream().map(material -> {
+            return convert.materialPoToEntity(material);
+        }).collect(Collectors.toList()));
+        return orderEntity;
     }
 
     public List<ManufactureOrder> assembleBatch(List<ManufactureOrderPO> records) {
@@ -97,8 +107,16 @@ public class ManufactureOrderManager {
         Map<String, List<ManufactureOrderMaterialPO>> materials = manufactureOrderMaterialRepository.selectListByOrderIds(ids).stream().collect(Collectors.groupingBy(ManufactureOrderMaterialPO::getOrderId));
         return records.stream().map(t -> {
             ManufactureOrder order = convert.poToEntity(t);
-            order.setTasks(convert.tasksPoToEntity(tasks.getOrDefault(t.getId(), Collections.emptyList())));
-            order.setMaterials(convert.materialsPoToEntity(materials.getOrDefault(t.getId(), Collections.emptyList())));
+            order.setTasks(
+                    tasks.getOrDefault(t.getId(), Collections.emptyList()).stream().map(task -> {
+                        return convert.taskPoToEntity(task);
+                    }).collect(Collectors.toList())
+            );
+            order.setMaterials(
+                    materials.getOrDefault(t.getId(), Collections.emptyList()).stream().map(material -> {
+                        return convert.materialPoToEntity(material);
+                    }).collect(Collectors.toList())
+            );
             return order;
         }).collect(Collectors.toList());
     }

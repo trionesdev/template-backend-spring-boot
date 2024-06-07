@@ -11,6 +11,7 @@ import com.trionesdev.mes.domain.core.provider.ssp.masterdata.arg.GetProductDefi
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -27,6 +28,10 @@ public class MasterDataProvider {
     public List<ProductDefinitionDTO> getProductDefinitionList(GetProductDefinitionsArg arg) {
         ProductDefinitionCriteria criteria = masterDataProviderBeanConvert.from(arg);
         return productDefinitionService.findList(criteria);
+    }
+
+    public List<ProductDefinitionDTO> getProductsByCodes(Collection<String> codes) {
+        return productDefinitionService.findProductsByCodes(codes);
     }
 
     public List<ProcessFlowDTO> getTechnologyList() {

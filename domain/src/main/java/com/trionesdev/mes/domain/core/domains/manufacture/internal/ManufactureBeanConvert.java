@@ -25,6 +25,9 @@ public interface ManufactureBeanConvert {
 
     ManufactureOrder poToEntity(ManufactureOrderPO manufactureOrderPO);
 
+    ManufactureOrder.Task taskPoToEntity(ManufactureOrderTaskPO manufactureOrderTaskPO);
+    ManufactureOrder.Material materialPoToEntity(ManufactureOrderMaterialPO materialPO);
+
     List<ManufactureOrder.Task> tasksPoToEntity(List<ManufactureOrderTaskPO> tasks);
 
     List<ManufactureOrder.Material> materialsPoToEntity(List<ManufactureOrderMaterialPO> materials);
