@@ -30,6 +30,10 @@ public class MasterDataProvider {
         return productDefinitionService.findList(criteria);
     }
 
+    public ProductDefinitionDTO getProductByCode(String code) {
+        return productDefinitionService.findByCode(code).orElse(null);
+    }
+
     public List<ProductDefinitionDTO> getProductsByCodes(Collection<String> codes) {
         return productDefinitionService.findProductsByCodes(codes);
     }

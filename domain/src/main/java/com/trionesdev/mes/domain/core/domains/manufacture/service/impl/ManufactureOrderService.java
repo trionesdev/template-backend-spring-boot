@@ -42,13 +42,24 @@ public class ManufactureOrderService {
     }
 
     public Optional<ManufactureOrderDTO> findManufactureOrderById(String id) {
-        return manufactureOrderManager.findById(id).map(convert::entityToDto);
+        return manufactureOrderManager.findById(id).map(order -> {
+            return assembleOrder(order);
+        });
     }
 
 
     public PageInfo<ManufactureOrderDTO> findManufactureOrderPage(ManufactureOrderCriteria criteria) {
         PageInfo<ManufactureOrder> page = manufactureOrderManager.findPage(criteria);
         return PageUtils.of(page, assembleBatch(page.getRows()));
+    }
+
+    private ManufactureOrderDTO assembleOrder(ManufactureOrder order) {
+        var dto = convert.entityToDto(order);
+        var productSnap = masterDataProvider.getProductByCode(order.getProductCode());
+        dto.setProduct(
+                Optional.ofNullable(productSnap).map(product -> ManufactureOrderDTO.Product.builder().code(product.getCode()).name(product.getName()).build()).orElse(null)
+        );
+        return dto;
     }
 
     private List<ManufactureOrderDTO> assembleBatch(List<ManufactureOrder> records) {

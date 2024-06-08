@@ -15,6 +15,12 @@ public class ManufactureOrderDTO {
     private String id;
     private String code;
     private String productCode;
+    private String remark;
+    private BigDecimal planQuantity; //计划数量
+    private Instant planStartTime;
+    private Instant planEndTime;
+    private Instant actualStartTime;
+    private Instant actualEndTime;
     private Product product;
     private List<Task> tasks;
     private List<Material> materials;
