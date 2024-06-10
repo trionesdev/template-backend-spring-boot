@@ -62,5 +62,6 @@ public class ManufactureOrder {
         private String productCode;
         private String processCode;
         private BigDecimal unitUsage; //单位用量
+        private String remark;
     }
 }

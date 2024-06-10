@@ -9,6 +9,7 @@ import com.trionesdev.mes.domain.core.domains.manufacture.internal.ManufactureBe
 import com.trionesdev.mes.domain.core.domains.manufacture.manager.impl.ManufactureOrderManager;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.criteria.ManufactureOrderCriteria;
 import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderDTO;
+import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.custom.impl.CustomProvider;
 import com.trionesdev.mes.domain.core.provider.ssp.masterdata.impl.MasterDataProvider;
@@ -56,9 +57,27 @@ public class ManufactureOrderService {
     private ManufactureOrderDTO assembleOrder(ManufactureOrder order) {
         var dto = convert.entityToDto(order);
         var productSnap = masterDataProvider.getProductByCode(order.getProductCode());
+        Set<String> taskCodes = order.getTasks().stream().map(ManufactureOrder.Task::getProcessCode).collect(Collectors.toSet());
+        Map<String, ManufactureProcessDTO> processMap = masterDataProvider.getProcessesByCodes(taskCodes).stream().collect(Collectors.toMap(ManufactureProcessDTO::getCode, v -> v, (v1, v2) -> v1));
+        Set<String> materialCodes = order.getMaterials().stream().map(ManufactureOrder.Material::getProductCode).collect(Collectors.toSet());
+        Map<String, ProductDefinitionDTO> materialMap = masterDataProvider.getProductsByCodes(materialCodes).stream().collect(Collectors.toMap(ProductDefinitionDTO::getCode, v -> v, (v1, v2) -> v1));
         dto.setProduct(
                 Optional.ofNullable(productSnap).map(product -> ManufactureOrderDTO.Product.builder().code(product.getCode()).name(product.getName()).build()).orElse(null)
         );
+        dto.setTasks(order.getTasks().stream().map(task -> {
+            var taskDto = convert.taskEntityToDto(task);
+            Optional.ofNullable(processMap.get(task.getProcessCode())).ifPresent(process ->
+                    taskDto.setName(process.getName())
+            );
+            return taskDto;
+        }).toList());
+        dto.setMaterials(order.getMaterials().stream().map(material -> {
+            var materialDto = convert.materialEntityToDto(material);
+            Optional.ofNullable(materialMap.get(material.getProductCode())).ifPresent(product ->
+                    materialDto.setName(product.getName())
+            );
+            return materialDto;
+        }).toList());
         return dto;
     }
 
@@ -68,12 +87,29 @@ public class ManufactureOrderService {
         }
         Set<String> productCodes = records.stream().map(ManufactureOrder::getProductCode).collect(Collectors.toSet());
         Map<String, ProductDefinitionDTO> productsMap = masterDataProvider.getProductsByCodes(productCodes).stream().collect(Collectors.toMap(ProductDefinitionDTO::getCode, v -> v, (v1, v2) -> v1));
-
+        Set<String> taskCodes = records.stream().flatMap(order -> order.getTasks().stream().map(ManufactureOrder.Task::getProcessCode)).collect(Collectors.toSet());
+        Map<String, ManufactureProcessDTO> processMap = masterDataProvider.getProcessesByCodes(taskCodes).stream().collect(Collectors.toMap(ManufactureProcessDTO::getCode, v -> v, (v1, v2) -> v1));
+        Set<String> materialCodes = records.stream().flatMap(order -> order.getMaterials().stream().map(ManufactureOrder.Material::getProductCode)).collect(Collectors.toSet());
+        Map<String, ProductDefinitionDTO> materialMap = masterDataProvider.getProductsByCodes(materialCodes).stream().collect(Collectors.toMap(ProductDefinitionDTO::getCode, v -> v, (v1, v2) -> v1));
         return records.stream().map(order -> {
             var dto = convert.entityToDto(order);
             dto.setProduct(
-                    Optional.ofNullable(productsMap.get(order.getProductCode())).map(product -> ManufactureOrderDTO.Product.builder().code(product.getCode()).name(product.getName()).build()).orElse(null)
+                    Optional.ofNullable(productsMap.get(order.getProductCode())).map(product -> ManufactureOrderDTO.Product.builder().code(product.getCode()).name(product.getName()).specification(product.getSpecification()).build()).orElse(null)
             );
+            dto.setTasks(order.getTasks().stream().map(task -> {
+                var taskDto = convert.taskEntityToDto(task);
+                Optional.ofNullable(processMap.get(task.getProcessCode())).ifPresent(process ->
+                        taskDto.setName(process.getName()).setRatio(process.getRatio())
+                );
+                return taskDto;
+            }).toList());
+            dto.setMaterials(order.getMaterials().stream().map(material -> {
+                var materialDto = convert.materialEntityToDto(material);
+                Optional.ofNullable(materialMap.get(material.getProductCode())).ifPresent(product ->
+                        materialDto.setName(product.getName()).setSpecification(product.getSpecification()).setType(product.getType()).setUnit(Optional.ofNullable(product.getUnit()).map(ProductDefinitionDTO.Unit::getName).orElse(null))
+                );
+                return materialDto;
+            }).toList());
             return dto;
         }).collect(Collectors.toList());
     }

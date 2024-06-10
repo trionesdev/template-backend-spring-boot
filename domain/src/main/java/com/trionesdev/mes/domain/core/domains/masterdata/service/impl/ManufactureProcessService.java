@@ -67,6 +67,14 @@ public class ManufactureProcessService {
         return PageUtils.of(pageInfo, assembleBatch(pageInfo.getRows()));
     }
 
+    public List<ManufactureProcessDTO> findProcessByCodes(Collection<String> codes) {
+        if (CollectionUtil.isEmpty(codes)) {
+            return Collections.emptyList();
+        }
+        List<ManufactureProcessPO> processes = manufactureProcessManager.findListByCodes(codes);
+        return assembleBatch(processes);
+    }
+
     private List<ManufactureProcessDTO> assembleBatch(List<ManufactureProcessPO> records) {
         if (CollectionUtil.isEmpty(records)) {
             return Collections.emptyList();
