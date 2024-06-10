@@ -6,6 +6,7 @@ import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.mes.domain.core.domains.manufacture.entity.ManufactureOrder;
 import com.trionesdev.mes.domain.core.domains.manufacture.internal.ManufactureBeanConvert;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.criteria.ManufactureOrderCriteria;
+import com.trionesdev.mes.domain.core.domains.manufacture.repository.criteria.ManufactureOrderTaskCriteria;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.impl.ManufactureOrderMaterialRepository;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.impl.ManufactureOrderRepository;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.impl.ManufactureOrderTaskRepository;
@@ -119,6 +120,11 @@ public class ManufactureOrderManager {
             );
             return order;
         }).collect(Collectors.toList());
+    }
+
+
+    public PageInfo<ManufactureOrderTaskPO> findTasksPage(ManufactureOrderTaskCriteria criteria) {
+        return manufactureOrderTaskRepository.selectPage(criteria);
     }
 
 }
