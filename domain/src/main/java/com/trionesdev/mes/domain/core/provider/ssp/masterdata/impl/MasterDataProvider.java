@@ -1,8 +1,11 @@
 package com.trionesdev.mes.domain.core.provider.ssp.masterdata.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ProductDefinitionCriteria;
+import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ManufactureProcessService;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ProductDefinitionService;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.UnitService;
+import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProcessFlowDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.UnitDTO;
@@ -12,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -20,6 +24,7 @@ public class MasterDataProvider {
     private final MasterDataProviderBeanConvert masterDataProviderBeanConvert;
     private final UnitService unitService;
     private final ProductDefinitionService productDefinitionService;
+    private final ManufactureProcessService processService;
 
     public List<UnitDTO> getUnitList() {
         return unitService.findList();
@@ -35,11 +40,17 @@ public class MasterDataProvider {
     }
 
     public List<ProductDefinitionDTO> getProductsByCodes(Collection<String> codes) {
+        if (CollectionUtil.isEmpty(codes)) {
+            return Collections.emptyList();
+        }
         return productDefinitionService.findProductsByCodes(codes);
     }
 
-    public List<ProcessFlowDTO> getTechnologyList() {
-        return null;
+    public List<ManufactureProcessDTO> getProcessesByCodes(Collection<String> codes) {
+        if (CollectionUtil.isEmpty(codes)) {
+            return Collections.emptyList();
+        }
+        return processService.findProcessByCodes(codes);
     }
 
 }

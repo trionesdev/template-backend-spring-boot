@@ -26,6 +26,7 @@ public interface ManufactureBeanConvert {
     ManufactureOrder poToEntity(ManufactureOrderPO manufactureOrderPO);
 
     ManufactureOrder.Task taskPoToEntity(ManufactureOrderTaskPO manufactureOrderTaskPO);
+
     ManufactureOrder.Material materialPoToEntity(ManufactureOrderMaterialPO materialPO);
 
     List<ManufactureOrder.Task> tasksPoToEntity(List<ManufactureOrderTaskPO> tasks);
@@ -34,4 +35,9 @@ public interface ManufactureBeanConvert {
 
 
     ManufactureOrderDTO entityToDto(ManufactureOrder manufactureOrder);
+
+    ManufactureOrderDTO.Task taskEntityToDto(ManufactureOrder.Task task);
+
+    ManufactureOrderDTO.Material materialEntityToDto(ManufactureOrder.Material material);
+
 }
