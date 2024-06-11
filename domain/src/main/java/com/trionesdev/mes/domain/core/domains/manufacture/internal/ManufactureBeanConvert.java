@@ -5,12 +5,11 @@ import com.trionesdev.mes.domain.core.domains.manufacture.repository.po.Manufact
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.po.ManufactureOrderPO;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.po.ManufactureOrderTaskPO;
 import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderDTO;
+import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderTaskDTO;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.Named;
-
-import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         builder = @Builder(disableBuilder = true))
@@ -29,15 +28,13 @@ public interface ManufactureBeanConvert {
 
     ManufactureOrder.Material materialPoToEntity(ManufactureOrderMaterialPO materialPO);
 
-    List<ManufactureOrder.Task> tasksPoToEntity(List<ManufactureOrderTaskPO> tasks);
-
-    List<ManufactureOrder.Material> materialsPoToEntity(List<ManufactureOrderMaterialPO> materials);
-
 
     ManufactureOrderDTO entityToDto(ManufactureOrder manufactureOrder);
 
     ManufactureOrderDTO.Task taskEntityToDto(ManufactureOrder.Task task);
 
     ManufactureOrderDTO.Material materialEntityToDto(ManufactureOrder.Material material);
+
+    ManufactureOrderTaskDTO taskPoToDto(ManufactureOrderTaskPO task);
 
 }

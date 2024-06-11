@@ -8,7 +8,11 @@ import com.trionesdev.mes.domain.core.domains.manufacture.entity.ManufactureOrde
 import com.trionesdev.mes.domain.core.domains.manufacture.internal.ManufactureBeanConvert;
 import com.trionesdev.mes.domain.core.domains.manufacture.manager.impl.ManufactureOrderManager;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.criteria.ManufactureOrderCriteria;
+import com.trionesdev.mes.domain.core.domains.manufacture.repository.criteria.ManufactureOrderTaskCriteria;
+import com.trionesdev.mes.domain.core.domains.manufacture.repository.po.ManufactureOrderPO;
+import com.trionesdev.mes.domain.core.domains.manufacture.repository.po.ManufactureOrderTaskPO;
 import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderDTO;
+import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderTaskDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.custom.impl.CustomProvider;
@@ -113,4 +117,31 @@ public class ManufactureOrderService {
             return dto;
         }).collect(Collectors.toList());
     }
+
+    private List<ManufactureOrderTaskDTO> assembleTasks(List<ManufactureOrderTaskPO> records) {
+        if (CollectionUtil.isEmpty(records)) {
+            return Collections.emptyList();
+        }
+        Set<String> orderIds = records.stream().map(ManufactureOrderTaskPO::getOrderId).collect(Collectors.toSet());
+        Map<String, ManufactureOrderPO> orderMap = manufactureOrderManager.findOrderRecords(orderIds).stream().collect(Collectors.toMap(ManufactureOrderPO::getId, v -> v, (v1, v2) -> v1));
+        Set<String> processCodes = records.stream().map(ManufactureOrderTaskPO::getProcessCode).collect(Collectors.toSet());
+        Map<String, ManufactureProcessDTO> processMap = masterDataProvider.getProcessesByCodes(processCodes).stream().collect(Collectors.toMap(ManufactureProcessDTO::getCode, v -> v, (v1, v2) -> v1));
+        return records.stream().map(record -> {
+            var dto = convert.taskPoToDto(record);
+            Optional.ofNullable(orderMap.get(record.getOrderId())).ifPresent(order -> {
+                dto.setOrderCode(order.getCode());
+            });
+            Optional.ofNullable(processMap.get(record.getProcessCode())).ifPresent(process ->
+                    dto.setName(process.getName())
+            );
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+    public PageInfo<ManufactureOrderTaskDTO> findTasksPage(ManufactureOrderTaskCriteria criteria) {
+        var page = manufactureOrderManager.findTasksPage(criteria);
+        return PageUtils.of(page, assembleTasks(page.getRows()));
+    }
+
+
 }

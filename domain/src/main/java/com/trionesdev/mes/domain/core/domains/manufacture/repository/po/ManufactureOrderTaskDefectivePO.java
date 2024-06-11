@@ -24,6 +24,7 @@ public class ManufactureOrderTaskDefectivePO extends BaseLogicPO {
     private String tenantId;
     private String orderId;
     private String taskId;
+    private String reportId;
     private String code;
     private BigDecimal quantity;
 }

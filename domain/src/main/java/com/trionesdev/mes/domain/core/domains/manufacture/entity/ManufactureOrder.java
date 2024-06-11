@@ -32,6 +32,7 @@ public class ManufactureOrder {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Task {
+        private String id;
         private String processCode;
         private BigDecimal ratio;
         private BigDecimal planQuantity;
@@ -41,6 +42,7 @@ public class ManufactureOrder {
         private Instant planEndTime;
         private Instant actualStartTime;
         private Instant actualEndTime;
+        private Integer sort;
         private List<Defective> defectives;
     }
 

@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -81,12 +82,13 @@ public class ManufactureOrderManager {
         });
     }
 
+
     public PageInfo<ManufactureOrder> findPage(ManufactureOrderCriteria criteria) {
         PageInfo<ManufactureOrderPO> page = manufactureOrderRepository.selectPage(criteria);
         return PageUtils.of(page, assembleBatch(page.getRows()));
     }
 
-    public ManufactureOrder orderAssemble(ManufactureOrderPO order) {
+    private ManufactureOrder orderAssemble(ManufactureOrderPO order) {
         var orderEntity = convert.poToEntity(order);
         orderEntity.setTasks(
                 manufactureOrderTaskRepository.selectListByOrderId(order.getId()).stream().map(task -> {
@@ -99,7 +101,7 @@ public class ManufactureOrderManager {
         return orderEntity;
     }
 
-    public List<ManufactureOrder> assembleBatch(List<ManufactureOrderPO> records) {
+    private List<ManufactureOrder> assembleBatch(List<ManufactureOrderPO> records) {
         if (CollectionUtil.isEmpty(records)) {
             return Collections.emptyList();
         }
@@ -122,6 +124,13 @@ public class ManufactureOrderManager {
         }).collect(Collectors.toList());
     }
 
+
+    public List<ManufactureOrderPO> findOrderRecords(Collection<String> orderIds) {
+        if (CollectionUtil.isEmpty(orderIds)) {
+            return Collections.emptyList();
+        }
+        return manufactureOrderRepository.listByIds(orderIds);
+    }
 
     public PageInfo<ManufactureOrderTaskPO> findTasksPage(ManufactureOrderTaskCriteria criteria) {
         return manufactureOrderTaskRepository.selectPage(criteria);
