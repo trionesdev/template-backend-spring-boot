@@ -31,5 +31,12 @@ public class ManufactureOrderPO extends BaseLogicPO {
     private Instant planEndTime;
     private Instant actualStartTime;
     private Instant actualEndTime;
-    private String status;
+    private Status status;
+
+    public enum Status {
+        PENDING,
+        PROGRESSING,
+        FINISHED,
+        CANCELED
+    }
 }

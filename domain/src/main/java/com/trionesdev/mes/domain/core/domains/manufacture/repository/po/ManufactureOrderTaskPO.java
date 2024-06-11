@@ -33,4 +33,12 @@ public class ManufactureOrderTaskPO extends BaseLogicEntity {
     private Instant planEndTime;
     private Instant actualStartTime;
     private Instant actualEndTime;
+    private Status status;
+
+    public enum Status {
+        PENDING,
+        PROCESSING,
+        FINISHED,
+    }
+
 }
