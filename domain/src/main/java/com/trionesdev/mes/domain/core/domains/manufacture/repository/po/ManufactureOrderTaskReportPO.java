@@ -20,17 +20,16 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "manufacture_order")
-public class ManufactureReportPO extends BaseLogicEntity {
+@TableName(value = "manufacture_order_task_report")
+public class ManufactureOrderTaskReportPO extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
     private String orderId;
+    private String taskId;
 
     private String processCode; //工序名称
     private BigDecimal planQuantity; //计划数量
     private BigDecimal goodQuantity; //良品数量
     private BigDecimal defectiveQuantity; //不良品数量
-    @TableField(typeHandler = StringCollectionTypeHandler.class)
-    private List<String> defectiveCodes;
 }
