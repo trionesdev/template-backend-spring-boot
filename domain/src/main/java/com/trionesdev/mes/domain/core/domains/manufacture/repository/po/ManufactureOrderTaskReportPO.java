@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -32,4 +33,17 @@ public class ManufactureOrderTaskReportPO extends BaseLogicEntity {
     private BigDecimal planQuantity; //计划数量
     private BigDecimal goodQuantity; //良品数量
     private BigDecimal defectiveQuantity; //不良品数量
+
+    private PricingMethod pricingMethod;//计价方式
+    private Instant startTime;
+    private Instant endTime;
+    private BigDecimal quality;
+    private BigDecimal unitPrice; //单价
+    private BigDecimal totalPrice; //总价工资
+
+    public enum PricingMethod {
+        PIECE_RATE,
+        TIME_BASED
+    }
+
 }
