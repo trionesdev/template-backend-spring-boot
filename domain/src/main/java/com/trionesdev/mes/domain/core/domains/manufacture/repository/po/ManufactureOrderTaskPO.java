@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.apache.ibatis.type.Alias;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -19,6 +20,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "manufacture_order_task")
+@Alias("task")
 public class ManufactureOrderTaskPO extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

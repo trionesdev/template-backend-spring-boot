@@ -1,5 +1,6 @@
 package com.trionesdev.mes.domain.core.domains.manufacture.repository.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -21,7 +22,12 @@ public class ManufactureOrderTaskRepository extends ServiceImpl<ManufactureOrder
     private LambdaQueryWrapper<ManufactureOrderTaskPO> buildQueryWrapper(ManufactureOrderTaskCriteria criteria) {
         LambdaQueryWrapper<ManufactureOrderTaskPO> queryWrapper = new LambdaQueryWrapper<>();
         if (Objects.nonNull(criteria)) {
-
+            queryWrapper.exists(StrUtil.isNotBlank(criteria.getOrderCode()), "    select * from manufacture_order order \n" +
+                            "             where order.is_deleted=false\n" +
+                            "             and order.id=task.order_id\n" +
+                            "             and order.code='" + criteria.getOrderCode() + "'")
+                    .eq(StrUtil.isNotBlank(criteria.getProcessCode()), ManufactureOrderTaskPO::getProcessCode, criteria.getProcessCode())
+            ;
         }
         return queryWrapper;
     }
