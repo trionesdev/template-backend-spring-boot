@@ -123,13 +123,19 @@ public class ManufactureOrderService {
             return Collections.emptyList();
         }
         Set<String> orderIds = records.stream().map(ManufactureOrderTaskPO::getOrderId).collect(Collectors.toSet());
-        Map<String, ManufactureOrderPO> orderMap = manufactureOrderManager.findOrderRecords(orderIds).stream().collect(Collectors.toMap(ManufactureOrderPO::getId, v -> v, (v1, v2) -> v1));
+        List<ManufactureOrderPO> orders = manufactureOrderManager.findOrderRecords(orderIds);
+        Set<String> productCodes = orders.stream().map(ManufactureOrderPO::getProductCode).collect(Collectors.toSet());
+        Map<String, ProductDefinitionDTO> productMap = masterDataProvider.getProductsByCodes(productCodes).stream().collect(Collectors.toMap(ProductDefinitionDTO::getCode, v -> v, (v1, v2) -> v1));
+        Map<String, ManufactureOrderPO> orderMap = orders.stream().collect(Collectors.toMap(ManufactureOrderPO::getId, v -> v, (v1, v2) -> v1));
         Set<String> processCodes = records.stream().map(ManufactureOrderTaskPO::getProcessCode).collect(Collectors.toSet());
         Map<String, ManufactureProcessDTO> processMap = masterDataProvider.getProcessesByCodes(processCodes).stream().collect(Collectors.toMap(ManufactureProcessDTO::getCode, v -> v, (v1, v2) -> v1));
         return records.stream().map(record -> {
             var dto = convert.taskPoToDto(record);
             Optional.ofNullable(orderMap.get(record.getOrderId())).ifPresent(order -> {
                 dto.setOrderCode(order.getCode());
+                Optional.ofNullable(productMap.get(order.getProductCode())).ifPresent(product -> {
+                    dto.setProduct(ManufactureOrderTaskDTO.Product.builder().code(product.getCode()).name(product.getName()).specification(product.getSpecification()).build());
+                });
             });
             Optional.ofNullable(processMap.get(record.getProcessCode())).ifPresent(process ->
                     dto.setName(process.getName())
