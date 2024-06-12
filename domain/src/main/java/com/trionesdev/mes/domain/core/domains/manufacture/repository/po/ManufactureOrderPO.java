@@ -36,7 +36,7 @@ public class ManufactureOrderPO extends BaseLogicPO {
     public enum Status {
         PENDING,
         PROGRESSING,
-        FINISHED,
+        COMPLETED,
         CANCELED
     }
 }

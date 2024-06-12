@@ -14,33 +14,37 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class ManufactureProcessManager {
-    private final ManufactureProcessRepository manufactureProcessDAO;
+    private final ManufactureProcessRepository processRepository;
 
     public void create(ManufactureProcessPO manufactureProcess) {
-        manufactureProcessDAO.save(manufactureProcess);
+        processRepository.save(manufactureProcess);
     }
 
     public void deleteById(String id) {
-        manufactureProcessDAO.removeById(id);
+        processRepository.removeById(id);
     }
 
     public void updateById(ManufactureProcessPO manufactureProcess) {
-        manufactureProcessDAO.updateById(manufactureProcess);
+        processRepository.updateById(manufactureProcess);
     }
 
     public Optional<ManufactureProcessPO> findById(String id) {
-        return Optional.ofNullable(manufactureProcessDAO.getById(id));
+        return Optional.ofNullable(processRepository.getById(id));
+    }
+
+    public Optional<ManufactureProcessPO> findByCode(String code) {
+        return Optional.ofNullable(processRepository.selectByCode(code));
     }
 
     public List<ManufactureProcessPO> findList(ManufactureProcessCriteria criteria) {
-        return manufactureProcessDAO.selectList(criteria);
+        return processRepository.selectList(criteria);
     }
 
     public PageInfo<ManufactureProcessPO> findPage(ManufactureProcessCriteria criteria) {
-        return manufactureProcessDAO.selectPage(criteria);
+        return processRepository.selectPage(criteria);
     }
 
     public List<ManufactureProcessPO> findListByCodes(Collection<String> codes) {
-        return manufactureProcessDAO.selectListByCodes(codes);
+        return processRepository.selectListByCodes(codes);
     }
 }

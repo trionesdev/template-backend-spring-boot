@@ -44,14 +44,12 @@ public class ManufactureProcessService {
         manufactureProcessManager.updateById(manufactureProcess);
     }
 
+    public Optional<ManufactureProcessDTO> findByCode(String code) {
+        return manufactureProcessManager.findByCode(code).map(this::assembleProcess);
+    }
+
     public Optional<ManufactureProcessDTO> findById(String id) {
-        return manufactureProcessManager.findById(id).map(po -> {
-            ManufactureProcessDTO dto = convert.poToDto(po);
-            if (CollectionUtil.isNotEmpty(dto.getDefectives())) {
-                dto.setDefectives(defectiveManager.findListByCodes(dto.getDefectiveCodes()).stream().map(convert::poToDto).collect(Collectors.toList()));
-            }
-            return dto;
-        });
+        return manufactureProcessManager.findById(id).map(this::assembleProcess);
     }
 
     public List<ManufactureProcessDTO> findList(ManufactureProcessCriteria criteria) {
@@ -73,6 +71,14 @@ public class ManufactureProcessService {
         }
         List<ManufactureProcessPO> processes = manufactureProcessManager.findListByCodes(codes);
         return assembleBatch(processes);
+    }
+
+    private ManufactureProcessDTO assembleProcess(ManufactureProcessPO record) {
+        var dto = convert.poToDto(record);
+        if (CollectionUtil.isNotEmpty(dto.getDefectives())) {
+            dto.setDefectives(defectiveManager.findListByCodes(dto.getDefectiveCodes()).stream().map(convert::poToDto).collect(Collectors.toList()));
+        }
+        return dto;
     }
 
     private List<ManufactureProcessDTO> assembleBatch(List<ManufactureProcessPO> records) {

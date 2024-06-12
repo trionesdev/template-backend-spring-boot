@@ -124,6 +124,9 @@ public class ManufactureOrderManager {
         }).collect(Collectors.toList());
     }
 
+    public Optional<ManufactureOrderPO> findRecordById(String id) {
+        return Optional.ofNullable(manufactureOrderRepository.getById(id));
+    }
 
     public List<ManufactureOrderPO> findOrderRecords(Collection<String> orderIds) {
         if (CollectionUtil.isEmpty(orderIds)) {
@@ -134,6 +137,10 @@ public class ManufactureOrderManager {
 
     public PageInfo<ManufactureOrderTaskPO> findTasksPage(ManufactureOrderTaskCriteria criteria) {
         return manufactureOrderTaskRepository.selectPage(criteria);
+    }
+
+    public Optional<ManufactureOrderTaskPO> findTaskById(String id) {
+        return Optional.ofNullable(manufactureOrderTaskRepository.getById(id));
     }
 
 }

@@ -118,6 +118,20 @@ public class ManufactureOrderService {
         }).collect(Collectors.toList());
     }
 
+    private ManufactureOrderTaskDTO assembleTask(ManufactureOrderTaskPO record) {
+        var dto = convert.taskPoToDto(record);
+        manufactureOrderManager.findRecordById(record.getOrderId()).ifPresent(order -> {
+            dto.setOrderCode(order.getCode());
+            Optional.ofNullable(masterDataProvider.getProductByCode(order.getProductCode())).ifPresent(product -> {
+                dto.setProduct(ManufactureOrderTaskDTO.Product.builder().code(product.getCode()).name(product.getName()).specification(product.getSpecification()).build());
+            });
+            Optional.ofNullable(masterDataProvider.getProcessByCode(record.getProcessCode())).ifPresent(process -> {
+                dto.setName(process.getName());
+            });
+        });
+        return dto;
+    }
+
     private List<ManufactureOrderTaskDTO> assembleTasks(List<ManufactureOrderTaskPO> records) {
         if (CollectionUtil.isEmpty(records)) {
             return Collections.emptyList();
@@ -149,5 +163,8 @@ public class ManufactureOrderService {
         return PageUtils.of(page, assembleTasks(page.getRows()));
     }
 
+    public Optional<ManufactureOrderTaskDTO> findTaskById(String taskId) {
+        return manufactureOrderManager.findTaskById(taskId).map(this::assembleTask);
+    }
 
 }

@@ -76,4 +76,10 @@ public class ManufactureOrderController {
         return manufactureOrderService.findTasksPage(criteria);
     }
 
+    @Operation(summary = "根据ID查询工单任务详情")
+    @GetMapping(value = "tasks/{id}")
+    public ManufactureOrderTaskDTO queryTaskById(@PathVariable String id) {
+        return manufactureOrderService.findTaskById(id).orElse(null);
+    }
+
 }
