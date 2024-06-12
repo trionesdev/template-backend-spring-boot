@@ -17,4 +17,5 @@ import lombok.experimental.SuperBuilder;
 public class ManufactureOrderTaskCriteria extends PageCriteria {
     private String orderCode;
     private String processCode;
+    private String orderStatus;
 }

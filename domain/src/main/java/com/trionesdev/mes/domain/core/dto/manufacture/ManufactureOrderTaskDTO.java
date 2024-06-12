@@ -14,6 +14,7 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 public class ManufactureOrderTaskDTO {
+    private String id;
     private String orderCode;
     private String processCode;
     private String name;

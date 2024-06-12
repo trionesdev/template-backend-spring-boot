@@ -9,6 +9,7 @@ import com.trionesdev.commons.mybatisplus.util.MpPageUtils;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ManufactureProcessCriteria;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureProcessPO;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.mapper.ManufactureProcessMapper;
+import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -37,6 +38,10 @@ public class ManufactureProcessRepository extends ServiceImpl<ManufactureProcess
 
     public PageInfo<ManufactureProcessPO> selectPage(ManufactureProcessCriteria criteria) {
         return MpPageUtils.of(baseMapper.selectPage(MpPageUtils.page(criteria), buildQueryWrapper(criteria)));
+    }
+
+    public ManufactureProcessPO selectByCode(String code) {
+        return baseMapper.selectOne(new LambdaQueryWrapper<ManufactureProcessPO>().eq(ManufactureProcessPO::getCode, code).last(" limit 1 "));
     }
 
     public List<ManufactureProcessPO> selectListByCodes(Collection<String> codes) {

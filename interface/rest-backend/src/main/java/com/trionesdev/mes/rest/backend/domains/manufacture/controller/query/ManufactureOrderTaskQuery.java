@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ManufactureOrderTaskQuery {
-    private String code;
+    private String processCode;;
     private String orderCode;
+    private String orderStatus;
 }

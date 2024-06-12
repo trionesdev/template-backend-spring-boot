@@ -46,6 +46,10 @@ public class MasterDataProvider {
         return productDefinitionService.findProductsByCodes(codes);
     }
 
+    public ManufactureProcessDTO getProcessByCode(String code) {
+        return processService.findByCode(code).orElse(null);
+    }
+
     public List<ManufactureProcessDTO> getProcessesByCodes(Collection<String> codes) {
         if (CollectionUtil.isEmpty(codes)) {
             return Collections.emptyList();
