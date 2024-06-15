@@ -8,6 +8,7 @@ import com.trionesdev.commons.mybatisplus.util.MpPageUtils;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.criteria.ManufactureOrderCriteria;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.mapper.ManufactureOrderMapper;
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.po.ManufactureOrderPO;
+import com.trionesdev.mes.domain.core.domains.manufacture.repository.po.ManufactureOrderTaskPO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,10 +25,10 @@ public class ManufactureOrderRepository extends ServiceImpl<ManufactureOrderMapp
     }
 
     public List<ManufactureOrderPO> selectList(ManufactureOrderCriteria criteria) {
-        return this.list(buildQueryWrapper(criteria));
+        return this.list(buildQueryWrapper(criteria).orderByDesc(ManufactureOrderPO::getCreatedAt));
     }
 
     public PageInfo<ManufactureOrderPO> selectPage(ManufactureOrderCriteria criteria) {
-        return MpPageUtils.of(baseMapper.selectPage(MpPageUtils.page(criteria), buildQueryWrapper(criteria)));
+        return MpPageUtils.of(baseMapper.selectPage(MpPageUtils.page(criteria), buildQueryWrapper(criteria).orderByDesc(ManufactureOrderPO::getCreatedAt)));
     }
 }
