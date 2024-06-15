@@ -143,4 +143,8 @@ public class ManufactureOrderManager {
         return Optional.ofNullable(manufactureOrderTaskRepository.getById(id));
     }
 
+    public void updateOrderTaskById(ManufactureOrderTaskPO task) {
+        manufactureOrderTaskRepository.updateById(task);
+    }
+
 }

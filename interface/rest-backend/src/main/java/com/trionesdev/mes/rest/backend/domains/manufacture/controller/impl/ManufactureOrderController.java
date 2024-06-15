@@ -7,6 +7,7 @@ import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderTaskDTO;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.query.ManufactureOrderQuery;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.query.ManufactureOrderTaskQuery;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureOrderRO;
+import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureOrderTaskRO;
 import com.trionesdev.mes.rest.backend.domains.manufacture.internal.ManufactureBeBeanConvert;
 import com.trionesdev.mes.rest.backend.domains.manufacture.internal.ManufactureConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -80,6 +81,17 @@ public class ManufactureOrderController {
     @GetMapping(value = "tasks/{id}")
     public ManufactureOrderTaskDTO queryTaskById(@PathVariable String id) {
         return manufactureOrderService.findTaskById(id).orElse(null);
+    }
+
+    @Operation(summary = "根据ID更新工单任务")
+    @PutMapping(value = "tasks/{id}")
+    public void updateOrderTask(
+            @PathVariable String id,
+            @Validated @RequestBody ManufactureOrderTaskRO.Update args
+    ) {
+        var task = convert.from(args);
+        task.setId(id);
+        manufactureOrderService.updateOrderTaskById(task);
     }
 
 }

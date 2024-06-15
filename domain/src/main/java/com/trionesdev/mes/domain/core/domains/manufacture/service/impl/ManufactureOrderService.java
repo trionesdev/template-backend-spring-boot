@@ -31,6 +31,7 @@ public class ManufactureOrderService {
     private final MasterDataProvider masterDataProvider;
     private final CustomProvider customProvider;
 
+    //region order
     public void createManufactureOrder(ManufactureOrder order) {
         if (StrUtil.isBlank(order.getCode())) {
             order.setCode(customProvider.generateCode("MANUFACTURE_ORDER"));
@@ -117,7 +118,9 @@ public class ManufactureOrderService {
             return dto;
         }).collect(Collectors.toList());
     }
+    //endregion
 
+    //region order task
     private ManufactureOrderTaskDTO assembleTask(ManufactureOrderTaskPO record) {
         var dto = convert.taskPoToDto(record);
         manufactureOrderManager.findRecordById(record.getOrderId()).ifPresent(order -> {
@@ -166,5 +169,11 @@ public class ManufactureOrderService {
     public Optional<ManufactureOrderTaskDTO> findTaskById(String taskId) {
         return manufactureOrderManager.findTaskById(taskId).map(this::assembleTask);
     }
+
+    public void updateOrderTaskById(ManufactureOrderTaskPO task) {
+        manufactureOrderManager.updateOrderTaskById(task);
+    }
+
+    //endregion
 
 }

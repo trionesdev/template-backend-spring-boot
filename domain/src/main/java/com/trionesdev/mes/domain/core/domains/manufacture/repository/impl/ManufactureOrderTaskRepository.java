@@ -47,11 +47,11 @@ public class ManufactureOrderTaskRepository extends ServiceImpl<ManufactureOrder
     }
 
     public List<ManufactureOrderTaskPO> selectListByOrderIds(Collection<String> orderIds) {
-        return baseMapper.selectList(new LambdaUpdateWrapper<ManufactureOrderTaskPO>().in(ManufactureOrderTaskPO::getOrderId, orderIds));
+        return baseMapper.selectList(new LambdaUpdateWrapper<ManufactureOrderTaskPO>().in(ManufactureOrderTaskPO::getOrderId, orderIds).orderByDesc(ManufactureOrderTaskPO::getCreatedAt));
     }
 
     public PageInfo<ManufactureOrderTaskPO> selectPage(ManufactureOrderTaskCriteria criteria) {
-        return MpPageUtils.of(baseMapper.selectPage(MpPageUtils.page(criteria), buildQueryWrapper(criteria)));
+        return MpPageUtils.of(baseMapper.selectPage(MpPageUtils.page(criteria), buildQueryWrapper(criteria).orderByDesc(ManufactureOrderTaskPO::getCreatedAt)));
     }
 
 }
