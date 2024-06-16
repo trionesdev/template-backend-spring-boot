@@ -53,6 +53,11 @@ public class ManufactureOrderService {
         });
     }
 
+    public List<ManufactureOrderDTO> findOrderList(ManufactureOrderCriteria criteria) {
+        var orders = manufactureOrderManager.findList(criteria);
+        return assembleBatch(orders);
+    }
+
 
     public PageInfo<ManufactureOrderDTO> findManufactureOrderPage(ManufactureOrderCriteria criteria) {
         PageInfo<ManufactureOrder> page = manufactureOrderManager.findPage(criteria);

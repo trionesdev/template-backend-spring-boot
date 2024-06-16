@@ -82,6 +82,10 @@ public class ManufactureOrderManager {
         });
     }
 
+    public List<ManufactureOrder> findList(ManufactureOrderCriteria criteria) {
+        var orders = manufactureOrderRepository.selectList(criteria);
+        return assembleBatch(orders);
+    }
 
     public PageInfo<ManufactureOrder> findPage(ManufactureOrderCriteria criteria) {
         PageInfo<ManufactureOrderPO> page = manufactureOrderRepository.selectPage(criteria);

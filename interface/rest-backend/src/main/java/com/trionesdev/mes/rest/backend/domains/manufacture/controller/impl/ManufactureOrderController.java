@@ -16,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "生产工单")
 @RequiredArgsConstructor
 @RestController
@@ -49,6 +51,13 @@ public class ManufactureOrderController {
     @GetMapping(value = "orders/{id}")
     public ManufactureOrderDTO findOrderById(@PathVariable String id) {
         return manufactureOrderService.findManufactureOrderById(id).orElse(null);
+    }
+
+    @Operation(summary = "查询工单列表")
+    @GetMapping(value = "orders/list")
+    public List<ManufactureOrderDTO> findOrderList(ManufactureOrderQuery query) {
+        var criteria = convert.from(query);
+        return manufactureOrderService.findOrderList(criteria);
     }
 
     @Operation(summary = "查询工单列表分页")
