@@ -62,6 +62,12 @@ public class ManufactureProcessController {
         return manufactureProcessService.findById(id).orElse(null);
     }
 
+    @Operation(summary = "根据Code查询生产工序")
+    @GetMapping("manufacture-processes/code/{code}")
+    public ManufactureProcessDTO findByCode(@PathVariable("code") String code) {
+        return manufactureProcessService.findByCode(code).orElse(null);
+    }
+
     @Operation(summary = "查询生产工序列表")
     @GetMapping("manufacture-processes/list")
     public List<ManufactureProcessDTO> findList(ManufactureProcessQuery query) {

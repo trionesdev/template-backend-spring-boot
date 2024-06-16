@@ -82,6 +82,12 @@ public class ManufactureOrderManager {
         });
     }
 
+    public Optional<ManufactureOrder> findByCode(String code) {
+        return Optional.ofNullable(manufactureOrderRepository.selectByCode(code)).map(t -> {
+            return orderAssemble(t);
+        });
+    }
+
     public List<ManufactureOrder> findList(ManufactureOrderCriteria criteria) {
         var orders = manufactureOrderRepository.selectList(criteria);
         return assembleBatch(orders);

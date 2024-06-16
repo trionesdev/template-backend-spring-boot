@@ -5,10 +5,7 @@ import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.Pro
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ManufactureProcessService;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ProductDefinitionService;
 import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.UnitService;
-import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
-import com.trionesdev.mes.domain.core.dto.masterdata.ProcessFlowDTO;
-import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
-import com.trionesdev.mes.domain.core.dto.masterdata.UnitDTO;
+import com.trionesdev.mes.domain.core.dto.masterdata.*;
 import com.trionesdev.mes.domain.core.provider.ssp.masterdata.MasterDataProviderBeanConvert;
 import com.trionesdev.mes.domain.core.provider.ssp.masterdata.arg.GetProductDefinitionsArg;
 import lombok.RequiredArgsConstructor;
@@ -55,6 +52,16 @@ public class MasterDataProvider {
             return Collections.emptyList();
         }
         return processService.findProcessByCodes(codes);
+    }
+
+    /**
+     * get process defective options by code
+     *
+     * @param code
+     * @return
+     */
+    public List<DefectiveDTO> getProcessDefectiveOptionsByCode(String code) {
+        return processService.findProcessDefectiveOptionsByCode(code);
     }
 
 }

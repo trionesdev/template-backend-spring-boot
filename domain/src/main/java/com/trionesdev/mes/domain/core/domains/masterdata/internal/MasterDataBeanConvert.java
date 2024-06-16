@@ -24,6 +24,8 @@ public interface MasterDataBeanConvert {
     List<UnitDTO> unitsEntityToDto(List<UnitPO> unit);
     //endregion
 
+    DefectiveDTO defectivePoToDto(DefectivePO defective);
+
     //region production definition
     ProductDefinitionDTO entityToDto(ProductDefinitionPO productDefinition);
 
@@ -38,6 +40,7 @@ public interface MasterDataBeanConvert {
     ManufactureProcessDTO poToDto(ManufactureProcessPO manufactureProcess);
 
     List<ManufactureProcessDTO> manufactureProcessesEntityToDto(List<ManufactureProcessPO> manufactureProcess);
+
     ManufactureProcessDTO.Defective poToDto(DefectivePO defective);
     //endregion
 
