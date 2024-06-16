@@ -2,8 +2,10 @@ package com.trionesdev.mes.rest.backend.domains.manufacture.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.mes.domain.core.domains.manufacture.service.impl.ManufactureOrderService;
+import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.DefectivePO;
 import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderDTO;
 import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderTaskDTO;
+import com.trionesdev.mes.domain.core.dto.masterdata.DefectiveDTO;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.query.ManufactureOrderQuery;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.query.ManufactureOrderTaskQuery;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureOrderRO;
@@ -53,6 +55,12 @@ public class ManufactureOrderController {
         return manufactureOrderService.findManufactureOrderById(id).orElse(null);
     }
 
+    @Operation(summary = "根据ID获取工单详情")
+    @GetMapping(value = "orders/code/{code}")
+    public ManufactureOrderDTO findOrderByCode(@PathVariable String code) {
+        return manufactureOrderService.findManufactureOrderByCode(code).orElse(null);
+    }
+
     @Operation(summary = "查询工单列表")
     @GetMapping(value = "orders/list")
     public List<ManufactureOrderDTO> findOrderList(ManufactureOrderQuery query) {
@@ -90,6 +98,12 @@ public class ManufactureOrderController {
     @GetMapping(value = "tasks/{id}")
     public ManufactureOrderTaskDTO queryTaskById(@PathVariable String id) {
         return manufactureOrderService.findTaskById(id).orElse(null);
+    }
+
+    @Operation(summary = "根据ID查询工单任务下可选的不良品项")
+    @GetMapping(value = "tasks/{id}/defective-options")
+    public List<DefectiveDTO> queryTaskProcessDefectiveOptionsById(@PathVariable String id) {
+        return manufactureOrderService.findTaskProcessDefectiveOptionsById(id);
     }
 
     @Operation(summary = "根据ID更新工单任务")

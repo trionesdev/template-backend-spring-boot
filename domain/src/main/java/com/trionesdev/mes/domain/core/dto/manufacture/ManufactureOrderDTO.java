@@ -40,6 +40,7 @@ public class ManufactureOrderDTO {
     @Data
     @Accessors(chain = true)
     public static class Task {
+        private String id;
         private String processCode;
         private String name;
         private BigDecimal ratio;

@@ -12,6 +12,7 @@ import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.Manufactu
 import com.trionesdev.mes.domain.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.domain.core.domains.masterdata.manager.impl.ManufactureProcessManager;
 import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ProcessFlowItemPO;
+import com.trionesdev.mes.domain.core.dto.masterdata.DefectiveDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.custom.impl.CustomProvider;
 import lombok.RequiredArgsConstructor;
@@ -100,6 +101,12 @@ public class ManufactureProcessService {
             }
             return dto;
         }).collect(Collectors.toList());
+    }
+
+    public List<DefectiveDTO> findProcessDefectiveOptionsByCode(String code) {
+        return manufactureProcessManager.findByCode(code).map(po -> {
+            return defectiveManager.findListByCodes(po.getDefectiveCodes()).stream().map(convert::defectivePoToDto).collect(Collectors.toList());
+        }).orElse(Collections.emptyList());
     }
 
     public List<ManufactureProcessDTO> findFlowsProcesses(List<String> flowIds) {

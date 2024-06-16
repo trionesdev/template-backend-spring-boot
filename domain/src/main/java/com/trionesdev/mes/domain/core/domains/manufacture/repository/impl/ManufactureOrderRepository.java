@@ -24,6 +24,10 @@ public class ManufactureOrderRepository extends ServiceImpl<ManufactureOrderMapp
         return queryWrapper;
     }
 
+    public ManufactureOrderPO selectByCode(String code) {
+        return baseMapper.selectOne(new LambdaQueryWrapper<ManufactureOrderPO>().eq(ManufactureOrderPO::getCode, code).last(" limit 1 "));
+    }
+
     public List<ManufactureOrderPO> selectList(ManufactureOrderCriteria criteria) {
         return this.list(buildQueryWrapper(criteria).orderByDesc(ManufactureOrderPO::getCreatedAt));
     }

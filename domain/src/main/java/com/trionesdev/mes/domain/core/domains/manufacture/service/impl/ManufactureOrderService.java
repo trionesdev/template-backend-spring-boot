@@ -13,6 +13,7 @@ import com.trionesdev.mes.domain.core.domains.manufacture.repository.po.Manufact
 import com.trionesdev.mes.domain.core.domains.manufacture.repository.po.ManufactureOrderTaskPO;
 import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderDTO;
 import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderTaskDTO;
+import com.trionesdev.mes.domain.core.dto.masterdata.DefectiveDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.ProductDefinitionDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.custom.impl.CustomProvider;
@@ -49,6 +50,12 @@ public class ManufactureOrderService {
 
     public Optional<ManufactureOrderDTO> findManufactureOrderById(String id) {
         return manufactureOrderManager.findById(id).map(order -> {
+            return assembleOrder(order);
+        });
+    }
+
+    public Optional<ManufactureOrderDTO> findManufactureOrderByCode(String code) {
+        return manufactureOrderManager.findByCode(code).map(order -> {
             return assembleOrder(order);
         });
     }
@@ -177,6 +184,10 @@ public class ManufactureOrderService {
 
     public void updateOrderTaskById(ManufactureOrderTaskPO task) {
         manufactureOrderManager.updateOrderTaskById(task);
+    }
+
+    public List<DefectiveDTO> findTaskProcessDefectiveOptionsById(String taskId) {
+        return manufactureOrderManager.findTaskById(taskId).map(task -> masterDataProvider.getProcessDefectiveOptionsByCode(task.getProcessCode())).orElse(Collections.emptyList());
     }
 
     //endregion
