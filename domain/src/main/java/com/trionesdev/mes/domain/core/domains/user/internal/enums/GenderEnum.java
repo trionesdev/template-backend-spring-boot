@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.domains.user.repository.po.enums;
+package com.trionesdev.mes.domain.core.domains.user.internal.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,5 @@ public enum GenderEnum {
     MALE("男"),
     FEMALE("女");
     @Getter
-    @Setter
-    private String babel;
+    private final String babel;
 }
