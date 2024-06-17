@@ -13,5 +13,5 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerCriteria extends PageCriteria {
-    private String code;
+    private String serialNum;
 }

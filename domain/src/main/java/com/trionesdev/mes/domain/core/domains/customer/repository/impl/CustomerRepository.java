@@ -21,7 +21,7 @@ public class CustomerRepository extends ServiceImpl<CustomerMapper, CustomerPO> 
     private LambdaQueryWrapper<CustomerPO> buildQueryWrapper(CustomerCriteria criteria) {
         LambdaQueryWrapper<CustomerPO> queryWrapper = new LambdaQueryWrapper<>();
         if (Objects.nonNull(criteria)) {
-            queryWrapper.eq(StrUtil.isNotBlank(criteria.getCode()), CustomerPO::getCode, criteria.getCode());
+            queryWrapper.eq(StrUtil.isNotBlank(criteria.getSerialNum()), CustomerPO::getSerialNum, criteria.getSerialNum());
         }
         return queryWrapper;
     }

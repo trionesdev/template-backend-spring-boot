@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.domains.user.dao.domain.enums;
+package com.trionesdev.mes.domain.core.domains.user.repository.po.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

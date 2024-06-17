@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.domains.user.dao.criteria;
+package com.trionesdev.mes.domain.core.domains.user.repository.criteria;
 
 import lombok.Data;
 

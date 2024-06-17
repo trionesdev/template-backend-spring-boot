@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class CustomerDTO {
     private String id;
-    private String code;
+    private String serialNum;
     private String name;
     private String fullName;
     private String contactName;
