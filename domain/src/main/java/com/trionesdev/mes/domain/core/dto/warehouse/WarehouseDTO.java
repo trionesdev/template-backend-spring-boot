@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class WarehouseDTO {
     private String id;
-    private String code;
+    private String serialNum;
     private String name;
     private String remark;
 }
