@@ -21,6 +21,10 @@ public class UserRepository extends ServiceImpl<UserMapper, UserPO> {
         return queryWrapper;
     }
 
+    public UserPO selectByPhone(String phone) {
+        return lambdaQuery().eq(UserPO::getPhone, phone).one();
+    }
+
     public List<UserPO> selectList(UserCriteria criteria) {
         return this.list(buildQueryWrapper(criteria));
     }
