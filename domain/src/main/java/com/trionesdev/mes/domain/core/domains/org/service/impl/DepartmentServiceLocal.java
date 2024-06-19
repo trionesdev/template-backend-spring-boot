@@ -13,6 +13,7 @@ import com.trionesdev.mes.domain.core.domains.org.repository.po.DepartmentPO;
 import com.trionesdev.mes.domain.core.domains.org.service.DepartmentService;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentDTO;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentMemberDTO;
+import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.tenent.TenantProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -68,8 +69,12 @@ public class DepartmentServiceLocal implements DepartmentService {
     public List<DepartmentMemberDTO> findMembersByDepartmentId(String departmentId) {
         var depMembers = departmentManager.findDepartmentMembers(DepartmentMemberCriteria.builder().departmentId(departmentId).build());
         var memberIds = depMembers.stream().map(DepartmentMemberPO::getMemberId).collect(Collectors.toSet());
-        var members = tenantProvider.getMembersByMemberIds(memberIds);
-        return List.of();
+        var membersMap = tenantProvider.getMembersByMemberIds(memberIds).stream().collect(Collectors.toMap(TenantMemberDTO::getId, v -> v, (v1, v2) -> v1));
+        return depMembers.stream().map(t -> {
+            var depMember = convert.poToDto(t);
+            depMember.setMember(membersMap.get(t.getMemberId()));
+            return depMember;
+        }).collect(Collectors.toList());
     }
 
     @Override
