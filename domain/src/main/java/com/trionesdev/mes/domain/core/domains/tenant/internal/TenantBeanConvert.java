@@ -12,5 +12,9 @@ import org.mapstruct.Named;
         builder = @Builder(disableBuilder = true))
 @Named("tenantBeanConvert")
 public interface TenantBeanConvert {
-    TenantMemberPO entityToPO(TenantMember args);
+    TenantMemberPO entityToPO(TenantMember record);
+
+    TenantMemberDTO entityToDTO(TenantMember record);
+
+    TenantMemberDTO memberPOToDTO(TenantMemberPO record);
 }
