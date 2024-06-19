@@ -5,6 +5,8 @@ import com.trionesdev.mes.domain.core.domains.tenant.repository.po.TenantMemberP
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -32,5 +34,8 @@ public class TenantMemberManager {
         return Optional.ofNullable(tenantMemberRepository.selectByUserId(userId));
     }
 
+    public List<TenantMemberPO> findMembersByIds(Collection<String> ids) {
+        return tenantMemberRepository.listByIds(ids);
+    }
 
 }
