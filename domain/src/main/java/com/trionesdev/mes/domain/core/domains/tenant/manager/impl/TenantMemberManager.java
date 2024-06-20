@@ -38,4 +38,8 @@ public class TenantMemberManager {
         return tenantMemberRepository.listByIds(ids);
     }
 
+    public Optional<TenantMemberPO> findMemberByUsername(String tenantId, String username) {
+        return Optional.ofNullable(tenantMemberRepository.selectByUsername(tenantId, username));
+    }
+
 }

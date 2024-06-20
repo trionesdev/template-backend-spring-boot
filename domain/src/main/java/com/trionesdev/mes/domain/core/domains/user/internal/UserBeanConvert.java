@@ -15,7 +15,6 @@ public interface UserBeanConvert {
 
     User from(UserBindDTO userBindDTO);
 
-    @Mapping(source = "encryptedPassword", target = "password")
     UserPO entityToPO(User user);
 
 }

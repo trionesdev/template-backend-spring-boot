@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>rest-backend</module>
+        <module>rest-boss</module>
     </modules>
 
     <properties>

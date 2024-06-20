@@ -28,6 +28,10 @@ public class UserManager {
         return Optional.ofNullable(userRepository.getById(id));
     }
 
+    public Optional<UserPO> findUserByUsername(String username) {
+        return Optional.ofNullable(userRepository.selectByUsername(username));
+    }
+
     public Optional<UserPO> findUserByPhone(String phone) {
         return Optional.ofNullable(userRepository.selectByPhone(phone));
     }

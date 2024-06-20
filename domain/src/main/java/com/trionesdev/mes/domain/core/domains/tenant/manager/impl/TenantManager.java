@@ -28,4 +28,8 @@ public class TenantManager {
         return Optional.ofNullable(tenantRepository.getById(id));
     }
 
+    public Optional<TenantPO> findTenantBySerial(String serial) {
+        return Optional.ofNullable(tenantRepository.selectBySerial(serial));
+    }
+
 }
