@@ -17,6 +17,6 @@ public class TenantMemberPO extends BaseLogicPO {
     private String tenantId;
     private String userId;
     private String username;
-    private String encryptedPassword;
+    private String encodedPassword;
     private String nickname;
 }

@@ -21,12 +21,12 @@ import java.time.Instant;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "u_user")
+@TableName(value = "user_user")
 public class UserPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String username;
-    private String encryptedPassword;
+    private String encodedPassword;
     private String phone;
     private String email;
     private String avatar;

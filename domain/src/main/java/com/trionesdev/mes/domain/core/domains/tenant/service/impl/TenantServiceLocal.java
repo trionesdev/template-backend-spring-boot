@@ -61,7 +61,7 @@ public class TenantServiceLocal implements TenantService {
         return tenantManager.findTenantBySerial(arg.getTenantSerial())
                 .map(tenantPO -> {
                     return tenantMemberManager.findMemberByUsername(arg.getTenantSerial(), arg.getUsername()).map(tenantMemberPO -> {
-                        if (arg.passwordMatch(tenantMemberPO.getEncryptedPassword())) {
+                        if (arg.passwordMatch(tenantMemberPO.getEncodedPassword())) {
                             return jwtFacade.generate(tenantMemberPO.getUserId(), ActorRoleEnum.TENANT_USER.name(), tenantPO.getId(), tenantMemberPO.getId());
                         }
                         throw new BusinessException("ACCOUNT_OR_PASSWORD_ERROR");
