@@ -26,7 +26,7 @@ public class UserPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String username;
-    private String password;
+    private String encryptedPassword;
     private String phone;
     private String email;
     private String avatar;

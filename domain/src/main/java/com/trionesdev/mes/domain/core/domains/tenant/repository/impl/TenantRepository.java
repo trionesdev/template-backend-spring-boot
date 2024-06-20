@@ -26,4 +26,8 @@ public class TenantRepository extends ServiceImpl<TenantMapper, TenantPO> {
         return MpPageUtils.of(this.page(MpPageUtils.page(criteria), buildQueryWrapper(criteria)));
     }
 
+    public TenantPO selectBySerial(String serial) {
+        return lambdaQuery().eq(TenantPO::getSerial, serial).one();
+    }
+
 }

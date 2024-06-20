@@ -44,4 +44,10 @@ public class TenantMemberRepository extends ServiceImpl<TenantMemberMapper, Tena
         );
     }
 
+    public TenantMemberPO selectByUsername(String tenantId, String username) {
+        return lambdaQuery().eq(TenantMemberPO::getTenantId, tenantId)
+                .eq(TenantMemberPO::getUsername, username)
+                .last(" limit 1 ").one();
+    }
+
 }
