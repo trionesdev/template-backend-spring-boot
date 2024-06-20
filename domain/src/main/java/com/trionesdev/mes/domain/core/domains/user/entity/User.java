@@ -18,7 +18,7 @@ public class User {
     private String id;
     private String username;
     private String password;
-    private String encryptedPassword;
+    private String encodedPassword;
     private String phone;
     private String email;
     private String avatar;
@@ -29,7 +29,7 @@ public class User {
     private Instant birthday;
     private Boolean enabled;
 
-    public String getEncryptedPassword() {
+    public String getEncodedPassword() {
         if (StrUtil.isNotBlank(password)) {
             return new BCryptPasswordEncoder().encode(password);
         }
