@@ -70,7 +70,7 @@ public class UserServiceLocal implements UserService {
             userSnap = userManager.findUserByUsername(args.getAccount());
         }
         return userSnap.map(userPO -> {
-            if (args.passwordMatch(userPO.getEncryptedPassword())) {
+            if (args.passwordMatch(userPO.getEncodedPassword())) {
                 return jwtFacade.generate(userPO.getId(), ActorRoleEnum.TENANT_USER.name(), null, null);
             }
             return null;
