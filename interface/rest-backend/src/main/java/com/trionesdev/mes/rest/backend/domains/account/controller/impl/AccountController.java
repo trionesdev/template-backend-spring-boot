@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "供应商")
+@Tag(name = "账户")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(AccountRestConstants.ACCOUNT_PATH)
@@ -26,7 +26,9 @@ public class AccountController {
     @Operation(summary = "账号登录")
     @PostMapping("sign-in/account")
     public TokenVO accountSinIn(@Validated @RequestBody AccountSignInRO args) {
-        var signInArg = AccountSignInArg.builder().build();
+        var signInArg = AccountSignInArg.builder().account(args.getAccount())
+                .password(args.getPassword())
+                .build();
         return TokenVO.builder().token(userService.accountSignIn(signInArg)).build();
     }
 
