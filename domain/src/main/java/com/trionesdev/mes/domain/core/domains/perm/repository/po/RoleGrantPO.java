@@ -20,8 +20,8 @@ public class RoleGrantPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
-    private ObjType objType;
-    private String objId;
+    private ObjType grantObjType;
+    private String grantObjId;
     private String roleId;
 
     public enum ObjType {
@@ -34,12 +34,12 @@ public class RoleGrantPO {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         RoleGrantPO roleGrant = (RoleGrantPO) o;
-        return objType == roleGrant.objType && Objects.equal(objId, roleGrant.objId) && Objects.equal(roleId, roleGrant.roleId);
+        return grantObjType == roleGrant.grantObjType && Objects.equal(grantObjId, roleGrant.grantObjId) && Objects.equal(roleId, roleGrant.roleId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(super.hashCode(), objType, objId, roleId);
+        return Objects.hashCode(super.hashCode(), grantObjType, grantObjId, roleId);
     }
 
 }
