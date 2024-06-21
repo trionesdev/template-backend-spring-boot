@@ -1,9 +1,15 @@
-package com.trionesdev.mes.domain.core.domains.tenant.service.bo;
+package com.trionesdev.mes.domain.core.dto.tenant;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TenantMemberSignInArg {
     private String tenantSerial;
     private String username;

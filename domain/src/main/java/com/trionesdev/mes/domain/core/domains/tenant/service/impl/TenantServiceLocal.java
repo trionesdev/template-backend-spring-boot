@@ -9,7 +9,7 @@ import com.trionesdev.mes.domain.core.domains.tenant.manager.impl.TenantManager;
 import com.trionesdev.mes.domain.core.domains.tenant.manager.impl.TenantMemberManager;
 import com.trionesdev.mes.domain.core.domains.tenant.repository.po.TenantPO;
 import com.trionesdev.mes.domain.core.domains.tenant.service.TenantService;
-import com.trionesdev.mes.domain.core.domains.tenant.service.bo.TenantMemberSignInArg;
+import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberSignInArg;
 import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberDTO;
 import com.trionesdev.mes.domain.core.dto.user.UserBindDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.user.UserProvider;
@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -57,12 +58,22 @@ public class TenantServiceLocal implements TenantService {
     }
 
     @Override
-    public String tenantMemberSignIn(TenantMemberSignInArg arg) {
+    public Optional<TenantMemberDTO> findTenantMemberByMemberId(String memberId) {
+        return tenantMemberManager.findMemberById(memberId).map(convert::memberPOToDTO);
+    }
+
+    @Override
+    public Optional<TenantMemberDTO> findTenantMemberByUserId(String userId) {
+        return tenantMemberManager.findMemberByUserId(userId).map(convert::memberPOToDTO);
+    }
+
+    @Override
+    public TenantMemberDTO tenantMemberSignIn(TenantMemberSignInArg arg) {
         return tenantManager.findTenantBySerial(arg.getTenantSerial())
                 .map(tenantPO -> {
                     return tenantMemberManager.findMemberByUsername(arg.getTenantSerial(), arg.getUsername()).map(tenantMemberPO -> {
                         if (arg.passwordMatch(tenantMemberPO.getEncodedPassword())) {
-                            return jwtFacade.generate(tenantMemberPO.getUserId(), ActorRoleEnum.TENANT_USER.name(), tenantPO.getId(), tenantMemberPO.getId());
+                            return convert.memberPOToDTO(tenantMemberPO);
                         }
                         throw new BusinessException("ACCOUNT_OR_PASSWORD_ERROR");
                     }).orElseThrow(() -> new BusinessException("ACCOUNT_OR_PASSWORD_ERROR"));
