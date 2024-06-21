@@ -1,5 +1,6 @@
 package com.trionesdev.mes.rest.backend.domains.org.controller.impl;
 
+import cn.hutool.core.lang.tree.Tree;
 import com.trionesdev.mes.domain.core.domains.org.repository.po.DepartmentPO;
 import com.trionesdev.mes.domain.core.domains.org.service.DepartmentService;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentDTO;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Tag(name = "部门")
 @RequiredArgsConstructor
@@ -52,6 +55,12 @@ public class DepartmentController {
     @GetMapping("departments/{id}")
     public DepartmentDTO queryDepartmentById(@PathVariable String id) {
         return departmentService.findDepartmentById(id).orElse(null);
+    }
+
+    @Operation(summary = "部门树形结构")
+    @GetMapping("departments/tree")
+    public List<Tree<String>> getDepartmentTree() {
+        return departmentService.departmentTree();
     }
 
 }
