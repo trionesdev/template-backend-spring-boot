@@ -3,6 +3,7 @@ package com.trionesdev.mes.domain.core.provider.ssp.tenent.impl;
 
 import com.trionesdev.mes.domain.core.domains.tenant.service.TenantService;
 import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberDTO;
+import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberSignInArg;
 import com.trionesdev.mes.domain.core.provider.ssp.tenent.TenantProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,22 @@ public class TenantProviderLocal implements TenantProvider {
     private final TenantService tenantService;
 
     @Override
+    public TenantMemberDTO getMemberByMemberId(String memberId) {
+        return tenantService.findTenantMemberByMemberId(memberId).orElse(null);
+    }
+
+    @Override
+    public TenantMemberDTO getMemberByUserId(String userId) {
+        return tenantService.findTenantMemberByUserId(userId).orElse(null);
+    }
+
+    @Override
     public List<TenantMemberDTO> getMembersByMemberIds(Collection<String> memberIds) {
         return tenantService.findTenantMembersByMemberIds(memberIds);
+    }
+
+    @Override
+    public TenantMemberDTO tenantMemberSignIn(TenantMemberSignInArg arg) {
+        return tenantService.tenantMemberSignIn(arg);
     }
 }

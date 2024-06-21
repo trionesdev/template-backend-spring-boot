@@ -1,4 +1,4 @@
-package com.trionesdev.mes.domain.core.domains.user.service.bo;
+package com.trionesdev.mes.domain.core.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -2,7 +2,8 @@ package com.trionesdev.mes.domain.core.domains.user.service;
 
 import com.trionesdev.mes.domain.core.domains.user.entity.User;
 import com.trionesdev.mes.domain.core.domains.user.repository.po.UserPO;
-import com.trionesdev.mes.domain.core.domains.user.service.bo.AccountSignInArg;
+import com.trionesdev.mes.domain.core.dto.user.AccountSignInArg;
+import com.trionesdev.mes.domain.core.dto.user.UserDTO;
 
 import java.util.Optional;
 
@@ -14,10 +15,13 @@ public interface UserService {
 
     void updateUserById(UserPO user);
 
-    Optional<UserPO> findUserById(String id);
+    Optional<UserDTO> findUserById(String id);
+
+    Optional<UserDTO> findUserByUsername(String username);
+
+    Optional<UserDTO> findUserByPhone(String phone);
 
     String bindUser(User user);
 
-    String accountSignIn(AccountSignInArg args);
-
+    UserDTO accountSignIn(AccountSignInArg args);
 }
