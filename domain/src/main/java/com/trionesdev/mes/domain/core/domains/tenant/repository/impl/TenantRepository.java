@@ -30,4 +30,7 @@ public class TenantRepository extends ServiceImpl<TenantMapper, TenantPO> {
         return lambdaQuery().eq(TenantPO::getSerial, serial).one();
     }
 
+    public TenantPO selectFirst() {
+        return lambdaQuery().last(" limit 1 ").one();
+    }
 }

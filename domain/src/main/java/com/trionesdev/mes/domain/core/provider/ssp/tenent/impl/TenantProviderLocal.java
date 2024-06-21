@@ -2,6 +2,7 @@ package com.trionesdev.mes.domain.core.provider.ssp.tenent.impl;
 
 
 import com.trionesdev.mes.domain.core.domains.tenant.service.TenantService;
+import com.trionesdev.mes.domain.core.dto.tenant.TenantDTO;
 import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberDTO;
 import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberSignInArg;
 import com.trionesdev.mes.domain.core.provider.ssp.tenent.TenantProvider;
@@ -15,6 +16,16 @@ import java.util.List;
 @Component
 public class TenantProviderLocal implements TenantProvider {
     private final TenantService tenantService;
+
+    @Override
+    public TenantDTO getTenantById(String id) {
+        return tenantService.findTenantById(id).orElse(null);
+    }
+
+    @Override
+    public TenantDTO getActorTenant() {
+        return tenantService.findActorTenant().orElse(null);
+    }
 
     @Override
     public TenantMemberDTO getMemberByMemberId(String memberId) {

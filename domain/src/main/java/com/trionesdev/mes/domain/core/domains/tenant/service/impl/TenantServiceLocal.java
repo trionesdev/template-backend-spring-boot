@@ -1,7 +1,5 @@
 package com.trionesdev.mes.domain.core.domains.tenant.service.impl;
 
-import com.trionesdev.commons.context.actor.ActorRoleEnum;
-import com.trionesdev.commons.core.jwt.JwtFacade;
 import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.mes.domain.core.domains.tenant.entity.TenantMember;
 import com.trionesdev.mes.domain.core.domains.tenant.internal.TenantBeanConvert;
@@ -9,8 +7,9 @@ import com.trionesdev.mes.domain.core.domains.tenant.manager.impl.TenantManager;
 import com.trionesdev.mes.domain.core.domains.tenant.manager.impl.TenantMemberManager;
 import com.trionesdev.mes.domain.core.domains.tenant.repository.po.TenantPO;
 import com.trionesdev.mes.domain.core.domains.tenant.service.TenantService;
-import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberSignInArg;
+import com.trionesdev.mes.domain.core.dto.tenant.TenantDTO;
 import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberDTO;
+import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberSignInArg;
 import com.trionesdev.mes.domain.core.dto.user.UserBindDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.user.UserProvider;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class TenantServiceLocal implements TenantService {
-    private final JwtFacade jwtFacade;
     private final TenantBeanConvert convert;
     private final TenantManager tenantManager;
     private final TenantMemberManager tenantMemberManager;
@@ -37,6 +35,16 @@ public class TenantServiceLocal implements TenantService {
 
     public void updateTenantById(TenantPO tenantPO) {
         tenantManager.updateTenantById(tenantPO);
+    }
+
+    @Override
+    public Optional<TenantDTO> findTenantById(String id) {
+        return tenantManager.findTenantById(id).map(convert::tenantPoToDto);
+    }
+
+    @Override
+    public Optional<TenantDTO> findActorTenant() {
+        return tenantManager.findFirstTenant().map(convert::tenantPoToDto);
     }
 
     @Transactional

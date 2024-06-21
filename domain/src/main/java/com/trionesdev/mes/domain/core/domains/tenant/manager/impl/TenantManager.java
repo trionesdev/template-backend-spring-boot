@@ -32,4 +32,7 @@ public class TenantManager {
         return Optional.ofNullable(tenantRepository.selectBySerial(serial));
     }
 
+    public Optional<TenantPO> findFirstTenant() {
+        return Optional.ofNullable(tenantRepository.selectFirst());
+    }
 }

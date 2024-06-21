@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeUtil;
+import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.core.constant.IdentityConstants;
 import com.trionesdev.mes.domain.core.domains.org.internal.OrgBeanConvert;
 import com.trionesdev.mes.domain.core.domains.org.manager.impl.DepartmentManager;
@@ -18,14 +19,14 @@ import com.trionesdev.mes.domain.core.provider.ssp.tenent.TenantProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class DepartmentServiceLocal implements DepartmentService {
     private final OrgBeanConvert convert;
+    private final ActorContext actorContext;
     private final DepartmentManager departmentManager;
     private final TenantProvider tenantProvider;
 
@@ -53,6 +54,15 @@ public class DepartmentServiceLocal implements DepartmentService {
 
     @Override
     public List<Tree<String>> departmentTree() {
+        var tenant = tenantProvider.getActorTenant();
+        if (Objects.isNull(tenant)) {
+            return Collections.emptyList();
+        }
+        Tree<String> root = new Tree<>();
+        root.setId(IdentityConstants.STRING_ID_ZERO_VALUE);
+        root.setParentId(tenant.getId());
+        root.setName(tenant.getName());
+
         var departments = departmentManager.findDepartments();
         List<TreeNode<String>> nodeList = CollUtil.newArrayList();
         departments.forEach(department -> {
@@ -62,7 +72,9 @@ public class DepartmentServiceLocal implements DepartmentService {
             node.setName(department.getName());
             nodeList.add(node);
         });
-        return TreeUtil.build(nodeList, IdentityConstants.STRING_ID_ZERO_VALUE);
+        var departmentNodes = TreeUtil.build(nodeList, IdentityConstants.STRING_ID_ZERO_VALUE);
+        root.setChildren(departmentNodes);
+        return Collections.singletonList(root);
     }
 
     @Override

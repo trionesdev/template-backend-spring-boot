@@ -2,6 +2,7 @@ package com.trionesdev.mes.domain.core.domains.tenant.service;
 
 import com.trionesdev.mes.domain.core.domains.tenant.entity.TenantMember;
 import com.trionesdev.mes.domain.core.domains.tenant.repository.po.TenantPO;
+import com.trionesdev.mes.domain.core.dto.tenant.TenantDTO;
 import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberSignInArg;
 import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberDTO;
 
@@ -14,6 +15,10 @@ public interface TenantService {
     void createTenant(TenantPO tenantPO);
 
     void updateTenantById(TenantPO tenantPO);
+
+    Optional<TenantDTO> findTenantById(String id);
+
+    Optional<TenantDTO> findActorTenant();
 
     void createTenantMember(TenantMember tenantMember);
 
