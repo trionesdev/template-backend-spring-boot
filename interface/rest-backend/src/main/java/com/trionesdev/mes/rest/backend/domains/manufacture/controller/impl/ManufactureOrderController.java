@@ -2,7 +2,6 @@ package com.trionesdev.mes.rest.backend.domains.manufacture.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.mes.domain.core.domains.manufacture.service.impl.ManufactureOrderService;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.DefectivePO;
 import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderDTO;
 import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderTaskDTO;
 import com.trionesdev.mes.domain.core.dto.masterdata.DefectiveDTO;
