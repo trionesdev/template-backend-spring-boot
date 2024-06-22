@@ -1,17 +1,22 @@
 package com.trionesdev.mes.domain.core.domains.org.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeUtil;
 import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.core.constant.IdentityConstants;
+import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.mes.domain.core.domains.org.internal.OrgBeanConvert;
 import com.trionesdev.mes.domain.core.domains.org.manager.impl.DepartmentManager;
 import com.trionesdev.mes.domain.core.domains.org.repository.criteria.DepartmentMemberCriteria;
 import com.trionesdev.mes.domain.core.domains.org.repository.po.DepartmentMemberPO;
 import com.trionesdev.mes.domain.core.domains.org.repository.po.DepartmentPO;
 import com.trionesdev.mes.domain.core.domains.org.service.DepartmentService;
+import com.trionesdev.mes.domain.core.domains.org.service.bo.DepartmentTreeArg;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentDTO;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentMemberDTO;
 import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberDTO;
@@ -53,16 +58,7 @@ public class DepartmentServiceLocal implements DepartmentService {
     }
 
     @Override
-    public List<Tree<String>> departmentTree() {
-        var tenant = tenantProvider.getActorTenant();
-        if (Objects.isNull(tenant)) {
-            return Collections.emptyList();
-        }
-        Tree<String> root = new Tree<>();
-        root.setId(IdentityConstants.STRING_ID_ZERO_VALUE);
-        root.setParentId(tenant.getId());
-        root.setName(tenant.getName());
-
+    public List<Tree<String>> departmentTree(DepartmentTreeArg arg) {
         var departments = departmentManager.findDepartments();
         List<TreeNode<String>> nodeList = CollUtil.newArrayList();
         departments.forEach(department -> {
@@ -73,20 +69,51 @@ public class DepartmentServiceLocal implements DepartmentService {
             nodeList.add(node);
         });
         var departmentNodes = TreeUtil.build(nodeList, IdentityConstants.STRING_ID_ZERO_VALUE);
-        root.setChildren(departmentNodes);
-        return Collections.singletonList(root);
+        if (Objects.isNull(arg.getMode())) {
+            return departmentNodes;
+        } else {
+            var tenant = tenantProvider.getActorTenant();
+            if (Objects.isNull(tenant)) {
+                return Collections.emptyList();
+            }
+            Tree<String> root = new Tree<>();
+            root.setId(IdentityConstants.STRING_ID_ZERO_VALUE);
+            root.setParentId(tenant.getId());
+            root.setName(tenant.getName());
+            if (DepartmentTreeArg.Mode.TENANT_SIDEWAYS.equals(arg.getMode())) {
+                List<Tree<String>> result = ListUtil.toList(root);
+                result.addAll(departmentNodes);
+                return result;
+            } else {
+                root.setChildren(departmentNodes);
+                return Collections.singletonList(root);
+            }
+        }
     }
 
-    @Override
-    public List<DepartmentMemberDTO> findMembersByDepartmentId(String departmentId) {
-        var depMembers = departmentManager.findDepartmentMembers(DepartmentMemberCriteria.builder().departmentId(departmentId).build());
-        var memberIds = depMembers.stream().map(DepartmentMemberPO::getMemberId).collect(Collectors.toSet());
+    private List<DepartmentMemberDTO> assembleDepartmentMembers(List<DepartmentMemberPO> records) {
+        if (CollectionUtil.isEmpty(records)) {
+            return Collections.emptyList();
+        }
+        var memberIds = records.stream().map(DepartmentMemberPO::getMemberId).collect(Collectors.toSet());
         var membersMap = tenantProvider.getMembersByMemberIds(memberIds).stream().collect(Collectors.toMap(TenantMemberDTO::getId, v -> v, (v1, v2) -> v1));
-        return depMembers.stream().map(t -> {
+        return records.stream().map(t -> {
             var depMember = convert.poToDto(t);
             depMember.setMember(membersMap.get(t.getMemberId()));
             return depMember;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<DepartmentMemberDTO> findDepartmentMembers(DepartmentMemberCriteria criteria) {
+        var depMembers = departmentManager.findDepartmentMembers(criteria);
+        return assembleDepartmentMembers(depMembers);
+    }
+
+    @Override
+    public PageInfo<DepartmentMemberDTO> findDepartmentMembersPage(DepartmentMemberCriteria criteria) {
+        var depMembersPage = departmentManager.findDepartmentMembersPage(criteria);
+        return PageUtils.of(depMembersPage, assembleDepartmentMembers(depMembersPage.getRows()));
     }
 
     @Override
