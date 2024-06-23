@@ -13,12 +13,17 @@ import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.mes.domain.core.domains.org.internal.OrgBeanConvert;
 import com.trionesdev.mes.domain.core.domains.org.manager.impl.DepartmentManager;
 import com.trionesdev.mes.domain.core.domains.org.repository.criteria.DepartmentMemberCriteria;
+import com.trionesdev.mes.domain.core.domains.org.repository.impl.DepartmentMemberRepository;
+import com.trionesdev.mes.domain.core.domains.org.repository.impl.DepartmentRepository;
+import com.trionesdev.mes.domain.core.domains.org.repository.mapper.DepartmentMapper;
+import com.trionesdev.mes.domain.core.domains.org.repository.mapper.DepartmentMemberMapper;
 import com.trionesdev.mes.domain.core.domains.org.repository.po.DepartmentMemberPO;
 import com.trionesdev.mes.domain.core.domains.org.repository.po.DepartmentPO;
-import com.trionesdev.mes.domain.core.domains.org.service.DepartmentService;
+import com.trionesdev.mes.domain.core.domains.org.service.DepartmentDomainService;
 import com.trionesdev.mes.domain.core.domains.org.service.bo.DepartmentTreeArg;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentDTO;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentMemberDTO;
+import com.trionesdev.mes.domain.core.dto.org.SetMemberDepartmentsArg;
 import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.tenent.TenantProvider;
 import lombok.RequiredArgsConstructor;
@@ -29,11 +34,13 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class DepartmentServiceLocal implements DepartmentService {
+public class DepartmentDomainServiceLocal implements DepartmentDomainService {
     private final OrgBeanConvert convert;
-    private final ActorContext actorContext;
     private final DepartmentManager departmentManager;
     private final TenantProvider tenantProvider;
+    private final DepartmentRepository departmentRepository;
+    private final DepartmentMemberRepository departmentMemberRepository;
+
 
     @Override
     public void createDepartment(DepartmentPO department) {
@@ -89,6 +96,20 @@ public class DepartmentServiceLocal implements DepartmentService {
                 return Collections.singletonList(root);
             }
         }
+    }
+
+    @Override
+    public void setMemberDepartments(SetMemberDepartmentsArg arg) {
+        departmentMemberRepository.deleteByMemberId(arg.getMemberId());
+        if (CollectionUtil.isNotEmpty(arg.getDepartmentIds())) {
+            List<DepartmentMemberPO> members = arg.getDepartmentIds().stream().map(t -> DepartmentMemberPO.builder().departmentId(t).memberId(arg.getMemberId()).build()).collect(Collectors.toList());
+            departmentMemberRepository.saveBatch(members);
+        }
+    }
+
+    @Override
+    public List<DepartmentMemberDTO> findDepartmentMembersByMemberId(String memberId) {
+        return assembleDepartmentMembers(departmentMemberRepository.selectListByMemberId(memberId));
     }
 
     private List<DepartmentMemberDTO> assembleDepartmentMembers(List<DepartmentMemberPO> records) {

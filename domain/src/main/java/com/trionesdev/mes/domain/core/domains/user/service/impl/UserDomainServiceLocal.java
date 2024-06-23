@@ -6,7 +6,7 @@ import com.trionesdev.mes.domain.core.domains.user.entity.User;
 import com.trionesdev.mes.domain.core.domains.user.internal.UserBeanConvert;
 import com.trionesdev.mes.domain.core.domains.user.manager.impl.UserManager;
 import com.trionesdev.mes.domain.core.domains.user.repository.po.UserPO;
-import com.trionesdev.mes.domain.core.domains.user.service.UserService;
+import com.trionesdev.mes.domain.core.domains.user.service.UserDomainService;
 import com.trionesdev.mes.domain.core.dto.user.AccountSignInArg;
 import com.trionesdev.mes.domain.core.dto.user.AccountSignInArg.AccountType;
 import com.trionesdev.mes.domain.core.dto.user.UserDTO;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class UserServiceLocal implements UserService {
+public class UserDomainServiceLocal implements UserDomainService {
     private final UserBeanConvert convert;
     private final UserManager userManager;
 

@@ -35,4 +35,12 @@ public class DepartmentMemberRepository extends ServiceImpl<DepartmentMemberMapp
         );
     }
 
+    public void deleteByMemberId(String memberId) {
+        remove(new LambdaQueryWrapper<DepartmentMemberPO>().eq(DepartmentMemberPO::getMemberId, memberId));
+    }
+
+    public List<DepartmentMemberPO> selectListByMemberId(String memberId) {
+        return lambdaQuery().eq(DepartmentMemberPO::getMemberId, memberId).list();
+    }
+
 }

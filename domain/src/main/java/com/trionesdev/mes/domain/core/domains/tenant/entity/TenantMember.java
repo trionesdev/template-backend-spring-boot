@@ -2,6 +2,8 @@ package com.trionesdev.mes.domain.core.domains.tenant.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class TenantMember {
     private String id;
@@ -14,4 +16,5 @@ public class TenantMember {
     private String firstName;
     private String lastName;
     private String username;
+    private List<String> departmentIds;
 }
