@@ -3,6 +3,7 @@ package com.trionesdev.mes.rest.backend.domains.org.controller.impl;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.util.EnumUtil;
 import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.mes.application.org.impl.DepartmentAppService;
 import com.trionesdev.mes.domain.core.domains.org.service.DepartmentDomainService;
 import com.trionesdev.mes.domain.core.domains.org.service.bo.DepartmentTreeArg;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentDTO;
@@ -23,8 +24,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(OrgRestConstants.ORG_PATH)
-public class DepartmentController {
+public class DepartmentResource {
     private final OrgBeRestBeanConvert convert;
+    private final DepartmentAppService departmentAppService;
     private final DepartmentDomainService departmentService;
 
     @Operation(summary = "创建部门")
@@ -73,6 +75,12 @@ public class DepartmentController {
         criteria.setPageNum(pageNum);
         criteria.setPageSize(pageSize);
         return departmentService.findDepartmentMembersPage(criteria);
+    }
+
+    @Operation(summary = "组织树形结构")
+    @GetMapping("tree")
+    public List<Tree<String>> queryOrgTree() {
+        return departmentAppService.orgTree();
     }
 
 }

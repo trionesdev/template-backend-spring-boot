@@ -65,6 +65,11 @@ public class DepartmentDomainServiceLocal implements DepartmentDomainService {
     }
 
     @Override
+    public List<DepartmentPO> findDepartments() {
+        return departmentRepository.list();
+    }
+
+    @Override
     public List<Tree<String>> departmentTree(DepartmentTreeArg arg) {
         var departments = departmentManager.findDepartments();
         List<TreeNode<String>> nodeList = CollUtil.newArrayList();
