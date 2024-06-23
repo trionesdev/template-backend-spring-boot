@@ -6,6 +6,7 @@ import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeUtil;
+import cn.hutool.core.map.MapUtil;
 import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.core.constant.IdentityConstants;
 import com.trionesdev.commons.core.page.PageInfo;
@@ -23,6 +24,7 @@ import com.trionesdev.mes.domain.core.domains.org.service.DepartmentDomainServic
 import com.trionesdev.mes.domain.core.domains.org.service.bo.DepartmentTreeArg;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentDTO;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentMemberDTO;
+import com.trionesdev.mes.domain.core.dto.org.OrgDTO;
 import com.trionesdev.mes.domain.core.dto.org.SetMemberDepartmentsArg;
 import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberDTO;
 import com.trionesdev.mes.domain.core.provider.ssp.tenent.TenantProvider;
@@ -144,6 +146,24 @@ public class DepartmentDomainServiceLocal implements DepartmentDomainService {
 
     @Override
     public List<Tree<String>> orgTree() {
+        var departments = departmentManager.findDepartments();
+        List<TreeNode<String>> nodeList = CollUtil.newArrayList();
+        departments.forEach(department -> {
+            Map<String, Object> extra = MapUtil.newHashMap();
+            extra.put("type", "DEPARTMENT");
+            TreeNode<String> node = new TreeNode<>();
+            node.setId(department.getId());
+            node.setParentId(department.getParentId());
+            node.setName(department.getName());
+            node.setExtra(extra);
+            nodeList.add(node);
+        });
+        return TreeUtil.build(nodeList, IdentityConstants.STRING_ID_ZERO_VALUE);
+    }
+
+    @Override
+    public List<OrgDTO> orgList(String departmentId) {
+        var departments = departmentRepository.selectListByParentId(departmentId);
         return List.of();
     }
 }
