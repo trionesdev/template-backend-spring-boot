@@ -3,7 +3,7 @@ package com.trionesdev.mes.rest.backend.domains.org.controller.impl;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.util.EnumUtil;
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.org.service.DepartmentService;
+import com.trionesdev.mes.domain.core.domains.org.service.DepartmentDomainService;
 import com.trionesdev.mes.domain.core.domains.org.service.bo.DepartmentTreeArg;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentDTO;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentMemberDTO;
@@ -25,7 +25,7 @@ import java.util.List;
 @RequestMapping(OrgRestConstants.ORG_PATH)
 public class DepartmentController {
     private final OrgBeRestBeanConvert convert;
-    private final DepartmentService departmentService;
+    private final DepartmentDomainService departmentService;
 
     @Operation(summary = "创建部门")
     @PostMapping("departments")

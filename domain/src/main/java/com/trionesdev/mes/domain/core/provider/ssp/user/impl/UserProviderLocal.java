@@ -1,7 +1,7 @@
 package com.trionesdev.mes.domain.core.provider.ssp.user.impl;
 
 import com.trionesdev.mes.domain.core.domains.user.internal.UserBeanConvert;
-import com.trionesdev.mes.domain.core.domains.user.service.UserService;
+import com.trionesdev.mes.domain.core.domains.user.service.UserDomainService;
 import com.trionesdev.mes.domain.core.dto.user.AccountSignInArg;
 import com.trionesdev.mes.domain.core.dto.user.UserBindDTO;
 import com.trionesdev.mes.domain.core.dto.user.UserDTO;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserProviderLocal implements UserProvider {
     private final UserBeanConvert convert;
-    private final UserService userService;
+    private final UserDomainService userService;
 
     @Override
     public String createUser(UserCreateDTO user) {

@@ -7,11 +7,12 @@ import com.trionesdev.mes.domain.core.domains.org.repository.po.DepartmentPO;
 import com.trionesdev.mes.domain.core.domains.org.service.bo.DepartmentTreeArg;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentDTO;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentMemberDTO;
+import com.trionesdev.mes.domain.core.dto.org.SetMemberDepartmentsArg;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface DepartmentService {
+public interface DepartmentDomainService {
 
 
     void createDepartment(DepartmentPO department);
@@ -23,6 +24,10 @@ public interface DepartmentService {
     Optional<DepartmentDTO> findDepartmentById(String id);
 
     List<Tree<String>> departmentTree(DepartmentTreeArg arg);
+
+    void setMemberDepartments(SetMemberDepartmentsArg arg);
+
+    List<DepartmentMemberDTO> findDepartmentMembersByMemberId(String memberId);
 
     List<DepartmentMemberDTO> findDepartmentMembers(DepartmentMemberCriteria criteria);
 

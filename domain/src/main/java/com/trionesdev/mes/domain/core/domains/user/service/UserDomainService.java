@@ -7,7 +7,7 @@ import com.trionesdev.mes.domain.core.dto.user.UserDTO;
 
 import java.util.Optional;
 
-public interface UserService {
+public interface UserDomainService {
 
     String createUser(User user);
 

@@ -1,5 +1,7 @@
 package com.trionesdev.mes.domain.core.domains.tenant.manager.impl;
 
+import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.mes.domain.core.domains.tenant.repository.criteria.TenantMemberCriteria;
 import com.trionesdev.mes.domain.core.domains.tenant.repository.impl.TenantMemberRepository;
 import com.trionesdev.mes.domain.core.domains.tenant.repository.po.TenantMemberPO;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +42,10 @@ public class TenantMemberManager {
 
     public Optional<TenantMemberPO> findMemberByUsername(String tenantId, String username) {
         return Optional.ofNullable(tenantMemberRepository.selectByUsername(tenantId, username));
+    }
+
+    public PageInfo<TenantMemberPO> findMembersPage(TenantMemberCriteria criteria) {
+        return tenantMemberRepository.selectPage(criteria);
     }
 
 }

@@ -2,6 +2,8 @@ package com.trionesdev.mes.domain.core.dto.tenant;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class TenantMemberDTO {
     private String id;
@@ -14,4 +16,5 @@ public class TenantMemberDTO {
     private String firstName;
     private String lastName;
     private String username;
+    private List<String> departmentIds;
 }
