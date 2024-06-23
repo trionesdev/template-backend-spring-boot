@@ -23,6 +23,8 @@ public interface DepartmentDomainService {
 
     Optional<DepartmentDTO> findDepartmentById(String id);
 
+    List<DepartmentPO> findDepartments();
+
     List<Tree<String>> departmentTree(DepartmentTreeArg arg);
 
     void setMemberDepartments(SetMemberDepartmentsArg arg);
