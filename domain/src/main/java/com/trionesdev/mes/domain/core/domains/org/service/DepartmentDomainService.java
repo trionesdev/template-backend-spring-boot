@@ -7,6 +7,7 @@ import com.trionesdev.mes.domain.core.domains.org.repository.po.DepartmentPO;
 import com.trionesdev.mes.domain.core.domains.org.service.bo.DepartmentTreeArg;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentDTO;
 import com.trionesdev.mes.domain.core.dto.org.DepartmentMemberDTO;
+import com.trionesdev.mes.domain.core.dto.org.OrgDTO;
 import com.trionesdev.mes.domain.core.dto.org.SetMemberDepartmentsArg;
 
 import java.util.List;
@@ -37,5 +38,5 @@ public interface DepartmentDomainService {
 
     List<Tree<String>> orgTree();
 
-
+    List<OrgDTO> orgList(String departmentId);
 }
