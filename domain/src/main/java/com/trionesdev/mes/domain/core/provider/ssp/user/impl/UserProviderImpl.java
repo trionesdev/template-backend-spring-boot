@@ -1,6 +1,7 @@
 package com.trionesdev.mes.domain.core.provider.ssp.user.impl;
 
 import com.trionesdev.mes.domain.core.domains.user.internal.UserBeanConvert;
+import com.trionesdev.mes.domain.core.domains.user.manager.impl.UserManager;
 import com.trionesdev.mes.domain.core.domains.user.service.UserDomainService;
 import com.trionesdev.mes.domain.core.dto.user.AccountSignInArg;
 import com.trionesdev.mes.domain.core.dto.user.UserBindDTO;
@@ -12,35 +13,36 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class UserProviderLocal implements UserProvider {
+public class UserProviderImpl implements UserProvider {
     private final UserBeanConvert convert;
-    private final UserDomainService userService;
+    private final UserManager userManager;
+//    private final UserDomainService userService;
 
     @Override
     public String createUser(UserCreateDTO user) {
-        var userPO = convert.from(user);
-        return userService.createUser(userPO);
+        var userEntity = convert.from(user);
+        return userManager.createUser(userEntity);
     }
 
     @Override
-    public String bindUser(UserBindDTO user) {
-        var userPO = convert.from(user);
-        return userService.bindUser(userPO);
+    public String bindUser(UserBindDTO record) {
+        var user = convert.from(record);
+        return userManager.bindUser(user);
     }
 
     @Override
     public UserDTO getUserById(String id) {
-        return userService.findUserById(id).orElse(null);
+        return userManager.findUserById(id).map(convert::userPoToDTO).orElse(null);
     }
 
     @Override
     public UserDTO getUserByUsername(String username) {
-        return userService.findUserByUsername(username).orElse(null);
+        return userManager.findUserByUsername(username).map(convert::userPoToDTO).orElse(null);
     }
 
     @Override
     public UserDTO getUserByPhone(String phone) {
-        return userService.findUserByPhone(phone).orElse(null);
+        return userManager.findUserByPhone(phone).map(convert::userPoToDTO).orElse(null);
     }
 
     @Override

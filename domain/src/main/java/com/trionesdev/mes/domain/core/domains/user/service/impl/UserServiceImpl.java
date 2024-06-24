@@ -18,19 +18,13 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class UserDomainServiceLocal implements UserDomainService {
+public class UserServiceImpl implements UserDomainService {
     private final UserBeanConvert convert;
     private final UserManager userManager;
 
     @Override
     public String createUser(User user) {
-        var userPhoneSnap = userManager.findUserByPhone(user.getPhone());
-        if (userPhoneSnap.isPresent()) {
-            throw new DuplicatedException("PHONE_EXISTS");
-        }
-        var userPo = convert.entityToPO(user);
-        userManager.createUser(userPo);
-        return userPo.getId();
+        return userManager.createUser(user);
     }
 
     @Override
