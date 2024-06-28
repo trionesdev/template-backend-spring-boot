@@ -1,7 +1,7 @@
 package com.trionesdev.mes.rest.backend.domains.account.controller.impl;
 
+import com.trionesdev.mes.core.domains.account.dto.ActorDTO;
 import com.trionesdev.mes.core.domains.account.service.AccountService;
-import com.trionesdev.mes.domain.core.dto.account.ActorDTO;
 import com.trionesdev.mes.core.domains.org.dto.TenantMemberSignInCmd;
 import com.trionesdev.mes.core.domains.user.dto.AccountSignInCmd;
 import com.trionesdev.mes.rest.backend.domains.account.controller.ro.AccountSignInRO;
