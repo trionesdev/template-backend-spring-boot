@@ -20,7 +20,6 @@ import com.trionesdev.mes.core.domains.masterdata.entity.ProcessFlow;
 import com.trionesdev.mes.core.domains.masterdata.entity.ProductBom.Material;
 import com.trionesdev.mes.core.domains.masterdata.entity.ProductDefinition;
 import com.trionesdev.mes.core.domains.masterdata.dto.ManufactureProcessDTO;
-import com.trionesdev.mes.domain.core.domains.masterdata.dao.po.*;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

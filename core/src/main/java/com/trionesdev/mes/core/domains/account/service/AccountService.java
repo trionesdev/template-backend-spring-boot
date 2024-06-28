@@ -1,6 +1,7 @@
 package com.trionesdev.mes.core.domains.account.service;
 
-import com.trionesdev.mes.domain.core.dto.account.ActorDTO;
+
+import com.trionesdev.mes.core.domains.account.dto.ActorDTO;
 import com.trionesdev.mes.core.domains.org.dto.TenantMemberSignInCmd;
 import com.trionesdev.mes.core.domains.user.dto.AccountSignInCmd;
 
