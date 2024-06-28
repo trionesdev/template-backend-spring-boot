@@ -1,10 +1,10 @@
 package com.trionesdev.mes.rest.backend.domains.manufacture.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.manufacture.service.impl.ManufactureOrderService;
-import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderDTO;
-import com.trionesdev.mes.domain.core.dto.manufacture.ManufactureOrderTaskDTO;
-import com.trionesdev.mes.domain.core.dto.masterdata.DefectiveDTO;
+import com.trionesdev.mes.core.domains.manufacture.service.impl.ManufactureOrderService;
+import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderDTO;
+import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskDTO;
+import com.trionesdev.mes.core.domains.masterdata.dto.DefectiveDTO;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.query.ManufactureOrderQuery;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.query.ManufactureOrderTaskQuery;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureOrderRO;

@@ -1,9 +1,9 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.DefectiveCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.DefectivePO;
-import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.DefectiveService;
+import com.trionesdev.mes.core.domains.masterdata.dao.criteria.DefectiveCriteria;
+import com.trionesdev.mes.core.domains.masterdata.dao.po.DefectivePO;
+import com.trionesdev.mes.core.domains.masterdata.service.impl.DefectiveService;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.DefectiveQuery;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.DefectiveRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;

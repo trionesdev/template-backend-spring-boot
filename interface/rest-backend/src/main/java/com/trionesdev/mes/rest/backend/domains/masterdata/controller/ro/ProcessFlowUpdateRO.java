@@ -1,6 +1,6 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro;
 
-import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow;
+import com.trionesdev.mes.core.domains.masterdata.entity.ProcessFlow;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;

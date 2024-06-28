@@ -20,7 +20,7 @@
     <modules>
         <module>infrastructure</module>
         <module>serve</module>
-        <module>domain</module>
+        <module>core</module>
         <module>interface</module>
     </modules>
 
@@ -39,7 +39,7 @@
             </dependency>
             <dependency>
                 <groupId>com.trionesdev.mes</groupId>
-                <artifactId>domain</artifactId>
+                <artifactId>core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

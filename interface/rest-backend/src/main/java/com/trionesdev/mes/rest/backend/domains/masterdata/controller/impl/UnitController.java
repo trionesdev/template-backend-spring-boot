@@ -1,14 +1,14 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.UnitCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.UnitPO;
-import com.trionesdev.mes.domain.core.dto.masterdata.UnitDTO;
+import com.trionesdev.mes.core.domains.masterdata.dao.criteria.UnitCriteria;
+import com.trionesdev.mes.core.domains.masterdata.dao.po.UnitPO;
+import com.trionesdev.mes.core.domains.masterdata.dto.UnitDTO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.UnitCreateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.UnitUpdateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
-import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.UnitService;
+import com.trionesdev.mes.core.domains.masterdata.service.impl.UnitService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
