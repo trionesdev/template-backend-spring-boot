@@ -2,8 +2,8 @@ package com.trionesdev.mes.rest.backend.domains.customer.internal;
 
 import org.mapstruct.*;
 
-import com.trionesdev.mes.domain.core.domains.customer.repository.criteria.CustomerCriteria;
-import com.trionesdev.mes.domain.core.domains.customer.repository.po.CustomerPO;
+import com.trionesdev.mes.core.domains.customer.dao.criteria.CustomerCriteria;
+import com.trionesdev.mes.core.domains.customer.dao.po.CustomerPO;
 import com.trionesdev.mes.rest.backend.domains.customer.controller.query.CustomerQuery;
 import com.trionesdev.mes.rest.backend.domains.customer.controller.ro.CustomerCreateRO;
 import com.trionesdev.mes.rest.backend.domains.customer.controller.ro.CustomerUpdateRO;

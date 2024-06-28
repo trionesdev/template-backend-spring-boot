@@ -1,10 +1,10 @@
 package com.trionesdev.mes.rest.backend.domains.warehouse.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.warehouse.repository.criteria.WarehouseCriteria;
-import com.trionesdev.mes.domain.core.domains.warehouse.repository.po.WarehousePO;
-import com.trionesdev.mes.domain.core.domains.warehouse.service.impl.WarehouseService;
-import com.trionesdev.mes.domain.core.dto.warehouse.WarehouseDTO;
+import com.trionesdev.mes.core.domains.warehouse.dao.criteria.WarehouseCriteria;
+import com.trionesdev.mes.core.domains.warehouse.dao.po.WarehousePO;
+import com.trionesdev.mes.core.domains.warehouse.service.impl.WarehouseService;
+import com.trionesdev.mes.core.domains.warehouse.dto.WarehouseDTO;
 import com.trionesdev.mes.rest.backend.domains.warehouse.controller.query.WarehouseQuery;
 import com.trionesdev.mes.rest.backend.domains.warehouse.controller.ro.WarehouseCreateRO;
 import com.trionesdev.mes.rest.backend.domains.warehouse.controller.ro.WarehouseUpdateRO;

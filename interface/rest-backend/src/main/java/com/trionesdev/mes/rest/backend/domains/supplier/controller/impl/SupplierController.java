@@ -1,10 +1,10 @@
 package com.trionesdev.mes.rest.backend.domains.supplier.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.supplier.repository.criteria.SupplierCriteria;
-import com.trionesdev.mes.domain.core.domains.supplier.repository.po.SupplierPO;
-import com.trionesdev.mes.domain.core.domains.supplier.service.impl.SupplierService;
-import com.trionesdev.mes.domain.core.dto.supplier.SupplierDTO;
+import com.trionesdev.mes.core.domains.supplier.dao.criteria.SupplierCriteria;
+import com.trionesdev.mes.core.domains.supplier.dao.po.SupplierPO;
+import com.trionesdev.mes.core.domains.supplier.service.impl.SupplierService;
+import com.trionesdev.mes.core.domains.supplier.dto.SupplierDTO;
 import com.trionesdev.mes.rest.backend.domains.supplier.controller.query.SupplierQuery;
 import com.trionesdev.mes.rest.backend.domains.supplier.controller.ro.SupplierCreateRO;
 import com.trionesdev.mes.rest.backend.domains.supplier.controller.ro.SupplierUpdateRO;

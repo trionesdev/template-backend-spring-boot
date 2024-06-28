@@ -1,15 +1,15 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ProcessFlowCriteria;
-import com.trionesdev.mes.domain.core.dto.masterdata.ProcessFlowDTO;
+import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ProcessFlowCriteria;
+import com.trionesdev.mes.core.domains.masterdata.dto.ProcessFlowDTO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ProcessFlowQuery;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ProcessFlowCreateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ProcessFlowUpdateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
-import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProcessFlow;
-import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ProcessFlowService;
+import com.trionesdev.mes.core.domains.masterdata.entity.ProcessFlow;
+import com.trionesdev.mes.core.domains.masterdata.service.impl.ProcessFlowService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

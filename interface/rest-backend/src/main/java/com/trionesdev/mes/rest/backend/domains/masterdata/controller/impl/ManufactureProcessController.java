@@ -7,10 +7,10 @@ import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.Manufact
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ManufactureProcessCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.po.ManufactureProcessPO;
-import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ManufactureProcessService;
-import com.trionesdev.mes.domain.core.dto.masterdata.ManufactureProcessDTO;
+import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ManufactureProcessCriteria;
+import com.trionesdev.mes.core.domains.masterdata.dao.po.ManufactureProcessPO;
+import com.trionesdev.mes.core.domains.masterdata.service.impl.ManufactureProcessService;
+import com.trionesdev.mes.core.domains.masterdata.dto.ManufactureProcessDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

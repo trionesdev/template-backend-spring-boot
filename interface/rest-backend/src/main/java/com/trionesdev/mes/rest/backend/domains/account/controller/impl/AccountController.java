@@ -1,9 +1,9 @@
 package com.trionesdev.mes.rest.backend.domains.account.controller.impl;
 
-import com.trionesdev.mes.domain.core.domains.account.service.AccountService;
+import com.trionesdev.mes.core.domains.account.service.AccountService;
 import com.trionesdev.mes.domain.core.dto.account.ActorDTO;
-import com.trionesdev.mes.domain.core.dto.tenant.TenantMemberSignInArg;
-import com.trionesdev.mes.domain.core.dto.user.AccountSignInArg;
+import com.trionesdev.mes.core.domains.org.dto.TenantMemberSignInCmd;
+import com.trionesdev.mes.core.domains.user.dto.AccountSignInCmd;
 import com.trionesdev.mes.rest.backend.domains.account.controller.ro.AccountSignInRO;
 import com.trionesdev.mes.rest.backend.domains.account.controller.ro.SmsSignInRO;
 import com.trionesdev.mes.rest.backend.domains.account.controller.ro.TenantMemberSignInRO;
@@ -30,7 +30,7 @@ public class AccountController {
     @Operation(summary = "账号登录")
     @PostMapping("sign-in/account")
     public TokenVO accountSinIn(@Validated @RequestBody AccountSignInRO args) {
-        var signInArg = AccountSignInArg.builder().account(args.getAccount())
+        var signInArg = AccountSignInCmd.builder().account(args.getAccount())
                 .password(args.getPassword())
                 .build();
         return TokenVO.builder().token(accountService.accountSignIn(signInArg)).build();
@@ -43,7 +43,7 @@ public class AccountController {
     }
 
     public TokenVO tenantMemberSignIn(@Validated @RequestBody TenantMemberSignInRO args){
-        var tenantMemberSignInArg = TenantMemberSignInArg.builder().tenantSerial(args.getTenantSerial())
+        var tenantMemberSignInArg = TenantMemberSignInCmd.builder().tenantSerial(args.getTenantSerial())
                 .username(args.getUsername())
                 .password(args.getPassword())
                 .build();

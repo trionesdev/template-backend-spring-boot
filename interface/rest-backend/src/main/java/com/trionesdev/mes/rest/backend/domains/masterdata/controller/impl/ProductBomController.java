@@ -1,11 +1,11 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.masterdata.entity.ProductBom;
-import com.trionesdev.mes.domain.core.domains.masterdata.repository.criteria.ProductDefinitionCriteria;
-import com.trionesdev.mes.domain.core.domains.masterdata.service.impl.ProductBomService;
-import com.trionesdev.mes.domain.core.dto.masterdata.ProductBomDTO;
-import com.trionesdev.mes.domain.core.dto.masterdata.ProductMaterialDTO;
+import com.trionesdev.mes.core.domains.masterdata.entity.ProductBom;
+import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ProductDefinitionCriteria;
+import com.trionesdev.mes.core.domains.masterdata.service.impl.ProductBomService;
+import com.trionesdev.mes.core.domains.masterdata.dto.ProductBomDTO;
+import com.trionesdev.mes.core.domains.masterdata.dto.ProductMaterialDTO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ProductBomCreateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataRestConstants;

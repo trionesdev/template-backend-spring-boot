@@ -1,6 +1,6 @@
 package com.trionesdev.mes.rest.backend.domains.customer.controller.impl;
 
-import com.trionesdev.mes.domain.core.domains.customer.repository.po.CustomerPO;
+import com.trionesdev.mes.core.domains.customer.dao.po.CustomerPO;
 import com.trionesdev.mes.rest.backend.domains.customer.controller.ro.CustomerUpdateRO;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.domain.core.domains.customer.repository.criteria.CustomerCriteria;
-import com.trionesdev.mes.domain.core.domains.customer.service.impl.CustomerService;
-import com.trionesdev.mes.domain.core.dto.customer.CustomerDTO;
+import com.trionesdev.mes.core.domains.customer.dao.criteria.CustomerCriteria;
+import com.trionesdev.mes.core.domains.customer.service.impl.CustomerService;
+import com.trionesdev.mes.core.domains.customer.dto.CustomerDTO;
 import com.trionesdev.mes.rest.backend.domains.customer.controller.query.CustomerQuery;
 import com.trionesdev.mes.rest.backend.domains.customer.controller.ro.CustomerCreateRO;
 import com.trionesdev.mes.rest.backend.domains.customer.internal.CustomerBeRestBeanConvert;
