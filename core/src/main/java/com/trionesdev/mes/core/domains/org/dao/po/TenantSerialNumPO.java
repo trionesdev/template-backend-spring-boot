@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-@TableName(value = "tenant_serial_num")
+@TableName(value = "org_serial_num")
 public class TenantSerialNumPO {
     private Integer sequence;
 }
