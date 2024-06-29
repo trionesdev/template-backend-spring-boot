@@ -33,6 +33,9 @@ public class User implements AggregateRoot<String> {
     private Boolean enabled;
 
     public String getEncodedPassword() {
+        if (StrUtil.isNotBlank(encodedPassword)) {
+            return encodedPassword;
+        }
         if (StrUtil.isNotBlank(password)) {
             return new BCryptPasswordEncoder().encode(password);
         }
