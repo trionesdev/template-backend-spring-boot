@@ -109,5 +109,9 @@ public class DepartmentManager {
         return departmentMemberDAO.selectListByDepartmentId(departmentId);
     }
 
+    public List<DepartmentMemberPO> findDepartmentMembersByMemberId(String departmentId) {
+        return departmentMemberDAO.selectListByMemberId(departmentId);
+    }
+
     //endregion
 }

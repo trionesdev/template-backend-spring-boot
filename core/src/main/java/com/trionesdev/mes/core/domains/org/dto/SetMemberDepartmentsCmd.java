@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @SuperBuilder
-public class SetMemberDepartmentsArg {
+public class SetMemberDepartmentsCmd {
     private String memberId;
     private List<String> departmentIds;
 }

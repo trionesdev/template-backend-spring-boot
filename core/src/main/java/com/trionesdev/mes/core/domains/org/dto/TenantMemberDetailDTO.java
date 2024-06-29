@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class TenantMemberDTO {
+public class TenantMemberDetailDTO {
     private String id;
     private String tenantId;
     private String userId;

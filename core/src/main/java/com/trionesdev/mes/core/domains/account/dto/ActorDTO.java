@@ -1,6 +1,6 @@
 package com.trionesdev.mes.core.domains.account.dto;
 
-import com.trionesdev.mes.core.domains.org.dto.TenantMemberDTO;
+import com.trionesdev.mes.core.domains.org.dto.TenantMemberDetailDTO;
 import com.trionesdev.mes.core.domains.user.internal.enums.GenderEnum;
 import lombok.Data;
 
@@ -19,5 +19,5 @@ public class ActorDTO {
     private String nickname;
     private Instant birthday;
     private String actorRole;
-    private TenantMemberDTO tenantMember;
+    private TenantMemberDetailDTO tenantMember;
 }

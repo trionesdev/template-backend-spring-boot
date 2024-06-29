@@ -7,5 +7,5 @@ public class DepartmentMemberDTO {
     private String id;
     private String departmentId;
     private String memberId;
-    private TenantMemberDTO member;
+    private TenantMemberDetailDTO member;
 }

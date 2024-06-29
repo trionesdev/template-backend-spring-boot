@@ -17,7 +17,7 @@ import com.trionesdev.mes.core.domains.org.dao.po.DepartmentMemberPO;
 import com.trionesdev.mes.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.mes.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.mes.core.domains.org.dto.OrgNodeDTO;
-import com.trionesdev.mes.core.domains.org.dto.SetMemberDepartmentsArg;
+import com.trionesdev.mes.core.domains.org.dto.SetMemberDepartmentsCmd;
 import com.trionesdev.mes.core.domains.org.service.bo.DepartmentTreeArg;
 import com.trionesdev.mes.core.domains.org.internal.OrgBeanConvert;
 import com.trionesdev.mes.core.domains.org.manager.impl.DepartmentManager;
@@ -89,9 +89,7 @@ public class DepartmentServiceLocal implements DepartmentService {
             paths.remove(IdentityConstants.STRING_ID_ZERO_VALUE);
             var parentPathDepartments = ListUtil.toList(departmentManager.findDepartmentsByIds(paths));
             parentPathDepartments.add(t);
-            return parentPathDepartments.stream().map(dep->{
-                return convert.poToDto(dep);
-            }).collect(Collectors.toList());
+            return parentPathDepartments.stream().map(convert::poToDto).collect(Collectors.toList());
         }).orElse(Collections.emptyList());
         departments.addAll(pathDepartments);
         return departments;
@@ -132,7 +130,7 @@ public class DepartmentServiceLocal implements DepartmentService {
     }
 
     @Override
-    public void setMemberDepartments(SetMemberDepartmentsArg arg) {
+    public void setMemberDepartments(SetMemberDepartmentsCmd arg) {
         departmentMemberDAO.deleteByMemberId(arg.getMemberId());
         if (CollectionUtil.isNotEmpty(arg.getDepartmentIds())) {
             List<DepartmentMemberPO> members = arg.getDepartmentIds().stream().map(t -> DepartmentMemberPO.builder().departmentId(t).memberId(arg.getMemberId()).build()).collect(Collectors.toList());
