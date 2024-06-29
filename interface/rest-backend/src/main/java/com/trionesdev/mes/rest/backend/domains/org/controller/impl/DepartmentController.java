@@ -63,6 +63,12 @@ public class DepartmentController {
         return departmentService.departmentTree(DepartmentTreeArg.builder().mode(EnumUtil.fromString(DepartmentTreeArg.Mode.class, mode, null)).build());
     }
 
+    @Operation(summary = "获取部门路径")
+    @GetMapping(value = "departments/{id}/paths")
+    public List<DepartmentDTO> queryDepartmentPaths(@PathVariable String id) {
+        return departmentService.findDepartmentPaths(id);
+    }
+
     @Operation(summary = "查询部门成员列表分页")
     @GetMapping("department/members/page")
     public PageInfo<DepartmentMemberDTO> queryDepartmentMembersPage(
@@ -75,6 +81,8 @@ public class DepartmentController {
         criteria.setPageSize(pageSize);
         return departmentService.findDepartmentMembersPage(criteria);
     }
+
+
 
     @Operation(summary = "查询组织列表(包含组织下成员)")
     @GetMapping("department/org/list")

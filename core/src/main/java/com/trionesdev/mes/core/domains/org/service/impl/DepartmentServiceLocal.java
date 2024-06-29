@@ -73,6 +73,31 @@ public class DepartmentServiceLocal implements DepartmentService {
     }
 
     @Override
+    public List<DepartmentDTO> findDepartmentPaths(String id) {
+        var tenant = tenantManager.findActorTenant(actorContext.getTenantId()).orElse(null);
+        if (Objects.isNull(tenant)) {
+            return Collections.emptyList();
+        }
+        List<DepartmentDTO> departments = new ArrayList<>();
+        var root = DepartmentDTO.builder().id(IdentityConstants.STRING_ID_ZERO_VALUE).name(tenant.getName()).build();
+        departments.add(root);
+        if (Objects.equals(IdentityConstants.STRING_ID_ZERO_VALUE, id)) {
+            return departments;
+        }
+        var pathDepartments = departmentManager.findDepartmentById(id).map(t -> {
+            var paths = t.getPaths();
+            paths.remove(IdentityConstants.STRING_ID_ZERO_VALUE);
+            var parentPathDepartments = ListUtil.toList(departmentManager.findDepartmentsByIds(paths));
+            parentPathDepartments.add(t);
+            return parentPathDepartments.stream().map(dep->{
+                return convert.poToDto(dep);
+            }).collect(Collectors.toList());
+        }).orElse(Collections.emptyList());
+        departments.addAll(pathDepartments);
+        return departments;
+    }
+
+    @Override
     public List<Tree<String>> departmentTree(DepartmentTreeArg arg) {
         var departments = departmentManager.findDepartments();
         List<TreeNode<String>> nodeList = CollUtil.newArrayList();
