@@ -1,7 +1,7 @@
 package com.trionesdev.mes.core.domains.org.provider;
 
 import com.trionesdev.mes.core.domains.org.dto.TenantDTO;
-import com.trionesdev.mes.core.domains.org.dto.TenantMemberDTO;
+import com.trionesdev.mes.core.domains.org.dto.TenantMemberDetailDTO;
 import com.trionesdev.mes.core.domains.org.dto.TenantMemberSignInCmd;
 
 import java.util.Collection;
@@ -14,13 +14,13 @@ public interface OrgProvider {
 
     TenantDTO getActorTenant(String tenantId);
 
-    TenantMemberDTO getMemberByMemberId(String memberId);
+    TenantMemberDetailDTO getMemberByMemberId(String memberId);
 
-    TenantMemberDTO getMemberByUserId(String userId);
+    TenantMemberDetailDTO getMemberByUserId(String userId);
 
-    List<TenantMemberDTO> getMembersByMemberIds(Collection<String> memberIds);
+    List<TenantMemberDetailDTO> getMembersByMemberIds(Collection<String> memberIds);
 
-    TenantMemberDTO tenantMemberSignIn(TenantMemberSignInCmd arg);
+    TenantMemberDetailDTO tenantMemberSignIn(TenantMemberSignInCmd arg);
     //endregion
 
 }

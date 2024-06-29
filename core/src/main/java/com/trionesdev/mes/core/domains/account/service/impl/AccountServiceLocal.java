@@ -10,7 +10,7 @@ import com.trionesdev.mes.core.domains.account.internal.AccountBeanConvert;
 import com.trionesdev.mes.core.domains.account.service.AccountService;
 import com.trionesdev.mes.core.domains.org.provider.OrgProvider;
 import com.trionesdev.mes.core.domains.user.provider.UserProvider;
-import com.trionesdev.mes.core.domains.org.dto.TenantMemberDTO;
+import com.trionesdev.mes.core.domains.org.dto.TenantMemberDetailDTO;
 import com.trionesdev.mes.core.domains.org.dto.TenantMemberSignInCmd;
 import com.trionesdev.mes.core.domains.user.dto.AccountSignInCmd;
 import com.trionesdev.mes.core.domains.user.dto.UserDTO;
@@ -39,7 +39,7 @@ public class AccountServiceLocal implements AccountService {
 
     @Override
     public String tenantMemberSignIn(TenantMemberSignInCmd arg) {
-        TenantMemberDTO tenantMember = orgProvider.tenantMemberSignIn(arg);
+        TenantMemberDetailDTO tenantMember = orgProvider.tenantMemberSignIn(arg);
         return jwtFacade.generate(tenantMember.getUserId(), ActorRoleEnum.TENANT_MEMBER.name(), tenantMember.getId(), tenantMember.getId());
     }
 

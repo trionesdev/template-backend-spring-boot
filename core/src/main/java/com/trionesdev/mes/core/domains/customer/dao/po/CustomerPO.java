@@ -21,7 +21,7 @@ public class CustomerPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
-    private String serialNum;
+    private String code;
     private String name;
     private String fullName;
     private String contactName;

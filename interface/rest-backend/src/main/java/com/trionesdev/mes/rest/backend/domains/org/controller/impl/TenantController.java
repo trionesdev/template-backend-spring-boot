@@ -1,7 +1,7 @@
 package com.trionesdev.mes.rest.backend.domains.org.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.core.domains.org.dto.TenantMemberDTO;
+import com.trionesdev.mes.core.domains.org.dto.TenantMemberDetailDTO;
 import com.trionesdev.mes.core.domains.org.service.impl.TenantService;
 import com.trionesdev.mes.rest.backend.domains.org.controller.query.TenantMemberQuery;
 import com.trionesdev.mes.rest.backend.domains.org.controller.ro.TenantMemberRO;
@@ -38,13 +38,13 @@ public class TenantController {
 
     @Operation(summary = "根据ID查询租户成员")
     @GetMapping("tenant/members/{id}")
-    public TenantMemberDTO queryTenantMemberById(@PathVariable String id) {
+    public TenantMemberDetailDTO queryTenantMemberById(@PathVariable String id) {
         return tenantService.findTenantMemberByMemberId(id).orElse(null);
     }
 
     @Operation(summary = "查询租户成员列表分页")
     @GetMapping("tenant/members/page")
-    public PageInfo<TenantMemberDTO> queryTenantMembersPage(
+    public PageInfo<TenantMemberDetailDTO> queryTenantMembersPage(
             @RequestParam(value = "pageNum") Integer pageNum,
             @RequestParam(value = "pageSize") Integer pageSize,
             TenantMemberQuery query) {

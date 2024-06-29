@@ -21,7 +21,7 @@ public class CustomerDAO extends ServiceImpl<CustomerMapper, CustomerPO> {
     private LambdaQueryWrapper<CustomerPO> buildQueryWrapper(CustomerCriteria criteria) {
         LambdaQueryWrapper<CustomerPO> queryWrapper = new LambdaQueryWrapper<>();
         if (Objects.nonNull(criteria)) {
-            queryWrapper.eq(StrUtil.isNotBlank(criteria.getSerialNum()), CustomerPO::getSerialNum, criteria.getSerialNum());
+            queryWrapper.eq(StrUtil.isNotBlank(criteria.getSerialNum()), CustomerPO::getCode, criteria.getSerialNum());
         }
         return queryWrapper;
     }

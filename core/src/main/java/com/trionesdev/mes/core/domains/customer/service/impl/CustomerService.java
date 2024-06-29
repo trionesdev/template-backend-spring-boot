@@ -26,8 +26,8 @@ public class CustomerService {
       private final CustomProvider customProvider;
 
     public void createCustomer(CustomerPO customer) {
-        if (StrUtil.isBlank(customer.getSerialNum())) {
-            customer.setSerialNum(customProvider.generateCode("CUSTOMER"));
+        if (StrUtil.isBlank(customer.getCode())) {
+            customer.setCode(customProvider.generateCode("CUSTOMER"));
         }
         customerManager.createCustomer(customer);
     }

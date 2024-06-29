@@ -4,7 +4,7 @@ import cn.hutool.core.lang.tree.Tree;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.mes.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.mes.core.domains.org.dto.OrgNodeDTO;
-import com.trionesdev.mes.core.domains.org.dto.SetMemberDepartmentsArg;
+import com.trionesdev.mes.core.domains.org.dto.SetMemberDepartmentsCmd;
 import com.trionesdev.mes.core.domains.org.service.bo.DepartmentTreeArg;
 import com.trionesdev.mes.core.domains.org.dao.criteria.DepartmentMemberCriteria;
 import com.trionesdev.mes.core.domains.org.dto.DepartmentDTO;
@@ -30,7 +30,7 @@ public interface DepartmentService {
 
     List<Tree<String>> departmentTree(DepartmentTreeArg arg);
 
-    void setMemberDepartments(SetMemberDepartmentsArg arg);
+    void setMemberDepartments(SetMemberDepartmentsCmd arg);
 
     List<DepartmentMemberDTO> findDepartmentMembersByMemberId(String memberId);
 
