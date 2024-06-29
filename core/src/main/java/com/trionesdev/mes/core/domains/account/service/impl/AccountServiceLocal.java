@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.context.actor.ActorRoleEnum;
 import com.trionesdev.commons.core.jwt.JwtFacade;
+import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.mes.core.domains.account.dto.ActorDTO;
 import com.trionesdev.mes.core.domains.account.internal.AccountBeanConvert;
 import com.trionesdev.mes.core.domains.account.service.AccountService;
@@ -15,6 +16,8 @@ import com.trionesdev.mes.core.domains.user.dto.AccountSignInCmd;
 import com.trionesdev.mes.core.domains.user.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -28,6 +31,9 @@ public class AccountServiceLocal implements AccountService {
     @Override
     public String accountSignIn(AccountSignInCmd args) {
         UserDTO user = userProvider.accountSignIn(args);
+        if (Objects.isNull(user)){
+            throw new BusinessException("ACCOUNT_OR_PASSWORD_ERROR");
+        }
         return jwtFacade.generate(user.getId(), ActorRoleEnum.USER.name(), null, null);
     }
 
