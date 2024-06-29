@@ -1,6 +1,8 @@
 package com.trionesdev.mes.core.domains.org.manager.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.collection.ListUtil;
+import com.trionesdev.commons.core.constant.IdentityConstants;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.mes.core.domains.org.dao.criteria.DepartmentMemberCriteria;
 import com.trionesdev.mes.core.domains.org.dao.impl.DepartmentDAO;
@@ -10,8 +12,7 @@ import com.trionesdev.mes.core.domains.org.dao.po.DepartmentPO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -21,7 +22,20 @@ public class DepartmentManager {
     private final DepartmentMemberDAO departmentMemberDAO;
 
     //region department
+
+    public List<String> findParentDepartmentPaths(String parentId) {
+        if (Objects.equals(IdentityConstants.STRING_ID_ZERO_VALUE, parentId)) {
+            return Collections.singletonList(IdentityConstants.STRING_ID_ZERO_VALUE);
+        }
+        return Optional.ofNullable(departmentDAO.getById(parentId)).map(t -> {
+            List<String> paths = new ArrayList<>(t.getPaths());
+            paths.add(t.getId());
+            return paths;
+        }).orElse(Collections.singletonList(IdentityConstants.STRING_ID_ZERO_VALUE));
+    }
+
     public void createDepartment(DepartmentPO department) {
+        department.setPaths(findParentDepartmentPaths(department.getParentId()));
         departmentDAO.save(department);
     }
 
@@ -30,6 +44,7 @@ public class DepartmentManager {
     }
 
     public void updateDepartmentById(DepartmentPO department) {
+        department.setPaths(findParentDepartmentPaths(department.getParentId()));
         departmentDAO.updateById(department);
     }
 
@@ -43,6 +58,13 @@ public class DepartmentManager {
 
     public List<DepartmentPO> findDepartmentsByParentId(String parentId) {
         return departmentDAO.selectListByParentId(parentId);
+    }
+
+    public List<DepartmentPO> findDepartmentsByIds(Collection<String> ids) {
+        if (CollectionUtil.isEmpty(ids)) {
+            return Collections.emptyList();
+        }
+        return departmentDAO.listByIds(ids);
     }
 
     //endregion

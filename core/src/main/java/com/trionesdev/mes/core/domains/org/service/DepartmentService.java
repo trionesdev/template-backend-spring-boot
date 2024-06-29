@@ -26,6 +26,8 @@ public interface DepartmentService {
 
     List<DepartmentPO> findDepartments();
 
+    List<DepartmentDTO> findDepartmentPaths(String id);
+
     List<Tree<String>> departmentTree(DepartmentTreeArg arg);
 
     void setMemberDepartments(SetMemberDepartmentsArg arg);
