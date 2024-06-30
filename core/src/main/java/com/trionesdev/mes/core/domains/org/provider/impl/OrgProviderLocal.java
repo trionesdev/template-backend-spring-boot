@@ -1,6 +1,8 @@
 package com.trionesdev.mes.core.domains.org.provider.impl;
 
+import com.trionesdev.mes.core.domains.org.dto.DepartmentDTO;
 import com.trionesdev.mes.core.domains.org.dto.TenantMemberDetailDTO;
+import com.trionesdev.mes.core.domains.org.manager.impl.DepartmentManager;
 import com.trionesdev.mes.core.domains.org.manager.impl.TenantMemberManager;
 import com.trionesdev.mes.core.domains.org.dto.TenantDTO;
 import com.trionesdev.mes.core.domains.org.dto.TenantMemberSignInCmd;
@@ -20,6 +22,7 @@ public class OrgProviderLocal implements OrgProvider {
 
     private final TenantManager tenantManager;
     private final TenantMemberManager tenantMemberManager;
+    private final DepartmentManager departmentManager;
 
     @Override
     public TenantDTO getTenantById(String id) {
@@ -49,5 +52,10 @@ public class OrgProviderLocal implements OrgProvider {
     @Override
     public TenantMemberDetailDTO tenantMemberSignIn(TenantMemberSignInCmd arg) {
         return tenantMemberManager.accountSignIn(arg.getTenantSerial(), arg.getUsername(), arg.getPassword()).map(convert::memberPOToDTO).orElse(null);
+    }
+
+    @Override
+    public List<DepartmentDTO> getDepartmentsByIds(Collection<String> departmentIds) {
+        return departmentManager.findDepartmentsByIds(departmentIds).stream().map(convert::poToDto).toList();
     }
 }

@@ -1,5 +1,6 @@
 package com.trionesdev.mes.core.domains.org.provider;
 
+import com.trionesdev.mes.core.domains.org.dto.DepartmentDTO;
 import com.trionesdev.mes.core.domains.org.dto.TenantDTO;
 import com.trionesdev.mes.core.domains.org.dto.TenantMemberDetailDTO;
 import com.trionesdev.mes.core.domains.org.dto.TenantMemberSignInCmd;
@@ -22,5 +23,7 @@ public interface OrgProvider {
 
     TenantMemberDetailDTO tenantMemberSignIn(TenantMemberSignInCmd arg);
     //endregion
+
+    List<DepartmentDTO> getDepartmentsByIds(Collection<String> departmentIds);
 
 }

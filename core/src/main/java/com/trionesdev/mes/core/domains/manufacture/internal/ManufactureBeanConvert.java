@@ -2,10 +2,13 @@ package com.trionesdev.mes.core.domains.manufacture.internal;
 
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderPO;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderTaskPO;
+import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderTaskReportPO;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderDTO;
+import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskReportDTO;
 import com.trionesdev.mes.core.domains.manufacture.entity.ManufactureOrder;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderMaterialPO;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskDTO;
+import com.trionesdev.mes.core.domains.manufacture.entity.ManufactureOrderTaskReport;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -36,5 +39,12 @@ public interface ManufactureBeanConvert {
     ManufactureOrderDTO.Material materialEntityToDto(ManufactureOrder.Material material);
 
     ManufactureOrderTaskDTO taskPoToDto(ManufactureOrderTaskPO task);
+
+
+    //region order task report
+    ManufactureOrderTaskReport reportDtoToEntity(ManufactureOrderTaskReportDTO report);
+
+    ManufactureOrderTaskReportPO reportEntityToPo(ManufactureOrderTaskReport report);
+    //endregion
 
 }

@@ -12,9 +12,13 @@ import com.trionesdev.mes.core.domains.masterdata.dao.po.ProcessFlowItemPO;
 import com.trionesdev.mes.core.domains.masterdata.dto.DefectiveDTO;
 import com.trionesdev.mes.core.domains.masterdata.dto.ManufactureProcessDTO;
 import com.trionesdev.mes.core.domains.masterdata.internal.MasterDataBeanConvert;
+import com.trionesdev.mes.core.domains.masterdata.internal.enums.ProcessGrantObjType;
 import com.trionesdev.mes.core.domains.masterdata.manager.impl.DefectiveManager;
 import com.trionesdev.mes.core.domains.masterdata.manager.impl.ManufactureProcessManager;
 import com.trionesdev.mes.core.domains.masterdata.manager.impl.ProcessFlowManager;
+import com.trionesdev.mes.core.domains.org.dto.DepartmentDTO;
+import com.trionesdev.mes.core.domains.org.dto.TenantMemberDetailDTO;
+import com.trionesdev.mes.core.domains.org.provider.OrgProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,20 +33,23 @@ public class ManufactureProcessService {
     private final ProcessFlowManager processFlowManager;
     private final DefectiveManager defectiveManager;
     private final CustomProvider customProvider;
+    private final OrgProvider orgProvider;
 
-    public void create(ManufactureProcessPO manufactureProcess) {
+    public void create(ManufactureProcessDTO manufactureProcess) {
+        var process = convert.processDtoToPo(manufactureProcess);
         if (StrUtil.isBlank(manufactureProcess.getCode())) {
-            manufactureProcess.setCode(customProvider.generateCode("MANUFACTURE_PROCESS"));
+            process.setCode(customProvider.generateCode("MANUFACTURE_PROCESS"));
         }
-        manufactureProcessManager.create(manufactureProcess);
+        manufactureProcessManager.create(process);
     }
 
     public void deleteById(String id) {
         manufactureProcessManager.deleteById(id);
     }
 
-    public void updateById(ManufactureProcessPO manufactureProcess) {
-        manufactureProcessManager.updateById(manufactureProcess);
+    public void updateById(ManufactureProcessDTO manufactureProcess) {
+        var process = convert.processDtoToPo(manufactureProcess);
+        manufactureProcessManager.updateById(process);
     }
 
     public Optional<ManufactureProcessDTO> findByCode(String code) {
@@ -76,8 +83,29 @@ public class ManufactureProcessService {
 
     private ManufactureProcessDTO assembleProcess(ManufactureProcessPO record) {
         var dto = convert.poToDto(record);
-        if (CollectionUtil.isNotEmpty(dto.getDefectives())) {
+        if (CollectionUtil.isNotEmpty(record.getDefectiveCodes())) {
             dto.setDefectives(defectiveManager.findListByCodes(dto.getDefectiveCodes()).stream().map(convert::poToDto).collect(Collectors.toList()));
+        }
+        if (CollectionUtil.isNotEmpty(Optional.ofNullable(dto.getPermissionGrant()).map(ManufactureProcessDTO.PermissionGrant::getAssignees).orElse(null))) {
+            Set<String> departmentIds = dto.getPermissionGrant().getAssignees().stream().filter(obj -> obj.getObjType() == ProcessGrantObjType.DEPARTMENT).map(ManufactureProcessDTO.GrantObj::getObjId).collect(Collectors.toSet());
+            Map<String, DepartmentDTO> departmentsMap = Collections.emptyMap();
+            if (CollectionUtil.isNotEmpty(departmentIds)) {
+                departmentsMap = orgProvider.getDepartmentsByIds(departmentIds).stream().collect(Collectors.toMap(DepartmentDTO::getId, v -> v, (v1, v2) -> v1));
+            }
+            Set<String> memberIds = dto.getPermissionGrant().getAssignees().stream().filter(obj -> obj.getObjType() == ProcessGrantObjType.MEMBER).map(ManufactureProcessDTO.GrantObj::getObjId).collect(Collectors.toSet());
+            Map<String, TenantMemberDetailDTO> membersMap = Collections.emptyMap();
+            if (CollectionUtil.isNotEmpty(memberIds)) {
+                membersMap = orgProvider.getMembersByMemberIds(memberIds).stream().collect(Collectors.toMap(TenantMemberDetailDTO::getId, v -> v, (v1, v2) -> v1));
+            }
+
+            for (var obj : dto.getPermissionGrant().getAssignees()) {
+                if (obj.getObjType() == ProcessGrantObjType.DEPARTMENT) {
+                    obj.setName(departmentsMap.get(obj.getObjId()).getName());
+                } else if (obj.getObjType() == ProcessGrantObjType.MEMBER) {
+                    obj.setName(Optional.ofNullable(membersMap.get(obj.getObjId())).map(TenantMemberDetailDTO::getNickname).orElse(null));
+                    obj.setAvatar(Optional.ofNullable(membersMap.get(obj.getObjId())).map(TenantMemberDetailDTO::getAvatar).orElse(null));
+                }
+            }
         }
         return dto;
     }
@@ -94,10 +122,38 @@ public class ManufactureProcessService {
                     return codes.stream();
                 }).collect(Collectors.toSet());
         var defectivesMap = defectiveManager.findListByCodes(defectiveCodes).stream().collect(Collectors.toMap(DefectivePO::getCode, v -> v, (v1, v2) -> v1));
+        var departmentIds = records.stream().map(ManufactureProcessPO::getPermissionGrant).filter(Objects::nonNull).map(ManufactureProcessPO.PermissionGrant::getAssignees)
+                .flatMap(assignees -> {
+                    return assignees.stream().filter(obj -> obj.getObjType() == ProcessGrantObjType.DEPARTMENT).map(ManufactureProcessPO.GrantObj::getObjId);
+                }).collect(Collectors.toSet());
+        Map<String, DepartmentDTO> departmentsMap = Collections.emptyMap();
+        if (CollectionUtil.isNotEmpty(departmentIds)) {
+            departmentsMap = orgProvider.getDepartmentsByIds(departmentIds).stream().collect(Collectors.toMap(DepartmentDTO::getId, v -> v, (v1, v2) -> v1));
+        }
+        var memberIds = records.stream().map(ManufactureProcessPO::getPermissionGrant).filter(Objects::nonNull).map(ManufactureProcessPO.PermissionGrant::getAssignees)
+                .flatMap(assignees -> {
+                    return assignees.stream().filter(obj -> obj.getObjType() == ProcessGrantObjType.MEMBER).map(ManufactureProcessPO.GrantObj::getObjId);
+                }).collect(Collectors.toSet());
+        Map<String, TenantMemberDetailDTO> membersMap = Collections.emptyMap();
+        if (CollectionUtil.isNotEmpty(memberIds)) {
+            membersMap = orgProvider.getMembersByMemberIds(memberIds).stream().collect(Collectors.toMap(TenantMemberDetailDTO::getId, v -> v, (v1, v2) -> v1));
+        }
+        var departmentsMapFinal = departmentsMap;
+        var membersMapFinal = membersMap;
         return records.stream().map(po -> {
             var dto = convert.poToDto(po);
             if (CollectionUtil.isNotEmpty(dto.getDefectiveCodes())) {
                 dto.setDefectives(dto.getDefectiveCodes().stream().map(defectivesMap::get).map(convert::poToDto).collect(Collectors.toList()));
+            }
+            if (CollectionUtil.isNotEmpty(Optional.ofNullable(dto.getPermissionGrant()).map(ManufactureProcessDTO.PermissionGrant::getAssignees).orElse(null))) {
+                dto.getPermissionGrant().getAssignees().forEach(obj -> {
+                    if (obj.getObjType() == ProcessGrantObjType.DEPARTMENT) {
+                        obj.setName(Optional.ofNullable(departmentsMapFinal.get(obj.getObjId())).map(DepartmentDTO::getName).orElse(null));
+                    } else if (obj.getObjType() == ProcessGrantObjType.MEMBER) {
+                        obj.setName(Optional.ofNullable(membersMapFinal.get(obj.getObjId())).map(TenantMemberDetailDTO::getNickname).orElse(null));
+                        obj.setAvatar(Optional.ofNullable(membersMapFinal.get(obj.getObjId())).map(TenantMemberDetailDTO::getAvatar).orElse(null));
+                    }
+                });
             }
             return dto;
         }).collect(Collectors.toList());

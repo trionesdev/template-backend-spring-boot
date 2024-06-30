@@ -1,29 +1,19 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.controller.impl;
 
-import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ManufactureProcessQuery;
-import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ProcessesByFlowIdsQuery;
-import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ManufactureProcessCreateRO;
-import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ManufactureProcessUpdateRO;
-import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
-import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ManufactureProcessCriteria;
-import com.trionesdev.mes.core.domains.masterdata.dao.po.ManufactureProcessPO;
-import com.trionesdev.mes.core.domains.masterdata.service.impl.ManufactureProcessService;
 import com.trionesdev.mes.core.domains.masterdata.dto.ManufactureProcessDTO;
+import com.trionesdev.mes.core.domains.masterdata.service.impl.ManufactureProcessService;
+import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ManufactureProcessQuery;
+import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ProcessesByFlowIdsQuery;
+import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ManufactureProcessRO;
+import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
+import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,13 +22,13 @@ import java.util.List;
 @RestController
 @RequestMapping(MasterDataRestConstants.MASTER_DATA_PATH)
 public class ManufactureProcessController {
-    private final MasterDataBeRestBeanConvert masterDataBeRestBeanConvert;
+    private final MasterDataBeRestBeanConvert convert;
     private final ManufactureProcessService manufactureProcessService;
 
     @Operation(summary = "创建生产工序")
     @PostMapping("manufacture-processes")
-    public void create(@Validated @RequestBody ManufactureProcessCreateRO args) {
-        ManufactureProcessPO manufactureProcess = masterDataBeRestBeanConvert.from(args);
+    public void create(@Validated @RequestBody ManufactureProcessRO.Create args) {
+        var manufactureProcess = convert.from(args);
         manufactureProcessService.create(manufactureProcess);
     }
 
@@ -50,8 +40,8 @@ public class ManufactureProcessController {
 
     @Operation(summary = "根据ID更新生产工序")
     @PutMapping("manufacture-processes/{id}")
-    public void updateById(@PathVariable("id") String id, @Validated @RequestBody ManufactureProcessUpdateRO args) {
-        ManufactureProcessPO manufactureProcess = masterDataBeRestBeanConvert.from(args);
+    public void updateById(@PathVariable("id") String id, @Validated @RequestBody ManufactureProcessRO.Update args) {
+        var manufactureProcess = convert.from(args);
         manufactureProcess.setId(id);
         manufactureProcessService.updateById(manufactureProcess);
     }
@@ -71,7 +61,7 @@ public class ManufactureProcessController {
     @Operation(summary = "查询生产工序列表")
     @GetMapping("manufacture-processes/list")
     public List<ManufactureProcessDTO> findList(ManufactureProcessQuery query) {
-        ManufactureProcessCriteria manufactureProcessCriteria = masterDataBeRestBeanConvert.from(query);
+        ManufactureProcessCriteria manufactureProcessCriteria = convert.from(query);
         return manufactureProcessService.findList(manufactureProcessCriteria);
     }
 
@@ -82,7 +72,7 @@ public class ManufactureProcessController {
             @RequestParam(value = "pageSize") Integer pageSize,
             ManufactureProcessQuery query
     ) {
-        ManufactureProcessCriteria manufactureProcessCriteria = masterDataBeRestBeanConvert.from(query);
+        ManufactureProcessCriteria manufactureProcessCriteria = convert.from(query);
         manufactureProcessCriteria.setPageNum(pageNum);
         manufactureProcessCriteria.setPageSize(pageSize);
         return manufactureProcessService.findPage(manufactureProcessCriteria);
