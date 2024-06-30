@@ -1,5 +1,6 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.internal;
 
+import com.trionesdev.mes.core.domains.masterdata.dto.ManufactureProcessDTO;
 import com.trionesdev.mes.core.domains.masterdata.entity.ProductBom;
 import com.trionesdev.mes.core.domains.masterdata.dao.criteria.DefectiveCriteria;
 import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ProcessFlowCriteria;
@@ -40,9 +41,9 @@ public interface MasterDataBeRestBeanConvert {
     //endregion
 
     //region manufacture process
-    ManufactureProcessPO from(ManufactureProcessCreateRO args);
+    ManufactureProcessDTO from(ManufactureProcessRO.Create args);
 
-    ManufactureProcessPO from(ManufactureProcessUpdateRO args);
+    ManufactureProcessDTO from(ManufactureProcessRO.Update args);
 
     ManufactureProcessCriteria from(ManufactureProcessQuery args);
     //endregion

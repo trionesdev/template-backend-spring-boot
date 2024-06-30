@@ -53,7 +53,7 @@ public interface MasterDataBeanConvert {
     //region manufacture process
     ManufactureProcessDTO poToDto(ManufactureProcessPO manufactureProcess);
 
-    List<ManufactureProcessDTO> manufactureProcessesEntityToDto(List<ManufactureProcessPO> manufactureProcess);
+    ManufactureProcessPO processDtoToPo(ManufactureProcessDTO manufactureProcess);
 
     ManufactureProcessDTO.Defective poToDto(DefectivePO defective);
     //endregion

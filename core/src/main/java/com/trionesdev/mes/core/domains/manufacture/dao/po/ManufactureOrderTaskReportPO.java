@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.trionesdev.commons.mybatisplus.entity.BaseLogicEntity;
+import com.trionesdev.mes.core.domains.manufacture.internal.enums.PricingMethod;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,10 +38,5 @@ public class ManufactureOrderTaskReportPO extends BaseLogicEntity {
     private BigDecimal quality;
     private BigDecimal unitPrice; //单价
     private BigDecimal totalPrice; //总价工资
-
-    public enum PricingMethod {
-        PIECE_RATE,
-        TIME_BASED
-    }
 
 }
