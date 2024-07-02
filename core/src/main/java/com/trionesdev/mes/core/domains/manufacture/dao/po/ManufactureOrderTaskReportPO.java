@@ -28,6 +28,7 @@ public class ManufactureOrderTaskReportPO extends BaseLogicEntity {
     private String taskId;
 
     private String processCode; //工序名称
+    private String unitId;
     private BigDecimal planQuantity; //计划数量
     private BigDecimal goodQuantity; //良品数量
     private BigDecimal defectiveQuantity; //不良品数量
