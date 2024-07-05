@@ -4,11 +4,11 @@ import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderPO;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderTaskPO;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderTaskReportPO;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderDTO;
-import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskReportDTO;
-import com.trionesdev.mes.core.domains.manufacture.entity.ManufactureOrder;
+import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskReportDetailDTO;
+import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureOrder;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderMaterialPO;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskDTO;
-import com.trionesdev.mes.core.domains.manufacture.entity.ManufactureOrderTaskReport;
+import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureOrderTaskReport;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -42,7 +42,7 @@ public interface ManufactureBeanConvert {
 
 
     //region order task report
-    ManufactureOrderTaskReport reportDtoToEntity(ManufactureOrderTaskReportDTO report);
+    ManufactureOrderTaskReport reportDtoToEntity(ManufactureOrderTaskReportDetailDTO report);
 
     ManufactureOrderTaskReportPO reportEntityToPo(ManufactureOrderTaskReport report);
     //endregion

@@ -1,7 +1,7 @@
 package com.trionesdev.mes.core.domains.manufacture.repository.impl;
 
 import com.trionesdev.mes.core.domains.manufacture.dao.impl.ManufactureOrderTaskReportDAO;
-import com.trionesdev.mes.core.domains.manufacture.entity.ManufactureOrderTaskReport;
+import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureOrderTaskReport;
 import com.trionesdev.mes.core.domains.manufacture.internal.ManufactureBeanConvert;
 import com.trionesdev.mes.infrastructure.ddd.BaseRepository;
 import lombok.RequiredArgsConstructor;

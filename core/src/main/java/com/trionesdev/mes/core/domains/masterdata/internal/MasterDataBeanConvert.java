@@ -11,6 +11,7 @@ import com.trionesdev.mes.core.domains.masterdata.dao.po.UnitPO;
 import com.trionesdev.mes.core.domains.masterdata.dto.DefectiveDTO;
 import com.trionesdev.mes.core.domains.masterdata.dto.ManufactureBomDTO;
 import com.trionesdev.mes.core.domains.masterdata.dto.ProcessFlowDTO;
+import com.trionesdev.mes.core.domains.masterdata.dto.ProcessPermissionGrantDTO;
 import com.trionesdev.mes.core.domains.masterdata.dto.ProductBomDTO;
 import com.trionesdev.mes.core.domains.masterdata.dto.ProductDefinitionDTO;
 import com.trionesdev.mes.core.domains.masterdata.dto.ProductMaterialDTO;
@@ -56,6 +57,8 @@ public interface MasterDataBeanConvert {
     ManufactureProcessPO processDtoToPo(ManufactureProcessDTO manufactureProcess);
 
     ManufactureProcessDTO.Defective poToDto(DefectivePO defective);
+
+    ProcessPermissionGrantDTO grantPoToDto(ManufactureProcessPO.PermissionGrant grant);
     //endregion
 
 

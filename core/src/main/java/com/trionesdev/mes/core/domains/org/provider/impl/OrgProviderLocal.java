@@ -44,6 +44,7 @@ public class OrgProviderLocal implements OrgProvider {
         return tenantMemberManager.findMemberByUserId(userId).map(convert::memberPOToDTO).orElse(null);
     }
 
+
     @Override
     public List<TenantMemberDetailDTO> getMembersByMemberIds(Collection<String> memberIds) {
         return tenantMemberManager.findMembersByIds(memberIds).stream().map(convert::memberPOToDTO).toList();
