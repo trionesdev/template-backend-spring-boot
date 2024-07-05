@@ -1,6 +1,6 @@
 package com.trionesdev.mes.rest.backend.domains.manufacture.internal;
 
-import com.trionesdev.mes.core.domains.manufacture.entity.ManufactureOrder;
+import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureOrder;
 import com.trionesdev.mes.core.domains.manufacture.dao.criteria.ManufactureOrderCriteria;
 import com.trionesdev.mes.core.domains.manufacture.dao.criteria.ManufactureOrderTaskCriteria;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderTaskPO;

@@ -159,11 +159,6 @@ public class ManufactureProcessService {
         }).collect(Collectors.toList());
     }
 
-    public List<DefectiveDTO> findProcessDefectiveOptionsByCode(String code) {
-        return manufactureProcessManager.findByCode(code).map(po -> {
-            return defectiveManager.findListByCodes(po.getDefectiveCodes()).stream().map(convert::defectivePoToDto).collect(Collectors.toList());
-        }).orElse(Collections.emptyList());
-    }
 
     public List<ManufactureProcessDTO> findFlowsProcesses(List<String> flowIds) {
         List<ProcessFlowItemPO> flowItems = processFlowManager.findFlowItemsByFlowIds(flowIds);

@@ -19,6 +19,7 @@ public interface OrgProvider {
 
     TenantMemberDetailDTO getMemberByUserId(String userId);
 
+
     List<TenantMemberDetailDTO> getMembersByMemberIds(Collection<String> memberIds);
 
     TenantMemberDetailDTO tenantMemberSignIn(TenantMemberSignInCmd arg);

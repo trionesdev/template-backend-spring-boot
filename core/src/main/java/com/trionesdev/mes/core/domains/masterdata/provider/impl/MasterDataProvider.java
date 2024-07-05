@@ -1,26 +1,30 @@
 package com.trionesdev.mes.core.domains.masterdata.provider.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.trionesdev.mes.core.domains.masterdata.service.impl.ManufactureProcessService;
-import com.trionesdev.mes.core.domains.masterdata.service.impl.ProductDefinitionService;
-import com.trionesdev.mes.core.domains.masterdata.service.impl.UnitService;
 import com.trionesdev.mes.core.domains.masterdata.dto.DefectiveDTO;
 import com.trionesdev.mes.core.domains.masterdata.dto.ManufactureProcessDTO;
+import com.trionesdev.mes.core.domains.masterdata.dto.ProcessPermissionGrantDTO;
 import com.trionesdev.mes.core.domains.masterdata.dto.ProductDefinitionDTO;
 import com.trionesdev.mes.core.domains.masterdata.dto.UnitDTO;
+import com.trionesdev.mes.core.domains.masterdata.internal.MasterDataBeanConvert;
+import com.trionesdev.mes.core.domains.masterdata.manager.impl.ManufactureProcessManager;
+import com.trionesdev.mes.core.domains.masterdata.service.impl.ProductDefinitionService;
+import com.trionesdev.mes.core.domains.masterdata.service.impl.UnitService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
 public class MasterDataProvider {
+    private final MasterDataBeanConvert convert;
     private final UnitService unitService;
     private final ProductDefinitionService productDefinitionService;
-    private final ManufactureProcessService processService;
+    private final ManufactureProcessManager processManager;
 
     public List<UnitDTO> getUnitList() {
         return unitService.findList();
@@ -39,14 +43,14 @@ public class MasterDataProvider {
     }
 
     public ManufactureProcessDTO getProcessByCode(String code) {
-        return processService.findByCode(code).orElse(null);
+        return processManager.findByCode(code).map(convert::poToDto).orElse(null);
     }
 
     public List<ManufactureProcessDTO> getProcessesByCodes(Collection<String> codes) {
         if (CollectionUtil.isEmpty(codes)) {
             return Collections.emptyList();
         }
-        return processService.findProcessByCodes(codes);
+        return processManager.findListByCodes(codes).stream().map(convert::poToDto).toList();
     }
 
     /**
@@ -56,7 +60,11 @@ public class MasterDataProvider {
      * @return
      */
     public List<DefectiveDTO> getProcessDefectiveOptionsByCode(String code) {
-        return processService.findProcessDefectiveOptionsByCode(code);
+        return processManager.findDefectiveOptionsByCode(code).stream().map(convert::defectivePoToDto).collect(Collectors.toList());
+    }
+
+    public ProcessPermissionGrantDTO getProcessPermissionGrant(String code) {
+        return processManager.findByCode(code).map(po -> convert.grantPoToDto(po.getPermissionGrant())).orElse(null);
     }
 
 }
