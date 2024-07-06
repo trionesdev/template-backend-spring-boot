@@ -136,6 +136,7 @@ public class ManufactureOrderService {
     private ManufactureOrderTaskDTO assembleTask(ManufactureOrderTaskPO record) {
         var dto = convert.taskPoToDto(record);
         manufactureOrderManager.findRecordById(record.getOrderId()).ifPresent(order -> {
+            dto.setOrderId(order.getId());
             dto.setOrderCode(order.getCode());
             Optional.ofNullable(masterDataProvider.getProductByCode(order.getProductCode())).ifPresent(product -> {
                 dto.setProduct(ManufactureOrderTaskDTO.Product.builder().code(product.getCode()).name(product.getName()).specification(product.getSpecification()).build());

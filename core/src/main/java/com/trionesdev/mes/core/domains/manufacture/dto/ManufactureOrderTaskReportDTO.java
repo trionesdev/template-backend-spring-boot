@@ -1,30 +1,20 @@
-package com.trionesdev.mes.core.domains.manufacture.internal.entity;
+package com.trionesdev.mes.core.domains.manufacture.dto;
 
 import com.trionesdev.mes.core.domains.manufacture.internal.enums.PricingMethod;
 import com.trionesdev.mes.core.domains.manufacture.internal.enums.TaskStatus;
-import com.trionesdev.mes.infrastructure.ddd.AggregateRoot;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
 @Data
-public class ManufactureOrderTaskReport implements AggregateRoot<String> {
-    private String id;
-    private String orderId;
+public class ManufactureOrderTaskReportDTO {
     private String taskId;
-
-    private String processCode; //任务工序名称
     private TaskStatus taskStatus;
     private String producerId; //生产者
-
-    private String unitId; //报工单位
-    private BigDecimal reportQuantity; //报工数量
     private BigDecimal goodQuantity; //良品数量
+    private String unitId; //报工单位
     private BigDecimal defectiveQuantity; //不良品数量
     private List<DefectiveItem> defectiveItems; //不良品项
     private Instant startTime;
@@ -36,12 +26,8 @@ public class ManufactureOrderTaskReport implements AggregateRoot<String> {
     private Boolean approved; //已审批
 
     @Data
-    @SuperBuilder
-    @AllArgsConstructor
-    @NoArgsConstructor
     public static class DefectiveItem {
         private String code;
         private BigDecimal quantity;
     }
-
 }
