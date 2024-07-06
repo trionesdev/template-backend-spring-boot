@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "manufacture_order_task_defective")
-public class ManufactureOrderTaskDefectivePO extends BaseLogicPO {
+public class ManufactureOrderTaskReportDefectivePO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;

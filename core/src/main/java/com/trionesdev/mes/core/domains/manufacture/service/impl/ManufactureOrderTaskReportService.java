@@ -1,6 +1,6 @@
 package com.trionesdev.mes.core.domains.manufacture.service.impl;
 
-import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskReportDetailDTO;
+import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskReportDTO;
 import com.trionesdev.mes.core.domains.manufacture.internal.ManufactureBeanConvert;
 import com.trionesdev.mes.core.domains.manufacture.manager.impl.ManufactureOrderManager;
 import com.trionesdev.mes.core.domains.manufacture.manager.impl.ManufactureOrderTaskReportManager;
@@ -18,7 +18,7 @@ public class ManufactureOrderTaskReportService {
     private final MasterDataProvider masterDataProvider;
     private final OrgProvider orgProvider;
 
-    public void createReport(ManufactureOrderTaskReportDetailDTO report) {
+    public void createReport(ManufactureOrderTaskReportDTO report) {
         var orderTaskReport = convert.reportDtoToEntity(report);
         orderTaskReportManager.create(orderTaskReport);
     }

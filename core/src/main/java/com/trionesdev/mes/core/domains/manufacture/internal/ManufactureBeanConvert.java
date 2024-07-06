@@ -4,6 +4,7 @@ import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderPO;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderTaskPO;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderTaskReportPO;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderDTO;
+import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskReportDTO;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskReportDetailDTO;
 import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureOrder;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderMaterialPO;
@@ -42,9 +43,12 @@ public interface ManufactureBeanConvert {
 
 
     //region order task report
-    ManufactureOrderTaskReport reportDtoToEntity(ManufactureOrderTaskReportDetailDTO report);
+    ManufactureOrderTaskReport reportDetailDtoToEntity(ManufactureOrderTaskReportDetailDTO report);
+    ManufactureOrderTaskReport reportDtoToEntity(ManufactureOrderTaskReportDTO report);
 
     ManufactureOrderTaskReportPO reportEntityToPo(ManufactureOrderTaskReport report);
+
+    ManufactureOrderTaskReport reportPoToEntity(ManufactureOrderTaskReportPO report);
     //endregion
 
 }
