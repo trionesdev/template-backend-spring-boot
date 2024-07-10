@@ -4,7 +4,6 @@ import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ManufactureProcessCriteria;
 import com.trionesdev.mes.core.domains.masterdata.dto.ManufactureProcessDTO;
 import com.trionesdev.mes.core.domains.masterdata.service.impl.ManufactureProcessService;
-import com.trionesdev.mes.core.domains.org.dto.TenantMemberDTO;
 import com.trionesdev.mes.core.domains.org.dto.TenantMemberDetailDTO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ManufactureProcessQuery;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ProcessesByFlowIdsQuery;
