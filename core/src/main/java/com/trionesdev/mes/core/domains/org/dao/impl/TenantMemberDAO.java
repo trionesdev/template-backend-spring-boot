@@ -1,5 +1,6 @@
 package com.trionesdev.mes.core.domains.org.dao.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Repository
@@ -23,7 +25,16 @@ public class TenantMemberDAO extends ServiceImpl<TenantMemberMapper, TenantMembe
     private LambdaQueryWrapper<TenantMemberPO> buildQueryWrapper(TenantMemberCriteria criteria) {
         var queryWrapper = new LambdaQueryWrapper<TenantMemberPO>();
         if (Objects.nonNull(criteria)) {
-            queryWrapper.eq(StrUtil.isNotBlank(actorContext.getTenantId()), TenantMemberPO::getTenantId, actorContext.getTenantId());
+            queryWrapper.eq(StrUtil.isNotBlank(actorContext.getTenantId()), TenantMemberPO::getTenantId, actorContext.getTenantId())
+                    .and(Objects.nonNull(criteria.getOrGroup()), orQueryWrapper -> {
+                        orQueryWrapper.in(CollectionUtil.isNotEmpty(criteria.getOrGroup().getIds()), TenantMemberPO::getId, criteria.getOrGroup().getIds())
+                                .or(CollectionUtil.isNotEmpty(criteria.getOrGroup().getDepartmentIds()), departmentIdsQueryWrapper -> {
+                                    departmentIdsQueryWrapper.exists(CollectionUtil.isNotEmpty(criteria.getOrGroup().getDepartmentIds()), "select * from org_department_member dm " +
+                                            "where dm.is_deleted = false  " +
+                                            "and department_id in (" + StrUtil.join(",", criteria.getOrGroup().getDepartmentIds().stream().map(departmentId -> "'" + departmentId + "'").collect(Collectors.toSet())) + ") " +
+                                            "and dm.member_id = org_tenant_member.id");
+                                });
+                    });
         }
         return queryWrapper;
     }

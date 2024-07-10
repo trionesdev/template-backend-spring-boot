@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: light-mes-backend
+  datasource:
+    name: dataSource
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      driver-class-name: org.postgresql.Driver
+  jackson:
+    locale: zh_CN
+    time-zone: Asia/Shanghai
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  messages:
+    basename: i18n/validation
+  cache:
+    type: caffeine
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-prefix: dao.
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+springdoc:
+  show-actuator: false
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
+triones:
+  exception:
+    resource-paths: i18n/error
+  security:
+    exclude-matchers: /**
+#logging:
+#  file:
+#    name: /var/log/application/${spring.application.name}
