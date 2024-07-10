@@ -47,6 +47,10 @@ public class TenantMemberManager {
         return Optional.ofNullable(tenantMemberDAO.selectByUsername(tenantId, username));
     }
 
+    public List<TenantMemberPO> findMembers(TenantMemberCriteria criteria) {
+        return tenantMemberDAO.selectList(criteria);
+    }
+
     public PageInfo<TenantMemberPO> findMembersPage(TenantMemberCriteria criteria) {
         return tenantMemberDAO.selectPage(criteria);
     }

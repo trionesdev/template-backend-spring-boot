@@ -55,6 +55,10 @@ public class TenantService {
         }).collect(Collectors.toList());
     }
 
+    public List<TenantMemberDetailDTO> findTenantMembers(TenantMemberCriteria criteria) {
+        return assembleTenantMembers(tenantMemberManager.findMembers(criteria));
+    }
+
     public PageInfo<TenantMemberDetailDTO> findTenantMembersPage(TenantMemberCriteria criteria) {
         var page = tenantMemberManager.findMembersPage(criteria);
         return PageUtils.of(page, assembleTenantMembers(page.getRows()));
