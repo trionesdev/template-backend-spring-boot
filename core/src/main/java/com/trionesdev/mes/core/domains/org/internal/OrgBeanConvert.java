@@ -1,5 +1,7 @@
 package com.trionesdev.mes.core.domains.org.internal;
 
+import com.trionesdev.mes.core.domains.org.dao.criteria.TenantCriteria;
+import com.trionesdev.mes.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.mes.core.domains.org.dao.po.DepartmentMemberPO;
 import com.trionesdev.mes.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.mes.core.domains.org.dao.po.TenantMemberPO;
@@ -24,6 +26,8 @@ public interface OrgBeanConvert {
     TenantDTO tenantPoToDto(TenantPO tenantPO);
 
     TenantMemberDetailDTO memberPOToDTO(TenantMemberPO record);
+
+    TenantMemberCriteria tenantMemberQueryToCriteria(TenantMemberQuery query);
     //endregion
 
     //region department
