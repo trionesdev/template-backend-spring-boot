@@ -1,11 +1,8 @@
 package com.trionesdev.mes.core.domains.org.provider.impl;
 
-import com.trionesdev.mes.core.domains.org.dto.DepartmentDTO;
-import com.trionesdev.mes.core.domains.org.dto.TenantMemberDetailDTO;
+import com.trionesdev.mes.core.domains.org.dto.*;
 import com.trionesdev.mes.core.domains.org.manager.impl.DepartmentManager;
 import com.trionesdev.mes.core.domains.org.manager.impl.TenantMemberManager;
-import com.trionesdev.mes.core.domains.org.dto.TenantDTO;
-import com.trionesdev.mes.core.domains.org.dto.TenantMemberSignInCmd;
 import com.trionesdev.mes.core.domains.org.internal.OrgBeanConvert;
 import com.trionesdev.mes.core.domains.org.manager.impl.TenantManager;
 import com.trionesdev.mes.core.domains.org.provider.OrgProvider;
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
@@ -42,6 +40,12 @@ public class OrgProviderLocal implements OrgProvider {
     @Override
     public TenantMemberDetailDTO getMemberByUserId(String userId) {
         return tenantMemberManager.findMemberByUserId(userId).map(convert::memberPOToDTO).orElse(null);
+    }
+
+    @Override
+    public List<TenantMemberDetailDTO> getTenantMembers(TenantMemberQuery query) {
+        var criteria = convert.tenantMemberQueryToCriteria(query);
+        return tenantMemberManager.findMembers(criteria).stream().map(convert::memberPOToDTO).collect(Collectors.toList());
     }
 
 

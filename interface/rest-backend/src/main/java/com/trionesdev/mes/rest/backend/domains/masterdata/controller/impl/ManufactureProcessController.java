@@ -4,6 +4,8 @@ import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ManufactureProcessCriteria;
 import com.trionesdev.mes.core.domains.masterdata.dto.ManufactureProcessDTO;
 import com.trionesdev.mes.core.domains.masterdata.service.impl.ManufactureProcessService;
+import com.trionesdev.mes.core.domains.org.dto.TenantMemberDTO;
+import com.trionesdev.mes.core.domains.org.dto.TenantMemberDetailDTO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ManufactureProcessQuery;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.ProcessesByFlowIdsQuery;
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ManufactureProcessRO;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "生产工艺")
+@Tag(name = "生产工序")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(MasterDataRestConstants.MASTER_DATA_PATH)
@@ -84,4 +86,9 @@ public class ManufactureProcessController {
         return manufactureProcessService.findFlowsProcesses(query.getFlowIds());
     }
 
+    @Operation(summary = "获取工序有报工权限的成员列表")
+    @GetMapping(value = "manufacture-processes/{id}/authorized-members")
+    public List<TenantMemberDetailDTO> queryAuthorizedMembers(@PathVariable(value = "id") String id) {
+        return manufactureProcessService.findAuthorizedMembers(id);
+    }
 }

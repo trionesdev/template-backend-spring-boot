@@ -13,11 +13,13 @@ import com.trionesdev.mes.core.domains.masterdata.dto.DefectiveDTO;
 import com.trionesdev.mes.core.domains.masterdata.dto.ManufactureProcessDTO;
 import com.trionesdev.mes.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.core.domains.masterdata.internal.enums.ProcessGrantObjType;
+import com.trionesdev.mes.core.domains.masterdata.internal.enums.ProcessGrantType;
 import com.trionesdev.mes.core.domains.masterdata.manager.impl.DefectiveManager;
 import com.trionesdev.mes.core.domains.masterdata.manager.impl.ManufactureProcessManager;
 import com.trionesdev.mes.core.domains.masterdata.manager.impl.ProcessFlowManager;
 import com.trionesdev.mes.core.domains.org.dto.DepartmentDTO;
 import com.trionesdev.mes.core.domains.org.dto.TenantMemberDetailDTO;
+import com.trionesdev.mes.core.domains.org.dto.TenantMemberQuery;
 import com.trionesdev.mes.core.domains.org.provider.OrgProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -169,6 +171,20 @@ public class ManufactureProcessService {
         var processes = assembleBatch(manufactureProcessManager.findListByCodes(processCodes));
         var processesMap = processes.stream().collect(Collectors.toMap(ManufactureProcessDTO::getCode, v -> v, (v1, v2) -> v1));
         return flowItems.stream().map(item -> processesMap.get(item.getCode())).collect(Collectors.toList());
+    }
+
+    public List<TenantMemberDetailDTO> findAuthorizedMembers(String id) {
+        return manufactureProcessManager.findById(id).map(process -> {
+            var query = TenantMemberQuery.builder().build();
+            if (Objects.equals(ProcessGrantType.ASSIGNEE, process.getPermissionGrant().getType())) {
+                Set<String> memberIds = process.getPermissionGrant().getAssignees().stream().filter(grantObj -> Objects.equals(ProcessGrantObjType.MEMBER, grantObj.getObjType()))
+                        .map(ManufactureProcessPO.GrantObj::getObjId).collect(Collectors.toSet());
+                Set<String> departmentIds = process.getPermissionGrant().getAssignees().stream().filter(grantObj -> Objects.equals(ProcessGrantObjType.DEPARTMENT, grantObj.getObjType()))
+                        .map(ManufactureProcessPO.GrantObj::getObjId).collect(Collectors.toSet());
+                query.setOrGroup(TenantMemberQuery.OrGroup.builder().ids(memberIds).departmentIds(departmentIds).build());
+            }
+            return orgProvider.getTenantMembers(query);
+        }).orElse(new ArrayList<>());
     }
 
 }
