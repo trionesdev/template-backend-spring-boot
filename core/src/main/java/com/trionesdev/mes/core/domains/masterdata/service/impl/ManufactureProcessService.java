@@ -173,8 +173,8 @@ public class ManufactureProcessService {
         return flowItems.stream().map(item -> processesMap.get(item.getCode())).collect(Collectors.toList());
     }
 
-    public List<TenantMemberDetailDTO> findAuthorizedMembers(String id) {
-        return manufactureProcessManager.findById(id).map(process -> {
+    public List<TenantMemberDetailDTO> findAuthorizedMembersByCode(String code) {
+        return manufactureProcessManager.findByCode(code).map(process -> {
             var query = TenantMemberQuery.builder().build();
             if (Objects.equals(ProcessGrantType.ASSIGNEE, process.getPermissionGrant().getType())) {
                 Set<String> memberIds = process.getPermissionGrant().getAssignees().stream().filter(grantObj -> Objects.equals(ProcessGrantObjType.MEMBER, grantObj.getObjType()))

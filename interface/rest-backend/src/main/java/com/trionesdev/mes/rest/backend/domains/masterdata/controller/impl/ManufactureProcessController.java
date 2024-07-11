@@ -86,8 +86,8 @@ public class ManufactureProcessController {
     }
 
     @Operation(summary = "获取工序有报工权限的成员列表")
-    @GetMapping(value = "manufacture-processes/{id}/authorized-members")
-    public List<TenantMemberDetailDTO> queryAuthorizedMembers(@PathVariable(value = "id") String id) {
-        return manufactureProcessService.findAuthorizedMembers(id);
+    @GetMapping(value = "manufacture-processes/code/{code}/authorized-members")
+    public List<TenantMemberDetailDTO> queryAuthorizedMembers(@PathVariable(value = "code") String code) {
+        return manufactureProcessService.findAuthorizedMembersByCode(code);
     }
 }
