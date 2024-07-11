@@ -26,7 +26,7 @@ public class ManufactureOrderTaskReport implements AggregateRoot<String> {
     private BigDecimal reportQuantity; //报工数量
     private BigDecimal goodQuantity; //良品数量
     private BigDecimal defectiveQuantity; //不良品数量
-    private List<DefectiveItem> defectiveItems; //不良品项
+    private List<DefectiveItem> defectives; //不良品项
     private Instant startTime;
     private Instant endTime;
     private Integer duration;
