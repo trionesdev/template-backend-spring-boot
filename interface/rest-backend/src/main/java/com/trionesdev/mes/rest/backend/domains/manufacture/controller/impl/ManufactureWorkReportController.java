@@ -1,7 +1,7 @@
 package com.trionesdev.mes.rest.backend.domains.manufacture.controller.impl;
 
-import com.trionesdev.mes.core.domains.manufacture.service.impl.ManufactureOrderTaskReportService;
-import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureOrderTaskReportRO;
+import com.trionesdev.mes.core.domains.manufacture.service.impl.ManufactureWorkReportService;
+import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureWorkReportRO;
 import com.trionesdev.mes.rest.backend.domains.manufacture.internal.ManufactureBeBeanConvert;
 import com.trionesdev.mes.rest.backend.domains.manufacture.internal.ManufactureConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = ManufactureConstants.MANUFACTURE_PATH)
-public class ManufactureOrderTaskReportController {
+public class ManufactureWorkReportController {
     private final ManufactureBeBeanConvert convert;
-    private final ManufactureOrderTaskReportService reportService;
+    private final ManufactureWorkReportService reportService;
 
     @Operation(summary = "创建报工")
-    @PostMapping(value = "task/reports")
-    public void create(@Validated @RequestBody ManufactureOrderTaskReportRO.Create args) {
+    @PostMapping(value = "work-reports")
+    public void create(@Validated @RequestBody ManufactureWorkReportRO.Create args) {
         var report = convert.from(args);
         reportService.createReport(report);
     }

@@ -1,10 +1,9 @@
 package com.trionesdev.mes.core.domains.manufacture.repository.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.trionesdev.mes.core.domains.manufacture.dao.impl.ManufactureOrderTaskReportDAO;
-import com.trionesdev.mes.core.domains.manufacture.dao.impl.ManufactureOrderTaskReportDefectiveDAO;
-import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderTaskReportDefectivePO;
-import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderTaskReportPO;
+import com.trionesdev.mes.core.domains.manufacture.dao.impl.ManufactureWorkReportDAO;
+import com.trionesdev.mes.core.domains.manufacture.dao.impl.ManufactureWorkReportDefectiveDAO;
+import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureWorkReportDefectivePO;
 import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureOrderTaskReport;
 import com.trionesdev.mes.core.domains.manufacture.internal.ManufactureBeanConvert;
 import com.trionesdev.mes.infrastructure.ddd.BaseRepository;
@@ -18,18 +17,20 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Repository
-public class ManufactureOrderTaskReportRepository implements BaseRepository {
+public class ManufactureWorkReportRepository implements BaseRepository {
     private final ManufactureBeanConvert convert;
-    private final ManufactureOrderTaskReportDAO orderTaskReportDAO;
-    private final ManufactureOrderTaskReportDefectiveDAO reportDefectiveDAO;
+    private final ManufactureWorkReportDAO orderTaskReportDAO;
+    private final ManufactureWorkReportDefectiveDAO reportDefectiveDAO;
 
     @Transactional
     public void save(ManufactureOrderTaskReport record) {
         var report = convert.reportEntityToPo(record);
         orderTaskReportDAO.save(report);
         if (CollectionUtil.isNotEmpty(record.getDefectives())) {
-            List<ManufactureOrderTaskReportDefectivePO> defectiveItems = record.getDefectives().stream().map(defectiveItem -> {
-                return ManufactureOrderTaskReportDefectivePO.builder().reportId(report.getId()).code(defectiveItem.getCode()).quantity(defectiveItem.getQuantity()).build();
+            List<ManufactureWorkReportDefectivePO> defectiveItems = record.getDefectives().stream().map(defectiveItem -> {
+                return ManufactureWorkReportDefectivePO.builder()
+                        .orderId(report.getOrderId()).taskId(report.getTaskId())
+                        .reportId(report.getId()).processCode(report.getProcessCode()).defectiveCode(defectiveItem.getCode()).quantity(defectiveItem.getQuantity()).build();
             }).collect(Collectors.toList());
             reportDefectiveDAO.saveBatch(defectiveItems);
         }
@@ -47,8 +48,8 @@ public class ManufactureOrderTaskReportRepository implements BaseRepository {
         orderTaskReportDAO.updateById(report);
         reportDefectiveDAO.removeByReportId(report.getId());
         if (CollectionUtil.isNotEmpty(record.getDefectives())) {
-            List<ManufactureOrderTaskReportDefectivePO> defectiveItems = record.getDefectives().stream().map(defectiveItem -> {
-                return ManufactureOrderTaskReportDefectivePO.builder().reportId(report.getId()).code(defectiveItem.getCode()).quantity(defectiveItem.getQuantity()).build();
+            List<ManufactureWorkReportDefectivePO> defectiveItems = record.getDefectives().stream().map(defectiveItem -> {
+                return ManufactureWorkReportDefectivePO.builder().reportId(report.getId()).defectiveCode(defectiveItem.getCode()).quantity(defectiveItem.getQuantity()).build();
             }).collect(Collectors.toList());
             reportDefectiveDAO.saveBatch(defectiveItems);
         }
@@ -58,7 +59,7 @@ public class ManufactureOrderTaskReportRepository implements BaseRepository {
         return Optional.ofNullable(orderTaskReportDAO.getById(id)).map(po -> {
             var report = convert.reportPoToEntity(po);
             List<ManufactureOrderTaskReport.DefectiveItem> defectivePOList = reportDefectiveDAO.selectByReportId(id).stream().map(defectivePO -> {
-                return ManufactureOrderTaskReport.DefectiveItem.builder().code(defectivePO.getCode()).quantity(defectivePO.getQuantity()).build();
+                return ManufactureOrderTaskReport.DefectiveItem.builder().code(defectivePO.getDefectiveCode()).quantity(defectivePO.getQuantity()).build();
             }).collect(Collectors.toList());
             report.setDefectives(defectivePOList);
             return report;

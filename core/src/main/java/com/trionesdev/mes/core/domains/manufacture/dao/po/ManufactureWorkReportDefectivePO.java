@@ -17,14 +17,15 @@ import java.math.BigDecimal;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "manufacture_order_task_defective")
-public class ManufactureOrderTaskReportDefectivePO extends BaseLogicPO {
+@TableName(value = "manufacture_work_report_defective")
+public class ManufactureWorkReportDefectivePO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
     private String orderId;
     private String taskId;
     private String reportId;
-    private String code;
+    private String processCode;
+    private String defectiveCode;
     private BigDecimal quantity;
 }
