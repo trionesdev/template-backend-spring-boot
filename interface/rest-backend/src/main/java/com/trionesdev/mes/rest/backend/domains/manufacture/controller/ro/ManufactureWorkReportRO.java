@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
-public class ManufactureOrderTaskReportRO {
+public class ManufactureWorkReportRO {
 
     @Data
     @SuperBuilder

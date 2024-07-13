@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Data
-public class ManufactureOrderTaskReportDetailDTO {
+public class ManufactureWorkReportDetailDTO {
     private String id;
     private String orderId;
     private String taskId;
@@ -32,6 +32,12 @@ public class ManufactureOrderTaskReportDetailDTO {
 
     private Integer duration;//时长
     private ReportApprovalStatus approvalStatus;
+
+    @Data
+    public static class Producer{
+        private String id;
+        private String nickname;
+    }
 
     @Data
     public static class DefectiveItem {

@@ -1,9 +1,9 @@
 package com.trionesdev.mes.core.domains.manufacture.service.impl;
 
-import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskReportDTO;
+import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureWorkReportDTO;
 import com.trionesdev.mes.core.domains.manufacture.internal.ManufactureBeanConvert;
 import com.trionesdev.mes.core.domains.manufacture.manager.impl.ManufactureOrderManager;
-import com.trionesdev.mes.core.domains.manufacture.manager.impl.ManufactureOrderTaskReportManager;
+import com.trionesdev.mes.core.domains.manufacture.manager.impl.ManufactureWorkReportManager;
 import com.trionesdev.mes.core.domains.masterdata.provider.impl.MasterDataProvider;
 import com.trionesdev.mes.core.domains.org.provider.OrgProvider;
 import lombok.RequiredArgsConstructor;
@@ -11,16 +11,16 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class ManufactureOrderTaskReportService {
+public class ManufactureWorkReportService {
     private final ManufactureBeanConvert convert;
     private final ManufactureOrderManager orderManager;
-    private final ManufactureOrderTaskReportManager orderTaskReportManager;
+    private final ManufactureWorkReportManager workReportManager;
     private final MasterDataProvider masterDataProvider;
     private final OrgProvider orgProvider;
 
-    public void createReport(ManufactureOrderTaskReportDTO report) {
+    public void createReport(ManufactureWorkReportDTO report) {
         var orderTaskReport = convert.reportDtoToEntity(report);
-        orderTaskReportManager.create(orderTaskReport);
+        workReportManager.create(orderTaskReport);
     }
 
 //    public List<TenantMemberDTO> findTaskReportMembers(String taskId) {

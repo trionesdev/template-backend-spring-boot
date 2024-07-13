@@ -9,14 +9,14 @@ import java.time.Instant;
 import java.util.List;
 
 @Data
-public class ManufactureOrderTaskReportDTO {
+public class ManufactureWorkReportDTO {
     private String taskId;
     private TaskStatus taskStatus;
     private String producerId; //生产者
     private BigDecimal goodQuantity; //良品数量
     private String unitId; //报工单位
     private BigDecimal defectiveQuantity; //不良品数量
-    private List<DefectiveItem> defectiveItems; //不良品项
+    private List<DefectiveItem> defectives; //不良品项
     private Instant startTime;
     private Instant endTime;
     private Integer duration;

@@ -20,8 +20,8 @@ import java.time.Instant;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "manufacture_order_task_report")
-public class ManufactureOrderTaskReportPO extends BaseLogicEntity {
+@TableName(value = "manufacture_work_report")
+public class ManufactureWorkReportPO extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
