@@ -1,5 +1,6 @@
 package com.trionesdev.mes.core.domains.manufacture.internal.entity;
 
+import com.trionesdev.commons.core.util.BigDecimalUtils;
 import com.trionesdev.mes.core.domains.manufacture.internal.enums.PricingMethod;
 import com.trionesdev.mes.core.domains.manufacture.internal.enums.TaskStatus;
 import com.trionesdev.mes.infrastructure.ddd.AggregateRoot;
@@ -11,9 +12,10 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Data
-public class ManufactureOrderTaskReport implements AggregateRoot<String> {
+public class ManufactureWorkReport implements AggregateRoot<String> {
     private String id;
     private String orderId;
     private String taskId;
@@ -34,6 +36,21 @@ public class ManufactureOrderTaskReport implements AggregateRoot<String> {
     private BigDecimal unitPrice; //单价
     private BigDecimal totalPrice; //总价工资
     private Boolean approved; //已审批
+
+    private Order order;
+
+
+    public BigDecimal getReportQuantity() {
+        return BigDecimalUtils.add(Optional.ofNullable(goodQuantity).orElse(BigDecimal.ZERO),Optional.ofNullable(defectiveQuantity).orElse(BigDecimal.ZERO));
+    }
+
+    @Data
+    @SuperBuilder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Order {
+        private String code;
+    }
 
     @Data
     @SuperBuilder

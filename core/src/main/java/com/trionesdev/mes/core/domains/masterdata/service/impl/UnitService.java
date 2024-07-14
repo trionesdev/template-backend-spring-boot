@@ -9,6 +9,7 @@ import com.trionesdev.mes.core.domains.masterdata.manager.impl.UnitManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,10 @@ public class UnitService {
 
     public List<UnitDTO> findList() {
         return masterDataBeanConvert.unitsEntityToDto(unitManager.findList());
+    }
+
+    public List<UnitDTO> findListByIds(Collection<String> ids) {
+        return masterDataBeanConvert.unitsEntityToDto(unitManager.findListByIds(ids));
     }
 
     public PageInfo<UnitPO> findPage(UnitCriteria criteria) {
