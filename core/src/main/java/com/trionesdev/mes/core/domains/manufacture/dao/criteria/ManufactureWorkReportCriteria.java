@@ -8,4 +8,5 @@ import lombok.EqualsAndHashCode;
 @Data
 public class ManufactureWorkReportCriteria extends PageCriteria {
     private String orderId;
+    private String orderCode;
 }
