@@ -30,6 +30,12 @@ public class MasterDataProvider {
         return unitService.findList();
     }
 
+    public List<UnitDTO> getUnitsByIds(Collection<String> ids) {
+        if (CollectionUtil.isEmpty(ids)){
+            return Collections.emptyList();
+        }
+        return unitService.findListByIds(ids);
+    }
 
     public ProductDefinitionDTO getProductByCode(String code) {
         return productDefinitionService.findByCode(code).orElse(null);

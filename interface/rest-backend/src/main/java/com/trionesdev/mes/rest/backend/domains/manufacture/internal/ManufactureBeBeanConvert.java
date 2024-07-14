@@ -1,5 +1,6 @@
 package com.trionesdev.mes.rest.backend.domains.manufacture.internal;
 
+import com.trionesdev.mes.core.domains.manufacture.dao.criteria.ManufactureWorkReportCriteria;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureWorkReportDTO;
 import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureOrder;
 import com.trionesdev.mes.core.domains.manufacture.dao.criteria.ManufactureOrderCriteria;
@@ -7,6 +8,7 @@ import com.trionesdev.mes.core.domains.manufacture.dao.criteria.ManufactureOrder
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderTaskPO;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.query.ManufactureOrderQuery;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.query.ManufactureOrderTaskQuery;
+import com.trionesdev.mes.rest.backend.domains.manufacture.controller.query.ManufactureWorkReportQuery;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureOrderRO;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureOrderTaskRO;
 import com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro.ManufactureWorkReportRO;
@@ -36,4 +38,5 @@ public interface ManufactureBeBeanConvert {
     ManufactureOrderTaskPO from(ManufactureOrderTaskRO.Update args);
 
     ManufactureWorkReportDTO from(ManufactureWorkReportRO.Create args);
+    ManufactureWorkReportCriteria from(ManufactureWorkReportQuery query);
 }

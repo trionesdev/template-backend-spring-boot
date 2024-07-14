@@ -9,7 +9,8 @@ import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureWorkReportDeta
 import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureOrder;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderMaterialPO;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskDTO;
-import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureOrderTaskReport;
+import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureWorkReport;
+import com.trionesdev.mes.core.domains.masterdata.dto.ProductDefinitionDTO;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -42,13 +43,19 @@ public interface ManufactureBeanConvert {
     ManufactureOrderTaskDTO taskPoToDto(ManufactureOrderTaskPO task);
 
 
-    //region order task report
-    ManufactureOrderTaskReport reportDetailDtoToEntity(ManufactureWorkReportDetailDTO report);
-    ManufactureOrderTaskReport reportDtoToEntity(ManufactureWorkReportDTO report);
+    //region work report
+    ManufactureWorkReportDetailDTO reportDetailEntityToDto(ManufactureWorkReport report);
+    ManufactureWorkReport reportDtoToEntity(ManufactureWorkReportDTO report);
 
-    ManufactureWorkReportPO reportEntityToPo(ManufactureOrderTaskReport report);
+    ManufactureWorkReportPO reportEntityToPo(ManufactureWorkReport report);
 
-    ManufactureOrderTaskReport reportPoToEntity(ManufactureWorkReportPO report);
+    ManufactureWorkReport reportPoToEntity(ManufactureWorkReportPO report);
+
+    ManufactureWorkReportDTO reportEntityToDto(ManufactureWorkReport report);
+    ManufactureWorkReportDetailDTO reportRecordToDetail(ManufactureWorkReportDTO report);
+    ManufactureWorkReportDTO.Order reportOrderPoToDto(ManufactureOrderPO order);
+
+
     //endregion
 
 }
