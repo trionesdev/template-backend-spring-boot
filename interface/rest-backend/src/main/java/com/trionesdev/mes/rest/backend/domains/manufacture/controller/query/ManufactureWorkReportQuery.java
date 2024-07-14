@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class ManufactureWorkReportQuery {
-    private String orderId;
+    private String orderCode;
 }

@@ -34,6 +34,8 @@ public class ManufactureWorkReportPO extends BaseLogicEntity {
     private BigDecimal goodQuantity; //良品数量
     private BigDecimal defectiveQuantity; //不良品数量
 
+    private String producerId;
+
     private Instant startTime;
     private Instant endTime;
     private Integer duration;
