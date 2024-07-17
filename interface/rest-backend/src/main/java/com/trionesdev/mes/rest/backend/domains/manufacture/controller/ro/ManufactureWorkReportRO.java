@@ -2,6 +2,7 @@ package com.trionesdev.mes.rest.backend.domains.manufacture.controller.ro;
 
 import com.trionesdev.mes.core.domains.manufacture.internal.enums.PricingMethod;
 import com.trionesdev.mes.core.domains.manufacture.internal.enums.TaskStatus;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,11 +19,13 @@ public class ManufactureWorkReportRO {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Create {
+        @NotNull
         private String taskId;
         private TaskStatus taskStatus;
         private String producerId; //生产者
-        private BigDecimal goodQuantity; //良品数量
         private String unitId; //报工单位
+        private BigDecimal reportQuantity;
+        private BigDecimal goodQuantity; //良品数量
         private BigDecimal defectiveQuantity; //不良品数量
         private List<DefectiveItem> defectives; //不良品项
         private Instant startTime;
@@ -32,6 +35,7 @@ public class ManufactureWorkReportRO {
         private BigDecimal unitPrice; //单价
         private BigDecimal totalPrice; //总价工资
         private Boolean approved; //已审批
+        private Instant reportTime;
     }
 
 

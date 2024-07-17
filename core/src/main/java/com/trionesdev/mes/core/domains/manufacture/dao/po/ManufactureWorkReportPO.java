@@ -45,4 +45,5 @@ public class ManufactureWorkReportPO extends BaseLogicEntity {
     private BigDecimal totalPrice; //总价工资
     @TableField(value = "is_approved")
     private Boolean approved;
+    private Instant reportTime;
 }

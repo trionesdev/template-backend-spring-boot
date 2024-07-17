@@ -19,8 +19,8 @@ public class JacksonConfiguration {
             builder.serializerByType(BigInteger.class, LongSerializer.instance);
             builder.serializerByType(Long.class, LongSerializer.instance);
             builder.serializerByType(Long.TYPE, LongSerializer.instance);
-            builder.serializerByType(Instant.class, new InstantSerializer());
-            builder.deserializerByType(Instant.class, new InstantDeserializer());
+            builder.serializerByType(Instant.class, InstantSerializer.instance);
+            builder.deserializerByType(Instant.class, InstantDeserializer.instance);
         };
     }
 

@@ -12,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Data
@@ -36,6 +37,7 @@ public class ManufactureWorkReport implements AggregateRoot<String> {
     private BigDecimal unitPrice; //单价
     private BigDecimal totalPrice; //总价工资
     private Boolean approved; //已审批
+    private Instant reportTime;
 
     private Order order;
 
@@ -59,6 +61,15 @@ public class ManufactureWorkReport implements AggregateRoot<String> {
     public static class DefectiveItem {
         private String code;
         private BigDecimal quantity;
+    }
+
+    public void createInitialize(){
+        if (Objects.isNull(reportQuantity)){
+            reportQuantity = BigDecimalUtils.add(goodQuantity, defectiveQuantity);
+        }
+       if (Objects.isNull(reportTime)){
+           reportTime = Instant.now();
+       }
     }
 
 }
