@@ -33,6 +33,7 @@ public class ManufactureWorkReportManager {
         if (Objects.nonNull(task)) {
             record.setOrderId(task.getOrderId());
             record.setProcessCode(task.getProcessCode());
+            record.createInitialize();
             taskReportRepository.save(record);
         }
     }

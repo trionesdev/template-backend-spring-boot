@@ -29,6 +29,7 @@ public class ManufactureWorkReportDTO {
     private BigDecimal unitPrice; //单价
     private BigDecimal totalPrice; //总价工资
     private Boolean approved; //已审批
+    private Instant reportTime;
 
     private Order order;
     private Task task;
