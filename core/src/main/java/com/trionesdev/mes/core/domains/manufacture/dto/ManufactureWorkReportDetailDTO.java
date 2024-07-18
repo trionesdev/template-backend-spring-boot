@@ -16,8 +16,11 @@ import java.util.List;
 
 @Data
 public class ManufactureWorkReportDetailDTO {
+    private String id;
+    private String orderId;
     private String taskId;
     private TaskStatus taskStatus;
+    private String processCode;
     private String producerId; //生产者
     private BigDecimal reportQuantity; //报工数量
     private BigDecimal goodQuantity; //良品数量
@@ -66,6 +69,9 @@ public class ManufactureWorkReportDetailDTO {
 
 
     @Data
+    @SuperBuilder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Producer{
         private String id;
         private String nickname;

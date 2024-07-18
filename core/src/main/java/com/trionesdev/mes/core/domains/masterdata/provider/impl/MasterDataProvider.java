@@ -30,6 +30,10 @@ public class MasterDataProvider {
         return unitService.findList();
     }
 
+    public UnitDTO getUnitById(String id) {
+        return unitService.findById(id).orElse(null);
+    }
+
     public List<UnitDTO> getUnitsByIds(Collection<String> ids) {
         if (CollectionUtil.isEmpty(ids)){
             return Collections.emptyList();

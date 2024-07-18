@@ -13,8 +13,11 @@ import java.util.List;
 
 @Data
 public class ManufactureWorkReportDTO {
+    private String id;
     private String taskId;
+    private String orderId;
     private TaskStatus taskStatus;
+    private String processCode;
     private String producerId; //生产者
     private BigDecimal reportQuantity; //报工数量
     private BigDecimal goodQuantity; //良品数量
