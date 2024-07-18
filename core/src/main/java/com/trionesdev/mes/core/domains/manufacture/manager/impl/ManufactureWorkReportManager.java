@@ -24,23 +24,15 @@ import java.util.stream.Collectors;
 @Service
 public class ManufactureWorkReportManager {
     private final ManufactureBeanConvert convert;
-    private final ManufactureWorkReportRepository taskReportRepository;
+    private final ManufactureWorkReportRepository workReportRepository;
     private final ManufactureOrderDAO orderDAO;
     private final ManufactureOrderTaskDAO orderTaskDAO;
 
-    public void create(ManufactureWorkReport record) {
-        var task = orderTaskDAO.getById(record.getTaskId());
-        if (Objects.nonNull(task)) {
-            record.setOrderId(task.getOrderId());
-            record.setProcessCode(task.getProcessCode());
-            record.createInitialize();
-            taskReportRepository.save(record);
-        }
-    }
-
-    public PageInfo<ManufactureWorkReportDTO> findPage(ManufactureWorkReportCriteria criteria) {
-        var pageInfo = taskReportRepository.findPage(criteria);
-        return PageUtils.of(pageInfo, assembleReports(pageInfo.getRows()));
+    private ManufactureWorkReportDTO assembleReport(ManufactureWorkReport report){
+        var reportDto = convert.reportEntityToDto(report);
+        var order = orderDAO.getById(report.getOrderId());
+        reportDto.setOrder(convert.reportOrderPoToDto(order));
+        return reportDto;
     }
 
     private List<ManufactureWorkReportDTO> assembleReports(List<ManufactureWorkReport> records){
@@ -55,4 +47,25 @@ public class ManufactureWorkReportManager {
             return report;
         }).toList();
     }
+
+    public void create(ManufactureWorkReport record) {
+        var task = orderTaskDAO.getById(record.getTaskId());
+        if (Objects.nonNull(task)) {
+            record.setOrderId(task.getOrderId());
+            record.setProcessCode(task.getProcessCode());
+            record.createInitialize();
+            workReportRepository.save(record);
+        }
+    }
+
+    public Optional<ManufactureWorkReportDTO> findById(String id) {
+       return workReportRepository.findById(id).map(this::assembleReport);
+    }
+
+    public PageInfo<ManufactureWorkReportDTO> findPage(ManufactureWorkReportCriteria criteria) {
+        var pageInfo = workReportRepository.findPage(criteria);
+        return PageUtils.of(pageInfo, assembleReports(pageInfo.getRows()));
+    }
+
+
 }

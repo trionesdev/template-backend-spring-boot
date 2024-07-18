@@ -28,13 +28,19 @@ public class ManufactureWorkReportController {
         reportService.createReport(report);
     }
 
+    @Operation(summary = "根据ID获取报工信息")
+    @GetMapping(value = "work-reports/{id}")
+    public ManufactureWorkReportDetailDTO queryById(@PathVariable String id) {
+        return reportService.findById(id).orElse(null);
+    }
+
     @Operation(summary = "分页查询报工")
     @GetMapping(value = "work-reports/page")
     public PageInfo<ManufactureWorkReportDetailDTO> findPage(
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
             @RequestParam(value = "pageSize", defaultValue = "1") Integer pageSize,
             ManufactureWorkReportQuery query
-    ){
+    ) {
         var criteria = convert.from(query);
         criteria.setPageNum(pageNum);
         criteria.setPageSize(pageSize);

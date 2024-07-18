@@ -15,6 +15,12 @@ import java.util.List;
 public class ManufactureWorkReportRO {
 
     @Data
+    public static class DefectiveItem {
+        private String code;
+        private BigDecimal quantity;
+    }
+
+    @Data
     @SuperBuilder
     @AllArgsConstructor
     @NoArgsConstructor
@@ -38,11 +44,27 @@ public class ManufactureWorkReportRO {
         private Instant reportTime;
     }
 
-
-
     @Data
-    public static class DefectiveItem {
-        private String code;
-        private BigDecimal quantity;
+    @SuperBuilder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Update {
+        @NotNull
+        private String taskId;
+        private TaskStatus taskStatus;
+        private String producerId; //生产者
+        private String unitId; //报工单位
+        private BigDecimal reportQuantity;
+        private BigDecimal goodQuantity; //良品数量
+        private BigDecimal defectiveQuantity; //不良品数量
+        private List<DefectiveItem> defectives; //不良品项
+        private Instant startTime;
+        private Instant endTime;
+        private Integer duration;
+        private PricingMethod pricingMethod;//计价方式
+        private BigDecimal unitPrice; //单价
+        private BigDecimal totalPrice; //总价工资
+        private Boolean approved; //已审批
+        private Instant reportTime;
     }
 }

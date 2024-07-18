@@ -18,7 +18,7 @@ public class ManufactureWorkReportDefectiveDAO extends ServiceImpl<ManufactureWo
     }
 
     public List<ManufactureWorkReportDefectivePO> selectByReportId(String reportId) {
-        return baseMapper.selectList(lambdaQuery().eq(ManufactureWorkReportDefectivePO::getReportId, reportId));
+        return lambdaQuery().eq(ManufactureWorkReportDefectivePO::getReportId, reportId).list();
     }
 
     public List<ManufactureWorkReportDefectivePO> selectListByReportIds(Collection<String> reportIds) {
