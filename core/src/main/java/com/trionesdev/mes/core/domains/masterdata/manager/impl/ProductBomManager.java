@@ -2,7 +2,7 @@ package com.trionesdev.mes.core.domains.masterdata.manager.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.trionesdev.mes.core.domains.masterdata.dao.impl.ProductMaterialDAO;
-import com.trionesdev.mes.core.domains.masterdata.entity.ProductBom;
+import com.trionesdev.mes.core.domains.masterdata.internal.aggreate.entity.ProductBom;
 import com.trionesdev.mes.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.core.domains.masterdata.dao.po.ProductMaterialPO;
 import lombok.RequiredArgsConstructor;

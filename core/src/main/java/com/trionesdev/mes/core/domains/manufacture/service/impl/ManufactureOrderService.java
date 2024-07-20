@@ -9,7 +9,7 @@ import com.trionesdev.mes.core.domains.manufacture.dao.criteria.ManufactureOrder
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderPO;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderTaskPO;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderDTO;
-import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureOrder;
+import com.trionesdev.mes.core.domains.manufacture.repository.aggreate.entity.ManufactureOrder;
 import com.trionesdev.mes.core.domains.manufacture.internal.ManufactureBeanConvert;
 import com.trionesdev.mes.core.domains.manufacture.manager.impl.ManufactureOrderManager;
 import com.trionesdev.mes.core.domains.masterdata.dto.DefectiveDTO;

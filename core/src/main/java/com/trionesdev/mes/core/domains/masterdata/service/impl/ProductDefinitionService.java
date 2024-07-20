@@ -6,7 +6,7 @@ import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.mes.core.domains.custom.provider.impl.CustomProvider;
 import com.trionesdev.mes.core.domains.supplier.provider.impl.SupplierProvider;
-import com.trionesdev.mes.core.domains.masterdata.entity.ProductDefinition;
+import com.trionesdev.mes.core.domains.masterdata.internal.aggreate.entity.ProductDefinition;
 import com.trionesdev.mes.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.core.domains.masterdata.manager.impl.ProcessFlowManager;
 import com.trionesdev.mes.core.domains.masterdata.manager.impl.ProductDefinitionManager;

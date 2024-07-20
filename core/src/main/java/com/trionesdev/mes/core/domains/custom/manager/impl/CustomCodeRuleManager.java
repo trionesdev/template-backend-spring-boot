@@ -6,7 +6,7 @@ import com.trionesdev.mes.core.domains.custom.dao.impl.CustomCodeRuleDAO;
 import com.trionesdev.mes.core.domains.custom.dao.impl.CustomCodeSerialNumberDAO;
 import com.trionesdev.mes.core.domains.custom.dao.po.CustomCodeRulePO;
 import com.trionesdev.mes.core.domains.custom.dao.po.CustomCodeSerialNumberPO;
-import com.trionesdev.mes.core.domains.custom.entity.CustomCodeRule;
+import com.trionesdev.mes.core.domains.custom.internal.aggreate.entity.CustomCodeRule;
 import com.trionesdev.mes.core.domains.custom.internal.enums.TimeFormatTypeEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

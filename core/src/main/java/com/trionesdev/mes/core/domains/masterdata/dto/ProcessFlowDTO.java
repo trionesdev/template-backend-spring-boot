@@ -1,6 +1,6 @@
 package com.trionesdev.mes.core.domains.masterdata.dto;
 
-import com.trionesdev.mes.core.domains.masterdata.entity.ProcessFlow.ItemType;
+import com.trionesdev.mes.core.domains.masterdata.internal.aggreate.entity.ProcessFlow.ItemType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
