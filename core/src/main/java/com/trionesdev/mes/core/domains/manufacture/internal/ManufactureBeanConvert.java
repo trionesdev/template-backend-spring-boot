@@ -6,11 +6,10 @@ import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureWorkReportP
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderDTO;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureWorkReportDTO;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureWorkReportDetailDTO;
-import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureOrder;
+import com.trionesdev.mes.core.domains.manufacture.repository.aggreate.entity.ManufactureOrder;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderMaterialPO;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureOrderTaskDTO;
-import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureWorkReport;
-import com.trionesdev.mes.core.domains.masterdata.dto.ProductDefinitionDTO;
+import com.trionesdev.mes.core.domains.manufacture.repository.aggreate.entity.ManufactureWorkReport;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

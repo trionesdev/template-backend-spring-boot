@@ -1,7 +1,7 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.mes.core.domains.masterdata.entity.ProductBom;
+import com.trionesdev.mes.core.domains.masterdata.internal.aggreate.entity.ProductBom;
 import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ProductDefinitionCriteria;
 import com.trionesdev.mes.core.domains.masterdata.service.impl.ProductBomService;
 import com.trionesdev.mes.core.domains.masterdata.dto.ProductBomDTO;

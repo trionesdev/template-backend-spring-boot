@@ -9,7 +9,7 @@ import com.trionesdev.mes.core.domains.manufacture.dao.impl.ManufactureWorkRepor
 import com.trionesdev.mes.core.domains.manufacture.dao.impl.ManufactureWorkReportDefectiveDAO;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureWorkReportDefectivePO;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureWorkReportPO;
-import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureWorkReport;
+import com.trionesdev.mes.core.domains.manufacture.repository.aggreate.entity.ManufactureWorkReport;
 import com.trionesdev.mes.core.domains.manufacture.internal.ManufactureBeanConvert;
 import com.trionesdev.mes.infrastructure.ddd.BaseRepository;
 import lombok.RequiredArgsConstructor;

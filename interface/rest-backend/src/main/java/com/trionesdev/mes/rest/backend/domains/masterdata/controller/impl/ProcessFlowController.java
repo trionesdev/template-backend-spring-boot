@@ -8,7 +8,7 @@ import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ProcessF
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.ProcessFlowUpdateRO;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataBeRestBeanConvert;
 import com.trionesdev.mes.rest.backend.domains.masterdata.internal.MasterDataRestConstants;
-import com.trionesdev.mes.core.domains.masterdata.entity.ProcessFlow;
+import com.trionesdev.mes.core.domains.masterdata.internal.aggreate.entity.ProcessFlow;
 import com.trionesdev.mes.core.domains.masterdata.service.impl.ProcessFlowService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
