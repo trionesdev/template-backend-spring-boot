@@ -1,4 +1,4 @@
-package com.trionesdev.mes.core.domains.custom.internal.aggreate.entity;
+package com.trionesdev.mes.core.domains.custom.internal.aggregate.entity;
 
 import cn.hutool.core.util.StrUtil;
 import com.trionesdev.mes.core.domains.custom.internal.enums.TimeFormatTypeEnum;
