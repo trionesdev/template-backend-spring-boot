@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.trionesdev.commons.mybatisplus.po.BaseLogicPO;
-import com.trionesdev.mes.core.domains.masterdata.entity.ProcessFlow;
+import com.trionesdev.mes.core.domains.masterdata.internal.aggreate.entity.ProcessFlow;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

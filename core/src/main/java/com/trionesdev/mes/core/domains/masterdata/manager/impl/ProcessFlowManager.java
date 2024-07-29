@@ -5,7 +5,7 @@ import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.mes.core.domains.masterdata.dao.po.ProcessFlowItemPO;
 import com.trionesdev.mes.core.domains.masterdata.dao.po.ProcessFlowPO;
-import com.trionesdev.mes.core.domains.masterdata.entity.ProcessFlow;
+import com.trionesdev.mes.core.domains.masterdata.internal.aggreate.entity.ProcessFlow;
 import com.trionesdev.mes.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ProcessFlowCriteria;
 import com.trionesdev.mes.core.domains.masterdata.dao.impl.ProcessFlowItemDAO;

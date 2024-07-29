@@ -1,7 +1,7 @@
 package com.trionesdev.mes.rest.backend.domains.masterdata.internal;
 
 import com.trionesdev.mes.core.domains.masterdata.dto.ManufactureProcessDTO;
-import com.trionesdev.mes.core.domains.masterdata.entity.ProductBom;
+import com.trionesdev.mes.core.domains.masterdata.internal.aggreate.entity.ProductBom;
 import com.trionesdev.mes.core.domains.masterdata.dao.criteria.DefectiveCriteria;
 import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ProcessFlowCriteria;
 import com.trionesdev.mes.core.domains.masterdata.dao.po.DefectivePO;
@@ -12,10 +12,9 @@ import com.trionesdev.mes.rest.backend.domains.masterdata.controller.query.Produ
 import com.trionesdev.mes.rest.backend.domains.masterdata.controller.ro.*;
 import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ManufactureProcessCriteria;
 import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ProductDefinitionCriteria;
-import com.trionesdev.mes.core.domains.masterdata.dao.po.ManufactureProcessPO;
 import com.trionesdev.mes.core.domains.masterdata.dao.po.ProductDefinitionPO;
 import com.trionesdev.mes.core.domains.masterdata.dao.po.UnitPO;
-import com.trionesdev.mes.core.domains.masterdata.entity.ProcessFlow;
+import com.trionesdev.mes.core.domains.masterdata.internal.aggreate.entity.ProcessFlow;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

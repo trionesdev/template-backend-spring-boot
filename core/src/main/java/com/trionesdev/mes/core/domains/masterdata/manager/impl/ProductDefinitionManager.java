@@ -7,7 +7,7 @@ import com.trionesdev.mes.core.domains.masterdata.dao.impl.ProcessFlowDAO;
 import com.trionesdev.mes.core.domains.masterdata.dao.impl.ProductDefinitionDAO;
 import com.trionesdev.mes.core.domains.masterdata.dao.impl.UnitDAO;
 import com.trionesdev.mes.core.domains.masterdata.dao.po.ProductDefinitionPO;
-import com.trionesdev.mes.core.domains.masterdata.entity.ProductDefinition;
+import com.trionesdev.mes.core.domains.masterdata.internal.aggreate.entity.ProductDefinition;
 import com.trionesdev.mes.core.domains.masterdata.internal.MasterDataBeanConvert;
 import com.trionesdev.mes.core.domains.masterdata.dao.criteria.ProductDefinitionCriteria;
 import lombok.RequiredArgsConstructor;

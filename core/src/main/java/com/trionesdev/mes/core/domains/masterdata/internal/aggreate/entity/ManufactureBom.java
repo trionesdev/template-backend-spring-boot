@@ -1,4 +1,4 @@
-package com.trionesdev.mes.core.domains.masterdata.entity;
+package com.trionesdev.mes.core.domains.masterdata.internal.aggreate.entity;
 
 import com.trionesdev.mes.core.domains.masterdata.dao.po.ManufactureBomItemPO;
 import com.trionesdev.mes.core.domains.masterdata.dao.po.ManufactureBomPO;

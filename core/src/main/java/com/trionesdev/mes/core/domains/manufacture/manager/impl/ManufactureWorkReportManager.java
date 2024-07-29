@@ -9,7 +9,7 @@ import com.trionesdev.mes.core.domains.manufacture.dao.impl.ManufactureOrderTask
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderPO;
 import com.trionesdev.mes.core.domains.manufacture.dto.ManufactureWorkReportDTO;
 import com.trionesdev.mes.core.domains.manufacture.internal.ManufactureBeanConvert;
-import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureWorkReport;
+import com.trionesdev.mes.core.domains.manufacture.repository.aggreate.entity.ManufactureWorkReport;
 import com.trionesdev.mes.core.domains.manufacture.repository.impl.ManufactureWorkReportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
