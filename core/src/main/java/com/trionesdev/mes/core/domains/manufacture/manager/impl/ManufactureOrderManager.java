@@ -5,7 +5,7 @@ import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderPO;
 import com.trionesdev.mes.core.domains.manufacture.dao.po.ManufactureOrderTaskPO;
-import com.trionesdev.mes.core.domains.manufacture.internal.entity.ManufactureOrder;
+import com.trionesdev.mes.core.domains.manufacture.repository.aggreate.entity.ManufactureOrder;
 import com.trionesdev.mes.core.domains.manufacture.internal.ManufactureBeanConvert;
 import com.trionesdev.mes.core.domains.manufacture.dao.criteria.ManufactureOrderCriteria;
 import com.trionesdev.mes.core.domains.manufacture.dao.criteria.ManufactureOrderTaskCriteria;

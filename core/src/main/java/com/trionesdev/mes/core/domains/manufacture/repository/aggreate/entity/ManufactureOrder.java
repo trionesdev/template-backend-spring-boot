@@ -1,4 +1,4 @@
-package com.trionesdev.mes.core.domains.manufacture.internal.entity;
+package com.trionesdev.mes.core.domains.manufacture.repository.aggreate.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

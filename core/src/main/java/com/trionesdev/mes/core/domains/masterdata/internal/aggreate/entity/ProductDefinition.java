@@ -1,4 +1,4 @@
-package com.trionesdev.mes.core.domains.masterdata.entity;
+package com.trionesdev.mes.core.domains.masterdata.internal.aggreate.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
