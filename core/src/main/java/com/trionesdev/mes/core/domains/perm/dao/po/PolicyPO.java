@@ -5,11 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.trionesdev.commons.mybatisplus.entity.BaseLogicEntity;
 import com.trionesdev.mes.core.domains.perm.internal.enums.ClientType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.trionesdev.mes.core.domains.perm.internal.enums.PolicyObjType;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @EqualsAndHashCode(callSuper = true)
@@ -27,7 +24,7 @@ public class PolicyPO extends BaseLogicEntity {
     /**
      * 对象类型
      */
-    private ObjType grantObjType;
+    private PolicyObjType grantObjType;
     /**
      * 对象ID
      */
@@ -35,9 +32,5 @@ public class PolicyPO extends BaseLogicEntity {
     private String resObj;
     private String resAct;
 
-
-    public enum ObjType {
-        ROLE
-    }
 
 }
