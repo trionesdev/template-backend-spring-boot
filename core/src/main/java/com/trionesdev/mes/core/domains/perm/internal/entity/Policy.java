@@ -1,6 +1,6 @@
 package com.trionesdev.mes.core.domains.perm.internal.entity;
 
-import com.trionesdev.mes.core.domains.perm.dao.po.PolicyPO.ObjType;
+import com.trionesdev.mes.core.domains.perm.internal.enums.PolicyObjType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Policy {
     private String appIdentifier;
     private String client;
-    private ObjType grantObjType;
+    private PolicyObjType grantObjType;
     private String grantObjId;
     private List<Permission> permissions;
 
