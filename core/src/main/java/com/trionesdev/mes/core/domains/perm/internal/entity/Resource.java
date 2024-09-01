@@ -1,4 +1,4 @@
-package com.trionesdev.mes.core.domains.perm.entity;
+package com.trionesdev.mes.core.domains.perm.internal.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
