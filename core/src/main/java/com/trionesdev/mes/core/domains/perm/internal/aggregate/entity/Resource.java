@@ -1,5 +1,6 @@
-package com.trionesdev.mes.core.domains.perm.entity;
+package com.trionesdev.mes.core.domains.perm.internal.aggregate.entity;
 
+import com.trionesdev.mes.core.domains.perm.internal.enums.ClientType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,8 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Resource {
     private String id;
-    private String appIdentifier;
-    private String client;
+    private ClientType clientType;
+    private String parentId;
     private String name;
     private String identifier;
     private String type;

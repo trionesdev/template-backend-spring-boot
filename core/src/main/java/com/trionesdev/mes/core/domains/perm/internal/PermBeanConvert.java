@@ -1,5 +1,8 @@
 package com.trionesdev.mes.core.domains.perm.internal;
 
+import com.trionesdev.mes.core.domains.perm.dao.po.ResourceActionPO;
+import com.trionesdev.mes.core.domains.perm.dao.po.ResourceDraftPO;
+import com.trionesdev.mes.core.domains.perm.dao.po.ResourceObjectPO;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -9,4 +12,8 @@ import org.mapstruct.Named;
         builder = @Builder(disableBuilder = true))
 @Named("permBeanConvert")
 public interface PermBeanConvert {
+
+    ResourceObjectPO resourceDraftToPO(ResourceDraftPO draft);
+
+    ResourceActionPO resourceDraftActionToPO(ResourceDraftPO.Action draft);
 }

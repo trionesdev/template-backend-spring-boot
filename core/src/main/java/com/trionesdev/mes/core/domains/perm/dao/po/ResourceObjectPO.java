@@ -21,6 +21,7 @@ import lombok.experimental.SuperBuilder;
 public class ResourceObjectPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
+    private String parentId;
     private ClientType clientType;
     private String name;
     private String identifier;
