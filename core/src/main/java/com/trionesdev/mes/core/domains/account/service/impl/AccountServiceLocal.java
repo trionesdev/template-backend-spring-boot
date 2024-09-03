@@ -32,7 +32,7 @@ public class AccountServiceLocal implements AccountService {
     @Override
     public String accountSignIn(AccountSignInCmd args) {
         UserDTO user = userProvider.accountSignIn(args);
-        if (Objects.isNull(user)){
+        if (Objects.isNull(user)) {
             throw new BusinessException("ACCOUNT_OR_PASSWORD_ERROR");
         }
         return jwtFacade.generate(user.getId(), JwtClaims.builder().role(ActorRoleEnum.USER.name()).build());
@@ -41,7 +41,9 @@ public class AccountServiceLocal implements AccountService {
     @Override
     public String tenantMemberSignIn(TenantMemberSignInCmd arg) {
         TenantMemberDetailDTO tenantMember = orgProvider.tenantMemberSignIn(arg);
-        return jwtFacade.generate(tenantMember.getUserId(), JwtClaims.builder().role(ActorRoleEnum.TENANT_MEMBER.name()).tenantId(tenantMember.getTenantId()).tenantMemberId(tenantMember.getId()).build());
+        return jwtFacade.generate(tenantMember.getUserId(), JwtClaims.builder().role(ActorRoleEnum.TENANT_MEMBER.name())
+                .tenantId(tenantMember.getTenantId()).tenantMemberId(tenantMember.getId())
+                .build());
     }
 
     @Override
