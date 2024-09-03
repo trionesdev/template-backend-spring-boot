@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.google.common.base.Objects;
+import com.trionesdev.mes.core.domains.perm.internal.enums.RoleGrantObjType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,13 +21,9 @@ public class RoleGrantPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
-    private ObjType grantObjType;
+    private RoleGrantObjType grantObjType;
     private String grantObjId;
     private String roleId;
-
-    public enum ObjType {
-        USER
-    }
 
     @Override
     public boolean equals(Object o) {

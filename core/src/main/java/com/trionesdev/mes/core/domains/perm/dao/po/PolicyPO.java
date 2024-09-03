@@ -36,5 +36,4 @@ public class PolicyPO extends BaseLogicEntity {
     private String resObj;
     private String resAct;
 
-
 }

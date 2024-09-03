@@ -1,5 +1,6 @@
 package com.trionesdev.mes.core.domains.perm.internal.aggregate.entity;
 
+
 import com.trionesdev.mes.core.domains.perm.internal.enums.PolicyGrantObjType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
