@@ -3,6 +3,7 @@ package com.trionesdev.mes.core.domains.account.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.context.actor.ActorRoleEnum;
+import com.trionesdev.commons.core.jwt.JwtClaims;
 import com.trionesdev.commons.core.jwt.JwtFacade;
 import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.mes.core.domains.account.dto.ActorDTO;
@@ -34,13 +35,13 @@ public class AccountServiceLocal implements AccountService {
         if (Objects.isNull(user)){
             throw new BusinessException("ACCOUNT_OR_PASSWORD_ERROR");
         }
-        return jwtFacade.generate(user.getId(), ActorRoleEnum.USER.name(), null, null);
+        return jwtFacade.generate(user.getId(), JwtClaims.builder().role(ActorRoleEnum.USER.name()).build());
     }
 
     @Override
     public String tenantMemberSignIn(TenantMemberSignInCmd arg) {
         TenantMemberDetailDTO tenantMember = orgProvider.tenantMemberSignIn(arg);
-        return jwtFacade.generate(tenantMember.getUserId(), ActorRoleEnum.TENANT_MEMBER.name(), tenantMember.getId(), tenantMember.getId());
+        return jwtFacade.generate(tenantMember.getUserId(), JwtClaims.builder().role(ActorRoleEnum.TENANT_MEMBER.name()).tenantId(tenantMember.getTenantId()).tenantMemberId(tenantMember.getId()).build());
     }
 
     @Override

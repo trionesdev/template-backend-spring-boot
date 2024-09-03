@@ -24,6 +24,7 @@ import java.util.List;
 @TableName(value = "perm_resource_draft", autoResultMap = true)
 public class ResourceDraftPO extends BaseLogicPO {
     private String id;
+    private String parentId;
     private ClientType clientType;
     private ResourceType type;
     private String name;
