@@ -1,5 +1,6 @@
 package com.trionesdev.mes.core.domains.perm.service.impl;
 
+import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.mes.core.domains.perm.dao.po.ResourceDraftPO;
 import com.trionesdev.mes.core.domains.perm.internal.enums.ClientType;
 import com.trionesdev.mes.core.domains.perm.manager.impl.ResourceManager;
@@ -11,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class ResourceService {
+    private final ActorContext actorContext;
     private final ResourceManager resourceManager;
 
     public void createResourceDraft(ResourceDraftPO record) {
