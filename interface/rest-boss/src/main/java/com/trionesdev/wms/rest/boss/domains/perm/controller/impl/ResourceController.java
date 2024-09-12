@@ -1,8 +1,8 @@
 package com.trionesdev.wms.rest.boss.domains.perm.controller.impl;
 
-import com.trionesdev.wms.core.domains.perm.dao.po.ResourceDraftPO;
+import com.trionesdev.wms.core.domains.perm.dao.po.ViewResourceDraftPO;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.wms.core.domains.perm.service.impl.ResourceService;
+import com.trionesdev.wms.core.domains.perm.service.impl.ViewResourceService;
 import com.trionesdev.wms.rest.boss.domains.perm.controller.ro.ResourceDraftCreateRO;
 import com.trionesdev.wms.rest.boss.domains.perm.controller.ro.ResourceDraftReleaseRO;
 import com.trionesdev.wms.rest.boss.domains.perm.controller.ro.ResourceDraftUpdateRO;
@@ -31,19 +31,19 @@ import static com.trionesdev.wms.rest.boss.domains.perm.internal.PermConstants.P
 @RequestMapping(PERM_PATH)
 public class ResourceController {
     private final PermBeRestConvert convert;
-    private final ResourceService resourceService;
+    private final ViewResourceService viewResourceService;
 
     @Operation(summary = "创建资源草稿")
     @PostMapping(value = "resource/drafts")
     public void createDraft(@Validated @RequestBody ResourceDraftCreateRO args) {
         var draft = convert.from(args);
-        resourceService.createResourceDraft(draft);
+        viewResourceService.createResourceDraft(draft);
     }
 
     @Operation(summary = "根据ID资源草稿")
     @DeleteMapping(value = "resource/drafts/{id}")
     public void deleteDraftById(@PathVariable(value = "id") String id) {
-        resourceService.deleteResourceDraftById(id);
+        viewResourceService.deleteResourceDraftById(id);
     }
 
     @Operation(summary = "根据ID更新资源草稿")
@@ -51,18 +51,18 @@ public class ResourceController {
     public void updateDraft(@PathVariable(value = "id") String id, @Validated @RequestBody ResourceDraftUpdateRO args) {
         var draft = convert.from(args);
         draft.setId(id);
-        resourceService.updateDraftById(draft);
+        viewResourceService.updateDraftById(draft);
     }
 
     @Operation(summary = "获取资源草稿列表")
     @GetMapping(value = "resource/draft/list")
-    public List<ResourceDraftPO> findDraftsByClientType(@RequestParam ClientType clientType) {
-        return resourceService.findDraftsByClientType(clientType);
+    public List<ViewResourceDraftPO> findDraftsByClientType(@RequestParam ClientType clientType) {
+        return viewResourceService.findDraftsByClientType(clientType);
     }
 
     @Operation(summary = "发布资源草稿")
     @PutMapping(value = "resource/draft/release")
     public void releaseDraft(@Validated @RequestBody ResourceDraftReleaseRO args) {
-        resourceService.releaseDraft(args.getClientType());
+        viewResourceService.releaseDraft(args.getClientType());
     }
 }

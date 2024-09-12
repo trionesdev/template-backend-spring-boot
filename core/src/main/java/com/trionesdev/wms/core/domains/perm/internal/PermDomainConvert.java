@@ -1,8 +1,8 @@
 package com.trionesdev.wms.core.domains.perm.internal;
 
-import com.trionesdev.wms.core.domains.perm.dao.po.ResourceActionPO;
-import com.trionesdev.wms.core.domains.perm.dao.po.ResourceDraftPO;
-import com.trionesdev.wms.core.domains.perm.dao.po.ResourceObjectPO;
+import com.trionesdev.wms.core.domains.perm.dao.po.ViewResourceActionPO;
+import com.trionesdev.wms.core.domains.perm.dao.po.ViewResourceDraftPO;
+import com.trionesdev.wms.core.domains.perm.dao.po.ViewResourceObjectPO;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Resource;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -12,17 +12,17 @@ import org.mapstruct.MappingConstants;
         builder = @Builder(disableBuilder = true))
 public interface PermDomainConvert {
 
-    Resource resourceDraftToEntity(ResourceDraftPO draft);
+    Resource resourceDraftToEntity(ViewResourceDraftPO draft);
 
-    ResourceObjectPO resourceDraftToPO(ResourceDraftPO draft);
+    ViewResourceObjectPO resourceDraftToPO(ViewResourceDraftPO draft);
 
-    ResourceActionPO resourceDraftActionToPO(ResourceDraftPO.Action draft);
+    ViewResourceActionPO resourceDraftActionToPO(ViewResourceDraftPO.Action draft);
 
-    ResourceObjectPO resourceObjectEntityToPo(Resource resource);
+    ViewResourceObjectPO resourceObjectEntityToPo(Resource resource);
 
-    ResourceActionPO resourceActionEntityToPo(Resource.Action resource);
+    ViewResourceActionPO resourceActionEntityToPo(Resource.Action resource);
 
-    Resource resourceObjectToResource(ResourceObjectPO object);
+    Resource resourceObjectToResource(ViewResourceObjectPO object);
 
-    Resource.Action resourceActionToInnerAction(ResourceActionPO action);
+    Resource.Action resourceActionToInnerAction(ViewResourceActionPO action);
 }
