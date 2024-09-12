@@ -8,9 +8,10 @@ import com.trionesdev.wms.core.domains.org.service.DepartmentService;
 import com.trionesdev.wms.core.domains.org.service.bo.DepartmentTreeArg;
 import com.trionesdev.wms.core.domains.org.dto.DepartmentDTO;
 import com.trionesdev.wms.core.domains.org.dto.DepartmentMemberDTO;
-import com.trionesdev.wms.rest.backend.domains.org.controller.query.DepartmentMemberQuery;
-import com.trionesdev.wms.rest.backend.domains.org.controller.ro.DepartmentRO;
-import com.trionesdev.wms.rest.backend.domains.org.internal.OrgBeRestBeanConvert;
+import com.trionesdev.wms.rest.backend.domains.org.controller.ro.department.DepartmentCreateRO;
+import com.trionesdev.wms.rest.backend.domains.org.controller.ro.department.DepartmentMemberQueryRO;
+import com.trionesdev.wms.rest.backend.domains.org.controller.ro.department.DepartmentUpdateRO;
+import com.trionesdev.wms.rest.backend.domains.org.internal.OrgBeRestConvert;
 import com.trionesdev.wms.rest.backend.domains.org.internal.OrgRestConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,12 +26,12 @@ import java.util.List;
 @RestController
 @RequestMapping(OrgRestConstants.ORG_PATH)
 public class DepartmentController {
-    private final OrgBeRestBeanConvert convert;
+    private final OrgBeRestConvert convert;
     private final DepartmentService departmentService;
 
     @Operation(summary = "创建部门")
     @PostMapping("departments")
-    public void createDepartment(@Validated @RequestBody DepartmentRO.Create args) {
+    public void createDepartment(@Validated @RequestBody DepartmentCreateRO args) {
         var po = convert.from(args);
         departmentService.createDepartment(po);
     }
@@ -43,7 +44,7 @@ public class DepartmentController {
 
     @Operation(summary = "根据ID更新部门")
     @PutMapping("departments/{id}")
-    public void updateDepartmentById(@PathVariable String id, @Validated @RequestBody DepartmentRO.Update args) {
+    public void updateDepartmentById(@PathVariable String id, @Validated @RequestBody DepartmentUpdateRO args) {
         var po = convert.from(args);
         po.setId(id);
         departmentService.updateDepartmentById(po);
@@ -74,14 +75,13 @@ public class DepartmentController {
     public PageInfo<DepartmentMemberDTO> queryDepartmentMembersPage(
             @RequestParam(value = "pageNum") Integer pageNum,
             @RequestParam(value = "pageSize") Integer pageSize,
-            DepartmentMemberQuery query
+            DepartmentMemberQueryRO query
     ) {
         var criteria = convert.from(query);
         criteria.setPageNum(pageNum);
         criteria.setPageSize(pageSize);
         return departmentService.findDepartmentMembersPage(criteria);
     }
-
 
 
     @Operation(summary = "查询组织列表(包含组织下成员)")

@@ -21,8 +21,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-@TableName(value = "perm_resource_draft", autoResultMap = true)
-public class ResourceDraftPO extends BaseLogicPO {
+@TableName(value = "perm_view_resource_draft", autoResultMap = true)
+public class ViewResourceDraftPO extends BaseLogicPO {
     private String id;
     private String parentId;
     private ClientType clientType;

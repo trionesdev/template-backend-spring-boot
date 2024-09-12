@@ -3,8 +3,9 @@ package com.trionesdev.wms.core.domains.perm.dao.po;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.trionesdev.commons.mybatisplus.po.BaseLogicPO;
+import com.trionesdev.commons.mybatisplus.po.BasePO;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.ResourceType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,12 +17,14 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "perm_resource_action")
-public class ResourceActionPO extends BaseLogicPO {
+@TableName(value = "perm_view_resource_object")
+public class ViewResourceObjectPO extends BasePO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
+    private String parentId;
     private ClientType clientType;
-    private String resourceId;
     private String name;
     private String identifier;
+    private ResourceType type;
+
 }

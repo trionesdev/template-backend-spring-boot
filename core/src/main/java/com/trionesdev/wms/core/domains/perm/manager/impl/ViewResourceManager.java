@@ -1,11 +1,11 @@
 package com.trionesdev.wms.core.domains.perm.manager.impl;
 
 import com.trionesdev.wms.core.domains.perm.dao.impl.ResourceDraftDAO;
-import com.trionesdev.wms.core.domains.perm.dao.po.ResourceDraftPO;
+import com.trionesdev.wms.core.domains.perm.dao.po.ViewResourceDraftPO;
 import com.trionesdev.wms.core.domains.perm.internal.PermDomainConvert;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Resource;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.wms.core.domains.perm.repository.impl.ResourceRepository;
+import com.trionesdev.wms.core.domains.perm.repository.impl.ViewResourceRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -16,12 +16,12 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class ResourceManager {
+public class ViewResourceManager {
     private final PermDomainConvert convert;
     private final ResourceDraftDAO resourceDraftDAO;
-    private final ResourceRepository resourceRepository;
+    private final ViewResourceRepository viewResourceRepository;
 
-    public void createResourceDraft(ResourceDraftPO record) {
+    public void createResourceDraft(ViewResourceDraftPO record) {
         resourceDraftDAO.save(record);
     }
 
@@ -29,11 +29,11 @@ public class ResourceManager {
         resourceDraftDAO.removeById(id);
     }
 
-    public void updateDraftById(ResourceDraftPO record) {
+    public void updateDraftById(ViewResourceDraftPO record) {
         resourceDraftDAO.updateById(record);
     }
 
-    public List<ResourceDraftPO> findDraftsByClientType(ClientType clientType) {
+    public List<ViewResourceDraftPO> findDraftsByClientType(ClientType clientType) {
         return resourceDraftDAO.selectListByClientType(clientType);
     }
 
@@ -44,17 +44,17 @@ public class ResourceManager {
      */
     @Transactional
     public void releaseDraft(ClientType clientType) {
-        resourceRepository.deleteByClientType(clientType);
+        viewResourceRepository.deleteByClientType(clientType);
         var drafts = resourceDraftDAO.selectListByClientType(clientType);
         if (CollectionUtils.isEmpty(drafts)) {
             return;
         }
         var resources = drafts.stream().map(convert::resourceDraftToEntity).collect(Collectors.toList());
-        resourceRepository.saveBatch(resources);
+        viewResourceRepository.saveBatch(resources);
     }
 
     public List<Resource> findResourcesByClientType(ClientType clientType) {
-        return resourceRepository.findResourcesByClientType(clientType);
+        return viewResourceRepository.findResourcesByClientType(clientType);
     }
 
 }

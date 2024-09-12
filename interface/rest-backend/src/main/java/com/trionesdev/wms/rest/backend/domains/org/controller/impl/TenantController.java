@@ -3,9 +3,9 @@ package com.trionesdev.wms.rest.backend.domains.org.controller.impl;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberDetailDTO;
 import com.trionesdev.wms.core.domains.org.service.impl.TenantService;
-import com.trionesdev.wms.rest.backend.domains.org.controller.query.TenantMemberQuery;
+import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberQueryRO;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberRO;
-import com.trionesdev.wms.rest.backend.domains.org.internal.OrgBeRestBeanConvert;
+import com.trionesdev.wms.rest.backend.domains.org.internal.OrgBeRestConvert;
 import com.trionesdev.wms.rest.backend.domains.org.internal.OrgRestConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(OrgRestConstants.ORG_PATH)
 public class TenantController {
-    private final OrgBeRestBeanConvert convert;
+    private final OrgBeRestConvert convert;
     private final TenantService tenantService;
 
     @Operation(summary = "创建租户成员")
@@ -47,7 +47,7 @@ public class TenantController {
     public PageInfo<TenantMemberDetailDTO> queryTenantMembersPage(
             @RequestParam(value = "pageNum") Integer pageNum,
             @RequestParam(value = "pageSize") Integer pageSize,
-            TenantMemberQuery query) {
+            TenantMemberQueryRO query) {
         var criteria = convert.from(query);
         criteria.setPageNum(pageNum);
         criteria.setPageSize(pageSize);
