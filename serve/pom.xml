@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>triones-light-mes</artifactId>
-        <groupId>com.trionesdev.mes</groupId>
+        <artifactId>triones-wms</artifactId>
+        <groupId>com.trionesdev.wms</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -16,7 +16,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.trionesdev.mes</groupId>
+            <groupId>com.trionesdev.wms</groupId>
             <artifactId>rest-backend</artifactId>
         </dependency>
     </dependencies>
@@ -43,7 +43,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <finalName>backend-serve</finalName>
-                    <mainClass>com.trionesdev.mes.ServeApplication</mainClass>
+                    <mainClass>com.trionesdev.wms.ServeApplication</mainClass>
                     <fork>true</fork>
                 </configuration>
                 <executions>
