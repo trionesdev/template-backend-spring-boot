@@ -1,1 +1,0 @@
-package com.trionesdev.mes.rest.boss.domains;

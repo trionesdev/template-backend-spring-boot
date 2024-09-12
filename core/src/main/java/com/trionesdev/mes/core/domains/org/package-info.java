@@ -1,1 +1,0 @@
-package com.trionesdev.mes.core.domains.org;
