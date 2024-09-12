@@ -1,30 +1,25 @@
 package com.trionesdev.wms.core.domains.perm.manager.impl;
 
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
-import com.google.common.collect.Lists;
-import com.trionesdev.wms.core.domains.perm.dao.impl.ResourceActionDAO;
-import com.trionesdev.wms.core.domains.perm.dao.impl.ResourceObjectDAO;
-import com.trionesdev.wms.core.domains.perm.dao.po.ResourceActionPO;
-import com.trionesdev.wms.core.domains.perm.dao.po.ResourceDraftPO;
 import com.trionesdev.wms.core.domains.perm.dao.impl.ResourceDraftDAO;
-import com.trionesdev.wms.core.domains.perm.dao.po.ResourceObjectPO;
-import com.trionesdev.wms.core.domains.perm.internal.PermBeanConvert;
+import com.trionesdev.wms.core.domains.perm.dao.po.ResourceDraftPO;
+import com.trionesdev.wms.core.domains.perm.internal.PermDomainConvert;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Resource;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
+import com.trionesdev.wms.core.domains.perm.repository.impl.ResourceRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class ResourceManager {
-    private final PermBeanConvert convert;
+    private final PermDomainConvert convert;
     private final ResourceDraftDAO resourceDraftDAO;
-    private final ResourceObjectDAO resourceObjectDAO;
-    private final ResourceActionDAO resourceActionDAO;
+    private final ResourceRepository resourceRepository;
 
     public void createResourceDraft(ResourceDraftPO record) {
         resourceDraftDAO.save(record);
@@ -42,37 +37,24 @@ public class ResourceManager {
         return resourceDraftDAO.selectListByClientType(clientType);
     }
 
+    /**
+     * 发布草稿
+     *
+     * @param clientType
+     */
     @Transactional
     public void releaseDraft(ClientType clientType) {
-        resourceObjectDAO.deleteByClientType(clientType);
-        resourceActionDAO.deleteByClientType(clientType);
+        resourceRepository.deleteByClientType(clientType);
         var drafts = resourceDraftDAO.selectListByClientType(clientType);
         if (CollectionUtils.isEmpty(drafts)) {
             return;
         }
-        List<ResourceObjectPO> objs = Lists.newArrayList();
-        List<ResourceActionPO> actions = Lists.newArrayList();
-        drafts.forEach(draft -> {
-            var resource = convert.resourceDraftToPO(draft);
-            resource.setId(IdWorker.getIdStr());
-            objs.add(resource);
-            draft.getActions().forEach(action -> {
-                var act = convert.resourceDraftActionToPO(action);
-                act.setId(IdWorker.getIdStr());
-                act.setResourceId(resource.getId());
-                actions.add(act);
-            });
-        });
-        if (CollectionUtils.isNotEmpty(objs)) {
-            resourceObjectDAO.saveBatch(objs);
-        }
-        if (CollectionUtils.isNotEmpty(actions)) {
-            resourceActionDAO.saveBatch(actions);
-        }
+        var resources = drafts.stream().map(convert::resourceDraftToEntity).collect(Collectors.toList());
+        resourceRepository.saveBatch(resources);
     }
 
     public List<Resource> findResourcesByClientType(ClientType clientType) {
-        return null;
+        return resourceRepository.findResourcesByClientType(clientType);
     }
 
 }

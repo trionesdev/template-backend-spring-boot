@@ -2,6 +2,7 @@ package com.trionesdev.wms.core.domains.perm.service.impl;
 
 import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.wms.core.domains.perm.dao.po.ResourceDraftPO;
+import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Resource;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
 import com.trionesdev.wms.core.domains.perm.manager.impl.ResourceManager;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +36,8 @@ public class ResourceService {
         resourceManager.releaseDraft(clientType);
     }
 
+    public List<Resource> findResourcesByClientType(ClientType clientType) {
+        return resourceManager.findResourcesByClientType(clientType);
+    }
 
 }
