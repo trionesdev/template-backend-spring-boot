@@ -19,6 +19,10 @@
             <groupId>com.trionesdev.wms</groupId>
             <artifactId>rest-backend</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.trionesdev.wms</groupId>
+            <artifactId>rest-boss</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

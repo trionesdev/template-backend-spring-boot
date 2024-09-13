@@ -47,6 +47,11 @@
                 <artifactId>rest-backend</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.trionesdev.wms</groupId>
+                <artifactId>rest-boss</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

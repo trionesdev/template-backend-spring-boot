@@ -4,6 +4,6 @@ import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
 import lombok.Data;
 
 @Data
-public class ResourceDraftReleaseRO {
+public class FunctionalResourceDraftReleaseRO {
     private ClientType clientType;
 }

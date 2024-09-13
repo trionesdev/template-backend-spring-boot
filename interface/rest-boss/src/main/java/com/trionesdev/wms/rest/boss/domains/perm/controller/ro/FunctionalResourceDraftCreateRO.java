@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ResourceDraftUpdateRO {
+public class FunctionalResourceDraftCreateRO {
     private String parentId;
     private ClientType clientType;
     private ResourceType type;
