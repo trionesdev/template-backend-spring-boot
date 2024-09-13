@@ -1,7 +1,6 @@
-package com.trionesdev.wms.rest.backend.domains.perm.controller.ro;
+package com.trionesdev.wms.core.domains.perm.internal.aggregate.entity;
 
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.wms.core.domains.perm.internal.enums.ResourceType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,13 +9,18 @@ import lombok.experimental.SuperBuilder;
 import java.util.List;
 
 @Data
-public class ViewResourceDraftCreateRO {
-    private String parentId;
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+public class FunctionalResource {
+    private String id;
     private ClientType clientType;
-    private ResourceType type;
+    private String parentId;
     private String name;
     private String identifier;
+    private String type;
     private List<Action> actions;
+
 
     @Data
     @SuperBuilder
@@ -26,4 +30,5 @@ public class ViewResourceDraftCreateRO {
         private String name;
         private String identifier;
     }
+
 }
