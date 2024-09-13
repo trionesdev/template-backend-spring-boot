@@ -1,11 +1,11 @@
 package com.trionesdev.wms.core.domains.perm.manager.impl;
 
-import com.trionesdev.wms.core.domains.perm.dao.impl.ResourceDraftDAO;
-import com.trionesdev.wms.core.domains.perm.dao.po.ViewResourceDraftPO;
+import com.trionesdev.wms.core.domains.perm.dao.impl.FunctionalResourceDraftDAO;
+import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceDraftPO;
 import com.trionesdev.wms.core.domains.perm.internal.PermDomainConvert;
-import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Resource;
+import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.FunctionalResource;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.wms.core.domains.perm.repository.impl.ViewResourceRepository;
+import com.trionesdev.wms.core.domains.perm.repository.impl.FunctionalResourceRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -16,12 +16,12 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class ViewResourceManager {
+public class FunctionalResourceManager {
     private final PermDomainConvert convert;
-    private final ResourceDraftDAO resourceDraftDAO;
-    private final ViewResourceRepository viewResourceRepository;
+    private final FunctionalResourceDraftDAO resourceDraftDAO;
+    private final FunctionalResourceRepository viewResourceRepository;
 
-    public void createResourceDraft(ViewResourceDraftPO record) {
+    public void createResourceDraft(FunctionalResourceDraftPO record) {
         resourceDraftDAO.save(record);
     }
 
@@ -29,11 +29,11 @@ public class ViewResourceManager {
         resourceDraftDAO.removeById(id);
     }
 
-    public void updateDraftById(ViewResourceDraftPO record) {
+    public void updateDraftById(FunctionalResourceDraftPO record) {
         resourceDraftDAO.updateById(record);
     }
 
-    public List<ViewResourceDraftPO> findDraftsByClientType(ClientType clientType) {
+    public List<FunctionalResourceDraftPO> findDraftsByClientType(ClientType clientType) {
         return resourceDraftDAO.selectListByClientType(clientType);
     }
 
@@ -53,7 +53,7 @@ public class ViewResourceManager {
         viewResourceRepository.saveBatch(resources);
     }
 
-    public List<Resource> findResourcesByClientType(ClientType clientType) {
+    public List<FunctionalResource> findResourcesByClientType(ClientType clientType) {
         return viewResourceRepository.findResourcesByClientType(clientType);
     }
 

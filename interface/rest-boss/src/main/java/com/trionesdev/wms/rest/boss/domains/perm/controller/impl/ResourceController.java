@@ -1,8 +1,8 @@
 package com.trionesdev.wms.rest.boss.domains.perm.controller.impl;
 
-import com.trionesdev.wms.core.domains.perm.dao.po.ViewResourceDraftPO;
+import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceDraftPO;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.wms.core.domains.perm.service.impl.ViewResourceService;
+import com.trionesdev.wms.core.domains.perm.service.impl.FunctionalResourceService;
 import com.trionesdev.wms.rest.boss.domains.perm.controller.ro.ResourceDraftCreateRO;
 import com.trionesdev.wms.rest.boss.domains.perm.controller.ro.ResourceDraftReleaseRO;
 import com.trionesdev.wms.rest.boss.domains.perm.controller.ro.ResourceDraftUpdateRO;
@@ -31,7 +31,7 @@ import static com.trionesdev.wms.rest.boss.domains.perm.internal.PermConstants.P
 @RequestMapping(PERM_PATH)
 public class ResourceController {
     private final PermBeRestConvert convert;
-    private final ViewResourceService viewResourceService;
+    private final FunctionalResourceService viewResourceService;
 
     @Operation(summary = "创建资源草稿")
     @PostMapping(value = "resource/drafts")
@@ -56,7 +56,7 @@ public class ResourceController {
 
     @Operation(summary = "获取资源草稿列表")
     @GetMapping(value = "resource/draft/list")
-    public List<ViewResourceDraftPO> findDraftsByClientType(@RequestParam ClientType clientType) {
+    public List<FunctionalResourceDraftPO> findDraftsByClientType(@RequestParam ClientType clientType) {
         return viewResourceService.findDraftsByClientType(clientType);
     }
 

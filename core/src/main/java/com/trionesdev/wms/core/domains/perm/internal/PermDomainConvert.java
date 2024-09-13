@@ -1,9 +1,9 @@
 package com.trionesdev.wms.core.domains.perm.internal;
 
-import com.trionesdev.wms.core.domains.perm.dao.po.ViewResourceActionPO;
-import com.trionesdev.wms.core.domains.perm.dao.po.ViewResourceDraftPO;
-import com.trionesdev.wms.core.domains.perm.dao.po.ViewResourceObjectPO;
-import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Resource;
+import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceActionPO;
+import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceDraftPO;
+import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceObjectPO;
+import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.FunctionalResource;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -12,17 +12,17 @@ import org.mapstruct.MappingConstants;
         builder = @Builder(disableBuilder = true))
 public interface PermDomainConvert {
 
-    Resource resourceDraftToEntity(ViewResourceDraftPO draft);
+    FunctionalResource resourceDraftToEntity(FunctionalResourceDraftPO draft);
 
-    ViewResourceObjectPO resourceDraftToPO(ViewResourceDraftPO draft);
+    FunctionalResourceObjectPO resourceDraftToPO(FunctionalResourceDraftPO draft);
 
-    ViewResourceActionPO resourceDraftActionToPO(ViewResourceDraftPO.Action draft);
+    FunctionalResourceActionPO resourceDraftActionToPO(FunctionalResourceDraftPO.Action draft);
 
-    ViewResourceObjectPO resourceObjectEntityToPo(Resource resource);
+    FunctionalResourceObjectPO resourceObjectEntityToPo(FunctionalResource resource);
 
-    ViewResourceActionPO resourceActionEntityToPo(Resource.Action resource);
+    FunctionalResourceActionPO resourceActionEntityToPo(FunctionalResource.Action resource);
 
-    Resource resourceObjectToResource(ViewResourceObjectPO object);
+    FunctionalResource resourceObjectToResource(FunctionalResourceObjectPO object);
 
-    Resource.Action resourceActionToInnerAction(ViewResourceActionPO action);
+    FunctionalResource.Action resourceActionToInnerAction(FunctionalResourceActionPO action);
 }

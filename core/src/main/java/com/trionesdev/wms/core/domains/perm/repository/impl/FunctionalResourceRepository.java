@@ -1,12 +1,12 @@
 package com.trionesdev.wms.core.domains.perm.repository.impl;
 
 import com.google.common.collect.Lists;
-import com.trionesdev.wms.core.domains.perm.dao.impl.ResourceActionDAO;
-import com.trionesdev.wms.core.domains.perm.dao.impl.ResourceObjectDAO;
-import com.trionesdev.wms.core.domains.perm.dao.po.ViewResourceActionPO;
-import com.trionesdev.wms.core.domains.perm.dao.po.ViewResourceObjectPO;
+import com.trionesdev.wms.core.domains.perm.dao.impl.FunctionalResourceActionDAO;
+import com.trionesdev.wms.core.domains.perm.dao.impl.FunctionalResourceObjectDAO;
+import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceActionPO;
+import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceObjectPO;
 import com.trionesdev.wms.core.domains.perm.internal.PermDomainConvert;
-import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Resource;
+import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.FunctionalResource;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
@@ -19,20 +19,20 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Repository
-public class ViewResourceRepository {
+public class FunctionalResourceRepository {
     private final PermDomainConvert convert;
-    private final ResourceObjectDAO resourceObjectDAO;
-    private final ResourceActionDAO resourceActionDAO;
+    private final FunctionalResourceObjectDAO resourceObjectDAO;
+    private final FunctionalResourceActionDAO resourceActionDAO;
 
-    public void saveBatch(List<Resource> resources){
-        List<ViewResourceObjectPO> objs = Lists.newArrayList();
-        List<ViewResourceActionPO> actions = Lists.newArrayList();
+    public void saveBatch(List<FunctionalResource> resources){
+        List<FunctionalResourceObjectPO> objs = Lists.newArrayList();
+        List<FunctionalResourceActionPO> actions = Lists.newArrayList();
         resources.forEach(draft -> {
             var resource = convert.resourceObjectEntityToPo(draft);
             objs.add(resource);
             draft.getActions().forEach(action -> {
                 var act = convert.resourceActionEntityToPo(action);
-                act.setResourceId(resource.getId());
+                act.setObjectId(resource.getId());
                 actions.add(act);
             });
         });
@@ -49,9 +49,9 @@ public class ViewResourceRepository {
         resourceActionDAO.deleteByClientType(clientType);
     }
 
-    public List<Resource> findResourcesByClientType(ClientType clientType) {
+    public List<FunctionalResource> findResourcesByClientType(ClientType clientType) {
         var objects = resourceObjectDAO.selectListByClientType(clientType);
-        var actionsMap = resourceActionDAO.selectListByClientType(clientType).stream().collect(Collectors.groupingBy(ViewResourceActionPO::getResourceId));
+        var actionsMap = resourceActionDAO.selectListByClientType(clientType).stream().collect(Collectors.groupingBy(FunctionalResourceActionPO::getObjectId));
         return objects.stream().map(object -> {
             var resource = convert.resourceObjectToResource(object);
             var actions = Optional.ofNullable(actionsMap.get(object.getId())).map(list -> list.stream().map(convert::resourceActionToInnerAction).collect(Collectors.toList())).orElse(new ArrayList<>());
