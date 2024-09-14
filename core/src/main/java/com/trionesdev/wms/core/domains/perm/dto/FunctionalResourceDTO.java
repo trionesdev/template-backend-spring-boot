@@ -12,7 +12,7 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResourceDTO {
+public class FunctionalResourceDTO {
     private String id;
     private ClientType clientType;
     private String parentId;
@@ -30,5 +30,4 @@ public class ResourceDTO {
         private String name;
         private String identifier;
     }
-
 }

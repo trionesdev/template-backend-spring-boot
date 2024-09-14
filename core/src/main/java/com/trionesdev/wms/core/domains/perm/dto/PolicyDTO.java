@@ -1,5 +1,4 @@
-package com.trionesdev.wms.core.domains.perm.internal.aggregate.entity;
-
+package com.trionesdev.wms.core.domains.perm.dto;
 
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
 import com.trionesdev.wms.core.domains.perm.internal.enums.PolicyGrantObjType;
@@ -14,10 +13,9 @@ import java.util.Set;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Policy {
+public class PolicyDTO {
     ClientType clientType;
     private PolicyGrantObjType grantObjType;
     private String grantObjId;
-    private Set<Permission> permissions;
-
+    private Set<PermissionDTO> permissions;
 }

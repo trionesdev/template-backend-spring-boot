@@ -28,4 +28,8 @@ public class RoleDAO extends ServiceImpl<RoleMapper, RolePO> {
         );
     }
 
+    public List<RolePO> selectSubList(String parentId) {
+        return list(new LambdaQueryWrapper<RolePO>().eq(RolePO::getParentId, parentId));
+    }
+
 }
