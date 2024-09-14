@@ -2,7 +2,7 @@ package com.trionesdev.wms.rest.backend.domains.perm.internal;
 
 import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceDraftPO;
 import com.trionesdev.wms.core.domains.perm.dao.po.RolePO;
-import com.trionesdev.wms.core.domains.perm.dto.PolicyDTO;
+import com.trionesdev.wms.core.domains.perm.dto.PolicySaveCmd;
 import com.trionesdev.wms.rest.backend.domains.perm.controller.ro.FunctionalResourceDraftCreateRO;
 import com.trionesdev.wms.rest.backend.domains.perm.controller.ro.FunctionalResourceDraftUpdateRO;
 import com.trionesdev.wms.rest.backend.domains.perm.controller.ro.PolicySaveRO;
@@ -22,5 +22,5 @@ public interface PermBeRestConvert {
 
     RolePO from(RoleUpdateRO args);
 
-    PolicyDTO from(PolicySaveRO args);
+    PolicySaveCmd from(PolicySaveRO args);
 }

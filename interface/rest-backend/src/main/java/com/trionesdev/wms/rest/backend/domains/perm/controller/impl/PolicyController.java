@@ -1,6 +1,8 @@
 package com.trionesdev.wms.rest.backend.domains.perm.controller.impl;
 
 import com.trionesdev.wms.core.domains.perm.dto.PermissionDTO;
+import com.trionesdev.wms.core.domains.perm.dto.PolicyDTO;
+import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
 import com.trionesdev.wms.core.domains.perm.service.impl.PolicyService;
 import com.trionesdev.wms.rest.backend.domains.perm.controller.ro.PermissionQueryRO;
 import com.trionesdev.wms.rest.backend.domains.perm.controller.ro.PolicySaveRO;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
@@ -38,6 +41,12 @@ public class PolicyController {
     @GetMapping(value = "policy/permissions")
     public Set<PermissionDTO> findObjPermissions(PermissionQueryRO query) {
         return policyService.findPermissionsByGrantObj(query.getClientType(), query.getGrantObjType(), query.getGrantObjId());
+    }
+
+    @Operation(summary = "查询当前用户权限列表")
+    @GetMapping(value = "actor/policy")
+    public PolicyDTO actorPermissions(@RequestParam(value = "clientType") ClientType clientType) {
+        return policyService.findActorPolicy(clientType);
     }
 
 }
