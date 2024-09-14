@@ -30,6 +30,6 @@ public class RolePO extends BaseLogicPO {
     @TableField(typeHandler = StringCollectionTypeHandler.class)
     private List<String> prevIds;
     private String name;
-    private String remark;
+    private String description;
     private Boolean customFlag;
 }

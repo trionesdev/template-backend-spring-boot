@@ -3,7 +3,7 @@ package com.trionesdev.wms.core.domains.perm.dao.po;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.trionesdev.commons.mybatisplus.entity.BaseLogicEntity;
+import com.trionesdev.commons.mybatisplus.po.BasePO;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
 import com.trionesdev.wms.core.domains.perm.internal.enums.PolicyGrantObjType;
 import lombok.AllArgsConstructor;
@@ -19,8 +19,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-@TableName(value = "perm_policy", autoResultMap = true)
-public class PolicyPO extends BaseLogicEntity {
+@TableName(value = "perm_permission", autoResultMap = true)
+public class PolicyPO extends BasePO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
@@ -33,7 +33,7 @@ public class PolicyPO extends BaseLogicEntity {
      * 对象ID
      */
     private String grantObjId;
-    private String resObj;
-    private String resAct;
+    private String obj;
+    private String act;
 
 }
