@@ -3,7 +3,11 @@ package com.trionesdev.wms.core.domains.perm.internal;
 import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceActionPO;
 import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceDraftPO;
 import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceObjectPO;
+import com.trionesdev.wms.core.domains.perm.dto.PermissionDTO;
+import com.trionesdev.wms.core.domains.perm.dto.PolicyDTO;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.FunctionalResource;
+import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Permission;
+import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Policy;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -25,4 +29,9 @@ public interface PermDomainConvert {
     FunctionalResource resourceObjectToResource(FunctionalResourceObjectPO object);
 
     FunctionalResource.Action resourceActionToInnerAction(FunctionalResourceActionPO action);
+
+
+    Policy policyDtoToEntity(PolicyDTO dto);
+
+    PermissionDTO permissionEntityToDto(Permission permission);
 }

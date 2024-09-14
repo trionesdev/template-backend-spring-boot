@@ -42,9 +42,9 @@ public class PolicyRepository {
         return policies.stream().map(policy -> Permission.builder().obj(policy.getObj()).act(policy.getAct()).build()).collect(Collectors.toSet());
     }
 
-    public List<Permission> findPermissionsByGrantObjs(ClientType clientType, PolicyGrantObjType grantObjType, Collection<String> grantObjIds) {
+    public Set<Permission> findPermissionsByGrantObjs(ClientType clientType, PolicyGrantObjType grantObjType, Collection<String> grantObjIds) {
         var policies = policyDAO.selectByGrantObjs(clientType, grantObjType, grantObjIds);
-        return policies.stream().map(policy -> Permission.builder().obj(policy.getObj()).act(policy.getAct()).build()).collect(Collectors.toList());
+        return policies.stream().map(policy -> Permission.builder().obj(policy.getObj()).act(policy.getAct()).build()).collect(Collectors.toSet());
     }
 
 }
