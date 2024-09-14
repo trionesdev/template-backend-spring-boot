@@ -3,8 +3,11 @@ package com.trionesdev.wms.core.domains.perm.manager.impl;
 import com.trionesdev.commons.core.constant.IdentityConstants;
 import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.wms.core.domains.perm.dao.criteria.RoleCriteria;
+import com.trionesdev.wms.core.domains.perm.dao.impl.RoleGrantDAO;
+import com.trionesdev.wms.core.domains.perm.dao.po.RoleGrantPO;
 import com.trionesdev.wms.core.domains.perm.dao.po.RolePO;
 import com.trionesdev.wms.core.domains.perm.dao.impl.RoleDAO;
+import com.trionesdev.wms.core.domains.perm.internal.enums.RoleGrantObjType;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
@@ -12,14 +15,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class RoleManager {
     private final RoleDAO roleDAO;
+    private final RoleGrantDAO roleGrantDAO;
 
     public void create(RolePO record) {
         if (Objects.equals(IdentityConstants.STRING_ID_ZERO_VALUE, record.getParentId())) {
@@ -62,6 +69,7 @@ public class RoleManager {
 
     /**
      * 查询所有父级角色
+     *
      * @param id
      * @return
      */
@@ -80,7 +88,7 @@ public class RoleManager {
      * @param id
      * @return
      */
-    public List<RolePO> findWithPrev(String id) {
+    public List<RolePO> findRelationRolesById(String id) {
         var roles = new ArrayList<RolePO>();
         var role = roleDAO.getById(id);
         if (!Objects.equals(IdentityConstants.STRING_ID_ZERO_VALUE, role.getParentId())) {
@@ -89,6 +97,28 @@ public class RoleManager {
         }
         roles.add(role);
         return roles;
+    }
+
+    /**
+     * 查询对象关联的角色（包含父级角色）
+     *
+     * @param grantObjType
+     * @param grantObjId
+     * @return
+     */
+    public Set<RolePO> findObjRelationRoles(RoleGrantObjType grantObjType, String grantObjId) {
+        var roleGrants = roleGrantDAO.selectListByObj(grantObjType, grantObjId);
+        if (CollectionUtils.isEmpty(roleGrants)) {
+            return Collections.emptySet();
+        }
+        var allRoles = new HashSet<RolePO>();
+        var roleIds = roleGrants.stream().map(RoleGrantPO::getRoleId).collect(Collectors.toSet());
+        var roles = roleDAO.listByIds(roleIds);
+        var prevIds = roles.stream().map(RolePO::getPrevIds).flatMap(List::stream).collect(Collectors.toSet());
+        var prevRoles = roleDAO.listByIds(prevIds);
+        allRoles.addAll(roles);
+        allRoles.addAll(prevRoles);
+        return allRoles;
     }
 
 }

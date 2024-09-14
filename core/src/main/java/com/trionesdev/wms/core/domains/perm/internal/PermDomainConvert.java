@@ -4,7 +4,7 @@ import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceActionPO;
 import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceDraftPO;
 import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceObjectPO;
 import com.trionesdev.wms.core.domains.perm.dto.PermissionDTO;
-import com.trionesdev.wms.core.domains.perm.dto.PolicyDTO;
+import com.trionesdev.wms.core.domains.perm.dto.PolicySaveCmd;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.FunctionalResource;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Permission;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Policy;
@@ -31,7 +31,7 @@ public interface PermDomainConvert {
     FunctionalResource.Action resourceActionToInnerAction(FunctionalResourceActionPO action);
 
 
-    Policy policyDtoToEntity(PolicyDTO dto);
+    Policy policyDtoToEntity(PolicySaveCmd dto);
 
     PermissionDTO permissionEntityToDto(Permission permission);
 }
