@@ -1,7 +1,7 @@
 package com.trionesdev.wms.core.domains.perm.repository.impl;
 
-import com.trionesdev.wms.core.domains.perm.dao.impl.PolicyDAO;
-import com.trionesdev.wms.core.domains.perm.dao.po.PolicyPO;
+import com.trionesdev.wms.core.domains.perm.dao.impl.PermissionDAO;
+import com.trionesdev.wms.core.domains.perm.dao.po.PermissionPO;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Permission;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Policy;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
@@ -19,13 +19,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Repository
 public class PolicyRepository {
-    private final PolicyDAO policyDAO;
+    private final PermissionDAO policyDAO;
 
     @Transactional
     public void savePolicy(Policy policy) {
         policyDAO.deleteByGrantObj(policy.getClientType(), policy.getGrantObjType(), policy.getGrantObjId());
         if (CollectionUtils.isNotEmpty(policy.getPermissions())) {
-            List<PolicyPO> policies = policy.getPermissions().stream().map(permission -> PolicyPO.builder()
+            List<PermissionPO> policies = policy.getPermissions().stream().map(permission -> PermissionPO.builder()
                     .clientType(policy.getClientType())
                     .build()).collect(Collectors.toList());
             policyDAO.saveBatch(policies);
