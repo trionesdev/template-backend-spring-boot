@@ -20,7 +20,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @TableName(value = "perm_permission", autoResultMap = true)
-public class PolicyPO extends BasePO {
+public class PermissionPO extends BasePO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
