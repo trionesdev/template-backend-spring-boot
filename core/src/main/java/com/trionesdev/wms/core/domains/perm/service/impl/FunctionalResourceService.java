@@ -49,6 +49,8 @@ public class FunctionalResourceService {
             var treeNode = new TreeNode<String>();
             treeNode.setId(resource.getId());
             treeNode.setParentId(resource.getParentId());
+            treeNode.setName(resource.getName());
+            treeNode.setExtra(map);
             return treeNode;
         }).collect(Collectors.toList());
         return TreeUtil.build(resources, IdentityConstants.STRING_ID_ZERO_VALUE);
