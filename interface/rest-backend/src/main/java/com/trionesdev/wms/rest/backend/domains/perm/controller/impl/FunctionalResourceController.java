@@ -23,7 +23,7 @@ public class FunctionalResourceController {
     private final PermBeRestConvert convert;
     private final FunctionalResourceService functionalResourceService;
     @Operation(summary = "获取功能资源(树形列表)")
-    @GetMapping(value = "functional/resource/tree")
+    @GetMapping(value = "functional-resource/tree")
     public List<Tree<String>> findResourceTreeByClientType(@RequestParam ClientType clientType) {
         return functionalResourceService.findResourceTreeByClientType(clientType);
     }

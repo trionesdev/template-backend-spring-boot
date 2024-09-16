@@ -1,7 +1,6 @@
 package com.trionesdev.wms.rest.boss.domains.perm.controller.impl;
 
 import cn.hutool.core.lang.tree.Tree;
-import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceDraftPO;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
 import com.trionesdev.wms.core.domains.perm.service.impl.FunctionalResourceService;
 import com.trionesdev.wms.rest.boss.domains.perm.controller.ro.FunctionalResourceDraftCreateRO;
@@ -35,20 +34,20 @@ public class FunctionalResourceController {
     private final FunctionalResourceService functionalResourceService;
 
     @Operation(summary = "创建资源草稿")
-    @PostMapping(value = "functional/resource/drafts")
+    @PostMapping(value = "functional-resource/drafts")
     public void createDraft(@Validated @RequestBody FunctionalResourceDraftCreateRO args) {
         var draft = convert.from(args);
         functionalResourceService.createResourceDraft(draft);
     }
 
     @Operation(summary = "根据ID资源草稿")
-    @DeleteMapping(value = "functional/resource/drafts/{id}")
+    @DeleteMapping(value = "functional-resource/drafts/{id}")
     public void deleteDraftById(@PathVariable(value = "id") String id) {
         functionalResourceService.deleteResourceDraftById(id);
     }
 
     @Operation(summary = "根据ID更新资源草稿")
-    @PutMapping(value = "functional/resource/drafts/{id}")
+    @PutMapping(value = "functional-resource/drafts/{id}")
     public void updateDraft(@PathVariable(value = "id") String id, @Validated @RequestBody FunctionalResourceDraftUpdateRO args) {
         var draft = convert.from(args);
         draft.setId(id);
@@ -56,19 +55,19 @@ public class FunctionalResourceController {
     }
 
     @Operation(summary = "获取资源草稿列表")
-    @GetMapping(value = "functional/resource/draft/list")
-    public List<FunctionalResourceDraftPO> findDraftsByClientType(@RequestParam ClientType clientType) {
-        return functionalResourceService.findDraftsByClientType(clientType);
+    @GetMapping(value = "functional-resource/draft/tree")
+    public List<Tree<String>> findDraftsByClientType(@RequestParam ClientType clientType) {
+        return functionalResourceService.findDraftTreeByClientType(clientType);
     }
 
     @Operation(summary = "发布资源草稿")
-    @PutMapping(value = "functional/resource/draft/release")
+    @PutMapping(value = "functional-resource/draft/release")
     public void releaseDraft(@Validated @RequestBody FunctionalResourceDraftReleaseRO args) {
         functionalResourceService.releaseDraft(args.getClientType());
     }
 
     @Operation(summary = "获取功能资源(树形列表)")
-    @GetMapping(value = "functional/resource/tree")
+    @GetMapping(value = "functional-resource/tree")
     public List<Tree<String>> findResourceTreeByClientType(@RequestParam ClientType clientType) {
         return functionalResourceService.findResourceTreeByClientType(clientType);
     }

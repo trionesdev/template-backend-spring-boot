@@ -10,8 +10,10 @@ import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Functional
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
 import com.trionesdev.wms.core.domains.perm.manager.impl.FunctionalResourceManager;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,6 +40,20 @@ public class FunctionalResourceService {
         return functionalResourceManager.findDraftsByClientType(clientType);
     }
 
+    public List<Tree<String>> findDraftTreeByClientType(ClientType clientType) {
+        var resources = functionalResourceManager.findDraftsByClientType(clientType).stream().map(resource -> {
+            var map = new HashMap<String, Object>();
+            map.put("identifier", resource.getIdentifier());
+            map.put("type", resource.getType());
+            map.put("actions", resource.getActions());
+            var treeNode = new TreeNode<String>();
+            treeNode.setId(resource.getId());
+            treeNode.setParentId(resource.getParentId());
+            return treeNode;
+        }).collect(Collectors.toList());
+        return TreeUtil.build(resources, IdentityConstants.STRING_ID_ZERO_VALUE);
+    }
+
     public void releaseDraft(ClientType clientType) {
         functionalResourceManager.releaseDraft(clientType);
     }
@@ -59,6 +75,9 @@ public class FunctionalResourceService {
             treeNode.setExtra(map);
             return treeNode;
         }).collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(resources)) {
+            return Collections.emptyList();
+        }
         return TreeUtil.build(resources, IdentityConstants.STRING_ID_ZERO_VALUE);
     }
 
