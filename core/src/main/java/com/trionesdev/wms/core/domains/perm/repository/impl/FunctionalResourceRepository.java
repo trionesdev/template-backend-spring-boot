@@ -24,17 +24,20 @@ public class FunctionalResourceRepository {
     private final FunctionalResourceObjectDAO resourceObjectDAO;
     private final FunctionalResourceActionDAO resourceActionDAO;
 
-    public void saveBatch(List<FunctionalResource> resources){
+    public void saveBatch(List<FunctionalResource> resources) {
         List<FunctionalResourceObjectPO> objs = Lists.newArrayList();
         List<FunctionalResourceActionPO> actions = Lists.newArrayList();
         resources.forEach(draft -> {
             var resource = convert.resourceObjectEntityToPo(draft);
             objs.add(resource);
-            draft.getActions().forEach(action -> {
-                var act = convert.resourceActionEntityToPo(action);
-                act.setObjectId(resource.getId());
-                actions.add(act);
-            });
+            if (CollectionUtils.isNotEmpty(draft.getActions())) {
+                draft.getActions().forEach(action -> {
+                    var act = convert.resourceActionEntityToPo(action);
+                    act.setObjectId(resource.getId());
+                    act.setClientType(resource.getClientType());
+                    actions.add(act);
+                });
+            }
         });
         if (CollectionUtils.isNotEmpty(objs)) {
             resourceObjectDAO.saveBatch(objs);
