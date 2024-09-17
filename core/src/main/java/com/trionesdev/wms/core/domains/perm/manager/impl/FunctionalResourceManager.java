@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -31,6 +32,10 @@ public class FunctionalResourceManager {
 
     public void updateDraftById(FunctionalResourceDraftPO record) {
         resourceDraftDAO.updateById(record);
+    }
+
+    public Optional<FunctionalResourceDraftPO> findDraftById(String id) {
+        return Optional.ofNullable(resourceDraftDAO.getById(id));
     }
 
     public List<FunctionalResourceDraftPO> findDraftsByClientType(ClientType clientType) {

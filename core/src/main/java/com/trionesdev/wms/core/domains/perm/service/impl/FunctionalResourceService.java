@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -34,6 +35,10 @@ public class FunctionalResourceService {
 
     public void updateDraftById(FunctionalResourceDraftPO record) {
         functionalResourceManager.updateDraftById(record);
+    }
+
+    public Optional<FunctionalResourceDraftPO> findDraftById(String id) {
+        return functionalResourceManager.findDraftById(id);
     }
 
     public List<FunctionalResourceDraftPO> findDraftsByClientType(ClientType clientType) {

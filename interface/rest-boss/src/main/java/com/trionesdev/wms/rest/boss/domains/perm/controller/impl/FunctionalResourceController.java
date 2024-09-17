@@ -1,6 +1,7 @@
 package com.trionesdev.wms.rest.boss.domains.perm.controller.impl;
 
 import cn.hutool.core.lang.tree.Tree;
+import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceDraftPO;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
 import com.trionesdev.wms.core.domains.perm.service.impl.FunctionalResourceService;
 import com.trionesdev.wms.rest.boss.domains.perm.controller.ro.FunctionalResourceDraftCreateRO;
@@ -52,6 +53,12 @@ public class FunctionalResourceController {
         var draft = convert.from(args);
         draft.setId(id);
         functionalResourceService.updateDraftById(draft);
+    }
+
+    @Operation(summary = "根据ID获取资源草稿")
+    @GetMapping(value = "functional-resource/drafts/{id}")
+    public FunctionalResourceDraftPO findDraftById(@PathVariable String id) {
+        return functionalResourceService.findDraftById(id).orElse(null);
     }
 
     @Operation(summary = "获取资源草稿列表")
