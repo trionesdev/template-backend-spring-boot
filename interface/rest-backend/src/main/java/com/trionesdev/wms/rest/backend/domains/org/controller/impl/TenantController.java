@@ -43,7 +43,7 @@ public class TenantController {
     }
 
     @Operation(summary = "查询租户成员列表分页")
-    @GetMapping("tenant/members/page")
+    @GetMapping("tenant/member/page")
     public PageInfo<TenantMemberDetailDTO> queryTenantMembersPage(
             @RequestParam(value = "pageNum") Integer pageNum,
             @RequestParam(value = "pageSize") Integer pageSize,

@@ -57,7 +57,7 @@ public class DepartmentController {
     }
 
     @Operation(summary = "部门树形结构")
-    @GetMapping("departments/tree")
+    @GetMapping("department/tree")
     public List<Tree<String>> getDepartmentTree(
             @RequestParam(value = "mode", required = false) String mode
     ) {
@@ -71,7 +71,7 @@ public class DepartmentController {
     }
 
     @Operation(summary = "查询部门成员列表分页")
-    @GetMapping("department/members/page")
+    @GetMapping("department/member/page")
     public PageInfo<DepartmentMemberDTO> queryDepartmentMembersPage(
             @RequestParam(value = "pageNum") Integer pageNum,
             @RequestParam(value = "pageSize") Integer pageSize,
