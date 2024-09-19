@@ -1,5 +1,7 @@
 package com.trionesdev.wms.core.domains.dic.manager.impl;
 
+import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.wms.core.domains.dic.dao.criteria.DictionaryCriteria;
 import com.trionesdev.wms.core.domains.dic.dao.impl.DictionaryDAO;
 import com.trionesdev.wms.core.domains.dic.dao.impl.DictionaryTypeDAO;
 import com.trionesdev.wms.core.domains.dic.dao.po.DictionaryPO;
@@ -54,5 +56,9 @@ public class DictionaryManager {
 
     public List<DictionaryPO> findDictionaryList() {
         return dictionaryDAO.list();
+    }
+
+    public PageInfo<DictionaryPO> findDictionaryPage(DictionaryCriteria criteria) {
+        return dictionaryDAO.selectPage(criteria);
     }
 }
