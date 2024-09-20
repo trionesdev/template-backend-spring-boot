@@ -24,6 +24,6 @@ public class DepartmentPO extends BaseLogicPO {
     private String tenantId;
     private String parentId;
     @TableField(typeHandler = StringCollectionTypeHandler.class)
-    private List<String> paths;
+    private List<String> prevIds;
     private String name;
 }
