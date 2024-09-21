@@ -196,7 +196,7 @@ public class DepartmentServiceLocal implements DepartmentService {
             var memberIds = departmentMembers.stream().map(DepartmentMemberPO::getMemberId).collect(Collectors.toSet());
             var members = tenantMemberManager.findMembersByIds(memberIds);
             members.forEach(t -> {
-                result.add(OrgNodeDTO.builder().id(t.getId()).name(t.getUsername()).type(OrgNodeDTO.Type.MEMBER).build());
+                result.add(OrgNodeDTO.builder().id(t.getId()).name(t.getNickname()).type(OrgNodeDTO.Type.MEMBER).build());
             });
         }
         return result;

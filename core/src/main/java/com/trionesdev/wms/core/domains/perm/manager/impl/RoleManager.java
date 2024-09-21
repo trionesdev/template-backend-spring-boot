@@ -140,8 +140,13 @@ public class RoleManager {
         roleGrantDAO.saveBatch(grants);
     }
 
+    public void removeRoleGrantByObjs(String roleId, RoleGrantObjType grantObjType, List<String> grantObjIds) {
+        roleGrantDAO.removeRoleGrantByObjs(roleId, grantObjType, grantObjIds);
+    }
+
     public PageInfo<RoleGrantPO> findRoleGrantPage(RoleGrantCriteria criteria) {
         return roleGrantDAO.selectPage(criteria);
     }
+
 
 }
