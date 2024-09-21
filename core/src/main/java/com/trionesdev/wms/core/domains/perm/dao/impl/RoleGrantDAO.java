@@ -8,6 +8,7 @@ import com.trionesdev.wms.core.domains.perm.dao.criteria.RoleGrantCriteria;
 import com.trionesdev.wms.core.domains.perm.dao.po.RoleGrantPO;
 import com.trionesdev.wms.core.domains.perm.dao.mapper.RoleGrantMapper;
 import com.trionesdev.wms.core.domains.perm.internal.enums.RoleGrantObjType;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,9 @@ public class RoleGrantDAO extends ServiceImpl<RoleGrantMapper, RoleGrantPO> {
     private LambdaQueryWrapper<RoleGrantPO> buildQueryWrapper(final RoleGrantCriteria criteria) {
         var queryWrapper = new LambdaQueryWrapper<RoleGrantPO>();
         if (Objects.nonNull(criteria)) {
-            queryWrapper.eq(StringUtils.isNoneBlank(criteria.getRoleId()), RoleGrantPO::getRoleId, criteria.getRoleId());
+            queryWrapper.eq(StringUtils.isNoneBlank(criteria.getRoleId()), RoleGrantPO::getRoleId, criteria.getRoleId())
+                    .eq(Objects.nonNull(criteria.getGrantObjType()), RoleGrantPO::getGrantObjType, criteria.getGrantObjType())
+            ;
         }
         return queryWrapper;
     }
@@ -38,5 +41,13 @@ public class RoleGrantDAO extends ServiceImpl<RoleGrantMapper, RoleGrantPO> {
 
     public PageInfo<RoleGrantPO> selectPage(RoleGrantCriteria criteria) {
         return MpPageUtils.of(page(MpPageUtils.page(criteria), buildQueryWrapper(criteria)));
+    }
+
+    public void removeRoleGrantByObjs(String roleId, RoleGrantObjType grantObjType, List<String> grantObjIds) {
+        if (CollectionUtils.isEmpty(grantObjIds)) {
+            return;
+        }
+        lambdaUpdate().eq(RoleGrantPO::getRoleId, roleId).eq(RoleGrantPO::getGrantObjType, grantObjType)
+                .in(RoleGrantPO::getGrantObjId, grantObjIds).remove();
     }
 }

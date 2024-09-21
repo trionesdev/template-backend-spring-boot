@@ -6,6 +6,7 @@ import com.trionesdev.wms.core.domains.perm.dao.criteria.RoleGrantCriteria;
 import com.trionesdev.wms.core.domains.perm.dao.po.RolePO;
 import com.trionesdev.wms.core.domains.perm.dto.RoleMemberDTO;
 import com.trionesdev.wms.core.domains.perm.service.impl.RoleService;
+import com.trionesdev.wms.rest.backend.domains.perm.controller.ro.RemoveRoleGrantRO;
 import com.trionesdev.wms.rest.backend.domains.perm.controller.ro.RoleCreateRO;
 import com.trionesdev.wms.rest.backend.domains.perm.controller.ro.RoleGrantRO;
 import com.trionesdev.wms.rest.backend.domains.perm.controller.ro.RoleUpdateRO;
@@ -66,6 +67,14 @@ public class RoleController {
         var cmd = convert.from(args);
         cmd.setRoleId(id);
         roleService.roleGrant(cmd);
+    }
+
+    @Operation(summary = "移除角色授予对象(批量)")
+    @PutMapping(value = "roles/{id}/grants/remove/batch")
+    public void removeRoleGrantBatch(@PathVariable String id, @Validated @RequestBody RemoveRoleGrantRO args) {
+        var cmd = convert.from(args);
+        cmd.setRoleId(id);
+        roleService.removeRoleGrantByObjs(cmd);
     }
 
     @Operation(summary = "根据ID获取角色成员(分页)")

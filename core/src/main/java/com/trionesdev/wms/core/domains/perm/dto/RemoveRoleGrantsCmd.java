@@ -12,7 +12,7 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoleGrantCmd {
+public class RemoveRoleGrantsCmd {
     private String roleId;
     private RoleGrantObjType grantObjType;
     private List<String> grantObjIds;

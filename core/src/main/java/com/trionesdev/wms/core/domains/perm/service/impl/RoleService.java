@@ -6,11 +6,14 @@ import cn.hutool.core.lang.tree.TreeUtil;
 import com.trionesdev.commons.core.constant.IdentityConstants;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
+import com.trionesdev.wms.core.domains.org.dto.TenantMemberDetailDTO;
+import com.trionesdev.wms.core.domains.org.provider.OrgProvider;
 import com.trionesdev.wms.core.domains.perm.dao.criteria.RoleCriteria;
 import com.trionesdev.wms.core.domains.perm.dao.criteria.RoleGrantCriteria;
 import com.trionesdev.wms.core.domains.perm.dao.po.RoleGrantPO;
 import com.trionesdev.wms.core.domains.perm.dao.po.RolePO;
-import com.trionesdev.wms.core.domains.perm.dto.RoleGrantCmd;
+import com.trionesdev.wms.core.domains.perm.dto.AddRoleGrantsCmd;
+import com.trionesdev.wms.core.domains.perm.dto.RemoveRoleGrantsCmd;
 import com.trionesdev.wms.core.domains.perm.dto.RoleMemberDTO;
 import com.trionesdev.wms.core.domains.perm.internal.enums.RoleGrantObjType;
 import com.trionesdev.wms.core.domains.perm.manager.impl.RoleManager;
@@ -28,6 +31,7 @@ import java.util.stream.Collectors;
 @Service
 public class RoleService {
     private final RoleManager roleManager;
+    private final OrgProvider orgProvider;
 
     public void create(RolePO role) {
         roleManager.create(role);
@@ -59,16 +63,33 @@ public class RoleService {
         return TreeUtil.build(treeNodes, IdentityConstants.STRING_ID_ZERO_VALUE);
     }
 
-    public void roleGrant(RoleGrantCmd cmd) {
+    public void roleGrant(AddRoleGrantsCmd cmd) {
         roleManager.roleGrant(cmd.getRoleId(), cmd.getGrantObjType(), cmd.getGrantObjIds());
+    }
+
+    public void removeRoleGrantByObjs(RemoveRoleGrantsCmd cmd) {
+        roleManager.removeRoleGrantByObjs(cmd.getRoleId(), cmd.getGrantObjType(), cmd.getGrantObjIds());
     }
 
     private List<RoleMemberDTO> assembleRoleMembers(List<RoleGrantPO> records) {
         if (CollectionUtils.isEmpty(records)) {
             return new ArrayList<>();
         }
+        var memberIds = records.stream().map(RoleGrantPO::getGrantObjId).toList();
+        var memberMap = orgProvider.getMembersByMemberIds(memberIds).stream().collect(Collectors.toMap(TenantMemberDetailDTO::getId, v -> v, (v1, v2) -> v1));
         return records.stream().map(t -> {
-            return RoleMemberDTO.builder().build();
+            var roleMember = RoleMemberDTO.builder()
+                    .id(t.getId())
+                    .roleId(t.getRoleId())
+                    .memberId(t.getGrantObjId())
+                    .build();
+            Optional.ofNullable(memberMap.get(t.getGrantObjId())).ifPresent(member -> {
+                roleMember.setNickname(member.getNickname());
+                roleMember.setAvatar(member.getAvatar());
+                roleMember.setEmail(member.getEmail());
+                roleMember.setPhone(member.getPhone());
+            });
+            return roleMember;
         }).collect(Collectors.toList());
     }
 
