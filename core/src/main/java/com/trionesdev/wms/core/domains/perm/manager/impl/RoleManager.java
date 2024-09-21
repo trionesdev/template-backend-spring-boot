@@ -1,8 +1,11 @@
 package com.trionesdev.wms.core.domains.perm.manager.impl;
 
+import com.google.common.collect.Lists;
 import com.trionesdev.commons.core.constant.IdentityConstants;
+import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.wms.core.domains.perm.dao.criteria.RoleCriteria;
+import com.trionesdev.wms.core.domains.perm.dao.criteria.RoleGrantCriteria;
 import com.trionesdev.wms.core.domains.perm.dao.impl.RoleGrantDAO;
 import com.trionesdev.wms.core.domains.perm.dao.po.RoleGrantPO;
 import com.trionesdev.wms.core.domains.perm.dao.po.RolePO;
@@ -12,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -119,6 +123,25 @@ public class RoleManager {
         allRoles.addAll(roles);
         allRoles.addAll(prevRoles);
         return allRoles;
+    }
+
+    @Transactional
+    public void roleGrant(String roleId, RoleGrantObjType grantObjType, List<String> grantObjIds) {
+        if (CollectionUtils.isEmpty(grantObjIds)) {
+            return;
+        }
+        List<RoleGrantPO> grants = Lists.newArrayList();
+        grantObjIds.forEach(grantObjId -> {
+            var roleGrant = roleGrantDAO.selectUnique(roleId, grantObjType, grantObjId);
+            if (Objects.isNull(roleGrant)) {
+                grants.add(RoleGrantPO.builder().roleId(roleId).grantObjType(grantObjType).grantObjId(grantObjId).build());
+            }
+        });
+        roleGrantDAO.saveBatch(grants);
+    }
+
+    public PageInfo<RoleGrantPO> findRoleGrantPage(RoleGrantCriteria criteria) {
+        return roleGrantDAO.selectPage(criteria);
     }
 
 }

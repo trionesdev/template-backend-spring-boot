@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.google.common.base.Objects;
+import com.trionesdev.commons.mybatisplus.po.BaseLogicPO;
+import com.trionesdev.commons.mybatisplus.po.BasePO;
 import com.trionesdev.wms.core.domains.perm.internal.enums.RoleGrantObjType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,8 +18,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-@TableName("perm_role_grant")
-public class RoleGrantPO {
+@TableName(value = "perm_role_grant")
+public class RoleGrantPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
