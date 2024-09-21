@@ -1,9 +1,13 @@
 package com.trionesdev.wms.rest.backend.domains.perm.controller.impl;
 
 import cn.hutool.core.lang.tree.Tree;
+import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.wms.core.domains.perm.dao.criteria.RoleGrantCriteria;
 import com.trionesdev.wms.core.domains.perm.dao.po.RolePO;
+import com.trionesdev.wms.core.domains.perm.dto.RoleMemberDTO;
 import com.trionesdev.wms.core.domains.perm.service.impl.RoleService;
 import com.trionesdev.wms.rest.backend.domains.perm.controller.ro.RoleCreateRO;
+import com.trionesdev.wms.rest.backend.domains.perm.controller.ro.RoleGrantRO;
 import com.trionesdev.wms.rest.backend.domains.perm.controller.ro.RoleUpdateRO;
 import com.trionesdev.wms.rest.backend.domains.perm.internal.PermBeRestConvert;
 import com.trionesdev.wms.rest.backend.domains.perm.internal.PermRestConstants;
@@ -11,14 +15,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,6 +44,7 @@ public class RoleController {
     @PutMapping(value = "roles/{id}")
     public void updateRoleById(@PathVariable String id, @Validated @RequestBody RoleUpdateRO args) {
         var record = convert.from(args);
+        record.setId(id);
         roleService.updateById(record);
     }
 
@@ -60,6 +58,25 @@ public class RoleController {
     @GetMapping(value = "role/tree")
     public List<Tree<String>> findRoleTree() {
         return roleService.findRoleTree();
+    }
+
+    @Operation(summary = "角色授予")
+    @PutMapping(value = "roles/{id}/grant")
+    public void grantRole(@PathVariable String id, @Validated @RequestBody RoleGrantRO args) {
+        var cmd = convert.from(args);
+        cmd.setRoleId(id);
+        roleService.roleGrant(cmd);
+    }
+
+    @Operation(summary = "根据ID获取角色成员(分页)")
+    @GetMapping(value = "roles/{id}/member/page")
+    public PageInfo<RoleMemberDTO> queryRoleMembersPage(
+            @PathVariable String id,
+            @RequestParam(value = "pageNum") Integer pageNum,
+            @RequestParam(value = "pageSize") Integer pageSize
+    ) {
+        var criteria = RoleGrantCriteria.builder().pageNum(pageNum).pageSize(pageSize).roleId(id).build();
+        return roleService.queryRoleMemberPage(criteria);
     }
 
 }

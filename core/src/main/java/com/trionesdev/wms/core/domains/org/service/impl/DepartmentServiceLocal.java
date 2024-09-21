@@ -85,8 +85,7 @@ public class DepartmentServiceLocal implements DepartmentService {
             return departments;
         }
         var pathDepartments = departmentManager.findDepartmentById(id).map(t -> {
-            var paths = t.getPaths();
-            paths.remove(IdentityConstants.STRING_ID_ZERO_VALUE);
+            var paths = t.getPrevIds();
             var parentPathDepartments = ListUtil.toList(departmentManager.findDepartmentsByIds(paths));
             parentPathDepartments.add(t);
             return parentPathDepartments.stream().map(convert::poToDto).collect(Collectors.toList());
