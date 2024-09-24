@@ -2,7 +2,7 @@ package com.trionesdev.wms.core.domains.perm.dao.po;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.trionesdev.commons.mybatisplus.po.BaseLogicPO;
+import com.trionesdev.commons.mybatisplus.po.BasePO;
 import com.trionesdev.commons.mybatisplus.typehandlers.CollectionTypeHandler;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ResourceType;
@@ -22,9 +22,13 @@ import java.util.List;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @TableName(value = "perm_functional_resource_draft", autoResultMap = true)
-public class FunctionalResourceDraftPO extends BaseLogicPO {
+public class FunctionalResourceDraftPO extends BasePO {
     private String id;
     private String parentId;
+    /**
+     * 应用标识，例如，租户端 tenant,Boss端 boss, 非多租户的场景，为空
+     */
+    private String appIdentifier;
     private ClientType clientType;
     private ResourceType type;
     private String name;

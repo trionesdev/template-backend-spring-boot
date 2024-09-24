@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class FunctionalResourceManager {
     private final PermDomainConvert convert;
     private final FunctionalResourceDraftDAO resourceDraftDAO;
-    private final FunctionalResourceRepository viewResourceRepository;
+    private final FunctionalResourceRepository functionalResourceRepository;
 
     public void createResourceDraft(FunctionalResourceDraftPO record) {
         resourceDraftDAO.save(record);
@@ -38,8 +38,8 @@ public class FunctionalResourceManager {
         return Optional.ofNullable(resourceDraftDAO.getById(id));
     }
 
-    public List<FunctionalResourceDraftPO> findDraftsByClientType(ClientType clientType) {
-        return resourceDraftDAO.selectListByClientType(clientType);
+    public List<FunctionalResourceDraftPO> findDraftsByClientType(String appIdentifier, ClientType clientType) {
+        return resourceDraftDAO.selectListByClientType(appIdentifier, clientType);
     }
 
     /**
@@ -48,18 +48,18 @@ public class FunctionalResourceManager {
      * @param clientType
      */
     @Transactional
-    public void releaseDraft(ClientType clientType) {
-        viewResourceRepository.deleteByClientType(clientType);
-        var drafts = resourceDraftDAO.selectListByClientType(clientType);
+    public void releaseDraft(String appIdentifier, ClientType clientType) {
+        functionalResourceRepository.deleteByClientType(appIdentifier, clientType);
+        var drafts = resourceDraftDAO.selectListByClientType(appIdentifier, clientType);
         if (CollectionUtils.isEmpty(drafts)) {
             return;
         }
         var resources = drafts.stream().map(convert::resourceDraftToEntity).collect(Collectors.toList());
-        viewResourceRepository.saveBatch(resources);
+        functionalResourceRepository.saveBatch(resources);
     }
 
-    public List<FunctionalResource> findResourcesByClientType(ClientType clientType) {
-        return viewResourceRepository.findResourcesByClientType(clientType);
+    public List<FunctionalResource> findResourcesByClientType(String appIdentifier, ClientType clientType) {
+        return functionalResourceRepository.findResourcesByClientType(appIdentifier, clientType);
     }
 
 }

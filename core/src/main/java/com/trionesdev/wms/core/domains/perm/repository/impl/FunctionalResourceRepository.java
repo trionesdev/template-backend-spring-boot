@@ -33,6 +33,7 @@ public class FunctionalResourceRepository {
             if (CollectionUtils.isNotEmpty(draft.getActions())) {
                 draft.getActions().forEach(action -> {
                     var act = convert.resourceActionEntityToPo(action);
+                    act.setAppIdentifier(resource.getAppIdentifier());
                     act.setObjectId(resource.getId());
                     act.setClientType(resource.getClientType());
                     actions.add(act);
@@ -47,14 +48,14 @@ public class FunctionalResourceRepository {
         }
     }
 
-    public void deleteByClientType(ClientType clientType) {
-        resourceObjectDAO.deleteByClientType(clientType);
-        resourceActionDAO.deleteByClientType(clientType);
+    public void deleteByClientType(String appIdentifier, ClientType clientType) {
+        resourceObjectDAO.deleteByClientType(appIdentifier, clientType);
+        resourceActionDAO.deleteByClientType(appIdentifier, clientType);
     }
 
-    public List<FunctionalResource> findResourcesByClientType(ClientType clientType) {
-        var objects = resourceObjectDAO.selectListByClientType(clientType);
-        var actionsMap = resourceActionDAO.selectListByClientType(clientType).stream().collect(Collectors.groupingBy(FunctionalResourceActionPO::getObjectId));
+    public List<FunctionalResource> findResourcesByClientType(String appIdentifier, ClientType clientType) {
+        var objects = resourceObjectDAO.selectListByClientType(appIdentifier, clientType);
+        var actionsMap = resourceActionDAO.selectListByClientType(appIdentifier, clientType).stream().collect(Collectors.groupingBy(FunctionalResourceActionPO::getObjectId));
         return objects.stream().map(object -> {
             var resource = convert.resourceObjectToResource(object);
             var actions = Optional.ofNullable(actionsMap.get(object.getId())).map(list -> list.stream().map(convert::resourceActionToInnerAction).collect(Collectors.toList())).orElse(new ArrayList<>());

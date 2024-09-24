@@ -63,19 +63,19 @@ public class FunctionalResourceController {
 
     @Operation(summary = "获取资源草稿列表")
     @GetMapping(value = "functional-resource/draft/tree")
-    public List<Tree<String>> findDraftsByClientType(@RequestParam ClientType clientType) {
-        return functionalResourceService.findDraftTreeByClientType(clientType);
+    public List<Tree<String>> findDraftsByClientType(@RequestParam(value = "appIdentifier", required = false) String appIdentifier, @RequestParam ClientType clientType) {
+        return functionalResourceService.findDraftTreeByClientType(appIdentifier, clientType);
     }
 
     @Operation(summary = "发布资源草稿")
     @PutMapping(value = "functional-resource/draft/release")
     public void releaseDraft(@Validated @RequestBody FunctionalResourceDraftReleaseRO args) {
-        functionalResourceService.releaseDraft(args.getClientType());
+        functionalResourceService.releaseDraft(args.getAppIdentifier(), args.getClientType());
     }
 
     @Operation(summary = "获取功能资源(树形列表)")
     @GetMapping(value = "functional-resource/tree")
-    public List<Tree<String>> findResourceTreeByClientType(@RequestParam ClientType clientType) {
-        return functionalResourceService.findResourceTreeByClientType(clientType);
+    public List<Tree<String>> findResourceTreeByClientType(@RequestParam(value = "appIdentifier", required = false) String appIdentifier, @RequestParam ClientType clientType) {
+        return functionalResourceService.findResourceTreeByClientType(appIdentifier, clientType);
     }
 }

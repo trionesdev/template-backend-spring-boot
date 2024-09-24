@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 public class FunctionalResourceDraftCreateRO {
     private String parentId;
+    private String appIdentifier;
     private ClientType clientType;
     private ResourceType type;
     private String name;

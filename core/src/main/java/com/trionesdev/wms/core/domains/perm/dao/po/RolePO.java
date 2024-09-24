@@ -25,6 +25,9 @@ import java.util.List;
 public class RolePO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
+    /**
+     * 租户ID，如果当前为非多租户场景，或者是Boss用户的时候，为空，多租户场景时，boss端tenantId 为 "0"
+     */
     private String tenantId;
     private String parentId;
     @TableField(typeHandler = StringCollectionTypeHandler.class)

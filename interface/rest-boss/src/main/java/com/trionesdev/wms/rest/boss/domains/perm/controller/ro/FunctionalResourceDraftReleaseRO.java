@@ -5,5 +5,6 @@ import lombok.Data;
 
 @Data
 public class FunctionalResourceDraftReleaseRO {
+    private String appIdentifier;
     private ClientType clientType;
 }

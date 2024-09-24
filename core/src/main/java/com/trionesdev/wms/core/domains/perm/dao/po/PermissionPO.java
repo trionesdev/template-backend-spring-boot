@@ -24,6 +24,10 @@ public class PermissionPO extends BasePO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
+    /**
+     * 应用标识，例如，租户端 tenant,Boss端 boss
+     */
+    private String appIdentifier;
     private ClientType clientType;
     /**
      * 对象类型
