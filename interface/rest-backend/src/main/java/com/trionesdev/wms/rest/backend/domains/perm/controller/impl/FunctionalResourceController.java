@@ -22,10 +22,11 @@ import java.util.List;
 public class FunctionalResourceController {
     private final PermBeRestConvert convert;
     private final FunctionalResourceService functionalResourceService;
+
     @Operation(summary = "获取功能资源(树形列表)")
     @GetMapping(value = "functional-resource/tree")
-    public List<Tree<String>> findResourceTreeByClientType(@RequestParam ClientType clientType) {
-        return functionalResourceService.findResourceTreeByClientType(clientType);
+    public List<Tree<String>> findResourceTreeByClientType(@RequestParam(value = "appIdentifier", required = false) String appIdentifier, @RequestParam ClientType clientType) {
+        return functionalResourceService.findResourceTreeByClientType(appIdentifier, clientType);
     }
 
 }

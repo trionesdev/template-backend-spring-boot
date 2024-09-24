@@ -41,12 +41,12 @@ public class FunctionalResourceService {
         return functionalResourceManager.findDraftById(id);
     }
 
-    public List<FunctionalResourceDraftPO> findDraftsByClientType(ClientType clientType) {
-        return functionalResourceManager.findDraftsByClientType(clientType);
+    public List<FunctionalResourceDraftPO> findDraftsByClientType(String appIdentifier, ClientType clientType) {
+        return functionalResourceManager.findDraftsByClientType(appIdentifier, clientType);
     }
 
-    public List<Tree<String>> findDraftTreeByClientType(ClientType clientType) {
-        var resources = functionalResourceManager.findDraftsByClientType(clientType).stream().map(resource -> {
+    public List<Tree<String>> findDraftTreeByClientType(String appIdentifier, ClientType clientType) {
+        var resources = functionalResourceManager.findDraftsByClientType(appIdentifier, clientType).stream().map(resource -> {
             var map = new HashMap<String, Object>();
             map.put("identifier", resource.getIdentifier());
             map.put("type", resource.getType());
@@ -61,16 +61,16 @@ public class FunctionalResourceService {
         return TreeUtil.build(resources, IdentityConstants.STRING_ID_ZERO_VALUE);
     }
 
-    public void releaseDraft(ClientType clientType) {
-        functionalResourceManager.releaseDraft(clientType);
+    public void releaseDraft(String appIdentifier, ClientType clientType) {
+        functionalResourceManager.releaseDraft(appIdentifier, clientType);
     }
 
-    public List<FunctionalResource> findResourcesByClientType(ClientType clientType) {
-        return functionalResourceManager.findResourcesByClientType(clientType);
+    public List<FunctionalResource> findResourcesByClientType(String appIdentifier, ClientType clientType) {
+        return functionalResourceManager.findResourcesByClientType(appIdentifier, clientType);
     }
 
-    public List<Tree<String>> findResourceTreeByClientType(ClientType clientType) {
-        var resources = functionalResourceManager.findResourcesByClientType(clientType).stream().map(resource -> {
+    public List<Tree<String>> findResourceTreeByClientType(String appIdentifier, ClientType clientType) {
+        var resources = functionalResourceManager.findResourcesByClientType(appIdentifier, clientType).stream().map(resource -> {
             var map = new HashMap<String, Object>();
             map.put("identifier", resource.getIdentifier());
             map.put("type", resource.getType());

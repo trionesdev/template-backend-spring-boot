@@ -20,6 +20,7 @@ import lombok.experimental.SuperBuilder;
 public class FunctionalResourceActionPO extends BasePO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
+    private String appIdentifier;
     private ClientType clientType;
     private String objectId;
     private String name;

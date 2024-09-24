@@ -22,6 +22,7 @@ public class FunctionalResourceObjectPO extends BasePO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String parentId;
+    private String appIdentifier;
     private ClientType clientType;
     private String name;
     private String identifier;
