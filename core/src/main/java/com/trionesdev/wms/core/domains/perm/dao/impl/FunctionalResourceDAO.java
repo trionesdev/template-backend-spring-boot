@@ -35,7 +35,8 @@ public class FunctionalResourceDAO extends ServiceImpl<FunctionalResourceMapper,
     }
 
     public List<FunctionalResourcePO> selectListByClientType(String appCode, ClientType clientType) {
-        return lambdaQuery().eq(StringUtils.isNoneBlank(appCode), FunctionalResourcePO::getAppCode, appCode).eq(FunctionalResourcePO::getClientType, clientType).list();
+        return lambdaQuery().eq(StringUtils.isNoneBlank(appCode), FunctionalResourcePO::getAppCode, appCode)
+                .eq(Objects.nonNull(clientType), FunctionalResourcePO::getClientType, clientType).list();
     }
 
 }

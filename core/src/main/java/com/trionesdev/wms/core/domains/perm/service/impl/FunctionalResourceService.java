@@ -56,7 +56,7 @@ public class FunctionalResourceService {
         }
         return resources.stream().map(resource -> {
             var map = new HashMap<String, Object>();
-            map.put("uniqueCoe", resource.getUniqueCode());
+            map.put("uniqueCode", resource.getUniqueCode());
             map.put("type", resource.getType());
             map.put("groupCode", resource.getGroupCoe());
             map.put("icon", resource.getIcon());

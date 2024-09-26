@@ -62,6 +62,10 @@ public class FunctionalResourceRepository {
         return assembleResources(functionalResourceDAO.selectList(criteria));
     }
 
+    public List<FunctionalResource> findListByClientType(String appCode, ClientType clientType) {
+        return assembleResources(functionalResourceDAO.selectListByClientType(appCode, clientType));
+    }
+
     public void saveBatch(List<FunctionalResource> resources) {
         List<FunctionalResourceObjectPO> objs = Lists.newArrayList();
         List<FunctionalResourceActionPO> actions = Lists.newArrayList();

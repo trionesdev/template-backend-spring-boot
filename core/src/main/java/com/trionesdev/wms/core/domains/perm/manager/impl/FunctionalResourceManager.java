@@ -52,6 +52,13 @@ public class FunctionalResourceManager {
         return functionalResourceRepository.findList(criteria);
     }
 
+    public List<FunctionalResource> findResourcesByClientType(String appCode, ClientType clientType) {
+        return functionalResourceRepository.findListByClientType(appCode, clientType);
+    }
+
+
+
+
     public void createResourceDraft(FunctionalResourceDraftPO record) {
         resourceDraftDAO.save(record);
     }
@@ -88,8 +95,6 @@ public class FunctionalResourceManager {
         functionalResourceRepository.saveBatch(resources);
     }
 
-    public List<FunctionalResource> findResourcesByClientType(String appIdentifier, ClientType clientType) {
-        return functionalResourceRepository.findResourcesByClientType(appIdentifier, clientType);
-    }
+
 
 }
