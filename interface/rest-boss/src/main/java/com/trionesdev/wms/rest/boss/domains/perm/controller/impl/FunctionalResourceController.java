@@ -66,15 +66,9 @@ public class FunctionalResourceController {
 
     @Operation(summary = "获取功能资源列表（树形）")
     @GetMapping(value = "functional-resource/tree")
-    public List<Tree<String>> findResourcesTree(@RequestParam(value = "appCode", required = false) String appCode, @RequestParam ClientType clientType) {
+    public List<Tree<String>> findResourcesTree(@RequestParam(value = "appCode", required = false) String appCode, @RequestParam(value = "clientType", required = false) ClientType clientType) {
         return functionalResourceService.findResourceTreeByClientType(appCode, clientType);
     }
-
-
-
-
-
-
 
 
     @Operation(summary = "创建资源草稿")
