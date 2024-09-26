@@ -21,15 +21,15 @@ import lombok.experimental.SuperBuilder;
 public class FunctionalResourcePO extends BasePO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
-    private String appIdentifier;
+    private String appCode;
     private ClientType clientType;
     private String parentId;
     private FunctionalResourceType type;
-    private String group;
+    private String groupCode;
     private String name;
-    private String identifier;
+    private String uniqueCode;
     private String icon;
     private String description;
-    private String apiIdentifier;
+    private String apiCode;
     private String routePath;
 }

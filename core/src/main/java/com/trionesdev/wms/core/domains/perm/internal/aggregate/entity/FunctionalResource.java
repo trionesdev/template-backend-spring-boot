@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,16 +20,16 @@ import java.util.Objects;
 @NoArgsConstructor
 public class FunctionalResource {
     private String id;
-    private String appIdentifier;
+    private String appCode;
     private ClientType clientType;
     private String parentId;
     private FunctionalResourceType type;
-    private String group;
+    private String groupCoe;
     private String name;
-    private String identifier;
+    private String uniqueCode;
     private String icon;
     private String description;
-    private String apiIdentifier;
+    private String apiCode;
     private String routePath;
 
 
@@ -46,30 +47,34 @@ public class FunctionalResource {
 
     /**
      * 初始化数据
+     *
      * @param parent
      */
     public void initialize(FunctionalResource parent) {
         if (Objects.nonNull(parent)) {
-            if (Objects.equals(FunctionalResourceType.GROUP, parent.getType())) {
-                this.group = parent.getGroup();
+            if (StringUtils.isNotBlank(parent.getGroupCoe())) {
+                this.groupCoe = parent.getGroupCoe();
             }
-            if (Objects.equals(FunctionalResourceType.GROUP,type)){
+            if (Objects.equals(FunctionalResourceType.GROUP, type)) {
                 throw new BusinessException(TrionesError.builder().code("TYPE_ERROR").message("分组类型只能是根数据").build());
             }
-            if (Objects.equals(FunctionalResourceType.MENU,type) && !CollectionUtils.containsAny(List.of(FunctionalResourceType.GROUP,FunctionalResourceType.MENU),parent.getType())){
+            if (Objects.equals(FunctionalResourceType.MENU, type) && !CollectionUtils.containsAny(List.of(FunctionalResourceType.GROUP, FunctionalResourceType.MENU), parent.getType())) {
                 throw new BusinessException(TrionesError.builder().code("TYPE_ERROR").message("菜单类型的父级类型只能是分组类型或菜单类型").build());
             }
-            if (Objects.equals(FunctionalResourceType.RESOURCE,type)  && !CollectionUtils.containsAny(List.of(FunctionalResourceType.GROUP,FunctionalResourceType.MENU),parent.getType())){
+            if (Objects.equals(FunctionalResourceType.RESOURCE, type) && !CollectionUtils.containsAny(List.of(FunctionalResourceType.GROUP, FunctionalResourceType.MENU), parent.getType())) {
                 throw new BusinessException(TrionesError.builder().code("TYPE_ERROR").message("资源类型的父级类型只能是分组类型或菜单类型").build());
             }
-            if (Objects.equals(FunctionalResourceType.ACTION,type)  && !CollectionUtils.containsAny(List.of(FunctionalResourceType.GROUP,FunctionalResourceType.MENU,FunctionalResourceType.RESOURCE),parent.getType())){
+            if (Objects.equals(FunctionalResourceType.ACTION, type) && !CollectionUtils.containsAny(List.of(FunctionalResourceType.GROUP, FunctionalResourceType.MENU, FunctionalResourceType.RESOURCE), parent.getType())) {
                 throw new BusinessException(TrionesError.builder().code("TYPE_ERROR").message("操作类型的父级类型只能是分组类型或菜单类型或资源类型").build());
             }
+        } else {
+            if (Objects.equals(FunctionalResourceType.GROUP, type)) {
+                this.groupCoe = this.uniqueCode;
+            }
         }
-
     }
 
-    public void validate(){
+    public void validate() {
 
     }
 

@@ -1,20 +1,11 @@
-package com.trionesdev.wms.core.domains.perm.dto;
+package com.trionesdev.wms.rest.boss.domains.perm.controller.ro;
 
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
 import com.trionesdev.wms.core.domains.perm.internal.enums.FunctionalResourceType;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-
-import java.util.List;
 
 @Data
-@SuperBuilder
-@AllArgsConstructor
-@NoArgsConstructor
-public class FunctionalResourceDTO {
-    private String id;
+public class FunctionalResourceUpdateRO {
     private String appCode;
     private ClientType clientType;
     private String parentId;
@@ -26,21 +17,4 @@ public class FunctionalResourceDTO {
     private String description;
     private String apiCode;
     private String routePath;
-
-
-
-
-
-
-    private List<Action> actions;
-
-
-    @Data
-    @SuperBuilder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class Action {
-        private String name;
-        private String identifier;
-    }
 }
