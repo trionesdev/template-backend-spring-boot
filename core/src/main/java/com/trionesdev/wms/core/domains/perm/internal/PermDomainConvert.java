@@ -3,6 +3,8 @@ package com.trionesdev.wms.core.domains.perm.internal;
 import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceActionPO;
 import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceDraftPO;
 import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceObjectPO;
+import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourcePO;
+import com.trionesdev.wms.core.domains.perm.dto.FunctionalResourceDTO;
 import com.trionesdev.wms.core.domains.perm.dto.PermissionDTO;
 import com.trionesdev.wms.core.domains.perm.dto.PolicySaveCmd;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.FunctionalResource;
@@ -15,6 +17,16 @@ import org.mapstruct.MappingConstants;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         builder = @Builder(disableBuilder = true))
 public interface PermDomainConvert {
+
+    FunctionalResourcePO resourceEntityToPo(FunctionalResource resource);
+
+    FunctionalResource resourcePoToEntity(FunctionalResourcePO po);
+
+    FunctionalResourceDTO resourceEntityToDto(FunctionalResource resource);
+
+
+
+
 
     FunctionalResource resourceDraftToEntity(FunctionalResourceDraftPO draft);
 

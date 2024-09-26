@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.trionesdev.commons.mybatisplus.po.BasePO;
 import com.trionesdev.commons.mybatisplus.typehandlers.CollectionTypeHandler;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.wms.core.domains.perm.internal.enums.ResourceType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.FunctionalResourceType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,7 +30,7 @@ public class FunctionalResourceDraftPO extends BasePO {
      */
     private String appIdentifier;
     private ClientType clientType;
-    private ResourceType type;
+    private FunctionalResourceType type;
     private String name;
     private String identifier;
     @TableField(typeHandler = ActionsTypeHandler.class)

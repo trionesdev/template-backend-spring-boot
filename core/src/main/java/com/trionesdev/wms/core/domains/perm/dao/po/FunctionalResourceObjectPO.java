@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.trionesdev.commons.mybatisplus.po.BasePO;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.wms.core.domains.perm.internal.enums.ResourceType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.FunctionalResourceType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,6 +26,6 @@ public class FunctionalResourceObjectPO extends BasePO {
     private ClientType clientType;
     private String name;
     private String identifier;
-    private ResourceType type;
+    private FunctionalResourceType type;
 
 }

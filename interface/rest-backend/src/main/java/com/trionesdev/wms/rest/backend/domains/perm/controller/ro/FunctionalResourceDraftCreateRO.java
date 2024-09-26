@@ -1,7 +1,7 @@
 package com.trionesdev.wms.rest.backend.domains.perm.controller.ro;
 
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.wms.core.domains.perm.internal.enums.ResourceType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.FunctionalResourceType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.List;
 public class FunctionalResourceDraftCreateRO {
     private String parentId;
     private ClientType clientType;
-    private ResourceType type;
+    private FunctionalResourceType type;
     private String name;
     private String identifier;
     private List<Action> actions;

@@ -2,8 +2,10 @@ package com.trionesdev.wms.rest.boss.domains.perm.controller.impl;
 
 import cn.hutool.core.lang.tree.Tree;
 import com.trionesdev.wms.core.domains.perm.dao.po.FunctionalResourceDraftPO;
+import com.trionesdev.wms.core.domains.perm.dto.FunctionalResourceDTO;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
 import com.trionesdev.wms.core.domains.perm.service.impl.FunctionalResourceService;
+import com.trionesdev.wms.rest.boss.domains.perm.controller.ro.FunctionalResourceCreateRO;
 import com.trionesdev.wms.rest.boss.domains.perm.controller.ro.FunctionalResourceDraftCreateRO;
 import com.trionesdev.wms.rest.boss.domains.perm.controller.ro.FunctionalResourceDraftReleaseRO;
 import com.trionesdev.wms.rest.boss.domains.perm.controller.ro.FunctionalResourceDraftUpdateRO;
@@ -33,6 +35,47 @@ import static com.trionesdev.wms.rest.boss.domains.perm.internal.PermConstants.P
 public class FunctionalResourceController {
     private final PermBossRestConvert convert;
     private final FunctionalResourceService functionalResourceService;
+
+
+    @Operation(summary = "创建功能资源")
+    @PostMapping(value = "functional-resources")
+    public void createResource(@Validated @RequestBody FunctionalResourceCreateRO args) {
+        var resource = convert.from(args);
+        functionalResourceService.createResource(resource);
+    }
+
+    @Operation(summary = "根据ID删除功能资源")
+    @DeleteMapping(value = "functional-resources/{id}")
+    public void deleteResourceById(@PathVariable String id) {
+        functionalResourceService.deleteResourceById(id);
+    }
+
+    @Operation(summary = "根据ID更新功能资源")
+    @PutMapping(value = "functional-resources/{id}")
+    public void updateResource(@PathVariable String id, @Validated @RequestBody FunctionalResourceCreateRO args) {
+        var resource = convert.from(args);
+        resource.setId(id);
+        functionalResourceService.updateResourceById(resource);
+    }
+
+    @Operation(summary = "根据ID获取功能资源")
+    @GetMapping(value = "functional-resources/{id}")
+    public FunctionalResourceDTO findResourceById(@PathVariable String id) {
+        return functionalResourceService.findResourceById(id).orElse(null);
+    }
+
+    @Operation(summary = "获取功能资源列表（树形）")
+    @GetMapping(value = "functional-resource/tree")
+    public List<Tree<String>> findResourcesTree(@RequestParam(value = "appCode", required = false) String appCode, @RequestParam ClientType clientType) {
+        return functionalResourceService.findResourceTreeByClientType(appCode, clientType);
+    }
+
+
+
+
+
+
+
 
     @Operation(summary = "创建资源草稿")
     @PostMapping(value = "functional-resource/drafts")
@@ -74,7 +117,7 @@ public class FunctionalResourceController {
     }
 
     @Operation(summary = "获取功能资源(树形列表)")
-    @GetMapping(value = "functional-resource/tree")
+    @GetMapping(value = "functional-resource/tree1")
     public List<Tree<String>> findResourceTreeByClientType(@RequestParam(value = "appIdentifier", required = false) String appIdentifier, @RequestParam ClientType clientType) {
         return functionalResourceService.findResourceTreeByClientType(appIdentifier, clientType);
     }
