@@ -1,6 +1,6 @@
 package com.trionesdev.wms.core.domains.perm.internal.enums;
 
-public enum RoleGrantObjType {
+public enum RoleSubjectType {
     USER,
     MEMBER
 }

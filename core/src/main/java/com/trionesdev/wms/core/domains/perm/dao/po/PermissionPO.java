@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.trionesdev.commons.mybatisplus.po.BasePO;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.wms.core.domains.perm.internal.enums.PolicyGrantObjType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.PermissionSubjectType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,17 +27,17 @@ public class PermissionPO extends BasePO {
     /**
      * 应用标识，例如，租户端 tenant,Boss端 boss
      */
-    private String appIdentifier;
+    private String appCode;
     private ClientType clientType;
     /**
-     * 对象类型
+     * 用户类型
      */
-    private PolicyGrantObjType grantObjType;
+    private PermissionSubjectType subjectType;
     /**
      * 对象ID
      */
-    private String grantObjId;
+    private String subject;
     private String obj;
-    private String act;
+    private String effect;
 
 }

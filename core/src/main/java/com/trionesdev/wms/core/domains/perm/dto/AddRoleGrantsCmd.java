@@ -1,6 +1,6 @@
 package com.trionesdev.wms.core.domains.perm.dto;
 
-import com.trionesdev.wms.core.domains.perm.internal.enums.RoleGrantObjType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.RoleSubjectType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class AddRoleGrantsCmd {
     private String roleId;
-    private RoleGrantObjType grantObjType;
+    private RoleSubjectType grantObjType;
     private List<String> grantObjIds;
 }

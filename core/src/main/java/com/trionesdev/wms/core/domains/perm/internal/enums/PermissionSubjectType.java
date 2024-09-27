@@ -1,5 +1,5 @@
 package com.trionesdev.wms.core.domains.perm.internal.enums;
 
-public enum PolicyGrantObjType {
+public enum PermissionSubjectType {
     ROLE
 }

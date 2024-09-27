@@ -1,7 +1,7 @@
 package com.trionesdev.wms.core.domains.perm.dto;
 
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.wms.core.domains.perm.internal.enums.PolicyGrantObjType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.PermissionSubjectType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +14,9 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PolicySaveCmd {
-    ClientType clientType;
-    private PolicyGrantObjType grantObjType;
-    private String grantObjId;
+    private String appCode;
+    private ClientType clientType;
+    private PermissionSubjectType subjectType;
+    private String subject;
     private Set<PermissionDTO> permissions;
 }

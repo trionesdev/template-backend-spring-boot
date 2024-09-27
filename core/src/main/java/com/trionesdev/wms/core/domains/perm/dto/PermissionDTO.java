@@ -11,5 +11,5 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class PermissionDTO {
     private String obj;
-    private String act;
+    private String effect;
 }

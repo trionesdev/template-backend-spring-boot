@@ -15,7 +15,7 @@ import com.trionesdev.wms.core.domains.perm.dao.po.RolePO;
 import com.trionesdev.wms.core.domains.perm.dto.AddRoleGrantsCmd;
 import com.trionesdev.wms.core.domains.perm.dto.RemoveRoleGrantsCmd;
 import com.trionesdev.wms.core.domains.perm.dto.RoleMemberDTO;
-import com.trionesdev.wms.core.domains.perm.internal.enums.RoleGrantObjType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.RoleSubjectType;
 import com.trionesdev.wms.core.domains.perm.manager.impl.RoleManager;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
@@ -75,15 +75,15 @@ public class RoleService {
         if (CollectionUtils.isEmpty(records)) {
             return new ArrayList<>();
         }
-        var memberIds = records.stream().map(RoleGrantPO::getGrantObjId).toList();
+        var memberIds = records.stream().map(RoleGrantPO::getSubject).toList();
         var memberMap = orgProvider.getMembersByMemberIds(memberIds).stream().collect(Collectors.toMap(TenantMemberDetailDTO::getId, v -> v, (v1, v2) -> v1));
         return records.stream().map(t -> {
             var roleMember = RoleMemberDTO.builder()
                     .id(t.getId())
                     .roleId(t.getRoleId())
-                    .memberId(t.getGrantObjId())
+                    .memberId(t.getSubject())
                     .build();
-            Optional.ofNullable(memberMap.get(t.getGrantObjId())).ifPresent(member -> {
+            Optional.ofNullable(memberMap.get(t.getSubject())).ifPresent(member -> {
                 roleMember.setNickname(member.getNickname());
                 roleMember.setAvatar(member.getAvatar());
                 roleMember.setEmail(member.getEmail());
@@ -94,7 +94,7 @@ public class RoleService {
     }
 
     public PageInfo<RoleMemberDTO> queryRoleMemberPage(RoleGrantCriteria criteria) {
-        criteria.setGrantObjType(RoleGrantObjType.MEMBER);
+        criteria.setSubjectType(RoleSubjectType.MEMBER);
         var pageInfo = roleManager.findRoleGrantPage(criteria);
         return PageUtils.of(pageInfo, assembleRoleMembers(pageInfo.getRows()));
     }
