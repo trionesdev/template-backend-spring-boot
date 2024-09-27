@@ -1,22 +1,23 @@
 package com.trionesdev.wms.rest.backend.domains.perm.controller.ro;
 
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.wms.core.domains.perm.internal.enums.PolicyGrantObjType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.PermissionSubjectType;
 import lombok.Data;
 
 import java.util.Set;
 
 @Data
 public class PolicySaveRO {
-    ClientType clientType;
-    private PolicyGrantObjType grantObjType;
-    private String grantObjId;
+    private String appCode;
+    private ClientType clientType;
+    private PermissionSubjectType subjectType;
+    private String subject;
     private Set<Permission> permissions;
 
     @Data
     public static class Permission {
         private String obj;
-        private String act;
+        private String effect;
     }
 
 }

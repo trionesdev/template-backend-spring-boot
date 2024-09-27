@@ -5,8 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.google.common.base.Objects;
 import com.trionesdev.commons.mybatisplus.po.BaseLogicPO;
-import com.trionesdev.commons.mybatisplus.po.BasePO;
-import com.trionesdev.wms.core.domains.perm.internal.enums.RoleGrantObjType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.RoleSubjectType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,8 +22,8 @@ public class RoleGrantPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
-    private RoleGrantObjType grantObjType;
-    private String grantObjId;
+    private RoleSubjectType subjectType;
+    private String subject;
     private String roleId;
 
     @Override
@@ -33,12 +32,12 @@ public class RoleGrantPO extends BaseLogicPO {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         RoleGrantPO roleGrant = (RoleGrantPO) o;
-        return grantObjType == roleGrant.grantObjType && Objects.equal(grantObjId, roleGrant.grantObjId) && Objects.equal(roleId, roleGrant.roleId);
+        return subjectType == roleGrant.subjectType && Objects.equal(subject, roleGrant.subject) && Objects.equal(roleId, roleGrant.roleId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(super.hashCode(), grantObjType, grantObjId, roleId);
+        return Objects.hashCode(super.hashCode(), subjectType, subjectType, roleId);
     }
 
 }

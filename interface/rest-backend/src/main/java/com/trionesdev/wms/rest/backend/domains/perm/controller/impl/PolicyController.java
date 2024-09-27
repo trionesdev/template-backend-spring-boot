@@ -30,7 +30,7 @@ public class PolicyController {
     private final PolicyService policyService;
 
     @Operation(summary = "保存策略")
-    @PutMapping(value = "policies")
+    @PutMapping(value = "policy/save")
     public void savePolicy(@Validated @RequestBody PolicySaveRO args) {
         var policy = convert.from(args);
         policyService.savePolicy(policy);
@@ -40,7 +40,7 @@ public class PolicyController {
     @Operation(summary = "查询权限列表")
     @GetMapping(value = "policy/permissions")
     public Set<PermissionDTO> findObjPermissions(PermissionQueryRO query) {
-        return policyService.findPermissionsByGrantObj(query.getClientType(), query.getGrantObjType(), query.getGrantObjId());
+        return policyService.findPermissionsBySubject(query.getClientType(), query.getSubjectType(), query.getSubject());
     }
 
     @Operation(summary = "查询当前用户权限列表")

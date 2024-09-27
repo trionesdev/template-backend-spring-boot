@@ -8,8 +8,8 @@ import com.trionesdev.wms.core.domains.perm.dto.PolicySaveCmd;
 import com.trionesdev.wms.core.domains.perm.internal.PermDomainConvert;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Permission;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.wms.core.domains.perm.internal.enums.PolicyGrantObjType;
-import com.trionesdev.wms.core.domains.perm.internal.enums.RoleGrantObjType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.PermissionSubjectType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.RoleSubjectType;
 import com.trionesdev.wms.core.domains.perm.manager.impl.PolicyManager;
 import com.trionesdev.wms.core.domains.perm.manager.impl.RoleManager;
 import lombok.RequiredArgsConstructor;
@@ -35,14 +35,14 @@ public class PolicyService {
         return permissions.stream().map(convert::permissionEntityToDto).collect(Collectors.toSet());
     }
 
-    public Set<PermissionDTO> findPermissionsByGrantObj(ClientType clientType, PolicyGrantObjType grantObjType, String grantObjId) {
-        return assemblePermissions(policyManager.findPermissionsByGrantObj(clientType, grantObjType, grantObjId));
+    public Set<PermissionDTO> findPermissionsBySubject(ClientType clientType, PermissionSubjectType grantObjType, String grantObjId) {
+        return assemblePermissions(policyManager.findPermissionsBySubject(clientType, grantObjType, grantObjId));
     }
 
     public PolicyDTO findActorPolicy(ClientType clientType) {
-        Set<RolePO> roles = roleManager.findObjRelationRoles(RoleGrantObjType.USER, actorContext.getUserId());
+        Set<RolePO> roles = roleManager.findObjRelationRoles(RoleSubjectType.USER, actorContext.getUserId());
         var roleIds = roles.stream().map(RolePO::getId).collect(Collectors.toSet());
-        var permissions = policyManager.findPermissionsByGrantObjs(clientType, PolicyGrantObjType.ROLE, roleIds);
+        var permissions = policyManager.findPermissionsBySubjects(clientType, PermissionSubjectType.ROLE, roleIds);
         return PolicyDTO.builder().permissions(assemblePermissions(permissions)).build();
     }
 

@@ -10,7 +10,7 @@ import com.trionesdev.wms.core.domains.perm.dao.impl.RoleGrantDAO;
 import com.trionesdev.wms.core.domains.perm.dao.po.RoleGrantPO;
 import com.trionesdev.wms.core.domains.perm.dao.po.RolePO;
 import com.trionesdev.wms.core.domains.perm.dao.impl.RoleDAO;
-import com.trionesdev.wms.core.domains.perm.internal.enums.RoleGrantObjType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.RoleSubjectType;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
@@ -110,7 +110,7 @@ public class RoleManager {
      * @param grantObjId
      * @return
      */
-    public Set<RolePO> findObjRelationRoles(RoleGrantObjType grantObjType, String grantObjId) {
+    public Set<RolePO> findObjRelationRoles(RoleSubjectType grantObjType, String grantObjId) {
         var roleGrants = roleGrantDAO.selectListByObj(grantObjType, grantObjId);
         if (CollectionUtils.isEmpty(roleGrants)) {
             return Collections.emptySet();
@@ -126,21 +126,21 @@ public class RoleManager {
     }
 
     @Transactional
-    public void roleGrant(String roleId, RoleGrantObjType grantObjType, List<String> grantObjIds) {
-        if (CollectionUtils.isEmpty(grantObjIds)) {
+    public void roleGrant(String roleId, RoleSubjectType subjectType, List<String> subjects) {
+        if (CollectionUtils.isEmpty(subjects)) {
             return;
         }
         List<RoleGrantPO> grants = Lists.newArrayList();
-        grantObjIds.forEach(grantObjId -> {
-            var roleGrant = roleGrantDAO.selectUnique(roleId, grantObjType, grantObjId);
+        subjects.forEach(grantObjId -> {
+            var roleGrant = roleGrantDAO.selectUnique(roleId, subjectType, grantObjId);
             if (Objects.isNull(roleGrant)) {
-                grants.add(RoleGrantPO.builder().roleId(roleId).grantObjType(grantObjType).grantObjId(grantObjId).build());
+                grants.add(RoleGrantPO.builder().roleId(roleId).subjectType(subjectType).subject(grantObjId).build());
             }
         });
         roleGrantDAO.saveBatch(grants);
     }
 
-    public void removeRoleGrantByObjs(String roleId, RoleGrantObjType grantObjType, List<String> grantObjIds) {
+    public void removeRoleGrantByObjs(String roleId, RoleSubjectType grantObjType, List<String> grantObjIds) {
         roleGrantDAO.removeRoleGrantByObjs(roleId, grantObjType, grantObjIds);
     }
 

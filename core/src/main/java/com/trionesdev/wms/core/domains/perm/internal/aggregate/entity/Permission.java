@@ -13,18 +13,18 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Permission {
     private String obj;
-    private String act;
+    private String effect;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-         Permission that = (Permission) o;
-        return Objects.equals(obj, that.act) && Objects.equals(act, that.act);
+        Permission that = (Permission) o;
+        return Objects.equals(obj, that.obj) && Objects.equals(effect, that.effect);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(obj, act);
+        return Objects.hash(obj, effect);
     }
 }

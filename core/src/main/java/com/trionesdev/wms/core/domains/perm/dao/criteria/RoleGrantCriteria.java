@@ -1,7 +1,7 @@
 package com.trionesdev.wms.core.domains.perm.dao.criteria;
 
 import com.trionesdev.commons.core.page.PageCriteria;
-import com.trionesdev.wms.core.domains.perm.internal.enums.RoleGrantObjType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.RoleSubjectType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,6 +15,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class RoleGrantCriteria extends PageCriteria {
     private String roleId;
-    private RoleGrantObjType grantObjType;
-    private String grantObjId;
+    private RoleSubjectType subjectType;
+    private String subject;
 }
