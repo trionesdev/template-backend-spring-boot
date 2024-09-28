@@ -70,6 +70,12 @@ public class DepartmentController {
         return departmentService.findDepartmentPaths(id);
     }
 
+    @Operation(summary = "根据ID删除部门成员")
+    @DeleteMapping(value = "department/members/{id}")
+    public void deleteDepartmentMemberById(@PathVariable String id) {
+        departmentService.deleteDepartmentMemberById(id);
+    }
+
     @Operation(summary = "查询部门成员列表分页")
     @GetMapping("department/member/page")
     public PageInfo<DepartmentMemberDTO> queryDepartmentMembersPage(

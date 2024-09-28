@@ -16,10 +16,12 @@ import org.mapstruct.Named;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         builder = @Builder(disableBuilder = true))
 @Named("orgBeanConvert")
-public interface OrgBeanConvert {
+public interface OrgDomainConvert {
 
     //region tenant
     TenantMemberPO from(TenantMemberCreateCmd cmd);
+
+    TenantMember memberCreateCmdToEntity(TenantMemberCreateCmd cmd);
 
     TenantMemberPO from(TenantMemberDetailDTO tenantMember);
 

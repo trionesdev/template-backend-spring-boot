@@ -16,6 +16,7 @@ import com.trionesdev.wms.core.domains.perm.internal.PermDomainConvert;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.FunctionalResource;
 import com.trionesdev.wms.core.domains.perm.internal.aggregate.entity.Permission;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
+import com.trionesdev.wms.core.domains.perm.internal.enums.FunctionalResourceType;
 import com.trionesdev.wms.core.domains.perm.internal.enums.PermissionSubjectType;
 import com.trionesdev.wms.core.domains.perm.internal.enums.RoleSubjectType;
 import com.trionesdev.wms.core.domains.perm.manager.impl.FunctionalResourceManager;
@@ -54,7 +55,7 @@ public class PolicyService {
     }
 
     public PolicyDTO findActorPolicy(String appCode, ClientType clientType) {
-        Set<RolePO> roles = roleManager.findObjRelationRoles(RoleSubjectType.USER, actorContext.getUserId());
+        Set<RolePO> roles = roleManager.findObjRelationRoles(RoleSubjectType.MEMBER, actorContext.getMemberId());
         var roleIds = roles.stream().map(RolePO::getId).collect(Collectors.toSet());
         var permissions = policyManager.findPermissionsBySubjects(appCode, clientType, PermissionSubjectType.ROLE, roleIds);
         return PolicyDTO.builder().permissions(assemblePermissions(permissions)).build();
@@ -98,15 +99,17 @@ public class PolicyService {
             parentId = resources.stream().filter(resource -> resource.getUniqueCode().equals(group)).findFirst().map(FunctionalResource::getId).orElse(parentId);
         }
         if (BooleanUtils.isTrue(tenantMember.getMaster())) {
-            return TreeUtil.build(assembleTreeNodes(resources), parentId);
+            var menus = resources.stream().filter(t -> Objects.equals(FunctionalResourceType.MENU, t.getType())).toList();
+            return TreeUtil.build(assembleTreeNodes(menus), parentId);
         } else {
-            Set<RolePO> roles = roleManager.findObjRelationRoles(RoleSubjectType.USER, actorContext.getUserId());
+            Set<RolePO> roles = roleManager.findObjRelationRoles(RoleSubjectType.MEMBER, actorContext.getMemberId());
             var roleIds = roles.stream().map(RolePO::getId).collect(Collectors.toSet());
             var permissionObjs = policyManager.findPermissionsBySubjects(appCode, clientType, PermissionSubjectType.ROLE, roleIds).stream().map(Permission::getObj).collect(Collectors.toList());
             var permissionResources = resources.stream().filter(resource -> {
-                return CollectionUtils.containsAny(permissionObjs, resource);
-            }).collect(Collectors.toList());
-            return TreeUtil.build(assembleTreeNodes(permissionResources), parentId);
+                return CollectionUtils.containsAny(permissionObjs, resource.getUniqueCode());
+            }).toList();
+            var menus = permissionResources.stream().filter(t -> Objects.equals(FunctionalResourceType.MENU, t.getType())).toList();
+            return TreeUtil.build(assembleTreeNodes(menus), parentId);
         }
     }
 }

@@ -2,10 +2,10 @@ package com.trionesdev.wms.rest.backend.domains.org.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberDTO;
-import com.trionesdev.wms.core.domains.org.dto.TenantMemberDetailDTO;
 import com.trionesdev.wms.core.domains.org.service.impl.TenantService;
+import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberCreateRO;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberQueryRO;
-import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberRO;
+import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberUpdateRO;
 import com.trionesdev.wms.rest.backend.domains.org.internal.OrgBeRestConvert;
 import com.trionesdev.wms.rest.backend.domains.org.internal.OrgRestConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,14 +24,17 @@ public class TenantController {
 
     @Operation(summary = "创建租户成员")
     @PostMapping("tenant/members")
-    public void createTenantMember(@Validated @RequestBody TenantMemberRO.Create args) {
+    public void createTenantMember(@Validated @RequestBody TenantMemberCreateRO args) {
         var tenantMember = convert.from(args);
         tenantService.createMember(tenantMember);
     }
 
     @Operation(summary = "根据ID更新租户成员")
     @PutMapping("tenant/members/{id}")
-    public void updateTenantMemberById(@PathVariable(value = "id") String id, @Validated @RequestBody TenantMemberRO.Update args) {
+    public void updateTenantMemberById(
+            @PathVariable(value = "id") String id,
+            @Validated @RequestBody TenantMemberUpdateRO args
+    ) {
         var tenantMember = convert.from(args);
         tenantMember.setId(id);
         tenantService.updateMemberById(tenantMember);
@@ -45,7 +48,7 @@ public class TenantController {
 
     @Operation(summary = "查询租户成员列表分页")
     @GetMapping("tenant/member/page")
-    public PageInfo<TenantMemberDetailDTO> queryTenantMembersPage(
+    public PageInfo<TenantMemberDTO> queryTenantMembersPage(
             @RequestParam(value = "pageNum") Integer pageNum,
             @RequestParam(value = "pageSize") Integer pageSize,
             TenantMemberQueryRO query) {

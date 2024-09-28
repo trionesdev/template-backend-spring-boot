@@ -83,6 +83,7 @@ public class DepartmentManager {
     }
 
     public void setMemberDepartments(String memberId, List<String> departmentIds) {
+        Objects.requireNonNull(memberId);
         departmentMemberDAO.deleteByMemberId(memberId);
         if (CollectionUtil.isEmpty(departmentIds)) {
             return;

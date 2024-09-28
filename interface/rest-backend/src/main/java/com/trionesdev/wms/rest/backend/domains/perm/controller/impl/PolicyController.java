@@ -1,5 +1,6 @@
 package com.trionesdev.wms.rest.backend.domains.perm.controller.impl;
 
+import cn.hutool.core.lang.tree.Tree;
 import com.trionesdev.wms.core.domains.perm.dto.PermissionDTO;
 import com.trionesdev.wms.core.domains.perm.dto.PolicyDTO;
 import com.trionesdev.wms.core.domains.perm.internal.enums.ClientType;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 
 @Tag(name = "权限-策略")
@@ -49,8 +51,17 @@ public class PolicyController {
             @RequestParam(value = "appCode", required = false) String appCode,
             @RequestParam(value = "clientType", required = false) ClientType clientType
     ) {
-        return policyService.findActorPolicy(appCode,clientType);
+        return policyService.findActorPolicy(appCode, clientType);
     }
 
+    @Operation(summary = "获取有权限的菜单")
+    @GetMapping(value = "actor/policy/menu")
+    public List<Tree<String>> findActorMenuTree(
+            @RequestParam(value = "appCode", required = false) String appCode,
+            @RequestParam(value = "clientType", required = false) ClientType clientType,
+            @RequestParam(value = "group", required = false) String group
+    ) {
+        return policyService.findActorMenuTree(appCode, clientType, group);
+    }
 
 }

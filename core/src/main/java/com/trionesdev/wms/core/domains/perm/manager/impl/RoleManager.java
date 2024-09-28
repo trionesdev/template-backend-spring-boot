@@ -1,6 +1,7 @@
 package com.trionesdev.wms.core.domains.perm.manager.impl;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.trionesdev.commons.core.constant.IdentityConstants;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.exception.BusinessException;
@@ -118,7 +119,9 @@ public class RoleManager {
         var allRoles = new HashSet<RolePO>();
         var roleIds = roleGrants.stream().map(RoleGrantPO::getRoleId).collect(Collectors.toSet());
         var roles = roleDAO.listByIds(roleIds);
-        var prevIds = roles.stream().map(RolePO::getPrevIds).flatMap(List::stream).collect(Collectors.toSet());
+        Set<String> prevIds = roles.stream().map(role -> {
+            return CollectionUtils.isNotEmpty(role.getPrevIds()) ? role.getPrevIds() : new ArrayList<String>();
+        }).flatMap(List::stream).collect(Collectors.toSet());
         var prevRoles = roleDAO.listByIds(prevIds);
         allRoles.addAll(roles);
         allRoles.addAll(prevRoles);

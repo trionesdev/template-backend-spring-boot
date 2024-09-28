@@ -13,6 +13,7 @@ public class RoleMemberDTO {
     private String id;
     private String roleId;
     private String memberId;
+    private String username;
     private String nickname;
     private String avatar;
     private String phone;

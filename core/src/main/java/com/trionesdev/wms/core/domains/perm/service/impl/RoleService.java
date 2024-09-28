@@ -86,6 +86,7 @@ public class RoleService {
             Optional.ofNullable(memberMap.get(t.getSubject())).ifPresent(member -> {
                 roleMember.setNickname(member.getNickname());
                 roleMember.setAvatar(member.getAvatar());
+                roleMember.setUsername(member.getUsername());
                 roleMember.setEmail(member.getEmail());
                 roleMember.setPhone(member.getPhone());
             });
