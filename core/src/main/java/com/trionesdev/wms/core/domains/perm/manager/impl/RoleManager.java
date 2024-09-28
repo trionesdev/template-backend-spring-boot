@@ -52,6 +52,9 @@ public class RoleManager {
     }
 
     public void updateById(RolePO record) {
+        if (Objects.equals(record.getId(), record.getParentId())) {
+            throw new BusinessException("ROLE_SELF_PARENT");
+        }
         var roleSnap = roleDAO.getById(record.getId());
         if (Objects.nonNull(record.getParentId()) && !Objects.equals(record.getParentId(), roleSnap.getParentId())) {
             if (Objects.equals(IdentityConstants.STRING_ID_ZERO_VALUE, record.getParentId())) {
