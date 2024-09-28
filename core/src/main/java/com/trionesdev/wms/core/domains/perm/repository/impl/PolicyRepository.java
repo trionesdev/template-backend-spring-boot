@@ -23,7 +23,7 @@ public class PolicyRepository {
 
     @Transactional
     public void savePolicy(Policy policy) {
-        policyDAO.deleteBySubject(policy.getClientType(), policy.getSubjectType(), policy.getSubject());
+        policyDAO.deleteBySubject(policy.getAppCode(), policy.getClientType(), policy.getSubjectType(), policy.getSubject());
         if (CollectionUtils.isNotEmpty(policy.getPermissions())) {
             List<PermissionPO> policies = policy.getPermissions().stream().map(permission -> PermissionPO.builder()
                     .appCode(policy.getAppCode())
@@ -37,18 +37,18 @@ public class PolicyRepository {
         }
     }
 
-    public void deleteBySubject(ClientType clientType, PermissionSubjectType subjectType, String subject) {
-        policyDAO.deleteBySubject(clientType, subjectType, subject);
+    public void deleteBySubject(String appCode, ClientType clientType, PermissionSubjectType subjectType, String subject) {
+        policyDAO.deleteBySubject(appCode, clientType, subjectType, subject);
     }
 
 
-    public Set<Permission> findPermissionsBySubject(ClientType clientType, PermissionSubjectType grantObjType, String grantObjId) {
-        var policies = policyDAO.selectListBySubject(clientType, grantObjType, grantObjId);
+    public Set<Permission> findPermissionsBySubject(String appCode, ClientType clientType, PermissionSubjectType grantObjType, String grantObjId) {
+        var policies = policyDAO.selectListBySubject(appCode, clientType, grantObjType, grantObjId);
         return policies.stream().map(policy -> Permission.builder().obj(policy.getObj()).effect(policy.getEffect()).build()).collect(Collectors.toSet());
     }
 
-    public Set<Permission> findPermissionsBySubjects(ClientType clientType, PermissionSubjectType grantObjType, Collection<String> grantObjIds) {
-        var policies = policyDAO.selectListBySubjects(clientType, grantObjType, grantObjIds);
+    public Set<Permission> findPermissionsBySubjects(String appCode, ClientType clientType, PermissionSubjectType grantObjType, Collection<String> grantObjIds) {
+        var policies = policyDAO.selectListBySubjects(appCode, clientType, grantObjType, grantObjIds);
         return policies.stream().map(policy -> Permission.builder().obj(policy.getObj()).effect(policy.getEffect()).build()).collect(Collectors.toSet());
     }
 

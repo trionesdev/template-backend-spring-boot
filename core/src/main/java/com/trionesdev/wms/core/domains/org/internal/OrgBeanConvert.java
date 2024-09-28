@@ -7,6 +7,7 @@ import com.trionesdev.wms.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.wms.core.domains.org.dao.po.TenantPO;
 import com.trionesdev.wms.core.domains.org.dto.*;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberDetailDTO;
+import com.trionesdev.wms.core.domains.org.internal.aggreate.entity.TenantMember;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -25,6 +26,11 @@ public interface OrgBeanConvert {
     TenantDTO tenantPoToDto(TenantPO tenantPO);
 
     TenantMemberDetailDTO memberPOToDTO(TenantMemberPO record);
+
+    TenantMemberPO memberEntityToPo(TenantMember tenantMember);
+    TenantMember memberPoToEntity(TenantMemberPO tenantMember);
+
+    TenantMemberDTO memberEntityToDTO(TenantMember record);
 
     TenantMemberCriteria tenantMemberQueryToCriteria(TenantMemberQuery query);
     //endregion

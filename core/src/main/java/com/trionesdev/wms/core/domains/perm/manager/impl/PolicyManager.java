@@ -20,12 +20,12 @@ public class PolicyManager {
         policyRepository.savePolicy(policy);
     }
 
-    public Set<Permission> findPermissionsBySubject(ClientType clientType, PermissionSubjectType subjectType, String subject) {
-        return policyRepository.findPermissionsBySubject(clientType, subjectType, subject);
+    public Set<Permission> findPermissionsBySubject(String appCode,ClientType clientType, PermissionSubjectType subjectType, String subject) {
+        return policyRepository.findPermissionsBySubject(appCode,clientType, subjectType, subject);
     }
 
-    public Set<Permission> findPermissionsBySubjects(ClientType clientType, PermissionSubjectType subjectType, Collection<String> subjects) {
-        return policyRepository.findPermissionsBySubjects(clientType, subjectType, subjects);
+    public Set<Permission> findPermissionsBySubjects(String appCode,ClientType clientType, PermissionSubjectType subjectType, Collection<String> subjects) {
+        return policyRepository.findPermissionsBySubjects(appCode,clientType, subjectType, subjects);
     }
 
 }

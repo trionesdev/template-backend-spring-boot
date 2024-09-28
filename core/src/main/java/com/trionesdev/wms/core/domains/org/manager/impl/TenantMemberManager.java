@@ -5,6 +5,8 @@ import com.trionesdev.wms.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.wms.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.wms.core.domains.org.dao.impl.TenantDAO;
 import com.trionesdev.wms.core.domains.org.dao.impl.TenantMemberDAO;
+import com.trionesdev.wms.core.domains.org.internal.aggreate.entity.TenantMember;
+import com.trionesdev.wms.core.domains.org.repository.impl.TenantMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.Optional;
 public class TenantMemberManager {
     private final TenantMemberDAO tenantMemberDAO;
     private final TenantDAO tenantDAO;
+    private final TenantMemberRepository tenantMemberRepository;
 
     public void createMember(TenantMemberPO tenantMember) {
         tenantMemberDAO.save(tenantMember);
@@ -31,8 +34,8 @@ public class TenantMemberManager {
         tenantMemberDAO.save(tenantMember);
     }
 
-    public Optional<TenantMemberPO> findMemberById(String id) {
-        return Optional.ofNullable(tenantMemberDAO.getById(id));
+    public Optional<TenantMember> findMemberById(String id) {
+        return tenantMemberRepository.findById(id);
     }
 
     public Optional<TenantMemberPO> findMemberByUserId(String userId) {

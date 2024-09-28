@@ -1,6 +1,7 @@
 package com.trionesdev.wms.rest.backend.domains.org.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.wms.core.domains.org.dto.TenantMemberDTO;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberDetailDTO;
 import com.trionesdev.wms.core.domains.org.service.impl.TenantService;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberQueryRO;
@@ -38,7 +39,7 @@ public class TenantController {
 
     @Operation(summary = "根据ID查询租户成员")
     @GetMapping("tenant/members/{id}")
-    public TenantMemberDetailDTO queryTenantMemberById(@PathVariable String id) {
+    public TenantMemberDTO queryTenantMemberById(@PathVariable String id) {
         return tenantService.findTenantMemberByMemberId(id).orElse(null);
     }
 

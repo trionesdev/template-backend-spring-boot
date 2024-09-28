@@ -33,8 +33,8 @@ public class OrgProviderLocal implements OrgProvider {
     }
 
     @Override
-    public TenantMemberDetailDTO getMemberByMemberId(String memberId) {
-        return tenantMemberManager.findMemberById(memberId).map(convert::memberPOToDTO).orElse(null);
+    public TenantMemberDTO getMemberById(String memberId) {
+        return tenantMemberManager.findMemberById(memberId).map(convert::memberEntityToDTO).orElse(null);
     }
 
     @Override
