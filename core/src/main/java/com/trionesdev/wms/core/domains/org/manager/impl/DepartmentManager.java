@@ -3,6 +3,7 @@ package com.trionesdev.wms.core.domains.org.manager.impl;
 import cn.hutool.core.collection.CollectionUtil;
 import com.trionesdev.commons.core.constant.IdentityConstants;
 import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.wms.core.domains.org.dao.criteria.DepartmentMemberCriteria;
 import com.trionesdev.wms.core.domains.org.dao.impl.DepartmentDAO;
 import com.trionesdev.wms.core.domains.org.dao.impl.DepartmentMemberDAO;
@@ -44,6 +45,9 @@ public class DepartmentManager {
     }
 
     public void updateDepartmentById(DepartmentPO department) {
+        if (Objects.equals(department.getId(), department.getParentId())) {
+            throw new BusinessException("DEPARTMENT_SELF_PARENT");
+        }
         department.setPrevIds(findPrevIds(department.getParentId()));
         departmentDAO.updateById(department);
     }
