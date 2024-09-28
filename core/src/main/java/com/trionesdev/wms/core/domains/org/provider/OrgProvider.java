@@ -12,7 +12,7 @@ public interface OrgProvider {
 
     TenantDTO getActorTenant(String tenantId);
 
-    TenantMemberDetailDTO getMemberByMemberId(String memberId);
+    TenantMemberDTO getMemberById(String memberId);
 
     TenantMemberDetailDTO getMemberByUserId(String userId);
 

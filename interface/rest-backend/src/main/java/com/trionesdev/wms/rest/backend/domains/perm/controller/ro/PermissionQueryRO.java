@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class PermissionQueryRO {
+    private String appCoe;
     private ClientType clientType;
     private PermissionSubjectType subjectType;
     private String subject;

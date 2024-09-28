@@ -9,6 +9,7 @@ public class TenantMemberDetailDTO {
     private String id;
     private String tenantId;
     private String userId;
+    private Boolean master;
     private String phone;
     private String email;
     private String avatar;

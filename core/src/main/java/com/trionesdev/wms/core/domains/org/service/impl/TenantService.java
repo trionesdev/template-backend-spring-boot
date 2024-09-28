@@ -4,7 +4,9 @@ import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.wms.core.domains.org.dao.po.DepartmentMemberPO;
 import com.trionesdev.wms.core.domains.org.dao.po.TenantMemberPO;
+import com.trionesdev.wms.core.domains.org.dto.TenantMemberDTO;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberDetailDTO;
+import com.trionesdev.wms.core.domains.org.internal.aggreate.entity.TenantMember;
 import com.trionesdev.wms.core.domains.org.manager.impl.TenantMemberManager;
 import com.trionesdev.wms.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.wms.core.domains.org.internal.OrgBeanConvert;
@@ -38,16 +40,18 @@ public class TenantService {
         departmentManager.setMemberDepartments(tenantMember.getId(), tenantMember.getDepartmentIds());
     }
 
-    public Optional<TenantMemberDetailDTO> findTenantMemberByMemberId(String memberId) {
-        return tenantMemberManager.findMemberById(memberId).map(this::assembleTenantMember);
-    }
-
-    private TenantMemberDetailDTO assembleTenantMember(TenantMemberPO tenantMember) {
-        var tenantMemberDTO = convert.memberPOToDTO(tenantMember);
+    private TenantMemberDTO assembleTenantMember(TenantMember tenantMember) {
+        var tenantMemberDTO = convert.memberEntityToDTO(tenantMember);
         var depMembers = departmentManager.findDepartmentMembersByMemberId(tenantMemberDTO.getId());
         tenantMemberDTO.setDepartmentIds(depMembers.stream().map(DepartmentMemberPO::getDepartmentId).collect(Collectors.toList()));
         return tenantMemberDTO;
     }
+
+    public Optional<TenantMemberDTO> findTenantMemberByMemberId(String memberId) {
+        return tenantMemberManager.findMemberById(memberId).map(this::assembleTenantMember);
+    }
+
+
 
     private List<TenantMemberDetailDTO> assembleTenantMembers(List<TenantMemberPO> members) {
         return members.stream().map(member -> {

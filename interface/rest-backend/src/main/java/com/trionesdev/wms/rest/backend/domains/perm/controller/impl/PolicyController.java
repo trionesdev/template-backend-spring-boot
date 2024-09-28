@@ -40,13 +40,17 @@ public class PolicyController {
     @Operation(summary = "查询权限列表")
     @GetMapping(value = "policy/permissions")
     public Set<PermissionDTO> findObjPermissions(PermissionQueryRO query) {
-        return policyService.findPermissionsBySubject(query.getClientType(), query.getSubjectType(), query.getSubject());
+        return policyService.findPermissionsBySubject(query.getAppCoe(), query.getClientType(), query.getSubjectType(), query.getSubject());
     }
 
     @Operation(summary = "查询当前用户权限列表")
     @GetMapping(value = "actor/policy")
-    public PolicyDTO actorPermissions(@RequestParam(value = "clientType") ClientType clientType) {
-        return policyService.findActorPolicy(clientType);
+    public PolicyDTO actorPermissions(
+            @RequestParam(value = "appCode", required = false) String appCode,
+            @RequestParam(value = "clientType", required = false) ClientType clientType
+    ) {
+        return policyService.findActorPolicy(appCode,clientType);
     }
+
 
 }
