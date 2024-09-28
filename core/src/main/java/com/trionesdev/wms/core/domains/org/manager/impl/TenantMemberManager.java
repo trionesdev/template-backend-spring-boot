@@ -5,9 +5,12 @@ import com.trionesdev.wms.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.wms.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.wms.core.domains.org.dao.impl.TenantDAO;
 import com.trionesdev.wms.core.domains.org.dao.impl.TenantMemberDAO;
+import com.trionesdev.wms.core.domains.org.dao.po.TenantPO;
 import com.trionesdev.wms.core.domains.org.internal.aggreate.entity.TenantMember;
 import com.trionesdev.wms.core.domains.org.repository.impl.TenantMemberRepository;
+import com.trionesdev.wms.infrastructure.conf.app.AppProperties;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +21,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class TenantMemberManager {
+    private final AppProperties appProperties;
     private final TenantMemberDAO tenantMemberDAO;
     private final TenantDAO tenantDAO;
     private final TenantMemberRepository tenantMemberRepository;
 
-    public void createMember(TenantMemberPO tenantMember) {
-        tenantMemberDAO.save(tenantMember);
+    public void createMember(TenantMember tenantMember) {
+        tenantMemberRepository.save(tenantMember);
     }
 
     public void deleteMemberById(String id) {
@@ -50,18 +54,33 @@ public class TenantMemberManager {
         return Optional.ofNullable(tenantMemberDAO.selectByUsername(tenantId, username));
     }
 
-    public List<TenantMemberPO> findMembers(TenantMemberCriteria criteria) {
-        return tenantMemberDAO.selectList(criteria);
+    public List<TenantMember> findMembers(TenantMemberCriteria criteria) {
+        return tenantMemberRepository.findMemberList(criteria);
     }
 
-    public PageInfo<TenantMemberPO> findMembersPage(TenantMemberCriteria criteria) {
-        return tenantMemberDAO.selectPage(criteria);
+    public PageInfo<TenantMember> findMembersPage(TenantMemberCriteria criteria) {
+        return tenantMemberRepository.findMemberPage(criteria);
     }
 
-    public Optional<TenantMemberPO> accountSignIn(String tenantSerial, String username, String password) {
-        return Optional.ofNullable(tenantDAO.selectBySerial(tenantSerial)).flatMap(tenant ->
-                Optional.ofNullable(tenantMemberDAO.selectByUsername(tenant.getId(), username))
-                        .filter(member -> new BCryptPasswordEncoder().matches(password, member.getEncodedPassword())));
+    public Optional<TenantMember> findByTenantAccount(String tenantId, String account, String password) {
+        var accountType = TenantMember.getAccountType(account);
+        Optional<TenantMember> memberSnap = Optional.empty();
+        if (accountType == TenantMember.AccountType.PHONE) {
+            memberSnap = tenantMemberRepository.findByPhone(tenantId, account);
+        } else if (accountType == TenantMember.AccountType.EMAIL) {
+            memberSnap = tenantMemberRepository.findByEmail(tenantId, account);
+        } else {
+            memberSnap = tenantMemberRepository.findByUsername(tenantId, account);
+        }
+        return memberSnap.filter(member -> member.passwordMatch(password));
+    }
+
+    public Optional<TenantMember> findByAccount(String tenantSerial, String account, String password) {
+        String tenantId = null;
+        if (BooleanUtils.isTrue(appProperties.getMultiTenant())) {
+            tenantId = Optional.ofNullable(tenantDAO.selectBySerial(tenantSerial)).map(TenantPO::getId).orElse(null);
+        }
+        return findByTenantAccount(tenantId, account, password);
     }
 
 }

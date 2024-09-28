@@ -11,6 +11,7 @@ import com.trionesdev.wms.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.wms.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.wms.core.domains.org.dao.mapper.TenantMemberMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -56,8 +57,20 @@ public class TenantMemberDAO extends ServiceImpl<TenantMemberMapper, TenantMembe
     }
 
     public TenantMemberPO selectByUsername(String tenantId, String username) {
-        return lambdaQuery().eq(TenantMemberPO::getTenantId, tenantId)
+        return lambdaQuery().eq(StringUtils.isNoneBlank(tenantId), TenantMemberPO::getTenantId, tenantId)
                 .eq(TenantMemberPO::getUsername, username)
+                .last(" limit 1 ").one();
+    }
+
+    public TenantMemberPO selectByPhone(String tenantId, String phone) {
+        return lambdaQuery().eq(StringUtils.isNoneBlank(tenantId), TenantMemberPO::getTenantId, tenantId)
+                .eq(TenantMemberPO::getPhone, phone)
+                .last(" limit 1 ").one();
+    }
+
+    public TenantMemberPO selectByEmail(String tenantId, String email) {
+        return lambdaQuery().eq(StringUtils.isNoneBlank(tenantId), TenantMemberPO::getTenantId, tenantId)
+                .eq(TenantMemberPO::getEmail, email)
                 .last(" limit 1 ").one();
     }
 

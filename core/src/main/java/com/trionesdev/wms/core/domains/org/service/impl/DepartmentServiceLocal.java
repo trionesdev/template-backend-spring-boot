@@ -19,7 +19,7 @@ import com.trionesdev.wms.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.wms.core.domains.org.dto.OrgNodeDTO;
 import com.trionesdev.wms.core.domains.org.dto.SetMemberDepartmentsCmd;
 import com.trionesdev.wms.core.domains.org.service.bo.DepartmentTreeArg;
-import com.trionesdev.wms.core.domains.org.internal.OrgBeanConvert;
+import com.trionesdev.wms.core.domains.org.internal.OrgDomainConvert;
 import com.trionesdev.wms.core.domains.org.manager.impl.DepartmentManager;
 import com.trionesdev.wms.core.domains.org.dao.criteria.DepartmentMemberCriteria;
 import com.trionesdev.wms.core.domains.org.manager.impl.TenantManager;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 @Service
 public class DepartmentServiceLocal implements DepartmentService {
     private final ActorContext actorContext;
-    private final OrgBeanConvert convert;
+    private final OrgDomainConvert convert;
     private final DepartmentManager departmentManager;
     private final TenantManager tenantManager;
     private final TenantMemberManager tenantMemberManager;
@@ -135,6 +135,11 @@ public class DepartmentServiceLocal implements DepartmentService {
             List<DepartmentMemberPO> members = arg.getDepartmentIds().stream().map(t -> DepartmentMemberPO.builder().departmentId(t).memberId(arg.getMemberId()).build()).collect(Collectors.toList());
             departmentMemberDAO.saveBatch(members);
         }
+    }
+
+    @Override
+    public void deleteDepartmentMemberById(String id) {
+        departmentManager.deleteDepartmentMemberById(id);
     }
 
     @Override

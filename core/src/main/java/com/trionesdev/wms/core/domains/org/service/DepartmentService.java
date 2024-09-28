@@ -32,6 +32,8 @@ public interface DepartmentService {
 
     void setMemberDepartments(SetMemberDepartmentsCmd arg);
 
+    void deleteDepartmentMemberById(String id);
+
     List<DepartmentMemberDTO> findDepartmentMembersByMemberId(String memberId);
 
     List<DepartmentMemberDTO> findDepartmentMembers(DepartmentMemberCriteria criteria);

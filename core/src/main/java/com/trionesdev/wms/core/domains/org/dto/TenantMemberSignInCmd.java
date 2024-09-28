@@ -12,11 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @NoArgsConstructor
 public class TenantMemberSignInCmd {
     private String tenantSerial;
-    private String username;
+    private String account;
     private String password;
-
-    public Boolean passwordMatch(String encryptedPassword) {
-        return new BCryptPasswordEncoder().matches(password, encryptedPassword);
-    }
 
 }

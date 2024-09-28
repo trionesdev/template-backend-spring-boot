@@ -20,6 +20,9 @@ public class TenantMemberPO extends BaseLogicPO {
     @TableField(value = "is_master")
     private Boolean master;
     private String username;
+    private String phone;
+    private String email;
     private String encodedPassword;
     private String nickname;
+    private String avatar;
 }

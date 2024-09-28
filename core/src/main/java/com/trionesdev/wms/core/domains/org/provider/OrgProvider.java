@@ -16,11 +16,10 @@ public interface OrgProvider {
 
     TenantMemberDetailDTO getMemberByUserId(String userId);
 
-    List<TenantMemberDetailDTO> getTenantMembers(TenantMemberQuery query);
+    List<TenantMemberDTO> getTenantMembers(TenantMemberQuery query);
 
     List<TenantMemberDetailDTO> getMembersByMemberIds(Collection<String> memberIds);
 
-    TenantMemberDetailDTO tenantMemberSignIn(TenantMemberSignInCmd arg);
     //endregion
 
     List<DepartmentDTO> getDepartmentsByIds(Collection<String> departmentIds);
