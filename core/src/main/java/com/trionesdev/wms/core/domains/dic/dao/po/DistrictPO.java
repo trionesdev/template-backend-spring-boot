@@ -19,19 +19,20 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "dic_district")
+@TableName(value = "dic_district", autoResultMap = true)
 public class DistrictPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String countryCode;
     /**
-     * 地区邮政编码
+     * 编码
      */
     private String code;
     /**
-     * 上级地区邮政编码
+     * 上级编码
      */
     private String parentCode;
+    private String cityCode;
     /**
      * 地区级别
      */
@@ -39,19 +40,15 @@ public class DistrictPO extends BaseLogicPO {
     /**
      * 地区中文名称
      */
-    private String nameZh;
-    /**
-     * 地区英文名称(中国地名则为拼音)
-     */
-    private String nameEn;
+    private String name;
     /**
      * 经度
      */
-    private Double longitude;
+    private String longitude;
     /**
      * 纬度
      */
-    private Double latitude;
+    private String latitude;
     /**
      * 所有上级地区邮政编码
      */
@@ -60,6 +57,6 @@ public class DistrictPO extends BaseLogicPO {
     /**
      * 合并名称
      */
-    private String mergeNameZh;
+    private String mergeName;
 
 }

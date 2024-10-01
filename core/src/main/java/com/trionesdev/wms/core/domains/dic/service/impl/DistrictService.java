@@ -1,8 +1,8 @@
-package com.trionesdev.wms.core.domains.dic.manager.impl;
+package com.trionesdev.wms.core.domains.dic.service.impl;
 
 import com.trionesdev.wms.core.domains.dic.dao.criteria.DistrictCriteria;
-import com.trionesdev.wms.core.domains.dic.dao.impl.DistrictDAO;
 import com.trionesdev.wms.core.domains.dic.dao.po.DistrictPO;
+import com.trionesdev.wms.core.domains.dic.manager.impl.DistrictManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,15 +10,10 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class DistrictManager {
-    private final DistrictDAO districtDAO;
-
-    public void saveBatch(List<DistrictPO> districts) {
-        districtDAO.saveBatch(districts);
-    }
+public class DistrictService {
+    private final DistrictManager districtManager;
 
     public List<DistrictPO> findDistricts(DistrictCriteria criteria) {
-        return districtDAO.selectList(criteria);
+        return districtManager.findDistricts(criteria);
     }
-
 }
