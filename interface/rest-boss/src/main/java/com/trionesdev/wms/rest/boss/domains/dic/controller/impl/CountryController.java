@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.trionesdev.wms.rest.boss.domains.dic.controller.internal.DicConstants.DIC_PATH;
+import static com.trionesdev.wms.rest.boss.domains.dic.internal.DicConstants.DIC_PATH;
 
 @Tag(name = "字典-国家")
 @RequiredArgsConstructor

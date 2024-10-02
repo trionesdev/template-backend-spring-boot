@@ -13,28 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class DictionaryManager {
-    private final DictionaryTypeDAO dictionaryTypeDAO;
     private final DictionaryDAO dictionaryDAO;
-
-    public void createDictionaryType(DictionaryTypePO record) {
-        dictionaryTypeDAO.save(record);
-    }
-
-    public void deleteDictionaryTypeById(String id) {
-        dictionaryTypeDAO.removeById(id);
-    }
-
-    public void updateDictionaryTypeById(DictionaryTypePO record) {
-        dictionaryTypeDAO.updateById(record);
-    }
-
-    public Optional<DictionaryTypePO> findDictionaryTypeById(String id) {
-        return dictionaryTypeDAO.getOptById(id);
-    }
-
-    public List<DictionaryTypePO> findDictionaryTypeList() {
-        return dictionaryTypeDAO.list();
-    }
 
     public void createDictionary(DictionaryPO record) {
         dictionaryDAO.save(record);
