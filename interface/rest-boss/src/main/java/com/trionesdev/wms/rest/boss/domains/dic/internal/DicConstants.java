@@ -1,4 +1,4 @@
-package com.trionesdev.wms.rest.boss.domains.dic.controller.internal;
+package com.trionesdev.wms.rest.boss.domains.dic.internal;
 
 import static com.trionesdev.wms.rest.boss.internal.RestConstants.CONTEXT_PATH;
 

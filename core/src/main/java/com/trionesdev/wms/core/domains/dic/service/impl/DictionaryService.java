@@ -7,7 +7,6 @@ import com.trionesdev.wms.core.domains.dic.manager.impl.DictionaryManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -15,36 +14,21 @@ import java.util.Optional;
 public class DictionaryService {
     private final DictionaryManager dictionaryManager;
 
-    public void createDictionaryType(DictionaryTypePO dictionaryTypePO) {
-        dictionaryManager.createDictionaryType(dictionaryTypePO);
-    }
-
-    public void deleteDictionaryTypeById(String id) {
-        dictionaryManager.deleteDictionaryTypeById(id);
-    }
-
-    public void updateDictionaryTypeById(DictionaryTypePO dictionaryTypePO) {
-        dictionaryManager.updateDictionaryTypeById(dictionaryTypePO);
-    }
-
-    public Optional<DictionaryTypePO> findDictionaryTypeById(String id) {
-        return dictionaryManager.findDictionaryTypeById(id);
-    }
-
-    public List<DictionaryTypePO> findDictionaryTypeList() {
-        return dictionaryManager.findDictionaryTypeList();
-    }
 
     public void createDictionary(DictionaryPO dictionaryPO) {
         dictionaryManager.createDictionary(dictionaryPO);
     }
 
-    public void deleteDictionaryById(DictionaryPO dictionaryPO) {
-        dictionaryManager.deleteDictionaryById(dictionaryPO.getId());
+    public void deleteDictionaryById(String id) {
+        dictionaryManager.deleteDictionaryById(id);
     }
 
     public void updateDictionaryById(DictionaryPO dictionaryPO) {
         dictionaryManager.updateDictionaryById(dictionaryPO);
+    }
+
+    public Optional<DictionaryPO> findDictionaryById(String id) {
+        return dictionaryManager.findDictionaryById(id);
     }
 
     public PageInfo<DictionaryPO> findDictionaryPage(DictionaryCriteria criteria) {
