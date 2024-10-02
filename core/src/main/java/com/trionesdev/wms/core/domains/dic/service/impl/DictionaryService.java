@@ -3,7 +3,6 @@ package com.trionesdev.wms.core.domains.dic.service.impl;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.wms.core.domains.dic.dao.criteria.DictionaryCriteria;
 import com.trionesdev.wms.core.domains.dic.dao.po.DictionaryPO;
-import com.trionesdev.wms.core.domains.dic.dao.po.DictionaryTypePO;
 import com.trionesdev.wms.core.domains.dic.manager.impl.DictionaryManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
