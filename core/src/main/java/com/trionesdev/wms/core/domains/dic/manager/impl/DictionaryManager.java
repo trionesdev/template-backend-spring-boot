@@ -31,8 +31,8 @@ public class DictionaryManager {
         return dictionaryDAO.getOptById(id);
     }
 
-    public List<DictionaryPO> findDictionaryList() {
-        return dictionaryDAO.list();
+    public List<DictionaryPO> findDictionaryList(DictionaryCriteria criteria) {
+        return dictionaryDAO.selectList(criteria);
     }
 
     public PageInfo<DictionaryPO> findDictionaryPage(DictionaryCriteria criteria) {

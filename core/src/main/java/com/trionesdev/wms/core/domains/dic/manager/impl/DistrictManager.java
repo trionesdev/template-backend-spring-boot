@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -15,6 +16,10 @@ public class DistrictManager {
 
     public void saveBatch(List<DistrictPO> districts) {
         districtDAO.saveBatch(districts);
+    }
+
+    public Optional<DistrictPO> findById(String id) {
+        return Optional.ofNullable(districtDAO.getById(id));
     }
 
     public List<DistrictPO> findDistricts(DistrictCriteria criteria) {

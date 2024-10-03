@@ -3,6 +3,7 @@ package com.trionesdev.wms.rest.boss.domains.dic.controller.impl;
 import com.trionesdev.wms.core.domains.dic.dao.po.DictionaryPO;
 import com.trionesdev.wms.core.domains.dic.service.impl.DictionaryService;
 import com.trionesdev.wms.rest.boss.domains.dic.controller.ro.DictionaryCreateRO;
+import com.trionesdev.wms.rest.boss.domains.dic.controller.ro.DictionaryQueryRO;
 import com.trionesdev.wms.rest.boss.domains.dic.controller.ro.DictionaryUpdateRO;
 import com.trionesdev.wms.rest.boss.domains.dic.internal.DicBossRestConvert;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,6 +11,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.trionesdev.wms.rest.boss.domains.dic.internal.DicConstants.DIC_PATH;
 
@@ -46,6 +49,13 @@ public class DictionaryController {
     @GetMapping(value = "dictionaries/{id}")
     public DictionaryPO findDictionaryById(@PathVariable(value = "id") String id) {
         return dictionaryService.findDictionaryById(id).orElse(null);
+    }
+
+    @Operation(summary = "查询字典列表")
+    @GetMapping(value = "dictionary/list")
+    public List<DictionaryPO> findDictionaryList(DictionaryQueryRO query) {
+        var criteria = convert.from(query);
+        return dictionaryService.findDictionaryList(criteria);
     }
 
 }

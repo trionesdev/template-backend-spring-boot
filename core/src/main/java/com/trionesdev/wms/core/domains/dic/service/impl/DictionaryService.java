@@ -7,6 +7,7 @@ import com.trionesdev.wms.core.domains.dic.manager.impl.DictionaryManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -29,6 +30,10 @@ public class DictionaryService {
 
     public Optional<DictionaryPO> findDictionaryById(String id) {
         return dictionaryManager.findDictionaryById(id);
+    }
+
+    public List<DictionaryPO> findDictionaryList(DictionaryCriteria criteria) {
+        return dictionaryManager.findDictionaryList(criteria);
     }
 
     public PageInfo<DictionaryPO> findDictionaryPage(DictionaryCriteria criteria) {
