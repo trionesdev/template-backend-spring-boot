@@ -41,13 +41,16 @@ public class DistrictManagerTest extends BaseTest {
         for (int i = 0; i < jsonArray.size(); i++) {
             var districtObj = jsonArray.getJSONObject(i);
             var district = DistrictPO.builder()
-                    .code(districtObj.getString("adcode"))
                     .parentCode(parent.getString("adcode"))
                     .name(districtObj.getString("name"))
                     .level(level)
                     .prevCodes(prevCodes)
                     .mergeName(mergeName + districtObj.getString("name"))
                     .build();
+            if (Objects.equals(districtObj.get("adcode"), parent.getString("adcode"))) {
+                districtObj.put("adcode", parent.getString("adcode") + districtObj.getString("adcode"));
+            }
+            district.setCode(districtObj.getString("adcode"));
             if (!Objects.equals(districtObj.getString("citycode"), "[]")) {
                 district.setCityCode(districtObj.getString("citycode"));
             }
@@ -85,7 +88,7 @@ public class DistrictManagerTest extends BaseTest {
             var country = res.getJSONArray("districts").getJSONObject(0);
             var provinceDistricts = country.getJSONArray("districts");
             var districts = districts(provinceDistricts, country, 1);
-//            System.out.println(JSON.toJSONString(districts));
+            System.out.println(JSON.toJSONString(districts));
             districtManager.saveBatch(districts);
         } catch (IOException e) {
             throw new RuntimeException(e);
