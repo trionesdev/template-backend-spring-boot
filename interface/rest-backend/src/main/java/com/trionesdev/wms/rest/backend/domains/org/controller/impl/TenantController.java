@@ -1,5 +1,6 @@
 package com.trionesdev.wms.rest.backend.domains.org.controller.impl;
 
+import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberDTO;
 import com.trionesdev.wms.core.domains.org.service.impl.TenantService;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(OrgRestConstants.ORG_PATH)
 public class TenantController {
     private final OrgBeRestConvert convert;
+    private final ActorContext actorContext;
     private final TenantService tenantService;
 
     @Operation(summary = "创建租户成员")
@@ -57,4 +59,11 @@ public class TenantController {
         criteria.setPageSize(pageSize);
         return tenantService.findTenantMembersPage(criteria);
     }
+
+    @Operation(summary = "获取当前执行成员")
+    @GetMapping(value = "tenant/member/actor")
+    public TenantMemberDTO queryActorMember() {
+        return tenantService.findTenantMemberByMemberId(actorContext.getMemberId()).orElse(null);
+    }
+
 }
