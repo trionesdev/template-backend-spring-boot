@@ -34,8 +34,8 @@ public class TenantMemberManager {
         tenantMemberDAO.removeById(id);
     }
 
-    public void updateMemberById(TenantMemberPO tenantMember) {
-        tenantMemberDAO.save(tenantMember);
+    public void updateMemberById(TenantMember tenantMember) {
+        tenantMemberRepository.updateById(tenantMember);
     }
 
     public Optional<TenantMember> findMemberById(String id) {

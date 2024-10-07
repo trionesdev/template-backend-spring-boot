@@ -8,10 +8,7 @@ import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.commons.exception.NotFoundException;
 import com.trionesdev.wms.core.domains.org.dao.po.DepartmentMemberPO;
 import com.trionesdev.wms.core.domains.org.dao.po.TenantMemberPO;
-import com.trionesdev.wms.core.domains.org.dto.TenantMemberCreateCmd;
-import com.trionesdev.wms.core.domains.org.dto.TenantMemberDTO;
-import com.trionesdev.wms.core.domains.org.dto.TenantMemberDetailDTO;
-import com.trionesdev.wms.core.domains.org.dto.TenantMemberSignInCmd;
+import com.trionesdev.wms.core.domains.org.dto.*;
 import com.trionesdev.wms.core.domains.org.internal.aggreate.entity.TenantMember;
 import com.trionesdev.wms.core.domains.org.manager.impl.TenantMemberManager;
 import com.trionesdev.wms.core.domains.org.dao.criteria.TenantMemberCriteria;
@@ -41,10 +38,15 @@ public class TenantService {
     }
 
     @Transactional
-    public void updateMemberById(TenantMemberDetailDTO tenantMember) {
-        var tenantMemberPO = convert.from(tenantMember);
-        tenantMemberManager.updateMemberById(tenantMemberPO);
+    public void updateMemberById(TenantMemberUpdateCmd cmd) {
+        var tenantMember = convert.memberUpdateCmdToEntity(cmd);
+        tenantMemberManager.updateMemberById(tenantMember);
         departmentManager.setMemberDepartments(tenantMember.getId(), tenantMember.getDepartmentIds());
+    }
+
+    public void updateMemberProfileById(TenantMemberProfileUpdateCmd cmd) {
+        var tenantMember = convert.memberProfileUpdateCmdToEntity(cmd);
+        tenantMemberManager.updateMemberById(tenantMember);
     }
 
     private TenantMemberDTO assembleTenantMember(TenantMember tenantMember) {

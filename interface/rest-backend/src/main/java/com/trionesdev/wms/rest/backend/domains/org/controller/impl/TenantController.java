@@ -4,6 +4,7 @@ import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberDTO;
 import com.trionesdev.wms.core.domains.org.service.impl.TenantService;
+import com.trionesdev.wms.rest.backend.domains.org.controller.ro.ActorMemberUpdateRO;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberCreateRO;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberQueryRO;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberUpdateRO;
@@ -61,9 +62,16 @@ public class TenantController {
     }
 
     @Operation(summary = "获取当前执行成员")
-    @GetMapping(value = "tenant/member/actor")
+    @GetMapping(value = "tenant/actor/member")
     public TenantMemberDTO queryActorMember() {
         return tenantService.findTenantMemberByMemberId(actorContext.getMemberId()).orElse(null);
+    }
+
+    @Operation(summary = "修改当前执行成员")
+    @PutMapping(value = "tenant/actor/member")
+    public void updateActorMember(@Validated @RequestBody ActorMemberUpdateRO args) {
+        var tenantMember = convert.from(args);
+        tenantService.updateMemberProfileById(tenantMember);
     }
 
 }

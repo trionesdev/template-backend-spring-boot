@@ -23,6 +23,9 @@ public interface OrgDomainConvert {
 
     TenantMember memberCreateCmdToEntity(TenantMemberCreateCmd cmd);
 
+    TenantMember memberUpdateCmdToEntity(TenantMemberUpdateCmd cmd);
+    TenantMember memberProfileUpdateCmdToEntity(TenantMemberProfileUpdateCmd cmd);
+
     TenantMemberPO from(TenantMemberDetailDTO tenantMember);
 
     TenantDTO tenantPoToDto(TenantPO tenantPO);
@@ -30,6 +33,7 @@ public interface OrgDomainConvert {
     TenantMemberDetailDTO memberPOToDTO(TenantMemberPO record);
 
     TenantMemberPO memberEntityToPo(TenantMember tenantMember);
+
     TenantMember memberPoToEntity(TenantMemberPO tenantMember);
 
     TenantMemberDTO memberEntityToDTO(TenantMember record);
