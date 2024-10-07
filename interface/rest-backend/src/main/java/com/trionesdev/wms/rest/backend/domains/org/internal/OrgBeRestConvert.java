@@ -5,6 +5,8 @@ import com.trionesdev.wms.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.wms.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberCreateCmd;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberDetailDTO;
+import com.trionesdev.wms.core.domains.org.dto.TenantMemberProfileUpdateCmd;
+import com.trionesdev.wms.core.domains.org.dto.TenantMemberUpdateCmd;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.*;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.department.DepartmentCreateRO;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.department.DepartmentMemberQueryRO;
@@ -21,7 +23,9 @@ public interface OrgBeRestConvert {
     //region tenant
     TenantMemberCreateCmd from(TenantMemberCreateRO args);
 
-    TenantMemberDetailDTO from(TenantMemberUpdateRO args);
+    TenantMemberUpdateCmd from(TenantMemberUpdateRO args);
+
+    TenantMemberProfileUpdateCmd from(ActorMemberUpdateRO args);
 
     TenantMemberCriteria from(TenantMemberQueryRO query);
     //endregion
