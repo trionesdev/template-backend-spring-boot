@@ -71,6 +71,7 @@ public class TenantController {
     @PutMapping(value = "tenant/actor/member")
     public void updateActorMember(@Validated @RequestBody ActorMemberUpdateRO args) {
         var tenantMember = convert.from(args);
+        tenantMember.setId(actorContext.getMemberId());
         tenantService.updateMemberProfileById(tenantMember);
     }
 
