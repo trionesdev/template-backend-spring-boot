@@ -3,11 +3,11 @@ package com.trionesdev.wms.rest.backend.domains.org.controller.impl;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.util.EnumUtil;
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.wms.core.domains.org.dto.OrgNodeDTO;
-import com.trionesdev.wms.core.domains.org.service.DepartmentService;
-import com.trionesdev.wms.core.domains.org.service.bo.DepartmentTreeArg;
 import com.trionesdev.wms.core.domains.org.dto.DepartmentDTO;
 import com.trionesdev.wms.core.domains.org.dto.DepartmentMemberDTO;
+import com.trionesdev.wms.core.domains.org.dto.DepartmentTreeQuery;
+import com.trionesdev.wms.core.domains.org.dto.OrgNodeDTO;
+import com.trionesdev.wms.core.domains.org.service.DepartmentService;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.department.DepartmentCreateRO;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.department.DepartmentMemberQueryRO;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.department.DepartmentUpdateRO;
@@ -61,7 +61,7 @@ public class DepartmentController {
     public List<Tree<String>> getDepartmentTree(
             @RequestParam(value = "mode", required = false) String mode
     ) {
-        return departmentService.departmentTree(DepartmentTreeArg.builder().mode(EnumUtil.fromString(DepartmentTreeArg.Mode.class, mode, null)).build());
+        return departmentService.departmentTree(DepartmentTreeQuery.builder().mode(EnumUtil.fromString(DepartmentTreeQuery.Mode.class, mode, null)).build());
     }
 
     @Operation(summary = "获取部门路径")

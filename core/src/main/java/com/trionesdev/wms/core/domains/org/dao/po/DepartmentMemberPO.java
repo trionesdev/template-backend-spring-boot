@@ -20,7 +20,7 @@ public class DepartmentMemberPO extends BaseLogicPO {
     private String id;
     private String tenantId;
     private String departmentId; //“0” 表示根部门
-    private String memberId;
+    private String userId;
 
     @Override
     public boolean equals(Object o) {
@@ -28,11 +28,11 @@ public class DepartmentMemberPO extends BaseLogicPO {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         DepartmentMemberPO that = (DepartmentMemberPO) o;
-        return Objects.equals(departmentId, that.departmentId) && Objects.equals(memberId, that.memberId);
+        return Objects.equals(departmentId, that.departmentId) && Objects.equals(userId, that.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), departmentId, memberId);
+        return Objects.hash(super.hashCode(), departmentId, userId);
     }
 }

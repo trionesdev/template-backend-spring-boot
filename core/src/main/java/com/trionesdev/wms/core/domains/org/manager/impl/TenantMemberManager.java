@@ -1,17 +1,16 @@
 package com.trionesdev.wms.core.domains.org.manager.impl;
 
+import com.trionesdev.boot.core.autoconfigure.AppProperties;
 import com.trionesdev.commons.core.page.PageInfo;
-import com.trionesdev.wms.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.wms.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.wms.core.domains.org.dao.impl.TenantDAO;
 import com.trionesdev.wms.core.domains.org.dao.impl.TenantMemberDAO;
+import com.trionesdev.wms.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.wms.core.domains.org.dao.po.TenantPO;
 import com.trionesdev.wms.core.domains.org.internal.aggreate.entity.TenantMember;
 import com.trionesdev.wms.core.domains.org.repository.impl.TenantMemberRepository;
-import com.trionesdev.wms.infrastructure.conf.app.AppProperties;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.BooleanUtils;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;

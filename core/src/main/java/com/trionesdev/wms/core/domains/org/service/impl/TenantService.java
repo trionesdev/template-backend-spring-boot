@@ -1,24 +1,26 @@
 package com.trionesdev.wms.core.domains.org.service.impl;
 
+import cn.hutool.core.util.IdUtil;
+import com.trionesdev.boot.core.autoconfigure.AppProperties;
 import com.trionesdev.commons.context.actor.ActorRoleEnum;
 import com.trionesdev.commons.core.jwt.JwtClaims;
 import com.trionesdev.commons.core.jwt.JwtFacade;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.commons.exception.NotFoundException;
-import com.trionesdev.wms.core.domains.org.dao.po.DepartmentMemberPO;
-import com.trionesdev.wms.core.domains.org.dao.po.TenantMemberPO;
-import com.trionesdev.wms.core.domains.org.dto.*;
-import com.trionesdev.wms.core.domains.org.internal.aggreate.entity.TenantMember;
-import com.trionesdev.wms.core.domains.org.manager.impl.TenantMemberManager;
 import com.trionesdev.wms.core.domains.org.dao.criteria.TenantMemberCriteria;
+import com.trionesdev.wms.core.domains.org.dao.po.DepartmentMemberPO;
+import com.trionesdev.wms.core.domains.org.dto.*;
 import com.trionesdev.wms.core.domains.org.internal.OrgDomainConvert;
+import com.trionesdev.wms.core.domains.org.internal.aggreate.entity.TenantMember;
 import com.trionesdev.wms.core.domains.org.manager.impl.DepartmentManager;
+import com.trionesdev.wms.core.domains.org.manager.impl.TenantMemberManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -27,21 +29,29 @@ import java.util.stream.Collectors;
 public class TenantService {
     private final OrgDomainConvert convert;
     private final JwtFacade jwtFacade;
+    private final AppProperties appProperties;
     private final TenantMemberManager tenantMemberManager;
     private final DepartmentManager departmentManager;
 
     @Transactional
     public void createMember(TenantMemberCreateCmd cmd) {
         var tenantMember = convert.memberCreateCmdToEntity(cmd);
+        if (appProperties.getMultiTenant()) {
+            Objects.requireNonNull(tenantMember.getUserId());
+        } else {
+            tenantMember.setUserId(IdUtil.getSnowflakeNextIdStr());
+        }
         tenantMemberManager.createMember(tenantMember);
-        departmentManager.setMemberDepartments(tenantMember.getId(), tenantMember.getDepartmentIds());
+        departmentManager.setMemberDepartments(tenantMember, tenantMember.getDepartmentIds());
     }
 
     @Transactional
     public void updateMemberById(TenantMemberUpdateCmd cmd) {
         var tenantMember = convert.memberUpdateCmdToEntity(cmd);
-        tenantMemberManager.updateMemberById(tenantMember);
-        departmentManager.setMemberDepartments(tenantMember.getId(), tenantMember.getDepartmentIds());
+        tenantMemberManager.findMemberById(tenantMember.getId()).ifPresent(tenantMemberSnap -> {
+            tenantMemberManager.updateMemberById(tenantMember);
+            departmentManager.setMemberDepartments(tenantMember, tenantMember.getDepartmentIds());
+        });
     }
 
     public void updateMemberProfileById(TenantMemberProfileUpdateCmd cmd) {
@@ -51,7 +61,7 @@ public class TenantService {
 
     private TenantMemberDTO assembleTenantMember(TenantMember tenantMember) {
         var tenantMemberDTO = convert.memberEntityToDTO(tenantMember);
-        var depMembers = departmentManager.findDepartmentMembersByMemberId(tenantMemberDTO.getId());
+        var depMembers = departmentManager.findDepartmentMembersByUserId(tenantMemberDTO.getUserId());
         tenantMemberDTO.setDepartmentIds(depMembers.stream().map(DepartmentMemberPO::getDepartmentId).collect(Collectors.toList()));
         return tenantMemberDTO;
     }

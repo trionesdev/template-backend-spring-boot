@@ -36,6 +36,11 @@ public class TenantMemberRepository {
         tenantMemberDAO.updateById(tenantMemberPo);
     }
 
+    public void updateByUserId(TenantMember tenantMember) {
+        var tenantMemberPo = convert.memberEntityToPo(tenantMember);
+        tenantMemberDAO.updateByUserId(tenantMemberPo);
+    }
+
     private TenantMember assembleMember(TenantMemberPO tenantMemberPO) {
         return convert.memberPoToEntity(tenantMemberPO);
     }

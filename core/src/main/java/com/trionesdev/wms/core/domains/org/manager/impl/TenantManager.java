@@ -1,6 +1,6 @@
 package com.trionesdev.wms.core.domains.org.manager.impl;
 
-import cn.hutool.core.util.StrUtil;
+import com.trionesdev.boot.core.autoconfigure.AppProperties;
 import com.trionesdev.wms.core.domains.org.dao.impl.TenantDAO;
 import com.trionesdev.wms.core.domains.org.dao.po.TenantPO;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +11,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class TenantManager {
+    private final AppProperties appProperties;
     private final TenantDAO tenantDAO;
 
     public void createTenant(TenantPO tenant) {
@@ -26,7 +27,7 @@ public class TenantManager {
     }
 
     public Optional<TenantPO> findActorTenant(String tenantId) {
-        if (StrUtil.isNotBlank(tenantId)) {
+        if (appProperties.getMultiTenant()) {
             return Optional.ofNullable(tenantDAO.getById(tenantId));
         } else {
             return Optional.ofNullable(tenantDAO.selectFirst());

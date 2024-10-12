@@ -33,7 +33,7 @@ public class TenantMemberDAO extends ServiceImpl<TenantMemberMapper, TenantMembe
                                     departmentIdsQueryWrapper.exists(CollectionUtil.isNotEmpty(criteria.getOrGroup().getDepartmentIds()), "select * from org_department_member dm " +
                                             "where dm.is_deleted = false  " +
                                             "and department_id in (" + StrUtil.join(",", criteria.getOrGroup().getDepartmentIds().stream().map(departmentId -> "'" + departmentId + "'").collect(Collectors.toSet())) + ") " +
-                                            "and dm.member_id = org_tenant_member.id");
+                                            "and dm.user_id = org_tenant_member.user_id");
                                 });
                     });
         }
@@ -72,6 +72,11 @@ public class TenantMemberDAO extends ServiceImpl<TenantMemberMapper, TenantMembe
         return lambdaQuery().eq(StringUtils.isNoneBlank(tenantId), TenantMemberPO::getTenantId, tenantId)
                 .eq(TenantMemberPO::getEmail, email)
                 .last(" limit 1 ").one();
+    }
+
+    public void updateByUserId(TenantMemberPO tenantMemberPO) {
+        Objects.requireNonNull(tenantMemberPO.getUserId());
+        lambdaUpdate().eq(TenantMemberPO::getUserId, tenantMemberPO.getUserId()).setEntity(tenantMemberPO).update();
     }
 
 }

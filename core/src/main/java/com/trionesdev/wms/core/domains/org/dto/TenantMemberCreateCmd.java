@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class TenantMemberCreateCmd {
+    private String userId;
     private String phone;
     private String email;
     private String nickname;
