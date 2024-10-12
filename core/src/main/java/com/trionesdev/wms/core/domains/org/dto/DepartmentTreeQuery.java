@@ -1,4 +1,4 @@
-package com.trionesdev.wms.core.domains.org.service.bo;
+package com.trionesdev.wms.core.domains.org.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DepartmentTreeArg {
+public class DepartmentTreeQuery {
     private Mode mode;
 
     public enum Mode {

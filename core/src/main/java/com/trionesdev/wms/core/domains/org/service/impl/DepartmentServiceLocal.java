@@ -11,22 +11,18 @@ import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.core.constant.IdentityConstants;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
+import com.trionesdev.wms.core.domains.org.dao.criteria.DepartmentMemberCriteria;
 import com.trionesdev.wms.core.domains.org.dao.impl.DepartmentDAO;
 import com.trionesdev.wms.core.domains.org.dao.impl.DepartmentMemberDAO;
 import com.trionesdev.wms.core.domains.org.dao.po.DepartmentMemberPO;
 import com.trionesdev.wms.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.wms.core.domains.org.dao.po.TenantMemberPO;
-import com.trionesdev.wms.core.domains.org.dto.OrgNodeDTO;
-import com.trionesdev.wms.core.domains.org.dto.SetMemberDepartmentsCmd;
-import com.trionesdev.wms.core.domains.org.service.bo.DepartmentTreeArg;
+import com.trionesdev.wms.core.domains.org.dto.*;
 import com.trionesdev.wms.core.domains.org.internal.OrgDomainConvert;
 import com.trionesdev.wms.core.domains.org.manager.impl.DepartmentManager;
-import com.trionesdev.wms.core.domains.org.dao.criteria.DepartmentMemberCriteria;
 import com.trionesdev.wms.core.domains.org.manager.impl.TenantManager;
 import com.trionesdev.wms.core.domains.org.manager.impl.TenantMemberManager;
 import com.trionesdev.wms.core.domains.org.service.DepartmentService;
-import com.trionesdev.wms.core.domains.org.dto.DepartmentDTO;
-import com.trionesdev.wms.core.domains.org.dto.DepartmentMemberDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -95,7 +91,7 @@ public class DepartmentServiceLocal implements DepartmentService {
     }
 
     @Override
-    public List<Tree<String>> departmentTree(DepartmentTreeArg arg) {
+    public List<Tree<String>> departmentTree(DepartmentTreeQuery arg) {
         var departments = departmentManager.findDepartments();
         List<TreeNode<String>> nodeList = CollUtil.newArrayList();
         departments.forEach(department -> {
@@ -117,7 +113,8 @@ public class DepartmentServiceLocal implements DepartmentService {
             root.setId(IdentityConstants.STRING_ID_ZERO_VALUE);
             root.setParentId(tenant.getId());
             root.setName(tenant.getName());
-            if (DepartmentTreeArg.Mode.TENANT_SIDEWAYS.equals(arg.getMode())) {
+            root.put("icon", tenant.getLogo());
+            if (DepartmentTreeQuery.Mode.TENANT_SIDEWAYS.equals(arg.getMode())) {
                 List<Tree<String>> result = ListUtil.toList(root);
                 result.addAll(departmentNodes);
                 return result;
@@ -130,11 +127,14 @@ public class DepartmentServiceLocal implements DepartmentService {
 
     @Override
     public void setMemberDepartments(SetMemberDepartmentsCmd arg) {
-        departmentMemberDAO.deleteByMemberId(arg.getMemberId());
-        if (CollectionUtil.isNotEmpty(arg.getDepartmentIds())) {
-            List<DepartmentMemberPO> members = arg.getDepartmentIds().stream().map(t -> DepartmentMemberPO.builder().departmentId(t).memberId(arg.getMemberId()).build()).collect(Collectors.toList());
-            departmentMemberDAO.saveBatch(members);
-        }
+        tenantMemberManager.findMemberById(arg.getMemberId()).ifPresent(tenantMember -> {
+            departmentMemberDAO.deleteByUserId(tenantMember.getUserId());
+            if (CollectionUtil.isNotEmpty(arg.getDepartmentIds())) {
+                List<DepartmentMemberPO> members = arg.getDepartmentIds().stream().map(t -> DepartmentMemberPO.builder().departmentId(t).userId(tenantMember.getUserId()).build()).collect(Collectors.toList());
+                departmentMemberDAO.saveBatch(members);
+            }
+        });
+
     }
 
     @Override
@@ -143,19 +143,19 @@ public class DepartmentServiceLocal implements DepartmentService {
     }
 
     @Override
-    public List<DepartmentMemberDTO> findDepartmentMembersByMemberId(String memberId) {
-        return assembleDepartmentMembers(departmentMemberDAO.selectListByMemberId(memberId));
+    public List<DepartmentMemberDTO> findDepartmentMembersByUserId(String userId) {
+        return assembleDepartmentMembers(departmentMemberDAO.selectListByUserId(userId));
     }
 
     private List<DepartmentMemberDTO> assembleDepartmentMembers(List<DepartmentMemberPO> records) {
         if (CollectionUtil.isEmpty(records)) {
             return Collections.emptyList();
         }
-        var memberIds = records.stream().map(DepartmentMemberPO::getMemberId).collect(Collectors.toSet());
+        var memberIds = records.stream().map(DepartmentMemberPO::getUserId).collect(Collectors.toSet());
         var membersMap = tenantMemberManager.findMembersByIds(memberIds).stream().collect(Collectors.toMap(TenantMemberPO::getId, v -> v, (v1, v2) -> v1));
         return records.stream().map(t -> {
             var depMember = convert.poToDto(t);
-            depMember.setMember(Optional.ofNullable(membersMap.get(t.getMemberId())).map(convert::memberPOToDTO).orElse(null));
+            depMember.setMember(Optional.ofNullable(membersMap.get(t.getUserId())).map(convert::memberPOToDTO).orElse(null));
             return depMember;
         }).collect(Collectors.toList());
     }
@@ -198,8 +198,8 @@ public class DepartmentServiceLocal implements DepartmentService {
         });
         var departmentMembers = departmentManager.findDepartmentMembersByDepartmentId(departmentId);
         if (CollectionUtil.isNotEmpty(departmentMembers)) {
-            var memberIds = departmentMembers.stream().map(DepartmentMemberPO::getMemberId).collect(Collectors.toSet());
-            var members = tenantMemberManager.findMembersByIds(memberIds);
+            var userIds = departmentMembers.stream().map(DepartmentMemberPO::getUserId).collect(Collectors.toSet());
+            var members = tenantMemberManager.findMembersByIds(userIds);
             members.forEach(t -> {
                 result.add(OrgNodeDTO.builder().id(t.getId()).name(t.getNickname()).type(OrgNodeDTO.Type.MEMBER).build());
             });

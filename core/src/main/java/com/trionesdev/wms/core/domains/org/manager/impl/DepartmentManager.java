@@ -9,6 +9,7 @@ import com.trionesdev.wms.core.domains.org.dao.impl.DepartmentDAO;
 import com.trionesdev.wms.core.domains.org.dao.impl.DepartmentMemberDAO;
 import com.trionesdev.wms.core.domains.org.dao.po.DepartmentMemberPO;
 import com.trionesdev.wms.core.domains.org.dao.po.DepartmentPO;
+import com.trionesdev.wms.core.domains.org.internal.aggreate.entity.TenantMember;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -86,14 +87,14 @@ public class DepartmentManager {
         departmentMemberDAO.updateById(departmentMember);
     }
 
-    public void setMemberDepartments(String memberId, List<String> departmentIds) {
-        Objects.requireNonNull(memberId);
-        departmentMemberDAO.deleteByMemberId(memberId);
+    public void setMemberDepartments(TenantMember tenantMember, List<String> departmentIds) {
+        Objects.requireNonNull(tenantMember.getUserId());
+        departmentMemberDAO.deleteByUserId(tenantMember.getUserId());
         if (CollectionUtil.isEmpty(departmentIds)) {
             return;
         }
         List<DepartmentMemberPO> departmentMembers = departmentIds.stream().map(departmentId -> {
-            return DepartmentMemberPO.builder().memberId(memberId).departmentId(departmentId).build();
+            return DepartmentMemberPO.builder().userId(tenantMember.getUserId()).departmentId(departmentId).build();
         }).collect(Collectors.toList());
         departmentMemberDAO.saveBatch(departmentMembers);
     }
@@ -114,8 +115,8 @@ public class DepartmentManager {
         return departmentMemberDAO.selectListByDepartmentId(departmentId);
     }
 
-    public List<DepartmentMemberPO> findDepartmentMembersByMemberId(String departmentId) {
-        return departmentMemberDAO.selectListByMemberId(departmentId);
+    public List<DepartmentMemberPO> findDepartmentMembersByUserId(String userId) {
+        return departmentMemberDAO.selectListByUserId(userId);
     }
 
     //endregion
