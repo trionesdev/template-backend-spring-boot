@@ -98,12 +98,19 @@ public class TenantService {
         }).orElseThrow(() -> new NotFoundException("TENANT_ACCOUNT_OR_PWS_ERROR"));
     }
 
-    public void changeActorPassword(ChangePasswordCmd cmd) {
+    public void changeActorPassword(ActorChangePasswordCmd cmd) {
         tenantMemberManager.findMemberByUserId(actorContext.getUserId()).ifPresent(tenantMemberSnap -> {
             if (!tenantMemberSnap.passwordMatch(cmd.getOldPassword())) {
                 throw new BusinessException("PWD_ERROR");
             }
             var tenantMember = TenantMember.builder().id(tenantMemberSnap.getId()).password(cmd.getNewPassword()).build();
+            tenantMemberManager.updateMemberById(tenantMember);
+        });
+    }
+
+    public void changePassword(ChangePasswordCmd cmd) {
+        tenantMemberManager.findMemberById(cmd.getId()).ifPresent(tenantMemberSnap -> {
+            var tenantMember = TenantMember.builder().id(cmd.getId()).password(cmd.getPassword()).build();
             tenantMemberManager.updateMemberById(tenantMember);
         });
     }

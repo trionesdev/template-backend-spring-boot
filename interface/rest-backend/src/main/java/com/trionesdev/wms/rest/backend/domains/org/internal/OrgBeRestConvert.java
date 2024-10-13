@@ -3,10 +3,7 @@ package com.trionesdev.wms.rest.backend.domains.org.internal;
 import com.trionesdev.wms.core.domains.org.dao.criteria.DepartmentMemberCriteria;
 import com.trionesdev.wms.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.wms.core.domains.org.dao.po.DepartmentPO;
-import com.trionesdev.wms.core.domains.org.dto.ChangePasswordCmd;
-import com.trionesdev.wms.core.domains.org.dto.TenantMemberCreateCmd;
-import com.trionesdev.wms.core.domains.org.dto.TenantMemberProfileUpdateCmd;
-import com.trionesdev.wms.core.domains.org.dto.TenantMemberUpdateCmd;
+import com.trionesdev.wms.core.domains.org.dto.*;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.department.DepartmentCreateRO;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.department.DepartmentMemberQueryRO;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.department.DepartmentUpdateRO;
@@ -27,7 +24,10 @@ public interface OrgBeRestConvert {
 
     TenantMemberUpdateCmd from(ActorMemberProfileUpdateRO args);
 
-    ChangePasswordCmd form(ActorMemberChangePasswordRO args);
+    ActorChangePasswordCmd form(ActorMemberChangePasswordRO args);
+
+    ChangePasswordCmd form(ChangePasswordRO args);
+
     TenantMemberCriteria from(TenantMemberQueryRO query);
     //endregion
 

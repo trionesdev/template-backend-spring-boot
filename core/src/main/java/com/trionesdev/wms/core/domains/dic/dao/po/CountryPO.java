@@ -3,20 +3,17 @@ package com.trionesdev.wms.core.domains.dic.dao.po;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.trionesdev.commons.mybatisplus.po.BasePO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "dic_country")
-public class CountryPO extends BasePO {
+public class CountryPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     /**
@@ -26,11 +23,11 @@ public class CountryPO extends BasePO {
     /**
      * 英文缩写
      */
-    private String abbrEn;
+    private String abbr;
     /**
      * 中文名称
      */
-    private String nameZh;
+    private String name;
     /**
      * 英文名称
      */
