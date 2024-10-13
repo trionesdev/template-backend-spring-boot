@@ -72,11 +72,17 @@ public class TenantController {
         tenantService.updateMemberById(tenantMember);
     }
 
-    @Operation(summary = "修改密码")
+    @Operation(summary = "修改当前用户密码")
     @PutMapping(value = "tenant/actor/password")
-    public void changePwd(@Validated @RequestBody ActorMemberChangePasswordRO args) {
+    public void actorChangePwd(@Validated @RequestBody ActorMemberChangePasswordRO args) {
         var changePwd = convert.form(args);
         tenantService.changeActorPassword(changePwd);
     }
 
+    @Operation(summary = "修改密码")
+    @PutMapping(value = "tenant/member/password")
+    public void changePwd(@Validated @RequestBody ChangePasswordRO args) {
+        var changePwd = convert.form(args);
+        tenantService.changePassword(changePwd);
+    }
 }
