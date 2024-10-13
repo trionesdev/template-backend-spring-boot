@@ -30,7 +30,7 @@ public interface OrgDomainConvert {
 
     TenantDTO tenantPoToDto(TenantPO tenantPO);
 
-    TenantMemberDetailDTO memberPOToDTO(TenantMemberPO record);
+    TenantMemberDetailDTO memberPOToDTO(TenantMember record);
 
     TenantMemberPO memberEntityToPo(TenantMember tenantMember);
 

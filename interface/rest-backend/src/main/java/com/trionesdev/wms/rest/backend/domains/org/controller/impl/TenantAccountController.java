@@ -2,7 +2,7 @@ package com.trionesdev.wms.rest.backend.domains.org.controller.impl;
 
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberSignInCmd;
 import com.trionesdev.wms.core.domains.org.service.impl.TenantService;
-import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantAccountSignInRO;
+import com.trionesdev.wms.rest.backend.domains.org.controller.ro.tenant.TenantAccountSignInRO;
 import com.trionesdev.wms.rest.backend.domains.org.controller.vo.TokenVO;
 import com.trionesdev.wms.rest.backend.domains.org.internal.OrgBeRestConvert;
 import com.trionesdev.wms.rest.backend.domains.org.internal.OrgRestConstants;

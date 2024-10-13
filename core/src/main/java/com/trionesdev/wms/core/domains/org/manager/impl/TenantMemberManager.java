@@ -41,12 +41,12 @@ public class TenantMemberManager {
         return tenantMemberRepository.findById(id);
     }
 
-    public Optional<TenantMemberPO> findMemberByUserId(String userId) {
-        return Optional.ofNullable(tenantMemberDAO.selectByUserId(userId));
+    public Optional<TenantMember> findMemberByUserId(String userId) {
+        return tenantMemberRepository.findByUserId(userId);
     }
 
-    public List<TenantMemberPO> findMembersByIds(Collection<String> ids) {
-        return tenantMemberDAO.listByIds(ids);
+    public List<TenantMember> findMembersByIds(Collection<String> ids) {
+        return tenantMemberRepository.findListByIds(ids);
     }
 
     public Optional<TenantMemberPO> findMemberByUsername(String tenantId, String username) {

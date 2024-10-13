@@ -12,6 +12,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +50,10 @@ public class TenantMemberRepository {
         return Optional.ofNullable(tenantMemberDAO.getById(id)).map(this::assembleMember);
     }
 
+    public Optional<TenantMember> findByUserId(String userId) {
+        return Optional.ofNullable(tenantMemberDAO.selectByUserId(userId)).map(this::assembleMember);
+    }
+
     public Optional<TenantMember> findByUsername(String tenantId, String username) {
         return Optional.ofNullable(tenantMemberDAO.selectByUsername(tenantId, username)).map(this::assembleMember);
     }
@@ -68,6 +73,11 @@ public class TenantMemberRepository {
         return records.stream().map(tenantMemberPO -> {
             return convert.memberPoToEntity(tenantMemberPO);
         }).toList();
+    }
+
+    public List<TenantMember> findListByIds(Collection<String> ids) {
+        var members = tenantMemberDAO.listByIds(ids);
+        return assembleMembers(members);
     }
 
     public List<TenantMember> findMemberList(TenantMemberCriteria criteria) {
