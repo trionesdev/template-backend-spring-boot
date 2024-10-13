@@ -19,6 +19,7 @@ import com.trionesdev.wms.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.wms.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.wms.core.domains.org.dto.*;
 import com.trionesdev.wms.core.domains.org.internal.OrgDomainConvert;
+import com.trionesdev.wms.core.domains.org.internal.aggreate.entity.TenantMember;
 import com.trionesdev.wms.core.domains.org.manager.impl.DepartmentManager;
 import com.trionesdev.wms.core.domains.org.manager.impl.TenantManager;
 import com.trionesdev.wms.core.domains.org.manager.impl.TenantMemberManager;
@@ -152,7 +153,7 @@ public class DepartmentServiceLocal implements DepartmentService {
             return Collections.emptyList();
         }
         var memberIds = records.stream().map(DepartmentMemberPO::getUserId).collect(Collectors.toSet());
-        var membersMap = tenantMemberManager.findMembersByIds(memberIds).stream().collect(Collectors.toMap(TenantMemberPO::getId, v -> v, (v1, v2) -> v1));
+        var membersMap = tenantMemberManager.findMembersByIds(memberIds).stream().collect(Collectors.toMap(TenantMember::getId, v -> v, (v1, v2) -> v1));
         return records.stream().map(t -> {
             var depMember = convert.poToDto(t);
             depMember.setMember(Optional.ofNullable(membersMap.get(t.getUserId())).map(convert::memberPOToDTO).orElse(null));

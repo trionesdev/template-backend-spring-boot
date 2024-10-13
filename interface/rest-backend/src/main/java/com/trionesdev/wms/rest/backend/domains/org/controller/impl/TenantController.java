@@ -4,10 +4,7 @@ import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberDTO;
 import com.trionesdev.wms.core.domains.org.service.impl.TenantService;
-import com.trionesdev.wms.rest.backend.domains.org.controller.ro.ActorMemberUpdateRO;
-import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberCreateRO;
-import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberQueryRO;
-import com.trionesdev.wms.rest.backend.domains.org.controller.ro.TenantMemberUpdateRO;
+import com.trionesdev.wms.rest.backend.domains.org.controller.ro.tenant.*;
 import com.trionesdev.wms.rest.backend.domains.org.internal.OrgBeRestConvert;
 import com.trionesdev.wms.rest.backend.domains.org.internal.OrgRestConstants;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,11 +37,11 @@ public class TenantController {
     ) {
         var tenantMember = convert.from(args);
         tenantMember.setId(id);
-        tenantService.updateMemberById(tenantMember);
+        tenantService.updateMemberProfileById(tenantMember);
     }
 
-    @Operation(summary = "根据ID查询租户成员")
-    @GetMapping("tenant/members/{id}")
+    @Operation(summary = "根据ID查询租户成员", description = "包含部门信息")
+    @GetMapping(value = "tenant/members/{id}")
     public TenantMemberDTO queryTenantMemberById(@PathVariable String id) {
         return tenantService.findTenantMemberByMemberId(id).orElse(null);
     }
@@ -69,10 +66,17 @@ public class TenantController {
 
     @Operation(summary = "修改当前执行成员")
     @PutMapping(value = "tenant/actor/member")
-    public void updateActorMember(@Validated @RequestBody ActorMemberUpdateRO args) {
+    public void updateActorMember(@Validated @RequestBody ActorMemberProfileUpdateRO args) {
         var tenantMember = convert.from(args);
         tenantMember.setId(actorContext.getMemberId());
-        tenantService.updateMemberProfileById(tenantMember);
+        tenantService.updateMemberById(tenantMember);
+    }
+
+    @Operation(summary = "修改密码")
+    @PutMapping(value = "tenant/actor/password")
+    public void changePwd(@Validated @RequestBody ActorMemberChangePasswordRO args) {
+        var changePwd = convert.form(args);
+        tenantService.changeActorPassword(changePwd);
     }
 
 }
