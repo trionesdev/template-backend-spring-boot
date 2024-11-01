@@ -1,5 +1,6 @@
 package com.trionesdev.wms.rest.backend.domains.dic.controller.impl;
 
+import com.trionesdev.spring.core.audit.AuditLog;
 import com.trionesdev.wms.core.domains.dic.dao.po.DistrictPO;
 import com.trionesdev.wms.core.domains.dic.service.impl.DistrictService;
 import com.trionesdev.wms.rest.backend.domains.dic.controller.ro.DistrictQueryRO;
@@ -23,6 +24,7 @@ public class DistrictController {
     private final DistrictService districtService;
 
     @Operation(summary = "获取地区数据列表")
+    @AuditLog(description = "查询国家地区")
     @GetMapping(value = "district/list")
     public List<DistrictPO> findList(DistrictQueryRO query) {
         var criteria = convert.from(query);

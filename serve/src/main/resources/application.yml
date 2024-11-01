@@ -23,7 +23,7 @@ spring:
   liquibase:
     enabled: false
     change-log: classpath:db/db.changelog-master.xml
-    contexts: !testing
+
 
 mybatis-plus:
   configuration:
