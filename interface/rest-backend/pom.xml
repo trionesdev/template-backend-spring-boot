@@ -21,4 +21,5 @@
             <artifactId>core</artifactId>
         </dependency>
     </dependencies>
+
 </project>
