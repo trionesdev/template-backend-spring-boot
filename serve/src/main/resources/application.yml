@@ -20,6 +20,10 @@ spring:
     basename: i18n/validation
   cache:
     type: caffeine
+  liquibase:
+    enabled: false
+    change-log: classpath:db/db.changelog-master.xml
+    contexts: !testing
 
 mybatis-plus:
   configuration:
