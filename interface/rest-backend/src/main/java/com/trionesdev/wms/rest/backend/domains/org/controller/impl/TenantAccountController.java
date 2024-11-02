@@ -1,5 +1,6 @@
 package com.trionesdev.wms.rest.backend.domains.org.controller.impl;
 
+import com.trionesdev.spring.core.audit.OperationAudit;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberSignInCmd;
 import com.trionesdev.wms.core.domains.org.service.impl.TenantService;
 import com.trionesdev.wms.rest.backend.domains.org.controller.ro.tenant.TenantAccountSignInRO;
@@ -24,6 +25,7 @@ public class TenantAccountController {
     private final TenantService tenantService;
 
     @Operation(summary = "账号登录")
+    @OperationAudit(description = "账号登录")
     @PostMapping(value = "sign-in/account")
     public TokenVO accountSignIn(@Validated @RequestBody TenantAccountSignInRO args) {
         var token = tenantService.accountSignIn(TenantMemberSignInCmd.builder().tenantSerial(args.getTenantSerial())
