@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.trionesdev.wms</groupId>
-            <artifactId>rest-backend</artifactId>
+            <artifactId>rest-tenant</artifactId>
         </dependency>
         <dependency>
             <groupId>com.trionesdev.wms</groupId>
