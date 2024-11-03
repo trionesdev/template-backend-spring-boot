@@ -1,0 +1,1 @@
+package com.trionesdev.wms.rest.tenant.domains;
