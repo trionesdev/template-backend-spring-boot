@@ -17,23 +17,23 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-@TableName(value = "log_operation_log", autoResultMap = true)
-public class OperationLogPO {
+@TableName(value = "log_login_log", autoResultMap = true)
+public class LoginLogPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
     private String actorId;
     private String actorRole;
-    private String objId;
+    private String username;
+    private String nickname;
+    private String ip;
+    private String district;
     private String type;
     private String category;
     private String action;
     private String description;
     private Instant startAt;
-    private Instant endAt;
     @TableField(value = "is_success")
     private Boolean success;
     private String errorMsg;
-    private String beforeValues;
-    private String afterValues;
 }
