@@ -2,18 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-<!--    <parent>-->
-<!--        <groupId>com.trionesdev</groupId>-->
-<!--        <artifactId>triones-spring-boot-parent</artifactId>-->
-<!--        <version>3.0-SNAPSHOT</version>-->
-<!--        <relativePath/>-->
-<!--    </parent>-->
-
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.trionesdev</groupId>
+        <artifactId>triones-spring-boot-parent</artifactId>
+        <version>3.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -40,13 +33,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.trionesdev</groupId>
-                <artifactId>triones-dependencies</artifactId>
-                <version>3.0-SNAPSHOT</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <dependency>
                 <groupId>com.trionesdev.wms</groupId>
                 <artifactId>infrastructure</artifactId>

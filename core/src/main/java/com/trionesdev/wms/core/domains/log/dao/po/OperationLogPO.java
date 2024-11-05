@@ -11,6 +11,7 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.time.Instant;
+import java.util.Map;
 
 @Data
 @SuperBuilder
@@ -36,4 +37,5 @@ public class OperationLogPO {
     private String errorMsg;
     private String beforeValues;
     private String afterValues;
+    private Map<String,String> extra;
 }
