@@ -80,6 +80,11 @@ public class TenantMemberRepository {
         return assembleMembers(members);
     }
 
+    public List<TenantMember> findListByUserIds(Collection<String> userIds) {
+        var members = tenantMemberDAO.selectListByUserIds(userIds);
+        return assembleMembers(members);
+    }
+
     public List<TenantMember> findMemberList(TenantMemberCriteria criteria) {
         var members = tenantMemberDAO.selectList(criteria);
         return assembleMembers(members);

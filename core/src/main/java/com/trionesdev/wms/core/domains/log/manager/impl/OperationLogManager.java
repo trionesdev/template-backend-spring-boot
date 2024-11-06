@@ -1,5 +1,7 @@
 package com.trionesdev.wms.core.domains.log.manager.impl;
 
+import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.wms.core.domains.log.dao.criteria.OperationLogCriteria;
 import com.trionesdev.wms.core.domains.log.dao.impl.OperationLogDAO;
 import com.trionesdev.wms.core.domains.log.dao.po.OperationLogPO;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,10 @@ public class OperationLogManager {
 
     public void create(OperationLogPO operationLog) {
         operationLogDAO.save(operationLog);
+    }
+
+    public PageInfo<OperationLogPO> findPage(OperationLogCriteria criteria) {
+        return operationLogDAO.selectPage(criteria);
     }
 
 }

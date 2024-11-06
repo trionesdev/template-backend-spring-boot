@@ -1,14 +1,8 @@
-package com.trionesdev.wms.core.domains.log.dao.po;
+package com.trionesdev.wms.core.domains.log.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.time.Instant;
@@ -18,10 +12,7 @@ import java.util.Map;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(callSuper = true)
-@TableName(value = "log_operation_log", autoResultMap = true)
-public class OperationLogPO {
-    @TableId(type = IdType.ASSIGN_ID)
+public class OperationLogCreateCmd {
     private String id;
     private String tenantId;
     private String actorId;
@@ -33,11 +24,9 @@ public class OperationLogPO {
     private String description;
     private Instant startAt;
     private Instant endAt;
-    @TableField(value = "is_success")
     private Boolean success;
     private String errorMsg;
     private String beforeValues;
     private String afterValues;
-    @TableField(typeHandler = JacksonTypeHandler.class)
     private Map<String,String> extra;
 }
