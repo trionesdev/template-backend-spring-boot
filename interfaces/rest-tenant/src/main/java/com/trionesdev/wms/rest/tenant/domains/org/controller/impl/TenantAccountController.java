@@ -2,7 +2,7 @@ package com.trionesdev.wms.rest.tenant.domains.org.controller.impl;
 
 import com.trionesdev.spring.core.audit.OperationAudit;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberSignInCmd;
-import com.trionesdev.wms.core.domains.org.internal.handler.LoginOperationHandler;
+import com.trionesdev.wms.rest.tenant.domains.org.internal.handler.LoginOperationHandler;
 import com.trionesdev.wms.core.domains.org.service.impl.TenantService;
 import com.trionesdev.wms.rest.tenant.domains.org.controller.ro.tenant.TenantAccountSignInRO;
 import com.trionesdev.wms.rest.tenant.domains.org.controller.vo.TokenVO;
@@ -27,9 +27,9 @@ public class TenantAccountController {
     private final TenantService tenantService;
 
     @Operation(summary = "账号登录")
-    @OperationAudit(type = "TENANT", category = "ORG", action = "LOGIN", description = "账号登录", handler = LoginOperationHandler.class)
-    @PostMapping(value = "sign-in/account/{id}")
-    public TokenVO accountSignIn(@PathVariable(value = "id") String id, @Validated @RequestBody TenantAccountSignInRO args) {
+    @OperationAudit(type = "LOGIN", category = "ORG", action = "LOGIN", description = "用户登录", handler = LoginOperationHandler.class)
+    @PostMapping(value = "sign-in/account")
+    public TokenVO accountSignIn( @Validated @RequestBody TenantAccountSignInRO args) {
         var token = tenantService.accountSignIn(TenantMemberSignInCmd.builder().tenantSerial(args.getTenantSerial())
                 .account(args.getAccount()).password(args.getPassword())
                 .build());

@@ -20,6 +20,9 @@ public interface OrgProvider {
 
     List<TenantMemberDetailDTO> getMembersByMemberIds(Collection<String> memberIds);
 
+    List<TenantMemberDetailDTO> getMembersByUserIds(Collection<String> userIds);
+
+
     //endregion
 
     List<DepartmentDTO> getDepartmentsByIds(Collection<String> departmentIds);

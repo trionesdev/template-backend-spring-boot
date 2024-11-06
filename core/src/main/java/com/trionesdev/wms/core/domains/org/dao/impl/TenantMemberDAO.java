@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -44,6 +46,13 @@ public class TenantMemberDAO extends ServiceImpl<TenantMemberMapper, TenantMembe
         return lambdaQuery().eq(TenantMemberPO::getUserId, userId)
                 .eq(StrUtil.isNotBlank(actorContext.getTenantId()), TenantMemberPO::getUserId, userId)
                 .last(" limit 1 ").one();
+    }
+
+    public List<TenantMemberPO> selectListByUserIds(Collection<String> userIds) {
+        if (CollectionUtil.isEmpty(userIds)) {
+            return Collections.emptyList();
+        }
+        return lambdaQuery().in(TenantMemberPO::getUserId, userIds).list();
     }
 
     public List<TenantMemberPO> selectList(TenantMemberCriteria criteria) {

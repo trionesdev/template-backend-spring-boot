@@ -49,6 +49,11 @@ public class TenantMemberManager {
         return tenantMemberRepository.findListByIds(ids);
     }
 
+    public List<TenantMember> findMembersByUserIds(Collection<String> userIds) {
+        return tenantMemberRepository.findListByUserIds(userIds);
+    }
+
+
     public Optional<TenantMemberPO> findMemberByUsername(String tenantId, String username) {
         return Optional.ofNullable(tenantMemberDAO.selectByUsername(tenantId, username));
     }
