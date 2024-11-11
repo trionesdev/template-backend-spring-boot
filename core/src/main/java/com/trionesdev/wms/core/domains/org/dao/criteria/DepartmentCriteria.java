@@ -14,4 +14,5 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class DepartmentCriteria extends PageCriteria {
     private String parentId;
+    private String name;
 }

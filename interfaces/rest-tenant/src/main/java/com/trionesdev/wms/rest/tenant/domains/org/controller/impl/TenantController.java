@@ -2,6 +2,7 @@ package com.trionesdev.wms.rest.tenant.domains.org.controller.impl;
 
 import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.wms.core.domains.org.dto.OrgNodeDTO;
 import com.trionesdev.wms.core.domains.org.dto.TenantMemberDTO;
 import com.trionesdev.wms.core.domains.org.service.impl.TenantService;
 import com.trionesdev.wms.rest.tenant.domains.org.controller.ro.tenant.*;
@@ -12,6 +13,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "租户")
 @RequiredArgsConstructor
@@ -85,4 +88,11 @@ public class TenantController {
         var changePwd = convert.form(args);
         tenantService.changePassword(changePwd);
     }
+
+    @Operation(summary = "查询组织列表(包含部门和租户成员)")
+    @GetMapping(value = "tenant/org/list")
+    public List<OrgNodeDTO> queryOrgNodeList(@RequestParam String wd) {
+        return tenantService.queryOrgNodeList(wd);
+    }
+
 }

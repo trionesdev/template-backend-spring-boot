@@ -10,6 +10,7 @@ public class OrgNodeDTO {
     private String name;
     private String avatar;
     private Type type;
+    private String nickname;
 
     public enum Type{
         DEPARTMENT,

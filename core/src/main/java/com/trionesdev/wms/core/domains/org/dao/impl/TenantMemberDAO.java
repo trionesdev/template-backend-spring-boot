@@ -29,6 +29,10 @@ public class TenantMemberDAO extends ServiceImpl<TenantMemberMapper, TenantMembe
         var queryWrapper = new LambdaQueryWrapper<TenantMemberPO>();
         if (Objects.nonNull(criteria)) {
             queryWrapper.eq(StrUtil.isNotBlank(actorContext.getTenantId()), TenantMemberPO::getTenantId, actorContext.getTenantId())
+                    .and(StringUtils.isNoneBlank(criteria.getWd()), wdQueryWrapper -> {
+                        wdQueryWrapper.like(TenantMemberPO::getName, criteria.getWd())
+                                .or().like(TenantMemberPO::getNickname, criteria.getWd());
+                    })
                     .and(Objects.nonNull(criteria.getOrGroup()), orQueryWrapper -> {
                         orQueryWrapper.in(CollectionUtil.isNotEmpty(criteria.getOrGroup().getIds()), TenantMemberPO::getId, criteria.getOrGroup().getIds())
                                 .or(CollectionUtil.isNotEmpty(criteria.getOrGroup().getDepartmentIds()), departmentIdsQueryWrapper -> {

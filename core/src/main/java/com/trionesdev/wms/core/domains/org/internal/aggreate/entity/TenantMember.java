@@ -27,6 +27,7 @@ public class TenantMember {
     private String encodedPassword;
     private String nickname;
     private String avatar;
+    private String name;
     private List<String> departmentIds;
 
     public String getEncodedPassword() {

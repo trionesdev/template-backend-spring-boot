@@ -16,6 +16,7 @@ import java.util.Collection;
 @NoArgsConstructor
 public class TenantMemberCriteria extends PageCriteria {
     private String userId;
+    private String wd;
     private OrGroup orGroup;
 
 

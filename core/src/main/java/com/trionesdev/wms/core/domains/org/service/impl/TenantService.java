@@ -10,18 +10,29 @@ import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.commons.exception.NotFoundException;
+import com.trionesdev.wms.core.domains.org.dao.criteria.DepartmentCriteria;
 import com.trionesdev.wms.core.domains.org.dao.criteria.TenantMemberCriteria;
-import com.trionesdev.wms.core.domains.org.dao.impl.TenantMemberDAO;
 import com.trionesdev.wms.core.domains.org.dao.po.DepartmentMemberPO;
-import com.trionesdev.wms.core.domains.org.dto.*;
+import com.trionesdev.wms.core.domains.org.dto.ActorChangePasswordCmd;
+import com.trionesdev.wms.core.domains.org.dto.ChangePasswordCmd;
+import com.trionesdev.wms.core.domains.org.dto.OrgNodeDTO;
+import com.trionesdev.wms.core.domains.org.dto.OrgNodeQuery;
+import com.trionesdev.wms.core.domains.org.dto.TenantMemberCreateCmd;
+import com.trionesdev.wms.core.domains.org.dto.TenantMemberDTO;
+import com.trionesdev.wms.core.domains.org.dto.TenantMemberProfileUpdateCmd;
+import com.trionesdev.wms.core.domains.org.dto.TenantMemberSignInCmd;
+import com.trionesdev.wms.core.domains.org.dto.TenantMemberUpdateCmd;
 import com.trionesdev.wms.core.domains.org.internal.OrgDomainConvert;
 import com.trionesdev.wms.core.domains.org.internal.aggreate.entity.TenantMember;
 import com.trionesdev.wms.core.domains.org.manager.impl.DepartmentManager;
 import com.trionesdev.wms.core.domains.org.manager.impl.TenantMemberManager;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -36,7 +47,6 @@ public class TenantService {
     private final AppProperties appProperties;
     private final TenantMemberManager tenantMemberManager;
     private final DepartmentManager departmentManager;
-    private final TenantMemberDAO tenantMemberDAO;
 
     @Transactional
     public void createMember(TenantMemberCreateCmd cmd) {
@@ -114,4 +124,26 @@ public class TenantService {
             tenantMemberManager.updateMemberById(tenantMember);
         });
     }
+
+    public List<OrgNodeDTO> queryOrgNodeList(String wd) {
+        List<OrgNodeDTO> result = new ArrayList<>();
+        var departments = departmentManager.findDepartments(DepartmentCriteria.builder().name(wd).build());
+        if (CollectionUtils.isNotEmpty(departments)) {
+            departments.forEach(t -> {
+                result.add(OrgNodeDTO.builder().id(t.getId()).name(t.getName()).type(OrgNodeDTO.Type.DEPARTMENT).build());
+            });
+        }
+        var tenantMembers = tenantMemberManager.findMembers(TenantMemberCriteria.builder().wd(wd).build());
+        if (CollectionUtils.isNotEmpty(tenantMembers)) {
+            tenantMembers.forEach(t -> {
+                var name = t.getName();
+                if (StringUtils.isBlank(name)) {
+                    name = t.getNickname();
+                }
+                result.add(OrgNodeDTO.builder().id(t.getId()).name(name).type(OrgNodeDTO.Type.MEMBER).avatar(t.getAvatar()).nickname(t.getNickname()).build());
+            });
+        }
+        return result;
+    }
+
 }

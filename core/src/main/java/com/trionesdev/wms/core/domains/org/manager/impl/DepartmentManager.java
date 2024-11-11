@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.trionesdev.commons.core.constant.IdentityConstants;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.exception.BusinessException;
+import com.trionesdev.wms.core.domains.org.dao.criteria.DepartmentCriteria;
 import com.trionesdev.wms.core.domains.org.dao.criteria.DepartmentMemberCriteria;
 import com.trionesdev.wms.core.domains.org.dao.impl.DepartmentDAO;
 import com.trionesdev.wms.core.domains.org.dao.impl.DepartmentMemberDAO;
@@ -59,6 +60,10 @@ public class DepartmentManager {
 
     public List<DepartmentPO> findDepartments() {
         return departmentDAO.list();
+    }
+
+    public List<DepartmentPO> findDepartments(DepartmentCriteria criteria) {
+        return departmentDAO.selectList(criteria);
     }
 
     public List<DepartmentPO> findDepartmentsByParentId(String parentId) {

@@ -16,7 +16,9 @@ public class CountryDAO extends ServiceImpl<CountryMapper, CountryPO> {
     private LambdaQueryWrapper<CountryPO> buildQueryWrapper(final CountryCriteria criteria) {
         LambdaQueryWrapper<CountryPO> queryWrapper = new LambdaQueryWrapper<>();
         if (Objects.nonNull(criteria)) {
-            queryWrapper.eq(StringUtils.isNoneBlank(criteria.getCode()), CountryPO::getCode, criteria.getCode());
+            queryWrapper
+                    .like(StringUtils.isNoneBlank(criteria.getName()), CountryPO::getName, criteria.getName())
+                    .eq(StringUtils.isNoneBlank(criteria.getCode()), CountryPO::getCode, criteria.getCode());
         }
         return queryWrapper;
     }

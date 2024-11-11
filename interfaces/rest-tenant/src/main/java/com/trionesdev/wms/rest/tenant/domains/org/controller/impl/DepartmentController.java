@@ -93,7 +93,7 @@ public class DepartmentController {
     @Operation(summary = "查询组织列表(包含组织下成员)")
     @GetMapping("department/org/list")
     public List<OrgNodeDTO> queryDepartmentOrgList(@RequestParam String departmentId) {
-        return departmentService.orgList(departmentId);
+        return departmentService.orgListByDepartmentId(departmentId);
     }
 
 }
