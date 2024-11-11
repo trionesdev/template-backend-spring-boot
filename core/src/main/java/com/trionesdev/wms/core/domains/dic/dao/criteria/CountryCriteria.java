@@ -13,5 +13,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CountryCriteria extends PageCriteria {
+    private String name;
     private String code;
 }

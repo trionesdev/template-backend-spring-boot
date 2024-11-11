@@ -38,5 +38,5 @@ public interface DepartmentService {
 
     List<Tree<String>> orgTree();
 
-    List<OrgNodeDTO> orgList(String departmentId);
+    List<OrgNodeDTO> orgListByDepartmentId(String departmentId);
 }

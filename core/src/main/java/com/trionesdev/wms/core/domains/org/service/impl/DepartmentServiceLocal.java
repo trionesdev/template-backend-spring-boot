@@ -25,6 +25,7 @@ import com.trionesdev.wms.core.domains.org.manager.impl.TenantManager;
 import com.trionesdev.wms.core.domains.org.manager.impl.TenantMemberManager;
 import com.trionesdev.wms.core.domains.org.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -191,7 +192,7 @@ public class DepartmentServiceLocal implements DepartmentService {
     }
 
     @Override
-    public List<OrgNodeDTO> orgList(String departmentId) {
+    public List<OrgNodeDTO> orgListByDepartmentId(String departmentId) {
         List<OrgNodeDTO> result = new ArrayList<>();
         var departments = departmentManager.findDepartmentsByParentId(departmentId);
         departments.forEach(t -> {
@@ -202,7 +203,11 @@ public class DepartmentServiceLocal implements DepartmentService {
             var userIds = departmentMembers.stream().map(DepartmentMemberPO::getUserId).collect(Collectors.toSet());
             var members = tenantMemberManager.findMembersByIds(userIds);
             members.forEach(t -> {
-                result.add(OrgNodeDTO.builder().id(t.getId()).name(t.getNickname()).type(OrgNodeDTO.Type.MEMBER).build());
+                var name = t.getName();
+                if (StringUtils.isBlank(name)) {
+                    name = t.getNickname();
+                }
+                result.add(OrgNodeDTO.builder().id(t.getId()).name(name).type(OrgNodeDTO.Type.MEMBER).avatar(t.getAvatar()).nickname(t.getNickname()).build());
             });
         }
         return result;

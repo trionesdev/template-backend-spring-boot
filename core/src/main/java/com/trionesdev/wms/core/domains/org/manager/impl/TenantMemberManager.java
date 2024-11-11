@@ -66,6 +66,14 @@ public class TenantMemberManager {
         return tenantMemberRepository.findMemberPage(criteria);
     }
 
+    /**
+     * 根据租户下，用户的账户和密码获取用户信息
+     *
+     * @param tenantId 租户ID
+     * @param account  账户，可以是手机号，邮箱，用户名
+     * @param password 密码
+     * @return 用户信息
+     */
     public Optional<TenantMember> findByTenantAccount(String tenantId, String account, String password) {
         var accountType = TenantMember.getAccountType(account);
         Optional<TenantMember> memberSnap = Optional.empty();
@@ -79,6 +87,14 @@ public class TenantMemberManager {
         return memberSnap.filter(member -> member.passwordMatch(password));
     }
 
+    /**
+     * 根据租户下，用户的账户和密码获取用户信息
+     *
+     * @param tenantSerial 租户序列号，如果当前是单租户，则不生效
+     * @param account      账户
+     * @param password     密码
+     * @return 用户信息
+     */
     public Optional<TenantMember> findByAccount(String tenantSerial, String account, String password) {
         String tenantId = null;
         if (BooleanUtils.isTrue(appProperties.getMultiTenant())) {
