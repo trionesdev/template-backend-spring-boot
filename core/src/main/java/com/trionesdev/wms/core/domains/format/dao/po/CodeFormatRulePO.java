@@ -1,10 +1,10 @@
-package com.trionesdev.wms.core.domains.custom.dao.po;
+package com.trionesdev.wms.core.domains.format.dao.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.trionesdev.commons.mybatisplus.entity.BaseLogicEntity;
-import com.trionesdev.wms.core.domains.custom.internal.enums.TimeFormatTypeEnum;
+import com.trionesdev.wms.core.domains.format.internal.enums.TimeFormatTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "custom_code_rule")
-public class CustomCodeRulePO extends BaseLogicEntity {
+public class CodeFormatRulePO extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;

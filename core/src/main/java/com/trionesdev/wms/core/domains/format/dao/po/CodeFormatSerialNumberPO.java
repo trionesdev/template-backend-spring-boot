@@ -1,4 +1,4 @@
-package com.trionesdev.wms.core.domains.custom.dao.po;
+package com.trionesdev.wms.core.domains.format.dao.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "custom_code_serial_number")
-public class CustomCodeSerialNumberPO  {
+public class CodeFormatSerialNumberPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
