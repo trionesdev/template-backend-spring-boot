@@ -1,13 +1,13 @@
-package com.trionesdev.wms.core.domains.custom.provider.impl;
+package com.trionesdev.wms.core.domains.format.provider.impl;
 
-import com.trionesdev.wms.core.domains.custom.manager.impl.CustomCodeRuleManager;
+import com.trionesdev.wms.core.domains.format.manager.impl.CodeFormatRuleManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
 public class CustomProvider {
-    private final CustomCodeRuleManager customCodeRuleManager;
+    private final CodeFormatRuleManager customCodeRuleManager;
 
     public String generateCode(String identifier) {
         return customCodeRuleManager.generateCode(identifier);

@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
-import com.trionesdev.wms.core.domains.custom.provider.impl.CustomProvider;
+import com.trionesdev.wms.core.domains.format.provider.impl.CustomProvider;
 import com.trionesdev.wms.core.domains.warehouse.dao.criteria.WarehouseCriteria;
 import com.trionesdev.wms.core.domains.warehouse.dao.po.WarehousePO;
 import com.trionesdev.wms.core.domains.warehouse.dto.WarehouseDTO;

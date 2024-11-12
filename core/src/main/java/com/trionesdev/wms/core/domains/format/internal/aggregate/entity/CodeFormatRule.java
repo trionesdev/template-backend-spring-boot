@@ -1,7 +1,7 @@
-package com.trionesdev.wms.core.domains.custom.internal.aggregate.entity;
+package com.trionesdev.wms.core.domains.format.internal.aggregate.entity;
 
 import cn.hutool.core.util.StrUtil;
-import com.trionesdev.wms.core.domains.custom.internal.enums.TimeFormatTypeEnum;
+import com.trionesdev.wms.core.domains.format.internal.enums.TimeFormatTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,12 +10,13 @@ import lombok.experimental.SuperBuilder;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomCodeRule {
+public class CodeFormatRule {
     private String identifier;
     private String name;
     private String prefix;
@@ -26,16 +27,11 @@ public class CustomCodeRule {
     public String timeIdentifier() {
         Instant now = Instant.now();
         LocalDateTime dateTime = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
-        switch (timeFormatType) {
-            case YYYY:
-                return String.valueOf(dateTime.getYear());
-            case YYYY_MM:
-                return String.valueOf(dateTime.getYear()) + dateTime.getMonthValue();
-            case YYYY_MM_DD:
-                return String.valueOf(dateTime.getYear()) + dateTime.getMonthValue() + dateTime.getDayOfMonth();
-            default:
-                return null;
+        if (timeFormatType == null) {
+            timeFormatType = TimeFormatTypeEnum.YYYY;
         }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(timeFormatType.getFormat());
+        return dateTime.format(formatter);
     }
 
 
