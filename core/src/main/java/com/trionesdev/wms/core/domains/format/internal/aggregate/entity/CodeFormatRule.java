@@ -1,7 +1,7 @@
 package com.trionesdev.wms.core.domains.format.internal.aggregate.entity;
 
 import cn.hutool.core.util.StrUtil;
-import com.trionesdev.wms.core.domains.format.internal.enums.TimeFormatTypeEnum;
+import com.trionesdev.wms.core.domains.format.internal.enums.TimeFormatType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,15 +20,14 @@ public class CodeFormatRule {
     private String identifier;
     private String name;
     private String prefix;
-    private TimeFormatTypeEnum timeFormatType;
+    private TimeFormatType timeFormatType;
     private Integer serialNumberDigits;
-
 
     public String timeIdentifier() {
         Instant now = Instant.now();
         LocalDateTime dateTime = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
         if (timeFormatType == null) {
-            timeFormatType = TimeFormatTypeEnum.YYYY;
+            timeFormatType = TimeFormatType.YYYY;
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(timeFormatType.getFormat());
         return dateTime.format(formatter);

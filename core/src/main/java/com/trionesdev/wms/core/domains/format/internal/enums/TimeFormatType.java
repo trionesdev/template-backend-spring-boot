@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum TimeFormatTypeEnum {
+public enum TimeFormatType {
     YYYY("yyyy"),
     YYYY_MM("yyyyMM"),
     YYYY_MM_DD("yyyyMMdd"),
