@@ -1,1 +1,0 @@
-package com.trionesdev.wms.core.domains.format;
