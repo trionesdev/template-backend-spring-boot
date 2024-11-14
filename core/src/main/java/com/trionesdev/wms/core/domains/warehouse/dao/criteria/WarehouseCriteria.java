@@ -14,4 +14,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class WarehouseCriteria extends PageCriteria{
     private String code;
+    private String name;
+    private Boolean enabled;
 }
