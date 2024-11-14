@@ -1,10 +1,9 @@
-package com.trionesdev.wms.core.domains.warehouse.dto;
+package com.trionesdev.wms.rest.tenant.domains.warehouse.controller.ro;
 
 import lombok.Data;
 
 @Data
-public class WarehouseDTO {
-    private String id;
+public class WarehouseRO {
     private String code;
     private String name;
     private String address;
