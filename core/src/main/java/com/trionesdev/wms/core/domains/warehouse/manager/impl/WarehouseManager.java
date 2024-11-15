@@ -39,4 +39,7 @@ public class WarehouseManager {
         return warehouseRepository.selectPage(criteria);
     }
 
+    public void deleteByIds(List<String> ids) {
+        warehouseRepository.removeByIds(ids);
+    }
 }
