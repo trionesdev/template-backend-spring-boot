@@ -27,6 +27,7 @@ spring:
 
 mybatis-plus:
   configuration:
+    default-enum-type-handler: com.trionesdev.commons.mybatisplus.typehandlers.EnumTypeHandler
     map-underscore-to-camel-case: true
     log-prefix: dao.
   global-config:
