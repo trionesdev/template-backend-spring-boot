@@ -19,6 +19,7 @@ public class CodeFormatRuleManager {
 
 
     public void createCodeFormatRule(CodeFormatRule record) {
+        record.uniqueValidate(codeFormatRepository);
         codeFormatRepository.create(record);
     }
 
@@ -27,6 +28,7 @@ public class CodeFormatRuleManager {
     }
 
     public void updateCodeFormatRuleById(CodeFormatRule record) {
+        record.uniqueValidate(codeFormatRepository);
         codeFormatRepository.updateById(record);
     }
 

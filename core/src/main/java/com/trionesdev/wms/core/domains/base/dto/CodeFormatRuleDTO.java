@@ -11,9 +11,11 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CodeFormatRuleDTO {
-    private String identifier;
+    private String id;
     private String name;
+    private String identifier;
     private String prefix;
     private TimeFormatType timeFormatType;
     private Integer serialNumberDigits;
+    private String description;
 }

@@ -21,9 +21,10 @@ public class CodeFormatRulePO extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
+    private String name;
     private String identifier;
     private String prefix;
     private TimeFormatType timeFormatType;
     private Integer serialNumberDigits;
-
+    private String description;
 }
