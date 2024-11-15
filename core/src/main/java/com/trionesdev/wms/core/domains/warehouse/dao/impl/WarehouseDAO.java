@@ -23,6 +23,7 @@ public class WarehouseDAO extends ServiceImpl<WarehouseMapper, WarehousePO> {
             queryWrapper.eq(StrUtil.isNotBlank(criteria.getName()), WarehousePO::getName, criteria.getName());
             queryWrapper.eq(ObjUtil.isNotNull(criteria.getEnabled()), WarehousePO::getEnabled, criteria.getEnabled());
         }
+        queryWrapper.orderByDesc(WarehousePO::getCreatedAt);
         return queryWrapper;
     }
 
