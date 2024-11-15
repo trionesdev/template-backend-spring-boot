@@ -66,4 +66,8 @@ public class WarehouseService {
         }
         return records.stream().map(this::assemble).collect(Collectors.toList());
     }
+
+    public void deleteByIds(List<String> ids) {
+        warehouseManager.deleteByIds(ids);
+    }
 }

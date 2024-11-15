@@ -1,5 +1,6 @@
 package com.trionesdev.wms.core.domains.warehouse.dao.impl;
 
+import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -19,7 +20,10 @@ public class WarehouseDAO extends ServiceImpl<WarehouseMapper, WarehousePO> {
         LambdaQueryWrapper<WarehousePO> queryWrapper = new LambdaQueryWrapper<>();
         if (Objects.nonNull(criteria)) {
             queryWrapper.eq(StrUtil.isNotBlank(criteria.getCode()), WarehousePO::getCode, criteria.getCode());
+            queryWrapper.eq(StrUtil.isNotBlank(criteria.getName()), WarehousePO::getName, criteria.getName());
+            queryWrapper.eq(ObjUtil.isNotNull(criteria.getEnabled()), WarehousePO::getEnabled, criteria.getEnabled());
         }
+        queryWrapper.orderByDesc(WarehousePO::getCreatedAt);
         return queryWrapper;
     }
 
