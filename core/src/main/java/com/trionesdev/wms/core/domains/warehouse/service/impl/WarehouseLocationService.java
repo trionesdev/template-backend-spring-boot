@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class WarehouseLocationService {
-
     private final WarehouseBeanConvert convert;
     private final WarehouseLocationManager warehouseLocationManager;
     private final WarehouseAreaManager warehouseAreaManager;

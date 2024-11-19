@@ -12,11 +12,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class WarehouseLocationCriteria extends PageCriteria {
+public class WarehouseContainerCriteria extends PageCriteria {
     private String code;
     private String name;
     private Boolean enabled;
-
     private String warehouseId;
-    private String warehouseAreaId;
 }
