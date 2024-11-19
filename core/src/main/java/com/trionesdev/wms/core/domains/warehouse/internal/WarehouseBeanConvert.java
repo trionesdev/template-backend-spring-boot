@@ -1,9 +1,11 @@
 package com.trionesdev.wms.core.domains.warehouse.internal;
 
 import com.trionesdev.wms.core.domains.warehouse.dao.po.WarehouseAreaPO;
+import com.trionesdev.wms.core.domains.warehouse.dao.po.WarehouseContainerPO;
 import com.trionesdev.wms.core.domains.warehouse.dao.po.WarehouseLocationPO;
 import com.trionesdev.wms.core.domains.warehouse.dao.po.WarehousePO;
 import com.trionesdev.wms.core.domains.warehouse.dto.WarehouseAreaDTO;
+import com.trionesdev.wms.core.domains.warehouse.dto.WarehouseContainerDTO;
 import com.trionesdev.wms.core.domains.warehouse.dto.WarehouseDTO;
 import com.trionesdev.wms.core.domains.warehouse.dto.WarehouseLocationDTO;
 import org.mapstruct.Builder;
@@ -21,5 +23,7 @@ public interface WarehouseBeanConvert {
     WarehouseAreaDTO poToDto(WarehouseAreaPO warehouseArea);
 
     WarehouseLocationDTO poToDto(WarehouseLocationPO warehouseLocation);
+
+    WarehouseContainerDTO poToDto(WarehouseContainerPO warehouseContainer);
 
 }

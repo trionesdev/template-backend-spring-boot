@@ -1,13 +1,17 @@
 package com.trionesdev.wms.rest.tenant.domains.warehouse.internal;
 
 import com.trionesdev.wms.core.domains.warehouse.dao.criteria.WarehouseAreaCriteria;
+import com.trionesdev.wms.core.domains.warehouse.dao.criteria.WarehouseContainerCriteria;
 import com.trionesdev.wms.core.domains.warehouse.dao.criteria.WarehouseCriteria;
 import com.trionesdev.wms.core.domains.warehouse.dao.criteria.WarehouseLocationCriteria;
 import com.trionesdev.wms.core.domains.warehouse.dao.po.WarehouseAreaPO;
+import com.trionesdev.wms.core.domains.warehouse.dao.po.WarehouseContainerPO;
 import com.trionesdev.wms.core.domains.warehouse.dao.po.WarehouseLocationPO;
 import com.trionesdev.wms.core.domains.warehouse.dao.po.WarehousePO;
 import com.trionesdev.wms.rest.tenant.domains.warehouse.controller.ro.WarehouseAreaQueryRO;
 import com.trionesdev.wms.rest.tenant.domains.warehouse.controller.ro.WarehouseAreaRO;
+import com.trionesdev.wms.rest.tenant.domains.warehouse.controller.ro.WarehouseContainerQueryRO;
+import com.trionesdev.wms.rest.tenant.domains.warehouse.controller.ro.WarehouseContainerRO;
 import com.trionesdev.wms.rest.tenant.domains.warehouse.controller.ro.WarehouseLocationQueryRO;
 import com.trionesdev.wms.rest.tenant.domains.warehouse.controller.ro.WarehouseLocationRO;
 import com.trionesdev.wms.rest.tenant.domains.warehouse.controller.ro.WarehouseQueryRO;
@@ -25,12 +29,15 @@ public interface WarehouseBeRestConvert {
 
     WarehousePO from(WarehouseRO args);
 
-    WarehouseAreaPO from(WarehouseAreaRO args);
-
     WarehouseAreaCriteria from(WarehouseAreaQueryRO args);
+
+    WarehouseAreaPO from(WarehouseAreaRO args);
 
     WarehouseLocationCriteria from(WarehouseLocationQueryRO args);
 
     WarehouseLocationPO from(WarehouseLocationRO args);
 
+    WarehouseContainerCriteria from(WarehouseContainerQueryRO args);
+
+    WarehouseContainerPO from(WarehouseContainerRO args);
 }
