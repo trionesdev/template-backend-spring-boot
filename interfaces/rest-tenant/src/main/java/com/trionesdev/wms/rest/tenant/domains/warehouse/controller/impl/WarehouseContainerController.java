@@ -35,8 +35,8 @@ public class WarehouseContainerController {
     @Operation(summary = "创建托盘")
     @PostMapping("warehouse-containers")
     public void create(@Validated @RequestBody WarehouseContainerRO args) {
-        var warehouse = convert.from(args);
-        warehouseContainerService.create(warehouse);
+        var po = convert.from(args);
+        warehouseContainerService.create(po);
     }
 
     @Operation(summary = "根据ID更新托盘")
@@ -45,9 +45,9 @@ public class WarehouseContainerController {
             @PathVariable(value = "id") String id,
             @Validated @RequestBody WarehouseContainerRO args
     ) {
-        var warehouse = convert.from(args);
-        warehouse.setId(id);
-        warehouseContainerService.updateById(warehouse);
+        var po = convert.from(args);
+        po.setId(id);
+        warehouseContainerService.updateById(po);
     }
 
     @Operation(summary = "根据ID查询托盘")
