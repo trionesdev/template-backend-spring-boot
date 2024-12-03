@@ -1,22 +1,19 @@
-package com.trionesdev.wms.core.domains.good.dao.criteria;
+package com.trionesdev.wms.core.domains.warehouse.dao.criteria;
 
 import com.trionesdev.commons.core.page.PageCriteria;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
-
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MeasureUnitCriteria extends PageCriteria {
-    private String code;
-    private String name;
-    private Boolean enabled;
-    private List<String> codes;
+public class WarehouseInboundPlanCriteria extends PageCriteria {
+    private String sn;
 }

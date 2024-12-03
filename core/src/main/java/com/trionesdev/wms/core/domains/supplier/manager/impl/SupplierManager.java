@@ -27,6 +27,10 @@ public class SupplierManager {
         return Optional.ofNullable(supplierRepository.getById(id));
     }
 
+    public List<SupplierPO> findById(List<String> ids) {
+        return supplierRepository.findById(ids);
+    }
+
     public List<SupplierPO> findList(SupplierCriteria criteria) {
         return supplierRepository.selectList(criteria);
     }
