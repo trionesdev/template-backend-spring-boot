@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
@@ -17,4 +19,5 @@ public class SupplierCriteria extends PageCriteria {
     private String name;
     private String contactName;
     private Boolean enabled;
+    private List<String> ids;
 }

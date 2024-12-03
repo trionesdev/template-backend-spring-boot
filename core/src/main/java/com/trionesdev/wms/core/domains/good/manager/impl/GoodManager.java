@@ -4,9 +4,12 @@ import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.wms.core.domains.good.dao.criteria.GoodCriteria;
 import com.trionesdev.wms.core.domains.good.dao.impl.GoodDAO;
 import com.trionesdev.wms.core.domains.good.dao.po.GoodPO;
+import com.trionesdev.wms.core.domains.good.dto.GoodDTO;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,5 +40,13 @@ public class GoodManager {
 
     public void deleteByIds(List<String> ids) {
         goodRepository.removeByIds(ids);
+    }
+
+    public List<GoodPO> listById(List<String> ids) {
+        if (CollectionUtils.isEmpty(ids)) {
+            return Collections.emptyList();
+        }
+
+        return goodRepository.listByIds(ids);
     }
 }

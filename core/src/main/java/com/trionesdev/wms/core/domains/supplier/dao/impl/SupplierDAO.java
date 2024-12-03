@@ -3,14 +3,17 @@ package com.trionesdev.wms.core.domains.supplier.dao.impl;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.mybatisplus.util.MpPageUtils;
 import com.trionesdev.wms.core.domains.supplier.dao.criteria.SupplierCriteria;
 import com.trionesdev.wms.core.domains.supplier.dao.mapper.SupplierMapper;
 import com.trionesdev.wms.core.domains.supplier.dao.po.SupplierPO;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,6 +26,7 @@ public class SupplierDAO extends ServiceImpl<SupplierMapper, SupplierPO> {
             queryWrapper.eq(StrUtil.isNotBlank(criteria.getName()), SupplierPO::getName, criteria.getName());
             queryWrapper.eq(StrUtil.isNotBlank(criteria.getContactName()), SupplierPO::getContactName, criteria.getContactName());
             queryWrapper.eq(ObjUtil.isNotNull(criteria.getEnabled()), SupplierPO::getEnabled, criteria.getEnabled());
+            queryWrapper.in(CollectionUtils.isNotEmpty(criteria.getIds()), SupplierPO::getId, criteria.getIds());
         }
         queryWrapper.orderByDesc(SupplierPO::getCreatedAt);
         return queryWrapper;
@@ -34,5 +38,14 @@ public class SupplierDAO extends ServiceImpl<SupplierMapper, SupplierPO> {
 
     public PageInfo<SupplierPO> selectPage(SupplierCriteria criteria) {
         return MpPageUtils.of(baseMapper.selectPage(MpPageUtils.page(criteria), buildQueryWrapper(criteria)));
+    }
+
+    public List<SupplierPO> findById(List<String> ids) {
+        if (CollectionUtils.isEmpty(ids)) {
+            return Collections.emptyList();
+        }
+        LambdaQueryWrapper<SupplierPO> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.in(SupplierPO::getId, ids);
+        return baseMapper.selectList(queryWrapper);
     }
 }

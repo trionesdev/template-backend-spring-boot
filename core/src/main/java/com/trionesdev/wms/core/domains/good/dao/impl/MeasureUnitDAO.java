@@ -9,6 +9,7 @@ import com.trionesdev.commons.mybatisplus.util.MpPageUtils;
 import com.trionesdev.wms.core.domains.good.dao.criteria.MeasureUnitCriteria;
 import com.trionesdev.wms.core.domains.good.dao.mapper.MeasureUnitMapper;
 import com.trionesdev.wms.core.domains.good.dao.po.MeasureUnitPO;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class MeasureUnitDAO extends ServiceImpl<MeasureUnitMapper, MeasureUnitPO
             queryWrapper.eq(StrUtil.isNotBlank(criteria.getCode()), MeasureUnitPO::getCode, criteria.getCode());
             queryWrapper.eq(StrUtil.isNotBlank(criteria.getName()), MeasureUnitPO::getName, criteria.getName());
             queryWrapper.eq(ObjUtil.isNotNull(criteria.getEnabled()), MeasureUnitPO::getEnabled, criteria.getEnabled());
+            queryWrapper.in(CollectionUtils.isNotEmpty(criteria.getCodes()), MeasureUnitPO::getCode, criteria.getCodes());
         }
         queryWrapper.orderByDesc(MeasureUnitPO::getCreatedAt);
         return queryWrapper;
