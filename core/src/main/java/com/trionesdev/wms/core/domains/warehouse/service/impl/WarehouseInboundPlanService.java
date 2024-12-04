@@ -4,8 +4,8 @@ package com.trionesdev.wms.core.domains.warehouse.service.impl;
 import com.google.common.collect.Lists;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.mybatisplus.util.MpPageUtils;
-import com.trionesdev.wms.core.domains.good.dto.GoodDTO;
-import com.trionesdev.wms.core.domains.good.provider.GoodsProvider;
+import com.trionesdev.wms.core.domains.goods.dto.GoodsDTO;
+import com.trionesdev.wms.core.domains.goods.provider.GoodsProvider;
 import com.trionesdev.wms.core.domains.supplier.dto.SupplierDTO;
 import com.trionesdev.wms.core.domains.supplier.provider.SupplierProvider;
 import com.trionesdev.wms.core.domains.warehouse.dao.criteria.WarehouseInboundPlanCriteria;
@@ -106,9 +106,9 @@ public class WarehouseInboundPlanService {
         Set<String> goodsIds = itemDTOS.stream()
                 .map(WarehouseInboundPlanItemDTO::getGoodsId)
                 .collect(Collectors.toSet());
-        List<GoodDTO> goodDTOS = goodsProvider.listById(Lists.newArrayList(goodsIds));
-        Map<String, GoodDTO> goodsMap = goodDTOS.stream()
-                .collect(Collectors.toMap(GoodDTO::getId, Function.identity()));
+        List<GoodsDTO> goodDTOS = goodsProvider.listById(Lists.newArrayList(goodsIds));
+        Map<String, GoodsDTO> goodsMap = goodDTOS.stream()
+                .collect(Collectors.toMap(GoodsDTO::getId, Function.identity()));
 
         for (WarehouseInboundPlanItemDTO itemDTO : itemDTOS) {
             itemDTO.setGoods(goodsMap.get(itemDTO.getGoodsId()));

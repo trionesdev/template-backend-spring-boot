@@ -1,6 +1,6 @@
 package com.trionesdev.wms.core.domains.warehouse.dto;
 
-import com.trionesdev.wms.core.domains.good.dto.GoodDTO;
+import com.trionesdev.wms.core.domains.goods.dto.GoodsDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,5 +33,5 @@ public class WarehouseInboundPlanItemDTO {
     private String createdBy;
     private Instant updatedAt;
     private String updatedBy;
-    private GoodDTO goods;
+    private GoodsDTO goods;
 }

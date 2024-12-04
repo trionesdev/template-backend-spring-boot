@@ -1,6 +1,6 @@
 package com.trionesdev.wms.rest.tenant.domains.warehouse.controller.vo;
 
-import com.trionesdev.wms.core.domains.good.dto.GoodDTO;
+import com.trionesdev.wms.core.domains.goods.dto.GoodsDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -49,5 +49,5 @@ public class WarehouseInboundPlanItemVO {
     @Schema(title = "")
     private String updatedBy;
     @Schema(title = "货品")
-    private GoodDTO goods;
+    private GoodsDTO goods;
 }

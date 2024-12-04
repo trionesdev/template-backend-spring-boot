@@ -1,6 +1,5 @@
 package com.trionesdev.wms.rest.tenant.domains.warehouse.controller.vo;
 
-import com.trionesdev.wms.core.domains.good.dto.GoodDTO;
 import com.trionesdev.wms.core.domains.supplier.dto.SupplierDTO;
 import com.trionesdev.wms.core.domains.warehouse.dao.po.WarehouseInboundPlanPO.InboundPlanStatusEnum;
 import com.trionesdev.wms.core.domains.warehouse.dao.po.enums.RelatedOrderSourceEnum;
