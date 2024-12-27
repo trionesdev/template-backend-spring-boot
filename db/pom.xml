@@ -26,9 +26,8 @@
                 <version>4.30.0</version>
                 <configuration>
                     <propertyFile>src/main/resources/liquibase.properties</propertyFile>
-                    <changeLogFile>${project.basedir}/src/main/resources/db/db.changelog-master.xml</changeLogFile>
-                    <outputChangeLogFile>${project.basedir}/src/main/resources/db/changelog/init-table.xml
-                    </outputChangeLogFile>
+                    <changeLogFile>src/main/resources/db/db.changelog-master.xml</changeLogFile>
+                    <outputChangeLogFile>src/main/resources/db/changelog/init-table.xml</outputChangeLogFile>
                     <propertyFileWillOverride>true</propertyFileWillOverride>
                 </configuration>
                 <dependencies>

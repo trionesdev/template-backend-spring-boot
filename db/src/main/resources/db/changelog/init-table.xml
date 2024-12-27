@@ -5,6 +5,8 @@
         <createTable tableName="custom_code_rule">
             <column name="id" type="VARCHAR(64)"/>
             <column name="tenant_id" type="VARCHAR(64)"/>
+            <column name="name" type="VARCHAR(256)"/>
+            <column name="description" type="VARCHAR(1024)"/>
             <column name="identifier" type="VARCHAR(64)"/>
             <column name="prefix" type="VARCHAR(32)"/>
             <column name="time_format_type" type="VARCHAR(64)"/>
@@ -14,8 +16,6 @@
             <column name="created_by" type="VARCHAR(64)"/>
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="updated_by" type="VARCHAR(64)"/>
-            <column name="name" type="VARCHAR(256)"/>
-            <column name="description" type="VARCHAR(1024)"/>
         </createTable>
     </changeSet>
     <changeSet author="fengxiaotx (generated)" id="1735265826108-7">
@@ -37,6 +37,7 @@
             <column name="contact_name" type="VARCHAR(512)"/>
             <column name="contact_phone" type="VARCHAR(512)"/>
             <column name="contact_address" type="VARCHAR(512)"/>
+            <column name="contact_email" remarks="邮箱" type="VARCHAR(128)"/>
             <column name="is_enabled" type="BOOLEAN"/>
             <column name="is_deleted" type="BOOLEAN"/>
             <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
@@ -45,7 +46,6 @@
             <column name="updated_by" type="VARCHAR(64)"/>
             <column name="contact_fixed_telephone" remarks="固定电话" type="VARCHAR(128)"/>
             <column name="remark" remarks="备注" type="VARCHAR(512)"/>
-            <column name="contact_email" remarks="邮箱" type="VARCHAR(128)"/>
         </createTable>
     </changeSet>
     <changeSet author="fengxiaotx (generated)" id="1735265826108-9">
@@ -118,13 +118,13 @@
             <column name="id" type="VARCHAR(64)"/>
             <column name="tenant_id" type="VARCHAR(64)"/>
             <column name="parent_id" type="VARCHAR(64)"/>
+            <column name="prev_ids" type="JSONB"/>
             <column name="name" type="VARCHAR(256)"/>
             <column name="is_deleted" type="BOOLEAN"/>
             <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="created_by" type="VARCHAR(64)"/>
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="updated_by" type="VARCHAR(64)"/>
-            <column name="prev_ids" type="JSONB"/>
         </createTable>
     </changeSet>
     <changeSet author="fengxiaotx (generated)" id="1735265826108-14">
@@ -138,7 +138,6 @@
             <column name="created_by" type="VARCHAR(64)"/>
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="updated_by" type="VARCHAR(64)"/>
-            <column name="member_id" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
     <changeSet author="fengxiaotx (generated)" id="1735265826108-15">
@@ -166,17 +165,17 @@
             <column name="encoded_password" type="VARCHAR(256)"/>
             <column name="nickname" type="VARCHAR(64)"/>
             <column name="avatar" type="VARCHAR(256)"/>
+            <column name="is_master" type="BOOLEAN"/>
+            <column name="phone" type="VARCHAR(16)"/>
+            <column name="email" type="VARCHAR(256)"/>
+            <column name="name" remarks="姓名" type="VARCHAR(256)"/>
+            <column name="is_member_account" remarks="是否是成员账户" type="BOOLEAN"/>
             <column name="status" type="VARCHAR(64)"/>
             <column name="is_deleted" type="BOOLEAN"/>
             <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="created_by" type="VARCHAR(64)"/>
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="updated_by" type="VARCHAR(64)"/>
-            <column name="is_master" type="BOOLEAN"/>
-            <column name="phone" type="VARCHAR(16)"/>
-            <column name="email" type="VARCHAR(256)"/>
-            <column name="name" remarks="姓名" type="VARCHAR(256)"/>
-            <column name="is_member_account" remarks="是否是成员账户" type="BOOLEAN"/>
         </createTable>
     </changeSet>
     <changeSet author="fengxiaotx (generated)" id="1735265826108-17">
@@ -206,13 +205,13 @@
             <column name="object_id" type="VARCHAR(64)"/>
             <column name="name" type="VARCHAR(128)"/>
             <column name="identifier" type="VARCHAR(64)"/>
+            <column name="client_type" type="VARCHAR(64)"/>
+            <column name="app_identifier" type="VARCHAR(128)"/>
             <column name="is_deleted" type="BOOLEAN"/>
             <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="created_by" type="VARCHAR(64)"/>
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="updated_by" type="VARCHAR(64)"/>
-            <column name="client_type" type="VARCHAR(64)"/>
-            <column name="app_identifier" type="VARCHAR(128)"/>
         </createTable>
     </changeSet>
     <changeSet author="fengxiaotx (generated)" id="1735265826108-19">
@@ -308,14 +307,14 @@
             <column name="last_name" type="VARCHAR(32)"/>
             <column name="nickname" type="VARCHAR(256)"/>
             <column name="birthday" type="date"/>
+            <column name="signature" type="VARCHAR(512)"/>
+            <column name="latest_tenant_id" type="VARCHAR(64)"/>
             <column name="is_enabled" type="BOOLEAN"/>
             <column name="is_deleted" type="BOOLEAN"/>
             <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="created_by" type="VARCHAR(64)"/>
             <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="updated_by" type="VARCHAR(64)"/>
-            <column name="signature" type="VARCHAR(512)"/>
-            <column name="latest_tenant_id" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
