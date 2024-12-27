@@ -19,3 +19,11 @@
    4. 由于，地区数据的初始化耗时较久，在当前的 changelog-master文件中将 数据初始化的文件引入，先注释了。可以自己选择打开注释，或者直接通过sql 文件进行导入。
 3. 工程配置文件
    在serve模块下，复制application-example.properties为自己的环境配置，默认使用application-default.properties作为本地环境配置文件，将相关信息改成自己的即可。
+
+---
+
+#### 互相吹捧，共同进步
+
+<div style="width: 100%;text-align: center;">
+   <img src="images/shuque_wx.jpg" width="200px" alt="">
+</div>
