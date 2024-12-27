@@ -4,8 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>interfaces</artifactId>
-        <groupId>com.trionesdev.wms</groupId>
+        <groupId>com.trionesdev.template</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <name>LightMes:RestBackend</name>
@@ -17,7 +18,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.trionesdev.wms</groupId>
+            <groupId>com.trionesdev.template</groupId>
             <artifactId>core</artifactId>
         </dependency>
     </dependencies>

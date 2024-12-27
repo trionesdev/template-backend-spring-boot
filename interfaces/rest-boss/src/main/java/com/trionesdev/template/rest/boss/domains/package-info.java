@@ -1,0 +1,1 @@
+package com.trionesdev.template.rest.boss.domains;

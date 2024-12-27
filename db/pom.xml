@@ -2,18 +2,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.trionesdev.wms</groupId>
-        <artifactId>triones-wms</artifactId>
+        <groupId>com.trionesdev.template</groupId>
+        <artifactId>triones-template</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>db</artifactId>
-    <name>Db</name>
+    <name>Triones:Db</name>
     
     <dependencies>
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>4.29.2</version>
+            <version>4.30.0</version>
         </dependency>
     </dependencies>
 
@@ -22,7 +23,7 @@
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
-                <version>4.29.2</version>
+                <version>4.30.0</version>
                 <configuration>
                     <propertyFile>src/main/resources/liquibase.properties</propertyFile>
                     <changeLogFile>${project.basedir}/src/main/resources/db/db.changelog-master.xml</changeLogFile>
