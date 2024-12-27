@@ -38,6 +38,13 @@
         </rollingPolicy>
     </appender>
 
+    <springProfile name="default">
+        <logger name="dao" level="DEBUG" />
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+
     <springProfile name="local">
         <logger name="dao" level="DEBUG" />
         <root level="INFO">
