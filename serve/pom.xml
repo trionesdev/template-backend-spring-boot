@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>triones-wms</artifactId>
-        <groupId>com.trionesdev.wms</groupId>
+        <artifactId>triones-template</artifactId>
+        <groupId>com.trionesdev.template</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>Serve</name>
+    <name>Triones:Serve</name>
     <artifactId>serve</artifactId>
     <properties>
         <skip.deploy>true</skip.deploy>
@@ -17,15 +17,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.trionesdev.wms</groupId>
+            <groupId>com.trionesdev.template</groupId>
             <artifactId>rest-tenant</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.trionesdev.wms</groupId>
+            <groupId>com.trionesdev.template</groupId>
             <artifactId>rest-boss</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.trionesdev.wms</groupId>
+            <groupId>com.trionesdev.template</groupId>
             <artifactId>db</artifactId>
         </dependency>
     </dependencies>
@@ -53,7 +53,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <finalName>backend-serve</finalName>
-                    <mainClass>com.trionesdev.wms.ServeApplication</mainClass>
+                    <mainClass>com.trionesdev.template.ServeApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

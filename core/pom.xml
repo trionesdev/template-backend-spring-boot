@@ -3,12 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>triones-wms</artifactId>
-        <groupId>com.trionesdev.wms</groupId>
+        <groupId>com.trionesdev.template</groupId>
+        <artifactId>triones-template</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>Core</name>
+    <name>Triones:Core</name>
     <artifactId>core</artifactId>
     <properties>
         <skip.deploy>true</skip.deploy>
@@ -16,7 +17,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.trionesdev.wms</groupId>
+            <groupId>com.trionesdev.template</groupId>
             <artifactId>infrastructure</artifactId>
         </dependency>
 

@@ -3,8 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>interfaces</artifactId>
-        <groupId>com.trionesdev.wms</groupId>
+        <groupId>com.trionesdev.template</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>rest-boss</artifactId>
@@ -16,7 +17,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.trionesdev.wms</groupId>
+            <groupId>com.trionesdev.template</groupId>
             <artifactId>core</artifactId>
         </dependency>
     </dependencies>

@@ -1,0 +1,1 @@
+package com.trionesdev.template.core.domains.base;
