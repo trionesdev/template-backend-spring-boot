@@ -1,6 +1,6 @@
 spring:
   application:
-    name: triones-wms-backend
+    name: triones-admin-backend
   datasource:
     name: dataSource
     type: com.zaxxer.hikari.HikariDataSource

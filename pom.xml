@@ -11,10 +11,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
-    <artifactId>triones-wms</artifactId>
-    <groupId>com.trionesdev.wms</groupId>
+    <artifactId>triones-template</artifactId>
+    <groupId>com.trionesdev.template</groupId>
     <version>1.0-SNAPSHOT</version>
-    <name>TrionesWMS</name>
+    <name>TrionesAdmin</name>
 
 
     <modules>
@@ -34,27 +34,27 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.trionesdev.wms</groupId>
+                <groupId>com.trionesdev.template</groupId>
                 <artifactId>infrastructure</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.trionesdev.wms</groupId>
+                <groupId>com.trionesdev.template</groupId>
                 <artifactId>core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.trionesdev.wms</groupId>
+                <groupId>com.trionesdev.template</groupId>
                 <artifactId>db</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.trionesdev.wms</groupId>
+                <groupId>com.trionesdev.template</groupId>
                 <artifactId>rest-tenant</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.trionesdev.wms</groupId>
+                <groupId>com.trionesdev.template</groupId>
                 <artifactId>rest-boss</artifactId>
                 <version>${project.version}</version>
             </dependency>
