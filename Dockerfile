@@ -1,4 +1,4 @@
-FROM ccr.ccs.tencentyun.com/moensun-dev/amazoncorretto:11.0.17-alpine3.16
+FROM ccr.ccs.tencentyun.com/moensun-dev/amazoncorretto:21.0.3-alpine3.19
 MAINTAINER "bane" <fengxiaotx@163.com>
 ENV container docker
 ENV TZ=Asia/Shanghai
