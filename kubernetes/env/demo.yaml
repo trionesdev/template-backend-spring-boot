@@ -5,13 +5,13 @@
 replicaCount: 1
 
 image:
-  repository: registry-vpc.cn-shanghai.aliyuncs.com/epiboly/epiboly-base
+  repository: registry-vpc.cn-shanghai.aliyuncs.com/epiboly/demo
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
   envs:
     - name: spring.profiles.active
-      value: "dev"
+      value: "demo"
   livenessProbe:
     httpGet:
       path: /actuator/health

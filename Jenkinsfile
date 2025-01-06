@@ -57,8 +57,8 @@ pipeline{
        node { label env.NODE }
    }
     environment {
-        IMAGE_NAME_DEFAULT =  "registry-vpc.cn-shanghai.aliyuncs.com/epiboly/epiboly-base"
-        APP_NAME = "triones-app-backend"
+        IMAGE_NAME_DEFAULT =  "registry-vpc.cn-shanghai.aliyuncs.com/epiboly/demo"
+        APP_NAME = "triones-admin-backend"
         HELM_NAME = "${APP_NAME}"
         DING_DING_TOKEN_DEFAULT = "ed73760cff1f973b16f14401e9cc9b48cbd9a877034251ff5645a2d0e00db596"
         DOCKER_REPOSITORY_URL_DEFAULT = 'registry-vpc.cn-shanghai.aliyuncs.com'
