@@ -63,7 +63,7 @@ ingress:
      kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: demo.triones-admin-backend.moensun.cn
+    - host: demo.triones-admin-backend.moensun.net
       paths:
         - path: /
           pathType: ImplementationSpecific
