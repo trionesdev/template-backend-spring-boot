@@ -52,6 +52,13 @@
         </root>
     </springProfile>
 
+    <springProfile name="demo">
+        <logger name="dao" level="DEBUG" />
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+
     <springProfile name="dev">
         <logger name="dao" level="DEBUG" />
         <root level="INFO">
