@@ -57,13 +57,13 @@ service:
   targetPort: 8080
 
 ingress:
-  enabled: false
+  enabled: true
   className: ""
   annotations:
      kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: one-table.moensun.cn
+    - host: demo.triones-admin-backend.moensun.cn
       paths:
         - path: /
           pathType: ImplementationSpecific
