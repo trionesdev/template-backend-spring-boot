@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "dic_dictionary")
+@TableName(value = "triones_dic_dictionary")
 public class DictionaryPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

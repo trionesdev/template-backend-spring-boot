@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "dic_country")
+@TableName(value = "triones_dic_country")
 public class CountryPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

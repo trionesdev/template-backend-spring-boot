@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-@TableName(value = "org_department", autoResultMap = true)
+@TableName(value = "triones_org_department", autoResultMap = true)
 public class DepartmentPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

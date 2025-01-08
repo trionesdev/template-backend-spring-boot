@@ -17,7 +17,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-@TableName(value = "log_login_log", autoResultMap = true)
+@TableName(value = "triones_log_login_log", autoResultMap = true)
 public class LoginLogPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

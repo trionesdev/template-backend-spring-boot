@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-@TableName(value = "perm_role_grant")
+@TableName(value = "triones_perm_role_grant")
 public class RoleGrantPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

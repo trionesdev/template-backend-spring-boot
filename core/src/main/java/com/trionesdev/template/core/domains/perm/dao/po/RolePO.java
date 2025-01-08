@@ -21,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-@TableName(value = "perm_role",autoResultMap = true)
+@TableName(value = "triones_perm_role",autoResultMap = true)
 public class RolePO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

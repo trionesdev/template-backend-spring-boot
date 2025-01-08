@@ -19,7 +19,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-@TableName(value = "log_operation_log", autoResultMap = true)
+@TableName(value = "triones_log_operation_log", autoResultMap = true)
 public class OperationLogPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

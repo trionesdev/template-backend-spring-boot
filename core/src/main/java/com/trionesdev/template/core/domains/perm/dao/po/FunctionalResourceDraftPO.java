@@ -21,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-@TableName(value = "perm_functional_resource_draft", autoResultMap = true)
+@TableName(value = "triones_perm_functional_resource_draft", autoResultMap = true)
 public class FunctionalResourceDraftPO extends BasePO {
     private String id;
     private String parentId;

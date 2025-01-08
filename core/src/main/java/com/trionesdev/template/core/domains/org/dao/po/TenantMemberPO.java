@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-@TableName(value = "org_tenant_member", autoResultMap = true)
+@TableName(value = "triones_org_tenant_member", autoResultMap = true)
 public class TenantMemberPO extends BaseLogicPO {
     private String id;
     private String tenantId;

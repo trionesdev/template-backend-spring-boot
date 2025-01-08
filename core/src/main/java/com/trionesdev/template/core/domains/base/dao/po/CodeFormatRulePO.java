@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "custom_code_rule")
+@TableName(value = "triones_base_code_rule")
 public class CodeFormatRulePO extends BaseLogicEntity {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

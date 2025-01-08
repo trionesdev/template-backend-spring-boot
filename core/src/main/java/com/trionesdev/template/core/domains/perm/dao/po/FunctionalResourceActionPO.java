@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "perm_functional_resource_action")
+@TableName(value = "triones_perm_functional_resource_action")
 public class FunctionalResourceActionPO extends BasePO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

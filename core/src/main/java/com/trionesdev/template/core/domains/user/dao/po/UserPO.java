@@ -21,7 +21,7 @@ import java.time.Instant;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "user_user")
+@TableName(value = "triones_user_user")
 public class UserPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;

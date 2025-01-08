@@ -1,1 +1,0 @@
-package com.trionesdev.template.core.domains.masterdata;
