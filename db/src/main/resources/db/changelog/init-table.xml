@@ -1,9 +1,10 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-6">
-        <createTable tableName="custom_code_rule">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-1">
+        <createTable tableName="triones_base_code_rule">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="custom_code_rule_pkey"/>
+            </column>
             <column name="tenant_id" type="VARCHAR(64)"/>
             <column name="name" type="VARCHAR(256)"/>
             <column name="description" type="VARCHAR(1024)"/>
@@ -18,38 +19,19 @@
             <column name="updated_by" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-7">
-        <createTable tableName="custom_code_serial_number">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-2">
+        <createTable tableName="triones_base_code_serial_number">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="custom_code_serial_number_pkey"/>
+            </column>
             <column name="tenant_id" type="VARCHAR(64)"/>
             <column name="identifier" type="VARCHAR(64)"/>
             <column name="time_identifier" type="VARCHAR(64)"/>
             <column name="serial_number" type="INTEGER"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-8">
-        <createTable tableName="customer_customer">
-            <column name="id" type="VARCHAR(64)"/>
-            <column name="tenant_id" type="VARCHAR(64)"/>
-            <column name="code" type="VARCHAR(128)"/>
-            <column name="name" type="VARCHAR(512)"/>
-            <column name="full_name" type="VARCHAR(512)"/>
-            <column name="contact_name" type="VARCHAR(512)"/>
-            <column name="contact_phone" type="VARCHAR(512)"/>
-            <column name="contact_address" type="VARCHAR(512)"/>
-            <column name="contact_email" remarks="邮箱" type="VARCHAR(128)"/>
-            <column name="is_enabled" type="BOOLEAN"/>
-            <column name="is_deleted" type="BOOLEAN"/>
-            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="created_by" type="VARCHAR(64)"/>
-            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="updated_by" type="VARCHAR(64)"/>
-            <column name="contact_fixed_telephone" remarks="固定电话" type="VARCHAR(128)"/>
-            <column name="remark" remarks="备注" type="VARCHAR(512)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-9">
-        <createTable remarks="国际电话号码区号" tableName="dic_country">
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-3">
+        <createTable remarks="国际电话号码区号" tableName="triones_dic_country">
             <column name="id" type="VARCHAR(64)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="dic_country_pkey"/>
             </column>
@@ -59,9 +41,11 @@
             <column name="abbr" remarks="缩写" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-10">
-        <createTable tableName="dic_dictionary">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-4">
+        <createTable tableName="triones_dic_dictionary">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="dic_dictionary_pkey"/>
+            </column>
             <column name="type" type="VARCHAR(64)"/>
             <column name="type_code" type="VARCHAR(64)"/>
             <column name="name" type="VARCHAR(128)"/>
@@ -73,9 +57,11 @@
             <column name="updated_by" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-11">
-        <createTable tableName="dic_district">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-5">
+        <createTable tableName="triones_dic_district">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="dic_district_pkey"/>
+            </column>
             <column name="country_code" type="VARCHAR(64)"/>
             <column name="code" type="VARCHAR(64)"/>
             <column name="parent_code" type="VARCHAR(64)"/>
@@ -93,9 +79,11 @@
             <column name="updated_by" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-12">
-        <createTable remarks="操作日志" tableName="log_operation_log">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-6">
+        <createTable remarks="操作日志" tableName="triones_log_operation_log">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="log_operation_log_pkey"/>
+            </column>
             <column name="tenant_id" type="VARCHAR(64)"/>
             <column name="actor_id" type="VARCHAR(64)"/>
             <column name="actor_role" type="VARCHAR(64)"/>
@@ -113,9 +101,11 @@
             <column name="extra" type="JSONB"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-13">
-        <createTable tableName="org_department">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-7">
+        <createTable tableName="triones_org_department">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="org_department_pkey"/>
+            </column>
             <column name="tenant_id" type="VARCHAR(64)"/>
             <column name="parent_id" type="VARCHAR(64)"/>
             <column name="prev_ids" type="JSONB"/>
@@ -127,9 +117,11 @@
             <column name="updated_by" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-14">
-        <createTable tableName="org_department_member">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-8">
+        <createTable tableName="triones_org_department_member">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="org_department_member_pkey"/>
+            </column>
             <column name="tenant_id" type="VARCHAR(64)"/>
             <column name="department_id" type="VARCHAR(64)"/>
             <column name="user_id" type="VARCHAR(64)"/>
@@ -140,9 +132,11 @@
             <column name="updated_by" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-15">
-        <createTable tableName="org_tenant">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-9">
+        <createTable tableName="triones_org_tenant">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="org_tenant_pkey"/>
+            </column>
             <column name="parent_id" type="VARCHAR(64)"/>
             <column name="serial" type="VARCHAR(64)"/>
             <column name="name" type="VARCHAR(128)"/>
@@ -156,9 +150,11 @@
             <column name="updated_by" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-16">
-        <createTable tableName="org_tenant_member">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-10">
+        <createTable tableName="triones_org_tenant_member">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="org_tenant_member_pkey"/>
+            </column>
             <column name="tenant_id" type="VARCHAR(64)"/>
             <column name="user_id" type="VARCHAR(64)"/>
             <column name="username" type="VARCHAR(64)"/>
@@ -178,9 +174,11 @@
             <column name="updated_by" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-17">
-        <createTable tableName="perm_functional_resource">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-11">
+        <createTable tableName="triones_perm_functional_resource">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="perm_functional_resource_pkey"/>
+            </column>
             <column name="parent_id" type="VARCHAR(64)"/>
             <column name="app_code" type="VARCHAR(128)"/>
             <column name="client_type" type="VARCHAR(64)"/>
@@ -199,9 +197,11 @@
             <column name="updated_by" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-18">
-        <createTable tableName="perm_functional_resource_action">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-12">
+        <createTable tableName="triones_perm_functional_resource_action">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="perm_functional_resource_action_pkey"/>
+            </column>
             <column name="object_id" type="VARCHAR(64)"/>
             <column name="name" type="VARCHAR(128)"/>
             <column name="identifier" type="VARCHAR(64)"/>
@@ -214,9 +214,11 @@
             <column name="updated_by" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-19">
-        <createTable tableName="perm_functional_resource_draft">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-13">
+        <createTable tableName="triones_perm_functional_resource_draft">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="perm_functional_resource_draft_pkey"/>
+            </column>
             <column name="parent_id" type="VARCHAR(64)"/>
             <column name="client_type" type="VARCHAR(64)"/>
             <column name="type" type="VARCHAR(64)"/>
@@ -231,9 +233,11 @@
             <column name="app_identifier" type="VARCHAR(128)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-20">
-        <createTable tableName="perm_functional_resource_object">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-14">
+        <createTable tableName="triones_perm_functional_resource_object">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="perm_functional_resource_object_pkey"/>
+            </column>
             <column name="parent_id" type="VARCHAR(64)"/>
             <column name="client_type" type="VARCHAR(64)"/>
             <column name="name" type="VARCHAR(256)"/>
@@ -247,9 +251,11 @@
             <column name="app_identifier" type="VARCHAR(128)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-21">
-        <createTable tableName="perm_permission">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-15">
+        <createTable tableName="triones_perm_permission">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="perm_permission_pkey"/>
+            </column>
             <column name="tenant_id" type="VARCHAR(64)"/>
             <column name="app_code" type="VARCHAR(128)"/>
             <column name="client_type" type="VARCHAR(64)"/>
@@ -264,9 +270,11 @@
             <column name="updated_by" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-22">
-        <createTable tableName="perm_role">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-16">
+        <createTable tableName="triones_perm_role">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="perm_role_pkey"/>
+            </column>
             <column name="tenant_id" type="INTEGER"/>
             <column name="parent_id" type="VARCHAR(64)"/>
             <column name="prev_ids" type="JSONB"/>
@@ -280,9 +288,11 @@
             <column name="updated_by" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-23">
-        <createTable tableName="perm_role_grant">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-17">
+        <createTable tableName="triones_perm_role_grant">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="perm_role_grant_pkey"/>
+            </column>
             <column name="tenant_id" type="VARCHAR(64)"/>
             <column name="role_id" type="VARCHAR(64)"/>
             <column name="subject_type" type="VARCHAR(64)"/>
@@ -294,9 +304,11 @@
             <column name="updated_by" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet author="fengxiaotx (generated)" id="1735265826108-24">
-        <createTable tableName="user_user">
-            <column name="id" type="VARCHAR(64)"/>
+    <changeSet author="fengxiaotx (generated)" id="1736329935781-18">
+        <createTable tableName="triones_user_user">
+            <column name="id" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_user_pkey"/>
+            </column>
             <column name="username" type="VARCHAR(128)"/>
             <column name="encoded_password" type="VARCHAR(256)"/>
             <column name="phone" type="VARCHAR(16)"/>
