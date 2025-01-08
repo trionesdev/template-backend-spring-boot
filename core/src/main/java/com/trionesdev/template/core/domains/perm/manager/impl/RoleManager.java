@@ -26,6 +26,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.trionesdev.template.core.domains.perm.internal.PermError.CAN_NOT_DELETE_ROLE_HAS_SUB;
+import static com.trionesdev.template.core.domains.perm.internal.PermError.ROLE_SELF_PARENT_INVALID;
+
 @RequiredArgsConstructor
 @Service
 public class RoleManager {
@@ -45,14 +48,14 @@ public class RoleManager {
     public void deleteById(String id) {
         var subRoles = roleDAO.selectSubList(id);
         if (CollectionUtils.isNotEmpty(subRoles)) {
-            throw new BusinessException("CAN_NOT_DELETE_ROLE_HAS_SUB");
+            throw new BusinessException(CAN_NOT_DELETE_ROLE_HAS_SUB);
         }
         roleDAO.removeById(id);
     }
 
     public void updateById(RolePO record) {
         if (Objects.equals(record.getId(), record.getParentId())) {
-            throw new BusinessException("ROLE_SELF_PARENT");
+            throw new BusinessException(ROLE_SELF_PARENT_INVALID);
         }
         var roleSnap = roleDAO.getById(record.getId());
         if (Objects.nonNull(record.getParentId()) && !Objects.equals(record.getParentId(), roleSnap.getParentId())) {

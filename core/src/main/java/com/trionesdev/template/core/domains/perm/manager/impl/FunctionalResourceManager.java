@@ -20,6 +20,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.trionesdev.template.core.domains.perm.internal.PermError.PARENT_RESOURCE_NOT_FOUND;
+
 @RequiredArgsConstructor
 @Service
 public class FunctionalResourceManager {
@@ -30,7 +32,7 @@ public class FunctionalResourceManager {
     public void createResource(FunctionalResource resource) {
         FunctionalResource parent = null;
         if (!Objects.equals(IdentityConstants.STRING_ID_ZERO_VALUE, resource.getParentId()) && StringUtils.isNotBlank(resource.getParentId())) {
-            parent = functionalResourceRepository.findById(resource.getParentId()).orElseThrow(() -> new NotFoundException("PARENT_RESOURCE_NOT_FOUND"));
+            parent = functionalResourceRepository.findById(resource.getParentId()).orElseThrow(() -> new NotFoundException(PARENT_RESOURCE_NOT_FOUND));
         }
         resource.initialize(parent);
         functionalResourceRepository.save(resource);

@@ -31,6 +31,8 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.trionesdev.template.core.domains.perm.internal.PermError.TENANT_MEMBER_NOT_FOUND;
+
 @RequiredArgsConstructor
 @Service
 public class PolicyService {
@@ -86,7 +88,7 @@ public class PolicyService {
     public List<Tree<String>> findActorMenuTree(String appCode, ClientType clientType, String group) {
         var tenantMember = orgProvider.getMemberById(actorContext.getMemberId());
         if (Objects.isNull(tenantMember)) {
-            throw new BusinessException("TENANT_MEMBER_NOT_FOUND");
+            throw new BusinessException(TENANT_MEMBER_NOT_FOUND);
         }
         var resources = functionalResourceManager.findResources(FunctionalResourceCriteria.builder()
                 .appCode(appCode).clientType(clientType).groupCode(group)
