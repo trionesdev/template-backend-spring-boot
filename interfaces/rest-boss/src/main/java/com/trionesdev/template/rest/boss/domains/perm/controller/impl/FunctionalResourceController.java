@@ -3,7 +3,7 @@ package com.trionesdev.template.rest.boss.domains.perm.controller.impl;
 import cn.hutool.core.lang.tree.Tree;
 import com.trionesdev.template.core.domains.perm.dao.po.FunctionalResourceDraftPO;
 import com.trionesdev.template.core.domains.perm.dto.FunctionalResourceDTO;
-import com.trionesdev.template.core.domains.perm.internal.enums.ClientType;
+import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
 import com.trionesdev.template.core.domains.perm.service.impl.FunctionalResourceService;
 import com.trionesdev.template.rest.boss.domains.perm.controller.ro.FunctionalResourceCreateRO;
 import com.trionesdev.template.rest.boss.domains.perm.controller.ro.FunctionalResourceDraftCreateRO;

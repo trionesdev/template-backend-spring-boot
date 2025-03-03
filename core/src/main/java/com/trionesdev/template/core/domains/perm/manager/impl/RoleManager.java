@@ -10,7 +10,7 @@ import com.trionesdev.template.core.domains.perm.dao.impl.RoleGrantDAO;
 import com.trionesdev.template.core.domains.perm.dao.po.RoleGrantPO;
 import com.trionesdev.template.core.domains.perm.dao.po.RolePO;
 import com.trionesdev.template.core.domains.perm.dao.impl.RoleDAO;
-import com.trionesdev.template.core.domains.perm.internal.enums.RoleSubjectType;
+import com.trionesdev.template.core.domains.perm.shared.enums.RoleSubjectType;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;

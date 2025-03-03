@@ -11,7 +11,7 @@ import com.trionesdev.template.core.domains.perm.dao.po.FunctionalResourceObject
 import com.trionesdev.template.core.domains.perm.dao.po.FunctionalResourcePO;
 import com.trionesdev.template.core.domains.perm.internal.PermDomainConvert;
 import com.trionesdev.template.core.domains.perm.internal.aggregate.entity.FunctionalResource;
-import com.trionesdev.template.core.domains.perm.internal.enums.ClientType;
+import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Repository;

@@ -25,8 +25,10 @@ import com.trionesdev.template.core.domains.org.internal.OrgDomainConvert;
 import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
 import com.trionesdev.template.core.domains.org.manager.impl.DepartmentManager;
 import com.trionesdev.template.core.domains.org.manager.impl.TenantMemberManager;
+import com.trionesdev.template.core.domains.user.provider.UserProvider;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,12 +51,22 @@ public class TenantService {
     private final AppProperties appProperties;
     private final TenantMemberManager tenantMemberManager;
     private final DepartmentManager departmentManager;
+    private final UserProvider userProvider;
 
+    /**
+     * create new tenant member
+     * if app is multi tenant, then create new userI
+     * @param cmd
+     */
     @Transactional
     public void createMember(TenantMemberCreateCmd cmd) {
         var tenantMember = convert.memberCreateCmdToEntity(cmd);
         if (appProperties.getMultiTenant()) {
-            Objects.requireNonNull(tenantMember.getUserId());
+            if (BooleanUtils.isTrue(tenantMember.getMemberAccount())) {
+                tenantMember.setUserId(IdUtil.getSnowflakeNextIdStr());
+            } else {
+                Objects.requireNonNull(tenantMember.getUserId());
+            }
         } else {
             tenantMember.setUserId(IdUtil.getSnowflakeNextIdStr());
         }

@@ -1,6 +1,6 @@
 package com.trionesdev.template.rest.boss.domains.perm.controller.ro;
 
-import com.trionesdev.template.core.domains.perm.internal.enums.ClientType;
+import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
 import lombok.Data;
 
 @Data

@@ -1,7 +1,7 @@
 package com.trionesdev.template.core.domains.user.internal.entity;
 
 import cn.hutool.core.util.StrUtil;
-import com.trionesdev.template.core.domains.user.internal.enums.GenderEnum;
+import com.trionesdev.template.core.domains.user.shared.enums.GenderEnum;
 import com.trionesdev.template.infrastructure.ddd.AggregateRoot;
 import lombok.AllArgsConstructor;
 import lombok.Data;

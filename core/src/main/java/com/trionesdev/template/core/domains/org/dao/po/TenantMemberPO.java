@@ -26,4 +26,6 @@ public class TenantMemberPO extends BaseLogicPO {
     private String nickname;
     private String avatar;
     private String name;
+    @TableField(value = "is_member_account")
+    private Boolean memberAccount;
 }

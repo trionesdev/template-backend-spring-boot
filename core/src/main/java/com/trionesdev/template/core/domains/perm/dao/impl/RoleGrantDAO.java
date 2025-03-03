@@ -7,7 +7,7 @@ import com.trionesdev.commons.mybatisplus.util.MpPageUtils;
 import com.trionesdev.template.core.domains.perm.dao.criteria.RoleGrantCriteria;
 import com.trionesdev.template.core.domains.perm.dao.po.RoleGrantPO;
 import com.trionesdev.template.core.domains.perm.dao.mapper.RoleGrantMapper;
-import com.trionesdev.template.core.domains.perm.internal.enums.RoleSubjectType;
+import com.trionesdev.template.core.domains.perm.shared.enums.RoleSubjectType;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;

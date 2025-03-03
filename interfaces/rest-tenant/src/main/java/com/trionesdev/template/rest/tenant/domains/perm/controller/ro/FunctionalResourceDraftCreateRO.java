@@ -1,7 +1,7 @@
 package com.trionesdev.template.rest.tenant.domains.perm.controller.ro;
 
-import com.trionesdev.template.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.template.core.domains.perm.internal.enums.FunctionalResourceType;
+import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
+import com.trionesdev.template.core.domains.perm.shared.enums.FunctionalResourceType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

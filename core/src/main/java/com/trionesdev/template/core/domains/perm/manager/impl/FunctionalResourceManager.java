@@ -7,7 +7,7 @@ import com.trionesdev.template.core.domains.perm.dao.impl.FunctionalResourceDraf
 import com.trionesdev.template.core.domains.perm.dao.po.FunctionalResourceDraftPO;
 import com.trionesdev.template.core.domains.perm.internal.PermDomainConvert;
 import com.trionesdev.template.core.domains.perm.internal.aggregate.entity.FunctionalResource;
-import com.trionesdev.template.core.domains.perm.internal.enums.ClientType;
+import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
 import com.trionesdev.template.core.domains.perm.repository.impl.FunctionalResourceRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.trionesdev.template.core.domains.user.internal.UserErrors.PHONE_EXISTS;
+
 @RequiredArgsConstructor
 @Service
 public class UserManager {
@@ -17,8 +19,8 @@ public class UserManager {
 
     public String createUser(User user) {
         var userPhoneSnap = userRepository.findByPhone(user.getPhone());
-        if (Objects.nonNull(userPhoneSnap)) {
-            throw new DuplicatedException("PHONE_EXISTS");
+        if (userPhoneSnap.isPresent()) {
+            throw new DuplicatedException(PHONE_EXISTS);
         }
         return userRepository.save(user);
     }

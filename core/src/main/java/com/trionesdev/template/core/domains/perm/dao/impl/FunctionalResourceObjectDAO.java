@@ -3,7 +3,7 @@ package com.trionesdev.template.core.domains.perm.dao.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.trionesdev.template.core.domains.perm.dao.po.FunctionalResourceObjectPO;
 import com.trionesdev.template.core.domains.perm.dao.mapper.FunctionalResourceObjectMapper;
-import com.trionesdev.template.core.domains.perm.internal.enums.ClientType;
+import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 

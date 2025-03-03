@@ -1,8 +1,8 @@
 package com.trionesdev.template.core.domains.perm.internal.aggregate.entity;
 
 
-import com.trionesdev.template.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.template.core.domains.perm.internal.enums.PermissionSubjectType;
+import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
+import com.trionesdev.template.core.domains.perm.shared.enums.PermissionSubjectType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,5 +20,4 @@ public class Policy {
     private PermissionSubjectType subjectType;
     private String subject;
     private Set<Permission> permissions;
-
 }

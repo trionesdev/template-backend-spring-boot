@@ -2,8 +2,8 @@ package com.trionesdev.template.core.domains.perm.manager.impl;
 
 import com.trionesdev.template.core.domains.perm.internal.aggregate.entity.Permission;
 import com.trionesdev.template.core.domains.perm.internal.aggregate.entity.Policy;
-import com.trionesdev.template.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.template.core.domains.perm.internal.enums.PermissionSubjectType;
+import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
+import com.trionesdev.template.core.domains.perm.shared.enums.PermissionSubjectType;
 import com.trionesdev.template.core.domains.perm.repository.impl.PolicyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

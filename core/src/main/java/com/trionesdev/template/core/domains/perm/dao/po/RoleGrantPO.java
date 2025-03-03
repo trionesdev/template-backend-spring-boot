@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.google.common.base.Objects;
 import com.trionesdev.commons.mybatisplus.po.BaseLogicPO;
-import com.trionesdev.template.core.domains.perm.internal.enums.RoleSubjectType;
+import com.trionesdev.template.core.domains.perm.shared.enums.RoleSubjectType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

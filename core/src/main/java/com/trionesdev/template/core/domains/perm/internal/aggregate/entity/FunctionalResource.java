@@ -2,8 +2,8 @@ package com.trionesdev.template.core.domains.perm.internal.aggregate.entity;
 
 import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.commons.exception.TrionesError;
-import com.trionesdev.template.core.domains.perm.internal.enums.ClientType;
-import com.trionesdev.template.core.domains.perm.internal.enums.FunctionalResourceType;
+import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
+import com.trionesdev.template.core.domains.perm.shared.enums.FunctionalResourceType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

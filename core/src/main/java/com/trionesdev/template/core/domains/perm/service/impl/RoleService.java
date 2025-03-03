@@ -15,7 +15,7 @@ import com.trionesdev.template.core.domains.perm.dao.po.RolePO;
 import com.trionesdev.template.core.domains.perm.dto.AddRoleGrantsCmd;
 import com.trionesdev.template.core.domains.perm.dto.RemoveRoleGrantsCmd;
 import com.trionesdev.template.core.domains.perm.dto.RoleMemberDTO;
-import com.trionesdev.template.core.domains.perm.internal.enums.RoleSubjectType;
+import com.trionesdev.template.core.domains.perm.shared.enums.RoleSubjectType;
 import com.trionesdev.template.core.domains.perm.manager.impl.RoleManager;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
