@@ -1,8 +1,8 @@
 package com.trionesdev.template.rest.tenant.domains.perm.controller.impl;
 
 import cn.hutool.core.lang.tree.Tree;
-import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
 import com.trionesdev.template.core.domains.perm.service.impl.FunctionalResourceService;
+import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
 import com.trionesdev.template.rest.tenant.domains.perm.internal.PermBeRestConvert;
 import com.trionesdev.template.rest.tenant.domains.perm.internal.PermRestConstants;
 import io.swagger.v3.oas.annotations.Operation;

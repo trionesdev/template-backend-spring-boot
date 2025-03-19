@@ -3,13 +3,15 @@ package com.trionesdev.template.core.domains.base.manager.impl;
 import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.spring.lock.Lock;
 import com.trionesdev.template.core.domains.base.internal.aggregate.entity.CodeFormatRule;
-import com.trionesdev.template.core.domains.base.internal.enums.TimeFormatType;
 import com.trionesdev.template.core.domains.base.repository.impl.CodeFormatRepository;
+import com.trionesdev.template.core.domains.base.shared.enums.TimeFormatType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.trionesdev.template.core.domains.base.internal.BaseConstants.DEFAULT_CODE_FORMAT_RULES;
 
 @RequiredArgsConstructor
 @Service
@@ -37,14 +39,17 @@ public class CodeFormatRuleManager {
     }
 
     public List<CodeFormatRule> findList() {
-        return codeFormatRepository.findList();
+        var rules = codeFormatRepository.findList();
+        return DEFAULT_CODE_FORMAT_RULES.stream().map(rule -> rule.merge(rules)).toList();
     }
 
     public Optional<CodeFormatRule> findByIdentifier(String identifier) {
-        return codeFormatRepository.findByIdentifier(identifier);
+        return codeFormatRepository.findByIdentifier(identifier).map(CodeFormatRule::mergeDefault).or(() -> {
+            return DEFAULT_CODE_FORMAT_RULES.stream().filter(rule -> rule.getIdentifier().equals(identifier)).findFirst();
+        });
     }
 
-    @Lock(key = "#{identifier}")
+    @Lock(key = "#identifier")
     public String generateCode(String identifier) {
         CodeFormatRule customCodeRule = this.findByIdentifier(identifier).orElse(CodeFormatRule.builder().identifier(identifier).prefix(identifier.toLowerCase()).timeFormatType(TimeFormatType.YYYY).serialNumberDigits(4).build());
         Integer serialNumber = codeFormatRepository.nextSerialNumber(customCodeRule);

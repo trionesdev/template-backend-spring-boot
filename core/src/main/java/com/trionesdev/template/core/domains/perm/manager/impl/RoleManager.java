@@ -6,10 +6,10 @@ import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.template.core.domains.perm.dao.criteria.RoleCriteria;
 import com.trionesdev.template.core.domains.perm.dao.criteria.RoleGrantCriteria;
+import com.trionesdev.template.core.domains.perm.dao.impl.RoleDAO;
 import com.trionesdev.template.core.domains.perm.dao.impl.RoleGrantDAO;
 import com.trionesdev.template.core.domains.perm.dao.po.RoleGrantPO;
 import com.trionesdev.template.core.domains.perm.dao.po.RolePO;
-import com.trionesdev.template.core.domains.perm.dao.impl.RoleDAO;
 import com.trionesdev.template.core.domains.perm.shared.enums.RoleSubjectType;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
@@ -17,17 +17,11 @@ import org.apache.commons.collections4.ListUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.trionesdev.template.core.domains.perm.internal.PermError.CAN_NOT_DELETE_ROLE_HAS_SUB;
-import static com.trionesdev.template.core.domains.perm.internal.PermError.ROLE_SELF_PARENT_INVALID;
+import static com.trionesdev.template.core.domains.perm.internal.PermErrors.CAN_NOT_DELETE_ROLE_HAS_SUB;
+import static com.trionesdev.template.core.domains.perm.internal.PermErrors.ROLE_SELF_PARENT_INVALID;
 
 @RequiredArgsConstructor
 @Service

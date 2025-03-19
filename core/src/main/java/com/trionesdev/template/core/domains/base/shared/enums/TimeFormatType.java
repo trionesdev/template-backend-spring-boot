@@ -1,4 +1,4 @@
-package com.trionesdev.template.core.domains.base.internal.enums;
+package com.trionesdev.template.core.domains.base.shared.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

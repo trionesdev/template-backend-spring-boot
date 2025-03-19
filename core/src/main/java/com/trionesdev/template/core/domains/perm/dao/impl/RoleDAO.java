@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.mybatisplus.util.MpPageUtils;
 import com.trionesdev.template.core.domains.perm.dao.criteria.RoleCriteria;
-import com.trionesdev.template.core.domains.perm.dao.po.RolePO;
 import com.trionesdev.template.core.domains.perm.dao.mapper.RoleMapper;
+import com.trionesdev.template.core.domains.perm.dao.po.RolePO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

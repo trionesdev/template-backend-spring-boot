@@ -34,9 +34,14 @@ public class FunctionalResourceDAO extends ServiceImpl<FunctionalResourceMapper,
         return baseMapper.selectList(buildQueryWrapper(criteria));
     }
 
-    public List<FunctionalResourcePO> selectListByClientType(String appCode, ClientType clientType) {
+    public List<FunctionalResourcePO> selectListByAppClient(String appCode, ClientType clientType) {
         return lambdaQuery().eq(StringUtils.isNoneBlank(appCode), FunctionalResourcePO::getAppCode, appCode)
                 .eq(Objects.nonNull(clientType), FunctionalResourcePO::getClientType, clientType).list();
+    }
+
+    public void deleteByAppClient(String appCode, ClientType clientType) {
+        lambdaUpdate().eq(StringUtils.isNoneBlank(appCode), FunctionalResourcePO::getAppCode, appCode)
+                .eq(Objects.nonNull(clientType), FunctionalResourcePO::getClientType, clientType).remove();
     }
 
 }

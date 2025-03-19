@@ -39,6 +39,10 @@ public class CodeFormatRuleService {
         return customCodeRuleManager.findCodeFormatRuleById(id).map(this::assembleCodeFormatRule);
     }
 
+    public Optional<CodeFormatRuleDTO> findCodeFormatRuleByIdentifier(String identifier) {
+        return customCodeRuleManager.findByIdentifier(identifier).map(this::assembleCodeFormatRule);
+    }
+
     private List<CodeFormatRuleDTO> assembleCodeFormatRules(List<CodeFormatRule> records) {
         if (CollectionUtils.isEmpty(records)) {
             return Collections.emptyList();

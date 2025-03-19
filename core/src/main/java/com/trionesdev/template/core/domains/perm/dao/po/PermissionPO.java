@@ -6,11 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.trionesdev.commons.mybatisplus.po.BasePO;
 import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
 import com.trionesdev.template.core.domains.perm.shared.enums.PermissionSubjectType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @EqualsAndHashCode(callSuper = true)
@@ -37,7 +33,7 @@ public class PermissionPO extends BasePO {
      * 对象ID
      */
     private String subject;
-    private String obj;
+    private String resourceCode;
     private String effect;
 
 }

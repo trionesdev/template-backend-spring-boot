@@ -1,6 +1,6 @@
 package com.trionesdev.template.rest.tenant.domains.base.controller.ro;
 
-import com.trionesdev.template.core.domains.base.internal.enums.TimeFormatType;
+import com.trionesdev.template.core.domains.base.shared.enums.TimeFormatType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

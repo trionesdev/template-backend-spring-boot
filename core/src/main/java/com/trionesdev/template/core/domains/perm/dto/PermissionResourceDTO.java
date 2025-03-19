@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PermissionDTO {
-    private String obj;
+public class PermissionResourceDTO {
+    private String resourceCode;
     private String effect;
 }

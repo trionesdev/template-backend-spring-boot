@@ -28,9 +28,15 @@ public class RoleGrantPO extends BaseLogicPO {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         RoleGrantPO roleGrant = (RoleGrantPO) o;
         return subjectType == roleGrant.subjectType && Objects.equal(subject, roleGrant.subject) && Objects.equal(roleId, roleGrant.roleId);
     }

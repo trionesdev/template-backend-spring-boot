@@ -4,8 +4,8 @@ import cn.hutool.core.util.StrUtil;
 import com.trionesdev.commons.exception.DuplicatedException;
 import com.trionesdev.commons.exception.TrionesError;
 import com.trionesdev.commons.exception.ValidationException;
-import com.trionesdev.template.core.domains.base.internal.enums.TimeFormatType;
 import com.trionesdev.template.core.domains.base.repository.impl.CodeFormatRepository;
+import com.trionesdev.template.core.domains.base.shared.enums.TimeFormatType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +15,9 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import static com.trionesdev.template.core.domains.base.internal.BaseConstants.DEFAULT_CODE_FORMAT_RULES;
 
 @Data
 @SuperBuilder
@@ -54,4 +57,35 @@ public class CodeFormatRule {
         });
     }
 
+    public CodeFormatRule mergeDefault() {
+       return DEFAULT_CODE_FORMAT_RULES.stream().filter(rule -> !rule.getIdentifier().equals(identifier)).findFirst().map(rule->{
+           rule.setTimeFormatType(timeFormatType);
+           rule.setPrefix(prefix);
+           rule.setSerialNumberDigits(serialNumberDigits);
+           rule.setDescription(description);
+           return rule;
+       }).orElse(null);
+    }
+
+    public CodeFormatRule mergeDefault(CodeFormatRule defaultRule) {
+        defaultRule.setTimeFormatType(timeFormatType);
+        defaultRule.setPrefix(prefix);
+        defaultRule.setSerialNumberDigits(serialNumberDigits);
+        defaultRule.setDescription(description);
+        return defaultRule;
+    }
+
+    /**
+     * 默认规则  合并 数据库规则
+     * @param rules
+     * @return
+     */
+    public CodeFormatRule merge(List<CodeFormatRule> rules) {
+        return rules.stream().filter(rule -> rule.getIdentifier().equals(identifier))
+                .findFirst().map(matchRule->{
+                    matchRule.setIdentifier(identifier);
+                    matchRule.setName(name);
+                    return matchRule;
+                }).orElse(this);
+    }
 }

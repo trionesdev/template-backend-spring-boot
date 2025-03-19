@@ -13,5 +13,5 @@ import java.util.Set;
 @NoArgsConstructor
 public class PolicyDTO {
     private Boolean master;
-    private Set<PermissionDTO> permissions;
+    private Set<PermissionResourceDTO> permissions;
 }

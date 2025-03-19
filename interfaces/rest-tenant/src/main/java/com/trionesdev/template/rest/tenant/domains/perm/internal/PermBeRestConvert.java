@@ -2,8 +2,8 @@ package com.trionesdev.template.rest.tenant.domains.perm.internal;
 
 import com.trionesdev.template.core.domains.perm.dao.po.FunctionalResourceDraftPO;
 import com.trionesdev.template.core.domains.perm.dao.po.RolePO;
-import com.trionesdev.template.core.domains.perm.dto.PolicySaveCmd;
 import com.trionesdev.template.core.domains.perm.dto.AddRoleGrantsCmd;
+import com.trionesdev.template.core.domains.perm.dto.PermissionPolicySaveCmd;
 import com.trionesdev.template.core.domains.perm.dto.RemoveRoleGrantsCmd;
 import com.trionesdev.template.rest.tenant.domains.perm.controller.ro.*;
 import org.mapstruct.Builder;
@@ -20,7 +20,7 @@ public interface PermBeRestConvert {
 
     RolePO from(RoleUpdateRO args);
 
-    PolicySaveCmd from(PolicySaveRO args);
+    PermissionPolicySaveCmd from(PermissionPolicySaveRO args);
 
     AddRoleGrantsCmd from(RoleGrantRO args);
 

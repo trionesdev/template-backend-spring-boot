@@ -1,25 +1,24 @@
 package com.trionesdev.template.rest.boss.domains.perm.controller.ro;
 
-import com.trionesdev.template.core.domains.perm.shared.enums.ClientType;
 import com.trionesdev.template.core.domains.perm.shared.enums.FunctionalResourceType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class FunctionalResourceDraftUpdateRO {
+
+    @NotBlank
     private String parentId;
-    private String appIdentifier;
-    private ClientType clientType;
+    @NotNull
     private FunctionalResourceType type;
+    private String groupCoe;
+    @NotBlank
     private String name;
-    private String identifier;
-    private List<Action> actions;
-
-    @Data
-    public static class Action {
-        private String name;
-        private String identifier;
-    }
-
+    @NotBlank
+    private String uniqueCode;
+    private String icon;
+    private String description;
+    private String apiCode;
+    private String routePath;
 }

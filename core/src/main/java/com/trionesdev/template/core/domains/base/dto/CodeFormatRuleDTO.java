@@ -1,6 +1,6 @@
 package com.trionesdev.template.core.domains.base.dto;
 
-import com.trionesdev.template.core.domains.base.internal.enums.TimeFormatType;
+import com.trionesdev.template.core.domains.base.shared.enums.TimeFormatType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

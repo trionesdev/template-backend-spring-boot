@@ -17,30 +17,43 @@ import java.util.Objects;
 @Repository
 public class PermissionDAO extends ServiceImpl<PermissionMapper, PermissionPO> {
 
-    public void deleteBySubject(String appCode, ClientType clientType, PermissionSubjectType grantObjType, String grantObjId) {
+    public void deleteBySubject(String appCode, ClientType clientType, PermissionSubjectType grantObjType, String subject) {
         lambdaUpdate()
                 .eq(StringUtils.isNotBlank(appCode), PermissionPO::getAppCode, appCode)
                 .eq(Objects.nonNull(clientType), PermissionPO::getClientType, clientType)
                 .eq(PermissionPO::getSubjectType, grantObjType)
-                .eq(PermissionPO::getSubject, grantObjId).remove();
+                .eq(PermissionPO::getSubject, subject).remove();
     }
 
-    public List<PermissionPO> selectListBySubject(String appCode, ClientType clientType, PermissionSubjectType grantObjType, String grantObjId) {
+    public List<PermissionPO> selectListBySubject(String appCode, ClientType clientType, PermissionSubjectType grantObjType, String subject) {
         return lambdaQuery()
                 .eq(StringUtils.isNotBlank(appCode), PermissionPO::getAppCode, appCode)
                 .eq(Objects.nonNull(clientType), PermissionPO::getClientType, clientType)
                 .eq(PermissionPO::getSubjectType, grantObjType)
-                .eq(PermissionPO::getSubject, grantObjId).list();
+                .eq(PermissionPO::getSubject, subject).list();
     }
 
-    public List<PermissionPO> selectListBySubjects(String appCode,ClientType clientType, PermissionSubjectType grantObjType, Collection<String> grantObjIds) {
-        if (CollectionUtils.isEmpty(grantObjIds)) {
+    public List<PermissionPO> selectListBySubjects(String appCode, ClientType clientType, PermissionSubjectType subjectType, Collection<String> subjects) {
+        if (CollectionUtils.isEmpty(subjects)) {
             return Collections.emptyList();
         }
         return lambdaQuery()
                 .eq(StringUtils.isNotBlank(appCode), PermissionPO::getAppCode, appCode)
                 .eq(Objects.nonNull(clientType), PermissionPO::getClientType, clientType)
-                .eq(PermissionPO::getSubjectType, grantObjType)
-                .in(PermissionPO::getSubject, grantObjIds).list();
+                .eq(PermissionPO::getSubjectType, subjectType)
+                .in(PermissionPO::getSubject, subjects).list();
+    }
+
+    public List<PermissionPO> selectResourcesBySubjects(String appCode, ClientType clientType, PermissionSubjectType subjectType, Collection<String> subjects) {
+        if (CollectionUtils.isEmpty(subjects)) {
+            return Collections.emptyList();
+        }
+        return lambdaQuery().select(PermissionPO::getResourceCode)
+                .eq(StringUtils.isNotBlank(appCode), PermissionPO::getAppCode, appCode)
+                .eq(Objects.nonNull(clientType), PermissionPO::getClientType, clientType)
+                .eq(PermissionPO::getSubjectType, subjectType)
+                .in(PermissionPO::getSubject, subjects)
+                .groupBy(PermissionPO::getResourceCode)
+                .list();
     }
 }
