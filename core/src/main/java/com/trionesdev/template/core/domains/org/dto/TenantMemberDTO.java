@@ -8,7 +8,7 @@ import java.util.List;
 public class TenantMemberDTO {
     private String id;
     private String tenantId;
-    private String userId;
+    private String memberId;
     private Boolean master;
     private String phone;
     private String email;

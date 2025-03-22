@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>rest-boss</artifactId>
-    <name>LightMes:RestBoss</name>
+    <name>Triones:RestBoss</name>
 
     <properties>
         <skip.deploy>true</skip.deploy>

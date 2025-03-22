@@ -3,6 +3,7 @@ package com.trionesdev.template.core.domains.org.dao.po;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.trionesdev.commons.mybatisplus.po.BaseLogicPO;
+import com.trionesdev.template.core.domains.org.shared.enums.TenantMemberStatus;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -26,6 +27,5 @@ public class TenantMemberPO extends BaseLogicPO {
     private String nickname;
     private String avatar;
     private String name;
-    @TableField(value = "is_member_account")
-    private Boolean memberAccount;
+    private TenantMemberStatus status;
 }

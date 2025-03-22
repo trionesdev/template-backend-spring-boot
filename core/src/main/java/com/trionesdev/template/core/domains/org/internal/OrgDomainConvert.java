@@ -6,7 +6,6 @@ import com.trionesdev.template.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.template.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.template.core.domains.org.dao.po.TenantPO;
 import com.trionesdev.template.core.domains.org.dto.*;
-import com.trionesdev.template.core.domains.org.dto.TenantMemberDetailDTO;
 import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -39,6 +38,7 @@ public interface OrgDomainConvert {
     TenantMemberDTO memberEntityToDTO(TenantMember record);
 
     TenantMemberCriteria tenantMemberQueryToCriteria(TenantMemberQuery query);
+
     //endregion
 
     //region department

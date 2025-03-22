@@ -2,9 +2,10 @@ package com.trionesdev.template.core.domains.user.internal.entity;
 
 import cn.hutool.core.util.StrUtil;
 import com.trionesdev.template.core.domains.user.shared.enums.GenderEnum;
-import com.trionesdev.template.infrastructure.ddd.AggregateRoot;
+import com.trionesdev.template.infrastructure.ddd.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,12 +13,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.time.Instant;
 import java.util.regex.Pattern;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements AggregateRoot<String> {
-    private String id;
+public class User extends Entity<String> {
     private String account;
     private String username;
     private String password;
@@ -31,6 +32,8 @@ public class User implements AggregateRoot<String> {
     private String nickname;
     private Instant birthday;
     private Boolean enabled;
+    private Instant latestLoginTime;
+    private String latestTenantId;
 
     public String getEncodedPassword() {
         if (StrUtil.isNotBlank(encodedPassword)) {
@@ -58,6 +61,10 @@ public class User implements AggregateRoot<String> {
 
     public Boolean passwordMatch(String encryptedPassword) {
         return new BCryptPasswordEncoder().matches(password, encryptedPassword);
+    }
+
+    public void changeTenant(String tenantId) {
+        this.latestTenantId = tenantId;
     }
 
 }

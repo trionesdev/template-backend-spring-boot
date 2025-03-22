@@ -98,7 +98,7 @@ public class DepartmentManager {
             return;
         }
         List<DepartmentMemberPO> departmentMembers = departmentIds.stream().map(departmentId -> {
-            return DepartmentMemberPO.builder().userId(tenantMember.getUserId()).departmentId(departmentId).build();
+            return DepartmentMemberPO.builder().memberId(tenantMember.getId()).departmentId(departmentId).build();
         }).collect(Collectors.toList());
         departmentMemberDAO.saveBatch(departmentMembers);
     }
@@ -119,8 +119,8 @@ public class DepartmentManager {
         return departmentMemberDAO.selectListByDepartmentId(departmentId);
     }
 
-    public List<DepartmentMemberPO> findDepartmentMembersByUserId(String userId) {
-        return departmentMemberDAO.selectListByUserId(userId);
+    public List<DepartmentMemberPO> findDepartmentMembersByMemberId(String memberId) {
+        return departmentMemberDAO.selectListByMemberId(memberId);
     }
 
     //endregion

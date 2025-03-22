@@ -95,4 +95,13 @@ public class TenantMemberRepository {
         return PageUtils.of(pageInfo, assembleMembers(pageInfo.getRows()));
     }
 
+    public List<TenantMember> findMembersByUserId(String userId) {
+        var members = tenantMemberDAO.selectListByUserId(userId);
+        return assembleMembers(members);
+    }
+
+    public Optional<TenantMember> findMemberByUserId(String tenantId, String userId) {
+        return Optional.ofNullable(tenantMemberDAO.selectByUserId(tenantId, userId)).map(this::assembleMember);
+    }
+
 }

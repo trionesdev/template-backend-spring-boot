@@ -9,6 +9,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserBindCmd {
+public class PhoneBindUserCmd {
     private String phone;
 }

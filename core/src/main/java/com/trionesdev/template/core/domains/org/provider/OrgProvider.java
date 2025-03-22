@@ -27,4 +27,7 @@ public interface OrgProvider {
 
     List<DepartmentDTO> getDepartmentsByIds(Collection<String> departmentIds);
 
+    TenantDTO getCurrentTenant(String tenantId);
+
+    TenantMemberDTO getCurrentTenantMember(String tenantId,String userId);
 }

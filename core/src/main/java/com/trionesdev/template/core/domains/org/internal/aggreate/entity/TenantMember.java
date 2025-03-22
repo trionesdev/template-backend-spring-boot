@@ -1,6 +1,7 @@
 package com.trionesdev.template.core.domains.org.internal.aggreate.entity;
 
 import cn.hutool.core.util.StrUtil;
+import com.trionesdev.template.core.domains.org.shared.enums.TenantMemberStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,7 @@ public class TenantMember {
     private String nickname;
     private String avatar;
     private String name;
-    private Boolean memberAccount;
+    private TenantMemberStatus status;
     private List<String> departmentIds;
 
     public String getEncodedPassword() {

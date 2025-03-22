@@ -1,11 +1,19 @@
 package com.trionesdev.template.core.domains.org.manager.impl;
 
 import com.trionesdev.boot.core.autoconfigure.AppProperties;
+import com.trionesdev.commons.core.constant.IdentityConstants;
+import com.trionesdev.template.core.domains.org.dao.impl.DepartmentMemberDAO;
 import com.trionesdev.template.core.domains.org.dao.impl.TenantDAO;
+import com.trionesdev.template.core.domains.org.dao.po.DepartmentMemberPO;
 import com.trionesdev.template.core.domains.org.dao.po.TenantPO;
+import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
+import com.trionesdev.template.core.domains.org.repository.impl.TenantMemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -13,9 +21,35 @@ import java.util.Optional;
 public class TenantManager {
     private final AppProperties appProperties;
     private final TenantDAO tenantDAO;
+    private final TenantMemberRepository tenantMemberRepository;
+    private final DepartmentMemberDAO departmentMemberDAO;
 
-    public void createTenant(TenantPO tenant) {
+    private void createDefaultDepartmentRelations(TenantPO tenant, TenantMember member) {
+        var departmentMember = DepartmentMemberPO.builder()
+                .departmentId(IdentityConstants.STRING_ID_ZERO_VALUE)
+                .memberId(member.getId())
+                .build();
+        departmentMemberDAO.save(departmentMember);
+    }
+
+    private String nextSerial() {
+        String serial = tenantDAO.selectMaxSerial();
+        if (Objects.isNull(serial)) {
+            return StringUtils.leftPad("1", 8, '0');
+        }
+        return StringUtils.leftPad(String.valueOf(Integer.parseInt(serial) + 1), 8, '0');
+    }
+
+    @Transactional
+    public void createTenant(TenantPO tenant, TenantMember member) {
+        tenant.setSerial(nextSerial());
         tenantDAO.save(tenant);
+        if (Objects.nonNull(member)) {
+            member.setTenantId(tenant.getId());
+            member.setMaster(true);
+            tenantMemberRepository.save(member);
+            createDefaultDepartmentRelations(tenant, member);
+        }
     }
 
     public void deleteTenantById(String id) {
@@ -23,14 +57,20 @@ public class TenantManager {
     }
 
     public void updateTenantById(TenantPO tenant) {
+        tenant.setSerial(null);
         tenantDAO.updateById(tenant);
     }
 
     public Optional<TenantPO> findActorTenant(String tenantId) {
         if (appProperties.getMultiTenant()) {
+            Objects.requireNonNull(tenantId);
             return Optional.ofNullable(tenantDAO.getById(tenantId));
         } else {
-            return Optional.ofNullable(tenantDAO.selectFirst());
+            if (StringUtils.isNotBlank(tenantId)) {
+                return Optional.ofNullable(tenantDAO.getById(tenantId));
+            } else {
+                return Optional.ofNullable(tenantDAO.selectFirst());
+            }
         }
     }
 
@@ -42,7 +82,4 @@ public class TenantManager {
         return Optional.ofNullable(tenantDAO.selectBySerial(serial));
     }
 
-    public Optional<TenantPO> findFirstTenant() {
-        return Optional.ofNullable(tenantDAO.selectFirst());
-    }
 }

@@ -2,9 +2,9 @@ package com.trionesdev.template.core.domains.org.service;
 
 import cn.hutool.core.lang.tree.Tree;
 import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.template.core.domains.org.dao.criteria.DepartmentMemberCriteria;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.template.core.domains.org.dto.*;
-import com.trionesdev.template.core.domains.org.dao.criteria.DepartmentMemberCriteria;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +30,7 @@ public interface DepartmentService {
 
     void deleteDepartmentMemberById(String id);
 
-    List<DepartmentMemberDTO> findDepartmentMembersByUserId(String memberId);
+    List<DepartmentMemberDTO> findDepartmentMembersByMemberId(String memberId);
 
     List<DepartmentMemberDTO> findDepartmentMembers(DepartmentMemberCriteria criteria);
 

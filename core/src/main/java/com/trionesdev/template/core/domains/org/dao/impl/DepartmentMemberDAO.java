@@ -20,7 +20,7 @@ public class DepartmentMemberDAO extends ServiceImpl<DepartmentMemberMapper, Dep
         var queryWrapper = new LambdaQueryWrapper<DepartmentMemberPO>();
         if (Objects.nonNull(criteria)) {
             queryWrapper.eq(StrUtil.isNotBlank(criteria.getDepartmentId()), DepartmentMemberPO::getDepartmentId, criteria.getDepartmentId())
-                    .eq(StrUtil.isNotBlank(criteria.getUserId()), DepartmentMemberPO::getUserId, criteria.getUserId());
+                    .eq(StrUtil.isNotBlank(criteria.getUserId()), DepartmentMemberPO::getMemberId, criteria.getUserId());
         }
         return queryWrapper;
     }
@@ -36,11 +36,11 @@ public class DepartmentMemberDAO extends ServiceImpl<DepartmentMemberMapper, Dep
     }
 
     public void deleteByUserId(String userId) {
-        remove(new LambdaQueryWrapper<DepartmentMemberPO>().eq(DepartmentMemberPO::getUserId, userId));
+        remove(new LambdaQueryWrapper<DepartmentMemberPO>().eq(DepartmentMemberPO::getMemberId, userId));
     }
 
-    public List<DepartmentMemberPO> selectListByUserId(String userId) {
-        return lambdaQuery().eq(DepartmentMemberPO::getUserId, userId).list();
+    public List<DepartmentMemberPO> selectListByMemberId(String memberId) {
+        return lambdaQuery().eq(DepartmentMemberPO::getMemberId, memberId).list();
     }
 
     public List<DepartmentMemberPO> selectListByDepartmentId(String departmentId) {

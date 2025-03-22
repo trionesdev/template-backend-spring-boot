@@ -10,6 +10,7 @@ import com.trionesdev.template.core.domains.org.dao.po.TenantPO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class TenantDAO extends ServiceImpl<TenantMapper, TenantPO> {
@@ -33,4 +34,13 @@ public class TenantDAO extends ServiceImpl<TenantMapper, TenantPO> {
     public TenantPO selectFirst() {
         return lambdaQuery().last(" limit 1 ").one();
     }
+
+    public String selectMaxSerial() {
+        var tenant = query().select("max(serial) as serial").one();
+        if (Objects.isNull(tenant)) {
+            return null;
+        }
+        return tenant.getSerial();
+    }
+
 }

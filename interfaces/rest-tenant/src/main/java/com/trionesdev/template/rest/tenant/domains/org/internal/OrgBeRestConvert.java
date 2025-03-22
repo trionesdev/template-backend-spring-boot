@@ -3,6 +3,7 @@ package com.trionesdev.template.rest.tenant.domains.org.internal;
 import com.trionesdev.template.core.domains.org.dao.criteria.DepartmentMemberCriteria;
 import com.trionesdev.template.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentPO;
+import com.trionesdev.template.core.domains.org.dao.po.TenantPO;
 import com.trionesdev.template.core.domains.org.dto.*;
 import com.trionesdev.template.rest.tenant.domains.org.controller.ro.department.DepartmentCreateRO;
 import com.trionesdev.template.rest.tenant.domains.org.controller.ro.department.DepartmentMemberQueryRO;
@@ -18,6 +19,12 @@ import org.mapstruct.Named;
 public interface OrgBeRestConvert {
 
     //region tenant
+    TenantPO from(TenantCreateRO args);
+
+    TenantPO from(TenantUpdateRO args);
+    //endregion
+
+    //region tenant member
     TenantMemberCreateCmd from(TenantMemberCreateRO args);
 
     TenantMemberProfileUpdateCmd from(TenantMemberUpdateRO args);

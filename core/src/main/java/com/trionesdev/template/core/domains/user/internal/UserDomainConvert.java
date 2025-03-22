@@ -1,22 +1,24 @@
 package com.trionesdev.template.core.domains.user.internal;
 
 import com.trionesdev.template.core.domains.user.dao.po.UserPO;
-import com.trionesdev.template.core.domains.user.dto.UserBindCmd;
+import com.trionesdev.template.core.domains.user.dto.PhoneBindUserCmd;
+import com.trionesdev.template.core.domains.user.dto.UserCreateCmd;
 import com.trionesdev.template.core.domains.user.dto.UserDTO;
 import com.trionesdev.template.core.domains.user.internal.entity.User;
-import com.trionesdev.template.core.domains.user.dto.UserCreateCmd;
-import org.mapstruct.*;
+import org.mapstruct.Builder;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         builder = @Builder(disableBuilder = true))
-@Named("userBeanConvert")
-public interface UserBeanConvert {
+public interface UserDomainConvert {
 
     User from(UserCreateCmd userCreateDTO);
+    User userCreateCmdToEntity(UserCreateCmd userCreateDTO);
 
-    User from(UserBindCmd userBindDTO);
+    User from(PhoneBindUserCmd userBindDTO);
 
-    User from(UserPO userPO);
+    User userPoToEntity(UserPO userPO);
 
     UserPO entityToPO(User user);
 

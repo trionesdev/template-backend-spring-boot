@@ -58,6 +58,11 @@
                 <artifactId>rest-boss</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.trionesdev.template</groupId>
+                <artifactId>rest-backend</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

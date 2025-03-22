@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.trionesdev.commons.mybatisplus.po.BaseLogicPO;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Objects;
@@ -19,20 +22,29 @@ public class DepartmentMemberPO extends BaseLogicPO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
-    private String departmentId; //“0” 表示根部门
-    private String userId;
+    /**
+     * “0” 表示根部门
+     */
+    private String departmentId;
+    private String memberId;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         DepartmentMemberPO that = (DepartmentMemberPO) o;
-        return Objects.equals(departmentId, that.departmentId) && Objects.equals(userId, that.userId);
+        return Objects.equals(departmentId, that.departmentId) && Objects.equals(memberId, that.memberId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), departmentId, userId);
+        return Objects.hash(super.hashCode(), departmentId, memberId);
     }
 }

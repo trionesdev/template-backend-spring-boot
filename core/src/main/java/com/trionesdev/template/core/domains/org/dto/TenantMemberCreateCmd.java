@@ -14,6 +14,5 @@ public class TenantMemberCreateCmd {
     private String firstName;
     private String lastName;
     private String username;
-    private Boolean memberAccount;
     private List<String> departmentIds;
 }

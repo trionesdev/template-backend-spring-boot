@@ -11,5 +11,5 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class SmsSignInCmd {
     private String phone;
-    private String captcha;
+    private String verificationCode;
 }

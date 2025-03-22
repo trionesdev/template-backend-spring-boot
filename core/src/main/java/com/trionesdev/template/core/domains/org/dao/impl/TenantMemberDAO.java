@@ -8,8 +8,8 @@ import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.mybatisplus.util.MpPageUtils;
 import com.trionesdev.template.core.domains.org.dao.criteria.TenantMemberCriteria;
-import com.trionesdev.template.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.template.core.domains.org.dao.mapper.TenantMemberMapper;
+import com.trionesdev.template.core.domains.org.dao.po.TenantMemberPO;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
@@ -90,6 +90,16 @@ public class TenantMemberDAO extends ServiceImpl<TenantMemberMapper, TenantMembe
     public void updateByUserId(TenantMemberPO tenantMemberPO) {
         Objects.requireNonNull(tenantMemberPO.getUserId());
         lambdaUpdate().eq(TenantMemberPO::getUserId, tenantMemberPO.getUserId()).setEntity(tenantMemberPO).update();
+    }
+
+    public List<TenantMemberPO> selectListByUserId(String userId) {
+        return lambdaQuery().eq(TenantMemberPO::getUserId, userId).list();
+    }
+
+    public TenantMemberPO selectByUserId(String tenantId, String userId) {
+        return lambdaQuery().eq(TenantMemberPO::getTenantId, tenantId)
+                .eq(TenantMemberPO::getUserId, userId)
+                .last(" limit 1 ").one();
     }
 
 }

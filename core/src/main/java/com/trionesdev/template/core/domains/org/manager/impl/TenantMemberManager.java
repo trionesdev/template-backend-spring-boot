@@ -2,35 +2,33 @@ package com.trionesdev.template.core.domains.org.manager.impl;
 
 import com.trionesdev.boot.core.autoconfigure.AppProperties;
 import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.template.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.template.core.domains.org.dao.impl.TenantDAO;
-import com.trionesdev.template.core.domains.org.dao.impl.TenantMemberDAO;
-import com.trionesdev.template.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.template.core.domains.org.dao.po.TenantPO;
 import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
 import com.trionesdev.template.core.domains.org.repository.impl.TenantMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import static com.trionesdev.template.core.domains.org.internal.OrgErrors.TENANT_SERIAL_EMPTY;
+
 @RequiredArgsConstructor
 @Service
 public class TenantMemberManager {
     private final AppProperties appProperties;
-    private final TenantMemberDAO tenantMemberDAO;
+
     private final TenantDAO tenantDAO;
     private final TenantMemberRepository tenantMemberRepository;
 
     public void createMember(TenantMember tenantMember) {
         tenantMemberRepository.save(tenantMember);
-    }
-
-    public void deleteMemberById(String id) {
-        tenantMemberDAO.removeById(id);
     }
 
     public void updateMemberById(TenantMember tenantMember) {
@@ -53,10 +51,6 @@ public class TenantMemberManager {
         return tenantMemberRepository.findListByUserIds(userIds);
     }
 
-
-    public Optional<TenantMemberPO> findMemberByUsername(String tenantId, String username) {
-        return Optional.ofNullable(tenantMemberDAO.selectByUsername(tenantId, username));
-    }
 
     public List<TenantMember> findMembers(TenantMemberCriteria criteria) {
         return tenantMemberRepository.findMemberList(criteria);
@@ -98,9 +92,20 @@ public class TenantMemberManager {
     public Optional<TenantMember> findByAccount(String tenantSerial, String account, String password) {
         String tenantId = null;
         if (BooleanUtils.isTrue(appProperties.getMultiTenant())) {
+            if (StringUtils.isBlank(tenantSerial)) {
+                throw new BusinessException(TENANT_SERIAL_EMPTY);
+            }
             tenantId = Optional.ofNullable(tenantDAO.selectBySerial(tenantSerial)).map(TenantPO::getId).orElse(null);
         }
         return findByTenantAccount(tenantId, account, password);
+    }
+
+    public List<TenantMember> findMembersByUserId(String userId) {
+        return tenantMemberRepository.findMembersByUserId(userId);
+    }
+
+    public Optional<TenantMember> findMemberByUserId(String tenantId, String userId) {
+        return tenantMemberRepository.findMemberByUserId(tenantId, userId);
     }
 
 }

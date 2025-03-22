@@ -10,6 +10,5 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ActorChangePasswordCmd {
-    private String oldPassword;
-    private String newPassword;
+    private String password;
 }

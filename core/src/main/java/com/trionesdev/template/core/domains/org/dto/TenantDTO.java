@@ -6,6 +6,7 @@ import lombok.Data;
 public class TenantDTO {
     private String id;
     private String parentId;
+    private String serial;
     private String name;
     private String logo;
     private String description;

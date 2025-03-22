@@ -29,6 +29,11 @@ public class UserDAO extends ServiceImpl<UserMapper, UserPO> {
         return lambdaQuery().eq(UserPO::getPhone, phone).one();
     }
 
+    public UserPO selectByEmail(String email) {
+        return lambdaQuery().eq(UserPO::getEmail, email).one();
+    }
+
+
     public List<UserPO> selectList(UserCriteria criteria) {
         return this.list(buildQueryWrapper(criteria));
     }

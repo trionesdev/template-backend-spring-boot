@@ -18,6 +18,10 @@
     <dependencies>
         <dependency>
             <groupId>com.trionesdev.template</groupId>
+            <artifactId>rest-backend</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.trionesdev.template</groupId>
             <artifactId>rest-tenant</artifactId>
         </dependency>
         <dependency>

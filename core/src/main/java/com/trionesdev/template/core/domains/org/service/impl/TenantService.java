@@ -10,21 +10,19 @@ import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.commons.exception.NotFoundException;
+import com.trionesdev.commons.model.ActorProfile;
+import com.trionesdev.template.core.domains.notification.provider.impl.NotificationProvider;
 import com.trionesdev.template.core.domains.org.dao.criteria.DepartmentCriteria;
 import com.trionesdev.template.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentMemberPO;
-import com.trionesdev.template.core.domains.org.dto.ActorChangePasswordCmd;
-import com.trionesdev.template.core.domains.org.dto.ChangePasswordCmd;
-import com.trionesdev.template.core.domains.org.dto.OrgNodeDTO;
-import com.trionesdev.template.core.domains.org.dto.TenantMemberCreateCmd;
-import com.trionesdev.template.core.domains.org.dto.TenantMemberDTO;
-import com.trionesdev.template.core.domains.org.dto.TenantMemberProfileUpdateCmd;
-import com.trionesdev.template.core.domains.org.dto.TenantMemberSignInCmd;
-import com.trionesdev.template.core.domains.org.dto.TenantMemberUpdateCmd;
+import com.trionesdev.template.core.domains.org.dao.po.TenantPO;
+import com.trionesdev.template.core.domains.org.dto.*;
 import com.trionesdev.template.core.domains.org.internal.OrgDomainConvert;
 import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
 import com.trionesdev.template.core.domains.org.manager.impl.DepartmentManager;
+import com.trionesdev.template.core.domains.org.manager.impl.TenantManager;
 import com.trionesdev.template.core.domains.org.manager.impl.TenantMemberManager;
+import com.trionesdev.template.core.domains.user.dto.UserCreateCmd;
 import com.trionesdev.template.core.domains.user.provider.UserProvider;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
@@ -39,8 +37,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.trionesdev.template.core.domains.org.internal.OrgError.PWD_ERROR;
-import static com.trionesdev.template.core.domains.org.internal.OrgError.TENANT_ACCOUNT_OR_PWS_ERROR;
+import static com.trionesdev.template.core.domains.org.internal.OrgErrors.*;
 
 @RequiredArgsConstructor
 @Service
@@ -49,24 +46,82 @@ public class TenantService {
     private final ActorContext actorContext;
     private final JwtFacade jwtFacade;
     private final AppProperties appProperties;
+    private final TenantManager tenantManager;
     private final TenantMemberManager tenantMemberManager;
     private final DepartmentManager departmentManager;
     private final UserProvider userProvider;
+    private final NotificationProvider notificationProvider;
+
+    public void createTenantByActor(TenantPO tenant) {
+        var user = userProvider.getUserById(actorContext.getUserId());
+        if (Objects.isNull(user)) {
+            throw new NotFoundException(USER_NOT_FOUND);
+        }
+        var tenantMember = TenantMember.builder()
+                .userId(user.getId())
+                .avatar(user.getAvatar())
+                .nickname(user.getNickname())
+                .username(user.getUsername())
+                .phone(user.getPhone())
+                .email(user.getEmail())
+                .build();
+        tenantManager.createTenant(tenant, tenantMember);
+    }
 
     /**
-     * create new tenant member
-     * if app is multi tenant, then create new userI
+     * 运营人员创建租户
+     *
      * @param cmd
      */
+    public void createTenantByBoss(BossCreateTenantCmd cmd) {
+        var verifySuccess = notificationProvider.verifySmsValidationCode(cmd.getPhone(), cmd.getValidationCode());
+        if (!verifySuccess) {
+            throw new BusinessException(VALIDATION_CODE_ERROR);
+        }
+        var userCreatCmd = UserCreateCmd.builder()
+                .phone(cmd.getPhone())
+                .email(cmd.getEmail())
+                .username(cmd.getUsername())
+                .nickname(cmd.getNickname())
+                .password(cmd.getPassword())
+                .build();
+        var user = userProvider.createUserByPhoneOrReturnExist(userCreatCmd);
+        var tenant = TenantPO.builder()
+                .name(cmd.getName())
+                .description(cmd.getDescription())
+                .build();
+        var tenantMember = TenantMember.builder()
+                .userId(user.getId())
+                .avatar(user.getAvatar())
+                .nickname(user.getNickname())
+                .username(user.getUsername())
+                .phone(user.getPhone())
+                .email(user.getEmail())
+                .build();
+        tenantManager.createTenant(tenant, tenantMember);
+    }
+
+    public Optional<TenantDTO> findActorTenant() {
+        return tenantManager.findActorTenant(actorContext.getTenantId()).map(convert::tenantPoToDto);
+    }
+
+    public void updateActorTenant(TenantPO tenant) {
+        if (BooleanUtils.isTrue(appProperties.getMultiTenant())) {
+            tenant.setId(actorContext.getTenantId());
+            tenantManager.updateTenantById(tenant);
+        } else {
+            tenantManager.findActorTenant(actorContext.getTenantId()).ifPresent(tenantSnap -> {
+                tenant.setId(tenantSnap.getId());
+                tenantManager.updateTenantById(tenant);
+            });
+        }
+    }
+
     @Transactional
     public void createMember(TenantMemberCreateCmd cmd) {
         var tenantMember = convert.memberCreateCmdToEntity(cmd);
         if (appProperties.getMultiTenant()) {
-            if (BooleanUtils.isTrue(tenantMember.getMemberAccount())) {
-                tenantMember.setUserId(IdUtil.getSnowflakeNextIdStr());
-            } else {
-                Objects.requireNonNull(tenantMember.getUserId());
-            }
+            Objects.requireNonNull(tenantMember.getUserId());
         } else {
             tenantMember.setUserId(IdUtil.getSnowflakeNextIdStr());
         }
@@ -90,7 +145,7 @@ public class TenantService {
 
     private TenantMemberDTO assembleTenantMember(TenantMember tenantMember) {
         var tenantMemberDTO = convert.memberEntityToDTO(tenantMember);
-        var depMembers = departmentManager.findDepartmentMembersByUserId(tenantMemberDTO.getUserId());
+        var depMembers = departmentManager.findDepartmentMembersByMemberId(tenantMemberDTO.getMemberId());
         tenantMemberDTO.setDepartmentIds(depMembers.stream().map(DepartmentMemberPO::getDepartmentId).collect(Collectors.toList()));
         return tenantMemberDTO;
     }
@@ -99,6 +154,31 @@ public class TenantService {
         return tenantMemberManager.findMemberById(memberId).map(this::assembleTenantMember);
     }
 
+    public Optional<ActorProfile> findActorProfile() {
+        if (Objects.equals(ActorRoleEnum.TENANT_MEMBER.name(), actorContext.getRole())) {
+            return tenantMemberManager.findMemberById(actorContext.getMemberId()).map(memberSnap -> {
+                return ActorProfile.builder()
+                        .role(ActorRoleEnum.TENANT_MEMBER.name())
+                        .nickname(memberSnap.getNickname())
+                        .userId(actorContext.getUserId())
+                        .memberId(actorContext.getMemberId())
+                        .tenantId(actorContext.getTenantId())
+                        .build();
+            });
+        } else if (Objects.equals(ActorRoleEnum.USER.name(), actorContext.getRole())) {
+            return Optional.ofNullable(userProvider.getUserById(actorContext.getUserId())).map(user -> {
+                return ActorProfile.builder()
+                        .role(ActorRoleEnum.USER.name())
+                        .nickname(user.getNickname())
+                        .userId(user.getId())
+                        .avatar(user.getAvatar())
+                        .tenantId(actorContext.getTenantId())
+                        .build();
+            });
+
+        }
+        return Optional.empty();
+    }
 
     private List<TenantMemberDTO> assembleTenantMembers(List<TenantMember> members) {
         return members.stream().map(member -> {
@@ -124,11 +204,8 @@ public class TenantService {
 
     public void changeActorPassword(ActorChangePasswordCmd cmd) {
         tenantMemberManager.findMemberByUserId(actorContext.getUserId()).ifPresent(tenantMemberSnap -> {
-            if (!tenantMemberSnap.passwordMatch(cmd.getOldPassword())) {
-                throw new BusinessException(PWD_ERROR);
-            }
-            var tenantMember = TenantMember.builder().id(tenantMemberSnap.getId()).password(cmd.getNewPassword()).build();
-            tenantMemberManager.updateMemberById(tenantMember);
+            tenantMemberSnap.setPassword(cmd.getPassword());
+            tenantMemberManager.updateMemberById(tenantMemberSnap);
         });
     }
 

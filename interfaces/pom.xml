@@ -16,6 +16,7 @@
     <modules>
         <module>rest-tenant</module>
         <module>rest-boss</module>
+        <module>rest-backend</module>
     </modules>
 
     <properties>

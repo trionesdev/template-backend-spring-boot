@@ -14,6 +14,5 @@ public class TenantMemberCreateRO {
     private String phone;
     @NotBlank
     private String nickname;
-    private Boolean memberAccount;
     private List<String> departmentIds;
 }

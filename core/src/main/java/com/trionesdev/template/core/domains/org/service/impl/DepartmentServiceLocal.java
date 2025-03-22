@@ -24,6 +24,7 @@ import com.trionesdev.template.core.domains.org.manager.impl.TenantManager;
 import com.trionesdev.template.core.domains.org.manager.impl.TenantMemberManager;
 import com.trionesdev.template.core.domains.org.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -116,8 +117,10 @@ public class DepartmentServiceLocal implements DepartmentService {
             root.setName(tenant.getName());
             root.put("icon", tenant.getLogo());
             if (DepartmentTreeQuery.Mode.TENANT_SIDEWAYS.equals(arg.getMode())) {
-                List<Tree<String>> result = ListUtil.toList(root);
-                result.addAll(departmentNodes);
+                List<Tree<String>> result = List.of(root);
+                if (CollectionUtils.isNotEmpty(departmentNodes)) {
+                    result.addAll(departmentNodes);
+                }
                 return result;
             } else {
                 root.setChildren(departmentNodes);
@@ -131,7 +134,7 @@ public class DepartmentServiceLocal implements DepartmentService {
         tenantMemberManager.findMemberById(arg.getMemberId()).ifPresent(tenantMember -> {
             departmentMemberDAO.deleteByUserId(tenantMember.getUserId());
             if (CollectionUtil.isNotEmpty(arg.getDepartmentIds())) {
-                List<DepartmentMemberPO> members = arg.getDepartmentIds().stream().map(t -> DepartmentMemberPO.builder().departmentId(t).userId(tenantMember.getUserId()).build()).collect(Collectors.toList());
+                List<DepartmentMemberPO> members = arg.getDepartmentIds().stream().map(t -> DepartmentMemberPO.builder().departmentId(t).memberId(tenantMember.getId()).build()).collect(Collectors.toList());
                 departmentMemberDAO.saveBatch(members);
             }
         });
@@ -144,19 +147,19 @@ public class DepartmentServiceLocal implements DepartmentService {
     }
 
     @Override
-    public List<DepartmentMemberDTO> findDepartmentMembersByUserId(String userId) {
-        return assembleDepartmentMembers(departmentMemberDAO.selectListByUserId(userId));
+    public List<DepartmentMemberDTO> findDepartmentMembersByMemberId(String memberId) {
+        return assembleDepartmentMembers(departmentManager.findDepartmentMembersByMemberId(memberId));
     }
 
     private List<DepartmentMemberDTO> assembleDepartmentMembers(List<DepartmentMemberPO> records) {
         if (CollectionUtil.isEmpty(records)) {
             return Collections.emptyList();
         }
-        var memberIds = records.stream().map(DepartmentMemberPO::getUserId).collect(Collectors.toSet());
+        var memberIds = records.stream().map(DepartmentMemberPO::getMemberId).collect(Collectors.toSet());
         var membersMap = tenantMemberManager.findMembersByIds(memberIds).stream().collect(Collectors.toMap(TenantMember::getId, v -> v, (v1, v2) -> v1));
         return records.stream().map(t -> {
             var depMember = convert.poToDto(t);
-            depMember.setMember(Optional.ofNullable(membersMap.get(t.getUserId())).map(convert::memberPOToDTO).orElse(null));
+            depMember.setMember(Optional.ofNullable(membersMap.get(t.getMemberId())).map(convert::memberPOToDTO).orElse(null));
             return depMember;
         }).collect(Collectors.toList());
     }
@@ -199,7 +202,7 @@ public class DepartmentServiceLocal implements DepartmentService {
         });
         var departmentMembers = departmentManager.findDepartmentMembersByDepartmentId(departmentId);
         if (CollectionUtil.isNotEmpty(departmentMembers)) {
-            var userIds = departmentMembers.stream().map(DepartmentMemberPO::getUserId).collect(Collectors.toSet());
+            var userIds = departmentMembers.stream().map(DepartmentMemberPO::getMemberId).collect(Collectors.toSet());
             var members = tenantMemberManager.findMembersByIds(userIds);
             members.forEach(t -> {
                 var name = t.getName();

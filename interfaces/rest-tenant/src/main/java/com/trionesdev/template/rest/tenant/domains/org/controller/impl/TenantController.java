@@ -2,7 +2,9 @@ package com.trionesdev.template.rest.tenant.domains.org.controller.impl;
 
 import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.commons.model.ActorProfile;
 import com.trionesdev.template.core.domains.org.dto.OrgNodeDTO;
+import com.trionesdev.template.core.domains.org.dto.TenantDTO;
 import com.trionesdev.template.core.domains.org.dto.TenantMemberDTO;
 import com.trionesdev.template.core.domains.org.service.impl.TenantService;
 import com.trionesdev.template.rest.tenant.domains.org.controller.ro.tenant.*;
@@ -24,6 +26,26 @@ public class TenantController {
     private final OrgBeRestConvert convert;
     private final ActorContext actorContext;
     private final TenantService tenantService;
+
+    @Operation(summary = "新建租户")
+    @PostMapping(value = "tenants")
+    public void createTenantByActor(@Validated @RequestBody TenantCreateRO args) {
+        var tenant = convert.from(args);
+        tenantService.createTenantByActor(tenant);
+    }
+
+    @Operation(summary = "获取当前租户")
+    @GetMapping(value = "actor/tenant")
+    public TenantDTO findActorTenant() {
+        return tenantService.findActorTenant().orElse(null);
+    }
+
+    @Operation(summary = "修改当前执行人租户信息")
+    @PutMapping(value = "actor/tenant")
+    public void updateActorTenant(@Validated @RequestBody TenantUpdateRO args) {
+        var tenant = convert.from(args);
+        tenantService.updateActorTenant(tenant);
+    }
 
     @Operation(summary = "创建租户成员")
     @PostMapping("tenant/members")
@@ -65,6 +87,12 @@ public class TenantController {
     @GetMapping(value = "tenant/actor/member")
     public TenantMemberDTO queryActorMember() {
         return tenantService.findTenantMemberByMemberId(actorContext.getMemberId()).orElse(null);
+    }
+
+    @Operation(summary = "获取当前执行成员信息")
+    @GetMapping(value = "tenant/actor/profile")
+    public ActorProfile fineActorProfile() {
+        return tenantService.findActorProfile().orElse(null);
     }
 
     @Operation(summary = "修改当前执行成员")

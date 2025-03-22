@@ -11,4 +11,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class UserCreateCmd {
     private String phone;
+    private String email;
+    private String password;
+    private String username;
+    private String nickname;
+    private String verificationCode;
 }
