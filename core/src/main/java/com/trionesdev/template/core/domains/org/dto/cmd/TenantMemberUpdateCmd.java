@@ -1,16 +1,16 @@
-package com.trionesdev.template.core.domains.org.dto;
+package com.trionesdev.template.core.domains.org.dto.cmd;
 
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class TenantMemberCreateCmd {
-    private String userId;
+public class TenantMemberUpdateCmd {
+    private String id;
     private String phone;
     private String email;
-    private String nickname;
     private String avatar;
+    private String nickname;
     private String firstName;
     private String lastName;
     private String username;

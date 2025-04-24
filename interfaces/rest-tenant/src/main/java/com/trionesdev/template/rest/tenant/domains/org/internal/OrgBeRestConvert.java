@@ -4,7 +4,7 @@ import com.trionesdev.template.core.domains.org.dao.criteria.DepartmentMemberCri
 import com.trionesdev.template.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.template.core.domains.org.dao.po.TenantPO;
-import com.trionesdev.template.core.domains.org.dto.*;
+import com.trionesdev.template.core.domains.org.dto.cmd.*;
 import com.trionesdev.template.rest.tenant.domains.org.controller.ro.department.DepartmentCreateRO;
 import com.trionesdev.template.rest.tenant.domains.org.controller.ro.department.DepartmentMemberQueryRO;
 import com.trionesdev.template.rest.tenant.domains.org.controller.ro.department.DepartmentUpdateRO;

@@ -1,6 +1,6 @@
 package com.trionesdev.template.rest.tenant.domains.org.controller.impl;
 
-import com.trionesdev.template.core.domains.org.dto.TenantMemberSignInCmd;
+import com.trionesdev.template.core.domains.org.dto.cmd.TenantMemberSignInCmd;
 import com.trionesdev.template.core.domains.org.service.impl.TenantService;
 import com.trionesdev.template.rest.tenant.domains.org.controller.ro.tenant.TenantAccountSignInRO;
 import com.trionesdev.template.rest.tenant.domains.org.controller.vo.TokenVO;

@@ -1,4 +1,4 @@
-package com.trionesdev.template.core.domains.org.dto;
+package com.trionesdev.template.core.domains.org.dto.cmd;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,11 +7,8 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
-@AllArgsConstructor
 @NoArgsConstructor
-public class TenantMemberSignInCmd {
-    private String tenantSerial;
-    private String account;
+@AllArgsConstructor
+public class ActorChangePasswordCmd {
     private String password;
-
 }

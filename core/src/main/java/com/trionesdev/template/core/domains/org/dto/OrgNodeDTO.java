@@ -1,5 +1,6 @@
 package com.trionesdev.template.core.domains.org.dto;
 
+import com.trionesdev.template.core.domains.org.shared.enums.OrgNodeType;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
@@ -9,11 +10,7 @@ public class OrgNodeDTO {
     private String id;
     private String name;
     private String avatar;
-    private Type type;
+    private OrgNodeType type;
     private String nickname;
 
-    public enum Type{
-        DEPARTMENT,
-        MEMBER
-    }
 }

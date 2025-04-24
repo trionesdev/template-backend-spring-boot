@@ -17,8 +17,11 @@ import com.trionesdev.template.core.domains.org.dao.impl.DepartmentMemberDAO;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentMemberPO;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.template.core.domains.org.dto.*;
+import com.trionesdev.template.core.domains.org.dto.cmd.DepartmentOrgNodesQueryCmd;
+import com.trionesdev.template.core.domains.org.dto.cmd.SetMemberDepartmentsCmd;
 import com.trionesdev.template.core.domains.org.internal.OrgDomainConvert;
 import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
+import com.trionesdev.template.core.domains.org.shared.enums.OrgNodeType;
 import com.trionesdev.template.core.domains.org.manager.impl.DepartmentManager;
 import com.trionesdev.template.core.domains.org.manager.impl.TenantManager;
 import com.trionesdev.template.core.domains.org.manager.impl.TenantMemberManager;
@@ -194,13 +197,16 @@ public class DepartmentServiceLocal implements DepartmentService {
     }
 
     @Override
-    public List<OrgNodeDTO> orgListByDepartmentId(String departmentId) {
+    public List<OrgNodeDTO> findDepartmentOrgNodes(DepartmentOrgNodesQueryCmd cmd) {
         List<OrgNodeDTO> result = new ArrayList<>();
-        var departments = departmentManager.findDepartmentsByParentId(departmentId);
+        var departments = departmentManager.findDepartmentsByParentId(cmd.getDepartmentId());
         departments.forEach(t -> {
-            result.add(OrgNodeDTO.builder().id(t.getId()).name(t.getName()).type(OrgNodeDTO.Type.DEPARTMENT).build());
+            result.add(OrgNodeDTO.builder().id(t.getId()).name(t.getName()).type(OrgNodeType.DEPARTMENT).build());
         });
-        var departmentMembers = departmentManager.findDepartmentMembersByDepartmentId(departmentId);
+        if (Objects.equals(OrgNodeType.DEPARTMENT, cmd.getType())) {
+            return result;
+        }
+        var departmentMembers = departmentManager.findDepartmentMembersByDepartmentId(cmd.getDepartmentId());
         if (CollectionUtil.isNotEmpty(departmentMembers)) {
             var userIds = departmentMembers.stream().map(DepartmentMemberPO::getMemberId).collect(Collectors.toSet());
             var members = tenantMemberManager.findMembersByIds(userIds);
@@ -209,7 +215,7 @@ public class DepartmentServiceLocal implements DepartmentService {
                 if (StringUtils.isBlank(name)) {
                     name = t.getNickname();
                 }
-                result.add(OrgNodeDTO.builder().id(t.getId()).name(name).type(OrgNodeDTO.Type.MEMBER).avatar(t.getAvatar()).nickname(t.getNickname()).build());
+                result.add(OrgNodeDTO.builder().id(t.getId()).name(name).type(OrgNodeType.MEMBER).avatar(t.getAvatar()).nickname(t.getNickname()).build());
             });
         }
         return result;
