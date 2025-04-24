@@ -5,7 +5,7 @@ import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.template.core.domains.org.dao.criteria.DepartmentMemberCriteria;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.template.core.domains.org.dto.*;
-import com.trionesdev.template.core.domains.org.dto.cmd.DepartmentOrgNodesQueryCmd;
+import com.trionesdev.template.core.domains.org.dto.cmd.OrgNodeQueryCmd;
 import com.trionesdev.template.core.domains.org.dto.cmd.SetMemberDepartmentsCmd;
 
 import java.util.List;
@@ -40,5 +40,5 @@ public interface DepartmentService {
 
     List<Tree<String>> orgTree();
 
-    List<OrgNodeDTO> findDepartmentOrgNodes(DepartmentOrgNodesQueryCmd cmd);
+    List<OrgNodeDTO> findDepartmentOrgNodes(OrgNodeQueryCmd cmd);
 }

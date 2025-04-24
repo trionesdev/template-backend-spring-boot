@@ -10,7 +10,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DepartmentOrgNodesQueryCmd {
+public class OrgNodeQueryCmd {
     private String departmentId;
     private OrgNodeType type;
+    private String wd;
 }

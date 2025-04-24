@@ -7,7 +7,7 @@ import com.trionesdev.template.core.domains.org.dto.DepartmentDTO;
 import com.trionesdev.template.core.domains.org.dto.DepartmentMemberDTO;
 import com.trionesdev.template.core.domains.org.dto.DepartmentTreeQuery;
 import com.trionesdev.template.core.domains.org.dto.OrgNodeDTO;
-import com.trionesdev.template.core.domains.org.dto.cmd.DepartmentOrgNodesQueryCmd;
+import com.trionesdev.template.core.domains.org.dto.cmd.OrgNodeQueryCmd;
 import com.trionesdev.template.core.domains.org.service.DepartmentService;
 import com.trionesdev.template.rest.tenant.domains.org.controller.ro.department.DepartmentCreateRO;
 import com.trionesdev.template.rest.tenant.domains.org.controller.ro.department.DepartmentMemberQueryRO;
@@ -95,7 +95,7 @@ public class DepartmentController {
     @Operation(summary = "查询组织列表(包含组织下成员)")
     @GetMapping("department/org/list")
     public List<OrgNodeDTO> queryDepartmentOrgList(DepartmentOrgNodesQueryRO query) {
-        return departmentService.findDepartmentOrgNodes(DepartmentOrgNodesQueryCmd.builder().departmentId(query.getDepartmentId()).type(query.getType()).build());
+        return departmentService.findDepartmentOrgNodes(OrgNodeQueryCmd.builder().departmentId(query.getDepartmentId()).type(query.getType()).build());
     }
 
 }

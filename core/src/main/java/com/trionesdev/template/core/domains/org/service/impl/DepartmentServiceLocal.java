@@ -17,7 +17,7 @@ import com.trionesdev.template.core.domains.org.dao.impl.DepartmentMemberDAO;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentMemberPO;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.template.core.domains.org.dto.*;
-import com.trionesdev.template.core.domains.org.dto.cmd.DepartmentOrgNodesQueryCmd;
+import com.trionesdev.template.core.domains.org.dto.cmd.OrgNodeQueryCmd;
 import com.trionesdev.template.core.domains.org.dto.cmd.SetMemberDepartmentsCmd;
 import com.trionesdev.template.core.domains.org.internal.OrgDomainConvert;
 import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
@@ -197,7 +197,7 @@ public class DepartmentServiceLocal implements DepartmentService {
     }
 
     @Override
-    public List<OrgNodeDTO> findDepartmentOrgNodes(DepartmentOrgNodesQueryCmd cmd) {
+    public List<OrgNodeDTO> findDepartmentOrgNodes(OrgNodeQueryCmd cmd) {
         List<OrgNodeDTO> result = new ArrayList<>();
         var departments = departmentManager.findDepartmentsByParentId(cmd.getDepartmentId());
         departments.forEach(t -> {
