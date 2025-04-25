@@ -6,6 +6,8 @@ import com.trionesdev.template.core.domains.bossuser.repository.aggregate.entity
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Repository
 public class BossUserRepository {
@@ -20,5 +22,9 @@ public class BossUserRepository {
     public void updateById(BossUser bossUser) {
         var bossUserPo = convert.userEntityToPo(bossUser);
         bossUserDAO.updateById(bossUserPo);
+    }
+
+    public Optional<BossUser> findById(String id) {
+        return Optional.ofNullable(bossUserDAO.getById(id)).map(convert::usePoToEntity);
     }
 }
