@@ -6,7 +6,7 @@ import com.trionesdev.template.core.domains.org.dao.impl.DepartmentMemberDAO;
 import com.trionesdev.template.core.domains.org.dao.impl.TenantDAO;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentMemberPO;
 import com.trionesdev.template.core.domains.org.dao.po.TenantPO;
-import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
+import com.trionesdev.template.core.domains.org.internal.aggregate.entity.TenantMember;
 import com.trionesdev.template.core.domains.org.repository.impl.TenantMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;

@@ -20,7 +20,7 @@ import com.trionesdev.template.core.domains.org.dto.*;
 import com.trionesdev.template.core.domains.org.dto.cmd.OrgNodeQueryCmd;
 import com.trionesdev.template.core.domains.org.dto.cmd.SetMemberDepartmentsCmd;
 import com.trionesdev.template.core.domains.org.internal.OrgDomainConvert;
-import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
+import com.trionesdev.template.core.domains.org.internal.aggregate.entity.TenantMember;
 import com.trionesdev.template.core.domains.org.shared.enums.OrgNodeType;
 import com.trionesdev.template.core.domains.org.manager.impl.DepartmentManager;
 import com.trionesdev.template.core.domains.org.manager.impl.TenantManager;

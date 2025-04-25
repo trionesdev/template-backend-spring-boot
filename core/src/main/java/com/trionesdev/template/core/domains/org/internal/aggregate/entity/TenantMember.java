@@ -1,4 +1,4 @@
-package com.trionesdev.template.core.domains.org.internal.aggreate.entity;
+package com.trionesdev.template.core.domains.org.internal.aggregate.entity;
 
 import cn.hutool.core.util.StrUtil;
 import com.trionesdev.template.core.domains.org.shared.enums.TenantMemberStatus;

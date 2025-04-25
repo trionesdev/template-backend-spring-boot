@@ -6,7 +6,7 @@ import com.trionesdev.template.core.domains.org.dao.criteria.TenantMemberCriteri
 import com.trionesdev.template.core.domains.org.dao.impl.TenantMemberDAO;
 import com.trionesdev.template.core.domains.org.dao.po.TenantMemberPO;
 import com.trionesdev.template.core.domains.org.internal.OrgDomainConvert;
-import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
+import com.trionesdev.template.core.domains.org.internal.aggregate.entity.TenantMember;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;

@@ -10,7 +10,7 @@ import com.trionesdev.template.core.domains.org.dao.impl.DepartmentDAO;
 import com.trionesdev.template.core.domains.org.dao.impl.DepartmentMemberDAO;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentMemberPO;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentPO;
-import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
+import com.trionesdev.template.core.domains.org.internal.aggregate.entity.TenantMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

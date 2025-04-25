@@ -9,7 +9,7 @@ import com.trionesdev.template.core.domains.org.dto.*;
 import com.trionesdev.template.core.domains.org.dto.cmd.TenantMemberCreateCmd;
 import com.trionesdev.template.core.domains.org.dto.cmd.TenantMemberProfileUpdateCmd;
 import com.trionesdev.template.core.domains.org.dto.cmd.TenantMemberUpdateCmd;
-import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
+import com.trionesdev.template.core.domains.org.internal.aggregate.entity.TenantMember;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

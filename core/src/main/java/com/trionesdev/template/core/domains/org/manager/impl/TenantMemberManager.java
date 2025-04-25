@@ -6,7 +6,7 @@ import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.template.core.domains.org.dao.criteria.TenantMemberCriteria;
 import com.trionesdev.template.core.domains.org.dao.impl.TenantDAO;
 import com.trionesdev.template.core.domains.org.dao.po.TenantPO;
-import com.trionesdev.template.core.domains.org.internal.aggreate.entity.TenantMember;
+import com.trionesdev.template.core.domains.org.internal.aggregate.entity.TenantMember;
 import com.trionesdev.template.core.domains.org.repository.impl.TenantMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.BooleanUtils;
