@@ -19,8 +19,10 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "triones_dic_district", autoResultMap = true)
+@TableName(value = DistrictPO.TABLE_NAME, autoResultMap = true)
 public class DistrictPO extends BaseLogicPO {
+    static final String TABLE_NAME = "triones_dic_district";
+
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String countryCode;

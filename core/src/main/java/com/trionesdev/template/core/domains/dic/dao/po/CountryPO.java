@@ -12,8 +12,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "triones_dic_country")
+@TableName(value = CountryPO.TABLE_NAME)
 public class CountryPO {
+    static final String TABLE_NAME = "triones_dic_country";
+
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     /**

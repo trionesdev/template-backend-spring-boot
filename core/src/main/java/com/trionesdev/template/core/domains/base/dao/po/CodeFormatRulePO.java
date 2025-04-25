@@ -16,8 +16,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "triones_base_code_rule")
+@TableName(value = CodeFormatRulePO.TABLE_NAME)
 public class CodeFormatRulePO extends BaseLogicEntity {
+    static final String TABLE_NAME = "triones_base_code_rule";
+
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;

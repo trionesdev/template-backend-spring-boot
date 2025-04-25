@@ -13,8 +13,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "triones_base_code_serial_number")
+@TableName(value = CodeFormatSerialNumberPO.TABLE_NAME)
 public class CodeFormatSerialNumberPO {
+    static final String TABLE_NAME = "triones_base_code_serial_number";
+
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String tenantId;
