@@ -1,7 +1,7 @@
-package com.trionesdev.template.rest.boss.domains.bossuser.internal;
+package com.trionesdev.template.rest.boss.domains.boss.internal;
 
 import static com.trionesdev.template.rest.boss.internal.RestConstants.CONTEXT_PATH;
 
-public class BossUserConstants {
+public class BossConstants {
     public final static String USER_PATH = CONTEXT_PATH + "user/";
 }

@@ -1,4 +1,4 @@
-package com.trionesdev.template.rest.boss.domains.bossuser.controller.vo;
+package com.trionesdev.template.rest.boss.domains.boss.controller.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

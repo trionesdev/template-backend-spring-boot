@@ -1,25 +1,25 @@
-package com.trionesdev.template.rest.boss.domains.bossuser.controller.impl;
+package com.trionesdev.template.rest.boss.domains.boss.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.model.ActorProfile;
 import com.trionesdev.template.core.domains.boss.dto.BossUserDTO;
 import com.trionesdev.template.core.domains.boss.service.impl.BossUserService;
-import com.trionesdev.template.rest.boss.domains.bossuser.controller.ro.BossUserQueryRO;
-import com.trionesdev.template.rest.boss.domains.bossuser.internal.BossUserRestBossConvert;
+import com.trionesdev.template.rest.boss.domains.boss.controller.ro.BossUserQueryRO;
+import com.trionesdev.template.rest.boss.domains.boss.internal.BossRestBossConvert;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 
-import static com.trionesdev.template.rest.boss.domains.bossuser.internal.BossUserConstants.USER_PATH;
+import static com.trionesdev.template.rest.boss.domains.boss.internal.BossConstants.USER_PATH;
 
 @Tag(name = "用户")
 @RequiredArgsConstructor
 @RestController("boss_userController")
 @RequestMapping(USER_PATH)
 public class BossUserController {
-    private final BossUserRestBossConvert convert;
+    private final BossRestBossConvert convert;
     private final BossUserService bossUserService;
 
     @Operation(summary = "获取当前用户信息(ActorProfile)")
