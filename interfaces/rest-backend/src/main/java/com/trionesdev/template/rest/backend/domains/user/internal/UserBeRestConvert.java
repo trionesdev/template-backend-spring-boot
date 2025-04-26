@@ -1,8 +1,8 @@
 package com.trionesdev.template.rest.backend.domains.user.internal;
 
-import com.trionesdev.template.core.domains.user.dto.AccountSignInCmd;
-import com.trionesdev.template.core.domains.user.dto.SmsSignInCmd;
-import com.trionesdev.template.core.domains.user.dto.UserCreateCmd;
+import com.trionesdev.template.core.domains.user.dto.cmd.AccountSignInCmd;
+import com.trionesdev.template.core.domains.user.dto.cmd.SmsSignInCmd;
+import com.trionesdev.template.core.domains.user.dto.cmd.UserCreateCmd;
 import com.trionesdev.template.core.domains.user.internal.entity.User;
 import com.trionesdev.template.rest.backend.domains.user.controller.ro.AccountSignInRO;
 import com.trionesdev.template.rest.backend.domains.user.controller.ro.ActorUserUpdateRO;

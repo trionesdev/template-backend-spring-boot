@@ -42,7 +42,7 @@ public class TrionesTenantLineInnerInterceptor implements TenantLineHandler {
             return true;
         }
         return List.of(
-
+"triones_boss_user"
         ).contains(tableName);
     }
 

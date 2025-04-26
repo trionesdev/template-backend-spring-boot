@@ -24,7 +24,7 @@ import com.trionesdev.template.core.domains.org.manager.impl.DepartmentManager;
 import com.trionesdev.template.core.domains.org.manager.impl.TenantManager;
 import com.trionesdev.template.core.domains.org.manager.impl.TenantMemberManager;
 import com.trionesdev.template.core.domains.org.shared.enums.OrgNodeType;
-import com.trionesdev.template.core.domains.user.dto.UserCreateCmd;
+import com.trionesdev.template.core.domains.user.dto.cmd.UserCreateCmd;
 import com.trionesdev.template.core.domains.user.provider.UserProvider;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;

@@ -8,6 +8,7 @@ import com.trionesdev.template.core.domains.org.dao.po.TenantPO;
 import com.trionesdev.template.core.domains.org.dto.*;
 import com.trionesdev.template.core.domains.org.dto.cmd.TenantMemberCreateCmd;
 import com.trionesdev.template.core.domains.org.dto.cmd.TenantMemberProfileUpdateCmd;
+import com.trionesdev.template.core.domains.org.dto.cmd.TenantMemberQuery;
 import com.trionesdev.template.core.domains.org.dto.cmd.TenantMemberUpdateCmd;
 import com.trionesdev.template.core.domains.org.internal.aggregate.entity.TenantMember;
 import org.mapstruct.Builder;

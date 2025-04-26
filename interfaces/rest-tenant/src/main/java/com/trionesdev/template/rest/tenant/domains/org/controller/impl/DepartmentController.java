@@ -5,7 +5,7 @@ import cn.hutool.core.util.EnumUtil;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.template.core.domains.org.dto.DepartmentDTO;
 import com.trionesdev.template.core.domains.org.dto.DepartmentMemberDTO;
-import com.trionesdev.template.core.domains.org.dto.DepartmentTreeQuery;
+import com.trionesdev.template.core.domains.org.dto.cmd.DepartmentTreeQuery;
 import com.trionesdev.template.core.domains.org.dto.OrgNodeDTO;
 import com.trionesdev.template.core.domains.org.dto.cmd.OrgNodeQueryCmd;
 import com.trionesdev.template.core.domains.org.service.DepartmentService;

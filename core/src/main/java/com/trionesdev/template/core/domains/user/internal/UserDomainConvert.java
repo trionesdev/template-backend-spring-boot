@@ -1,8 +1,8 @@
 package com.trionesdev.template.core.domains.user.internal;
 
 import com.trionesdev.template.core.domains.user.dao.po.UserPO;
-import com.trionesdev.template.core.domains.user.dto.PhoneBindUserCmd;
-import com.trionesdev.template.core.domains.user.dto.UserCreateCmd;
+import com.trionesdev.template.core.domains.user.dto.cmd.PhoneBindUserCmd;
+import com.trionesdev.template.core.domains.user.dto.cmd.UserCreateCmd;
 import com.trionesdev.template.core.domains.user.dto.UserDTO;
 import com.trionesdev.template.core.domains.user.internal.entity.User;
 import org.mapstruct.Builder;

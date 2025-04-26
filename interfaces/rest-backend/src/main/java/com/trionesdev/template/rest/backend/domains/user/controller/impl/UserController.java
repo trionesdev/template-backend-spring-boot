@@ -2,7 +2,7 @@ package com.trionesdev.template.rest.backend.domains.user.controller.impl;
 
 import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.model.ActorProfile;
-import com.trionesdev.template.core.domains.user.dto.ActorChangePasswordCmd;
+import com.trionesdev.template.core.domains.user.dto.cmd.ActorChangePasswordCmd;
 import com.trionesdev.template.core.domains.user.dto.UserDTO;
 import com.trionesdev.template.core.domains.user.service.impl.UserService;
 import com.trionesdev.template.rest.backend.domains.user.controller.ro.ChangeTenantRO;

@@ -1,6 +1,7 @@
 package com.trionesdev.template.core.domains.org.provider;
 
 import com.trionesdev.template.core.domains.org.dto.*;
+import com.trionesdev.template.core.domains.org.dto.cmd.TenantMemberQuery;
 
 import java.util.Collection;
 import java.util.List;

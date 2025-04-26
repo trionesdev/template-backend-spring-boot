@@ -1,10 +1,15 @@
 package com.trionesdev.template.core.domains.bossuser.manager.impl;
 
+import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.template.core.domains.bossuser.dao.criteria.BossUserCriteria;
 import com.trionesdev.template.core.domains.bossuser.repository.aggregate.entity.BossUser;
 import com.trionesdev.template.core.domains.bossuser.repository.impl.BossUserRepository;
+import com.trionesdev.template.core.domains.bossuser.shared.enums.AccountType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -20,7 +25,25 @@ public class BossUserManager {
         bossUserRepository.save(bossUser);
     }
 
-    public Optional<BossUser> findById(String id) {
+    public Optional<BossUser> findUserById(String id) {
         return bossUserRepository.findById(id);
+    }
+
+    public Optional<BossUser> findUserByAccount(BossUser user) {
+        Optional<BossUser> userSnap;
+        if (Objects.equals(AccountType.PHONE, user.getAccountType())) {
+            userSnap = bossUserRepository.findByPhone(user.getAccount());
+        } else {
+            userSnap = bossUserRepository.findByUsername(user.getAccount());
+        }
+        return userSnap.filter(userPO -> user.passwordMatch(userPO.getEncodedPassword()));
+    }
+
+    public List<BossUser> findUserList(BossUserCriteria criteria) {
+        return bossUserRepository.findList(criteria);
+    }
+
+    public PageInfo<BossUser> findUserPage(BossUserCriteria criteria) {
+        return bossUserRepository.findPage(criteria);
     }
 }

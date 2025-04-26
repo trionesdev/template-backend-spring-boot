@@ -2,6 +2,7 @@ package com.trionesdev.template.core.domains.org.provider.impl;
 
 import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.template.core.domains.org.dto.*;
+import com.trionesdev.template.core.domains.org.dto.cmd.TenantMemberQuery;
 import com.trionesdev.template.core.domains.org.internal.OrgDomainConvert;
 import com.trionesdev.template.core.domains.org.manager.impl.DepartmentManager;
 import com.trionesdev.template.core.domains.org.manager.impl.TenantManager;

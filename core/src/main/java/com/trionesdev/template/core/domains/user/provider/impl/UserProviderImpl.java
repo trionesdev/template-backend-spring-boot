@@ -1,8 +1,8 @@
 package com.trionesdev.template.core.domains.user.provider.impl;
 
-import com.trionesdev.template.core.domains.user.dto.AccountSignInCmd;
-import com.trionesdev.template.core.domains.user.dto.PhoneBindUserCmd;
-import com.trionesdev.template.core.domains.user.dto.UserCreateCmd;
+import com.trionesdev.template.core.domains.user.dto.cmd.AccountSignInCmd;
+import com.trionesdev.template.core.domains.user.dto.cmd.PhoneBindUserCmd;
+import com.trionesdev.template.core.domains.user.dto.cmd.UserCreateCmd;
 import com.trionesdev.template.core.domains.user.dto.UserDTO;
 import com.trionesdev.template.core.domains.user.internal.UserDomainConvert;
 import com.trionesdev.template.core.domains.user.internal.entity.User;

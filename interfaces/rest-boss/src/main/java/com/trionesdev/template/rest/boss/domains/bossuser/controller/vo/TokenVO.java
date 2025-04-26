@@ -1,4 +1,4 @@
-package com.trionesdev.template.core.domains.org.dto;
+package com.trionesdev.template.rest.boss.domains.bossuser.controller.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +9,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DepartmentTreeQuery {
-    private Mode mode;
-
-    public enum Mode {
-        TENANT_ROOT,
-        TENANT_SIDEWAYS
-    }
+public class TokenVO {
+    private String token;
 }

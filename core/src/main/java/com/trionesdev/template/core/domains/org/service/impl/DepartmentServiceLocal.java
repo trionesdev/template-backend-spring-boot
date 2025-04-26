@@ -17,6 +17,7 @@ import com.trionesdev.template.core.domains.org.dao.impl.DepartmentMemberDAO;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentMemberPO;
 import com.trionesdev.template.core.domains.org.dao.po.DepartmentPO;
 import com.trionesdev.template.core.domains.org.dto.*;
+import com.trionesdev.template.core.domains.org.dto.cmd.DepartmentTreeQuery;
 import com.trionesdev.template.core.domains.org.dto.cmd.OrgNodeQueryCmd;
 import com.trionesdev.template.core.domains.org.dto.cmd.SetMemberDepartmentsCmd;
 import com.trionesdev.template.core.domains.org.internal.OrgDomainConvert;
