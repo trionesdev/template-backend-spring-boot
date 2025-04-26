@@ -2,9 +2,8 @@ package com.trionesdev.template.rest.boss.domains.bossuser.controller.impl;
 
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.model.ActorProfile;
-import com.trionesdev.template.core.domains.bossuser.dao.criteria.BossUserCriteria;
-import com.trionesdev.template.core.domains.bossuser.dto.BossUserDTO;
-import com.trionesdev.template.core.domains.bossuser.service.impl.BossUserService;
+import com.trionesdev.template.core.domains.boss.dto.BossUserDTO;
+import com.trionesdev.template.core.domains.boss.service.impl.BossUserService;
 import com.trionesdev.template.rest.boss.domains.bossuser.controller.ro.BossUserQueryRO;
 import com.trionesdev.template.rest.boss.domains.bossuser.internal.BossUserRestBossConvert;
 import io.swagger.v3.oas.annotations.Operation;

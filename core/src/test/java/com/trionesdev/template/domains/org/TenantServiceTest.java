@@ -1,8 +1,8 @@
 package com.trionesdev.template.domains.org;
 
 import com.trionesdev.template.BaseTest;
-import com.trionesdev.template.core.domains.org.dao.criteria.TenantMemberCriteria;
-import com.trionesdev.template.core.domains.org.service.impl.TenantService;
+import com.trionesdev.template.core.domains.tenant.dao.criteria.TenantMemberCriteria;
+import com.trionesdev.template.core.domains.tenant.service.impl.TenantService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

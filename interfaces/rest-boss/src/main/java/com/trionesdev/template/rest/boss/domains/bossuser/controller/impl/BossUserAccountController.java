@@ -1,6 +1,6 @@
 package com.trionesdev.template.rest.boss.domains.bossuser.controller.impl;
 
-import com.trionesdev.template.core.domains.bossuser.service.impl.BossUserService;
+import com.trionesdev.template.core.domains.boss.service.impl.BossUserService;
 import com.trionesdev.template.rest.boss.domains.bossuser.controller.ro.AccountSignInRO;
 import com.trionesdev.template.rest.boss.domains.bossuser.controller.vo.TokenVO;
 import com.trionesdev.template.rest.boss.domains.bossuser.internal.BossUserRestBossConvert;

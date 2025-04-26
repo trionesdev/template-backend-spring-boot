@@ -6,7 +6,7 @@ import cn.hutool.core.lang.tree.TreeUtil;
 import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.core.constant.IdentityConstants;
 import com.trionesdev.commons.exception.BusinessException;
-import com.trionesdev.template.core.domains.org.provider.OrgProvider;
+import com.trionesdev.template.core.domains.tenant.provider.OrgProvider;
 import com.trionesdev.template.core.domains.perm.dao.criteria.FunctionalResourceCriteria;
 import com.trionesdev.template.core.domains.perm.dao.po.FunctionalResourcePO;
 import com.trionesdev.template.core.domains.perm.dao.po.PermissionPO;

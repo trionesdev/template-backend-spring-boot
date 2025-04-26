@@ -8,7 +8,7 @@ import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.commons.exception.NotFoundException;
 import com.trionesdev.commons.model.ActorProfile;
 import com.trionesdev.template.core.domains.notification.provider.impl.NotificationProvider;
-import com.trionesdev.template.core.domains.org.provider.OrgProvider;
+import com.trionesdev.template.core.domains.tenant.provider.OrgProvider;
 import com.trionesdev.template.core.domains.user.dto.*;
 import com.trionesdev.template.core.domains.user.dto.cmd.AccountSignInCmd;
 import com.trionesdev.template.core.domains.user.dto.cmd.ActorChangePasswordCmd;

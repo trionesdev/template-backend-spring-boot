@@ -32,7 +32,7 @@ public class UserController {
 
     /**
      * if the application is for backend management we suggest the api in tenant module.
-     * @see com.trionesdev.template.rest.tenant.domains.org.controller.impl.TenantController#fineActorProfile()
+     * @see com.trionesdev.template.rest.tenant.domains.tenant.controller.impl.TenantController#fineActorProfile()
      * @return
      */
     @Operation(summary = "获取当前用户信息(ActorProfile)")
