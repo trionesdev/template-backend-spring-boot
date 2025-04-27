@@ -58,7 +58,6 @@ public class BossUserService {
                     .nickname(user.getNickname())
                     .userId(user.getId())
                     .avatar(user.getAvatar())
-                    .tenantId(actorContext.getTenantId())
                     .build();
         });
     }
