@@ -22,7 +22,6 @@ public class BossDepartmentPO extends BaseLogicPO {
     public static final String TABLE_NAME = "triones_boss_department";
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
-    private String tenantId;
     private String parentId;
     @TableField(typeHandler = StringCollectionTypeHandler.class)
     private List<String> prevIds;

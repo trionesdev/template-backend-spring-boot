@@ -19,7 +19,7 @@ import lombok.experimental.SuperBuilder;
 @ToString(callSuper = true)
 @TableName(value = BossRoleGrantPO.TABLE_NAME)
 public class BossRoleGrantPO extends BaseLogicPO {
-    public static final String TABLE_NAME = "triones_boss_perm_role_grant";
+    public static final String TABLE_NAME = "triones_boss_role_grant";
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private RoleSubjectType subjectType;

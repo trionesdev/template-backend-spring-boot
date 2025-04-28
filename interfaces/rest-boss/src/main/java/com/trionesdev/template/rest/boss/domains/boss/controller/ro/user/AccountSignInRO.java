@@ -1,4 +1,4 @@
-package com.trionesdev.template.rest.boss.domains.boss.controller.ro;
+package com.trionesdev.template.rest.boss.domains.boss.controller.ro.user;
 
 import lombok.Data;
 

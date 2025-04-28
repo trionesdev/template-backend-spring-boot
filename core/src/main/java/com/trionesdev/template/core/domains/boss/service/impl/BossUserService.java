@@ -9,11 +9,11 @@ import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.commons.exception.NotFoundException;
 import com.trionesdev.commons.model.ActorProfile;
 import com.trionesdev.template.core.domains.boss.dao.criteria.BossUserCriteria;
-import com.trionesdev.template.core.domains.boss.dto.BossUserDTO;
-import com.trionesdev.template.core.domains.boss.dto.cmd.BossAccountSignInCmd;
-import com.trionesdev.template.core.domains.boss.dto.cmd.BossUserCreateCmd;
-import com.trionesdev.template.core.domains.boss.dto.cmd.BossUserUpdateCmd;
-import com.trionesdev.template.core.domains.boss.internal.BossDomainConvert;
+import com.trionesdev.template.core.domains.boss.dto.user.BossUserDTO;
+import com.trionesdev.template.core.domains.boss.dto.user.cmd.BossAccountSignInCmd;
+import com.trionesdev.template.core.domains.boss.dto.user.cmd.BossUserCreateCmd;
+import com.trionesdev.template.core.domains.boss.dto.user.cmd.BossUserUpdateCmd;
+import com.trionesdev.template.core.domains.boss.internal.BossUserDomainConvert;
 import com.trionesdev.template.core.domains.boss.manager.impl.BossUserManager;
 import com.trionesdev.template.core.domains.boss.repository.aggregate.entity.BossUser;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ import static com.trionesdev.template.core.domains.user.internal.UserErrors.ACCO
 @RequiredArgsConstructor
 @Service
 public class BossUserService {
-    private final BossDomainConvert convert;
+    private final BossUserDomainConvert convert;
     private final JwtFacade jwtFacade;
     private final ActorContext actorContext;
     private final BossUserManager bossUserManager;

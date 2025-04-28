@@ -1,4 +1,4 @@
-package com.trionesdev.template.core.domains.boss.dto.cmd;
+package com.trionesdev.template.core.domains.boss.dto.user.cmd;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

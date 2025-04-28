@@ -19,7 +19,7 @@ import java.util.List;
 @ToString(callSuper = true)
 @TableName(value = BossRolePO.TABLE_NAME,autoResultMap = true)
 public class BossRolePO extends BaseLogicPO {
-    public static final String TABLE_NAME = "triones_boss_perm_role";
+    public static final String TABLE_NAME = "triones_boss_role";
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String parentId;

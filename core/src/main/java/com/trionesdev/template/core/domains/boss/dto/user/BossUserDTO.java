@@ -1,25 +1,27 @@
-package com.trionesdev.template.core.domains.boss.dto.cmd;
+package com.trionesdev.template.core.domains.boss.dto.user;
 
 import com.trionesdev.template.core.domains.boss.shared.enums.Gender;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.Instant;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BossUserCreateCmd {
+public class BossUserDTO {
     private String id;
     private String username;
     private String password;
+    private String encodedPassword;
     private String phone;
     private String email;
     private String avatar;
     private Gender gender;
     private String nickname;
     private Instant birthday;
+    private Boolean enabled;
 }

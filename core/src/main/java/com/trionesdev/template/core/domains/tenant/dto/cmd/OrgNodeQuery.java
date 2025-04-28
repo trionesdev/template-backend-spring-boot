@@ -1,5 +1,6 @@
 package com.trionesdev.template.core.domains.tenant.dto.cmd;
 
+import com.trionesdev.template.core.domains.tenant.shared.enums.OrgNodeType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,10 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class OrgNodeQuery {
     private String departmentId;
-    private String name;
+    private OrgNodeType type;
+    private String wd;
 }

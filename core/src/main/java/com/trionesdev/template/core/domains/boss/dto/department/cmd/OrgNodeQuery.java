@@ -1,6 +1,6 @@
-package com.trionesdev.template.core.domains.tenant.dto.cmd;
+package com.trionesdev.template.core.domains.boss.dto.department.cmd;
 
-import com.trionesdev.template.core.domains.tenant.shared.enums.OrgNodeType;
+import com.trionesdev.template.core.domains.boss.shared.enums.OrgNodeType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrgNodeQueryCmd {
+public class OrgNodeQuery {
     private String departmentId;
     private OrgNodeType type;
     private String wd;

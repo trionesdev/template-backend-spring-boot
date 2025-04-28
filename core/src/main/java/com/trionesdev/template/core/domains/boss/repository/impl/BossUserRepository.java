@@ -5,7 +5,7 @@ import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.template.core.domains.boss.dao.criteria.BossUserCriteria;
 import com.trionesdev.template.core.domains.boss.dao.impl.BossUserDAO;
 import com.trionesdev.template.core.domains.boss.dao.po.BossUserPO;
-import com.trionesdev.template.core.domains.boss.internal.BossDomainConvert;
+import com.trionesdev.template.core.domains.boss.internal.BossUserDomainConvert;
 import com.trionesdev.template.core.domains.boss.repository.aggregate.entity.BossUser;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Repository
 public class BossUserRepository {
-    private final BossDomainConvert convert;
+    private final BossUserDomainConvert convert;
     private final BossUserDAO bossUserDAO;
 
     public void save(BossUser bossUser) {
