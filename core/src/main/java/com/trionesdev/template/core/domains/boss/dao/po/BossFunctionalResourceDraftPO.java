@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.trionesdev.commons.mybatisplus.po.BasePO;
 import com.trionesdev.template.core.domains.boss.shared.enums.FunctionalResourceType;
+import com.trionesdev.template.core.domains.boss.shared.enums.ClientType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,6 +23,7 @@ public class BossFunctionalResourceDraftPO extends BasePO {
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
     private String parentId;
+    private ClientType clientType;
     private FunctionalResourceType type;
     private String groupCode;
     private String name;
