@@ -42,6 +42,10 @@ public class BossUserService {
         bossUserManager.create(bossUser);
     }
 
+    public void deleteBossUserById(String id) {
+        bossUserManager.deleteById(id);
+    }
+
     public void updateBossUserById(BossUserUpdateCmd cmd) {
         var bossUser = convert.userUpdateCmdToEntity(cmd);
         bossUserManager.updateById(bossUser);

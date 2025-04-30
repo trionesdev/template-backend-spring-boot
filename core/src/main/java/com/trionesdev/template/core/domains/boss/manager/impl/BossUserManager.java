@@ -8,6 +8,7 @@ import com.trionesdev.template.core.domains.boss.shared.enums.AccountType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -21,8 +22,12 @@ public class BossUserManager {
         bossUserRepository.save(bossUser);
     }
 
+    public void deleteById(String id) {
+        bossUserRepository.deleteById(id);
+    }
+
     public void updateById(BossUser bossUser) {
-        bossUserRepository.save(bossUser);
+        bossUserRepository.updateById(bossUser);
     }
 
     public Optional<BossUser> findUserById(String id) {
@@ -46,4 +51,9 @@ public class BossUserManager {
     public PageInfo<BossUser> findUserPage(BossUserCriteria criteria) {
         return bossUserRepository.findPage(criteria);
     }
+
+    public List<BossUser> findUserByIds(Collection<String> ids) {
+        return bossUserRepository.findListByIds(ids);
+    }
+
 }

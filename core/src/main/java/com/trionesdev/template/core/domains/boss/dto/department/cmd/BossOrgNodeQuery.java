@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrgNodeQuery {
+public class BossOrgNodeQuery {
     private String departmentId;
     private OrgNodeType type;
     private String wd;

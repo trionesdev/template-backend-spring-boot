@@ -12,6 +12,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,6 +26,10 @@ public class BossUserRepository {
     public void save(BossUser bossUser) {
         var bossUserPo = convert.userEntityToPo(bossUser);
         bossUserDAO.save(bossUserPo);
+    }
+
+    public void deleteById(String id) {
+        bossUserDAO.removeById(id);
     }
 
     public void updateById(BossUser bossUser) {
@@ -60,6 +65,10 @@ public class BossUserRepository {
     public PageInfo<BossUser> findPage(BossUserCriteria criteria) {
         var pageInfo = bossUserDAO.selectPage(criteria);
         return PageUtils.of(pageInfo, assembleBossUsers(pageInfo.getRows()));
+    }
+
+    public List<BossUser> findListByIds(Collection<String> ids) {
+        return assembleBossUsers(bossUserDAO.listByIds(ids));
     }
 
 }

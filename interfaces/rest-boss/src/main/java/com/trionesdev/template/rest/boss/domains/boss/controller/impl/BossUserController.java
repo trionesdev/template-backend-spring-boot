@@ -4,11 +4,14 @@ import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.model.ActorProfile;
 import com.trionesdev.template.core.domains.boss.dto.user.BossUserDTO;
 import com.trionesdev.template.core.domains.boss.service.impl.BossUserService;
+import com.trionesdev.template.rest.boss.domains.boss.controller.ro.user.BossUserCreateRO;
 import com.trionesdev.template.rest.boss.domains.boss.controller.ro.user.BossUserQueryRO;
+import com.trionesdev.template.rest.boss.domains.boss.controller.ro.user.BossUserUpdateRO;
 import com.trionesdev.template.rest.boss.domains.boss.internal.BossUserRestBossConvert;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,6 +24,27 @@ import static com.trionesdev.template.rest.boss.domains.boss.internal.BossConsta
 public class BossUserController {
     private final BossUserRestBossConvert convert;
     private final BossUserService bossUserService;
+
+    @Operation(summary = "新建用户")
+    @PostMapping(value = "users")
+    public void createUser(@Validated @RequestBody BossUserCreateRO args) {
+        var user = convert.userCreateCmdFromCreateRo(args);
+        bossUserService.createBossUser(user);
+    }
+
+    @Operation(summary = "根据ID删除用户")
+    @DeleteMapping(value = "users/{id}")
+    public void deleteUserById(@PathVariable(value = "id") String id) {
+        bossUserService.deleteBossUserById(id);
+    }
+
+    @Operation(summary = "根据ID修改用户")
+    @PutMapping(value = "users/{id}")
+    public void updateUserById(@PathVariable(value = "id") String id, @Validated @RequestBody BossUserUpdateRO args) {
+        var user = convert.userUpdateCmdFromUpdateRo(args);
+        user.setId(id);
+        bossUserService.updateBossUserById(user);
+    }
 
     @Operation(summary = "获取当前用户信息(ActorProfile)")
     @GetMapping(value = "actor/profile")

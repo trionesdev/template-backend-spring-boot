@@ -1,7 +1,10 @@
 package com.trionesdev.template.rest.boss.domains.boss.internal;
 
+import com.trionesdev.template.core.domains.boss.dao.criteria.BossDepartmentMemberCriteria;
 import com.trionesdev.template.core.domains.boss.dao.po.BossDepartmentPO;
+import com.trionesdev.template.core.domains.tenant.dao.criteria.DepartmentMemberCriteria;
 import com.trionesdev.template.rest.boss.domains.boss.controller.ro.department.BossDepartmentCreateRO;
+import com.trionesdev.template.rest.boss.domains.boss.controller.ro.department.BossDepartmentMemberQueryRO;
 import com.trionesdev.template.rest.boss.domains.boss.controller.ro.department.BossDepartmentUpdateRO;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -12,4 +15,6 @@ public interface BossDepartmentRestBossConvert {
     BossDepartmentPO departmentFromCreateRo(BossDepartmentCreateRO args);
 
     BossDepartmentPO departmentFromUpdateRo(BossDepartmentUpdateRO args);
+
+    BossDepartmentMemberCriteria departmentCriteriaFromQueryRo(BossDepartmentMemberQueryRO query);
 }
