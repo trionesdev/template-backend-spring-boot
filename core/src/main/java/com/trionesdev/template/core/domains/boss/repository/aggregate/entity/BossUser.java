@@ -1,5 +1,6 @@
 package com.trionesdev.template.core.domains.boss.repository.aggregate.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.trionesdev.template.core.domains.boss.shared.enums.AccountType;
 import com.trionesdev.template.core.domains.boss.shared.enums.Gender;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,8 @@ public class BossUser {
     private Gender gender;
     private String nickname;
     private Instant birthday;
+    @TableField(value = "is_master")
+    private Boolean master;
     private Boolean enabled;
 
     public String getEncodedPassword() {

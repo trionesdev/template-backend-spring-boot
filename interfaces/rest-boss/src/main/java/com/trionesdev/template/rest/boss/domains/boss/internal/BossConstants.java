@@ -5,4 +5,6 @@ import static com.trionesdev.template.rest.boss.internal.RestConstants.CONTEXT_P
 public class BossConstants {
     public final static String BOSS_USER_PATH = CONTEXT_PATH + "boss/user/";
     public final static String BOSS_DEPARTMENT_PATH = CONTEXT_PATH + "boss/department/";
+    public final static String BOSS_ROLE_PATH = CONTEXT_PATH + "boss/role/";
+    public final static String BOSS_PERM_PATH = CONTEXT_PATH + "boss/perm/";
 }
