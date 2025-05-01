@@ -1,6 +1,6 @@
 package com.trionesdev.template.core.domains.notification.service.impl;
 
-import com.trionesdev.template.core.domains.notification.manager.impl.NotificationManager;
+import com.trionesdev.mes.core.domains.notification.manager.impl.NotificationManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

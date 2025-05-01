@@ -60,14 +60,7 @@ public class TenantService {
         if (Objects.isNull(user)) {
             throw new NotFoundException(USER_NOT_FOUND);
         }
-        var tenantMember = TenantMember.builder()
-                .userId(user.getId())
-                .avatar(user.getAvatar())
-                .nickname(user.getNickname())
-                .username(user.getUsername())
-                .phone(user.getPhone())
-                .email(user.getEmail())
-                .build();
+        var tenantMember = TenantMember.builder().userId(user.getId()).avatar(user.getAvatar()).nickname(user.getNickname()).username(user.getUsername()).phone(user.getPhone()).email(user.getEmail()).build();
         tenantManager.createTenant(tenant, tenantMember);
     }
 
@@ -81,26 +74,10 @@ public class TenantService {
         if (!verifySuccess) {
             throw new BusinessException(VALIDATION_CODE_ERROR);
         }
-        var userCreatCmd = UserCreateCmd.builder()
-                .phone(cmd.getPhone())
-                .email(cmd.getEmail())
-                .username(cmd.getUsername())
-                .nickname(cmd.getNickname())
-                .password(cmd.getPassword())
-                .build();
+        var userCreatCmd = UserCreateCmd.builder().phone(cmd.getPhone()).email(cmd.getEmail()).username(cmd.getUsername()).nickname(cmd.getNickname()).password(cmd.getPassword()).build();
         var user = userProvider.createUserByPhoneOrReturnExist(userCreatCmd);
-        var tenant = TenantPO.builder()
-                .name(cmd.getName())
-                .description(cmd.getDescription())
-                .build();
-        var tenantMember = TenantMember.builder()
-                .userId(user.getId())
-                .avatar(user.getAvatar())
-                .nickname(user.getNickname())
-                .username(user.getUsername())
-                .phone(user.getPhone())
-                .email(user.getEmail())
-                .build();
+        var tenant = TenantPO.builder().name(cmd.getName()).description(cmd.getDescription()).build();
+        var tenantMember = TenantMember.builder().userId(user.getId()).avatar(user.getAvatar()).nickname(user.getNickname()).username(user.getUsername()).phone(user.getPhone()).email(user.getEmail()).build();
         tenantManager.createTenant(tenant, tenantMember);
     }
 
@@ -131,11 +108,31 @@ public class TenantService {
         return tenants.stream().map(convert::tenantPoToDto).collect(Collectors.toList());
     }
 
+
     public PageInfo<TenantDTO> queryTenantPage(TenantCriteria criteria) {
         var pageInfo = tenantManager.findTenantPage(criteria);
         return PageUtils.of(pageInfo, assembleTenantDtoList(pageInfo.getRows()));
     }
 
+    private List<TenantDetailsDTO> assembleTenantDetailsList(List<TenantPO> tenants) {
+        if (CollectionUtils.isEmpty(tenants)) {
+            return new ArrayList<>();
+        }
+        var tenantIds = tenants.stream().map(TenantPO::getId).toList();
+        var memberMap = tenantMemberManager.findTenantMastersByTenantIds(tenantIds).stream().collect(Collectors.toMap(TenantMember::getTenantId, v -> v, (a, b) -> a));
+        return tenants.stream().map((tenant) -> {
+            var tenantDetails = convert.tenantPoToDetailsDto(tenant);
+            tenantDetails.setMaster(Optional.ofNullable(memberMap.get(tenant.getId())).map(tenantMember -> {
+                return convert.memberEntityToDTO(tenantMember);
+            }).orElse(null));
+            return tenantDetails;
+        }).collect(Collectors.toList());
+    }
+
+    public PageInfo<TenantDetailsDTO> queryTenantDetailsPage(TenantCriteria criteria) {
+        var pageInfo = tenantManager.findTenantPage(criteria);
+        return PageUtils.of(pageInfo, assembleTenantDetailsList(pageInfo.getRows()));
+    }
 
     //----------------
 
@@ -179,23 +176,11 @@ public class TenantService {
     public Optional<ActorProfile> findActorProfile() {
         if (Objects.equals(ActorRoleEnum.TENANT_MEMBER.name(), actorContext.getRole())) {
             return tenantMemberManager.findMemberById(actorContext.getMemberId()).map(memberSnap -> {
-                return ActorProfile.builder()
-                        .role(ActorRoleEnum.TENANT_MEMBER.name())
-                        .nickname(memberSnap.getNickname())
-                        .userId(actorContext.getUserId())
-                        .memberId(actorContext.getMemberId())
-                        .tenantId(actorContext.getTenantId())
-                        .build();
+                return ActorProfile.builder().role(ActorRoleEnum.TENANT_MEMBER.name()).nickname(memberSnap.getNickname()).userId(actorContext.getUserId()).memberId(actorContext.getMemberId()).tenantId(actorContext.getTenantId()).build();
             });
         } else if (Objects.equals(ActorRoleEnum.USER.name(), actorContext.getRole())) {
             return Optional.ofNullable(userProvider.getUserById(actorContext.getUserId())).map(user -> {
-                return ActorProfile.builder()
-                        .role(ActorRoleEnum.USER.name())
-                        .nickname(user.getNickname())
-                        .userId(user.getId())
-                        .avatar(user.getAvatar())
-                        .tenantId(actorContext.getTenantId())
-                        .build();
+                return ActorProfile.builder().role(ActorRoleEnum.USER.name()).nickname(user.getNickname()).userId(user.getId()).avatar(user.getAvatar()).tenantId(actorContext.getTenantId()).build();
             });
 
         }

@@ -11,6 +11,7 @@ import com.trionesdev.template.core.domains.tenant.dao.criteria.TenantMemberCrit
 import com.trionesdev.template.core.domains.tenant.dao.mapper.TenantMemberMapper;
 import com.trionesdev.template.core.domains.tenant.dao.po.TenantMemberPO;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +30,8 @@ public class TenantMemberDAO extends ServiceImpl<TenantMemberMapper, TenantMembe
         var queryWrapper = new LambdaQueryWrapper<TenantMemberPO>();
         if (Objects.nonNull(criteria)) {
             queryWrapper.eq(StrUtil.isNotBlank(actorContext.getTenantId()), TenantMemberPO::getTenantId, actorContext.getTenantId())
+                    .eq(Objects.nonNull(criteria.getMaster()), TenantMemberPO::getMaster, criteria.getMaster())
+                    .in(CollectionUtils.isNotEmpty(criteria.getTenantIds()), TenantMemberPO::getTenantId, criteria.getTenantIds())
                     .and(StringUtils.isNoneBlank(criteria.getWd()), wdQueryWrapper -> {
                         wdQueryWrapper.like(TenantMemberPO::getName, criteria.getWd())
                                 .or().like(TenantMemberPO::getNickname, criteria.getWd());

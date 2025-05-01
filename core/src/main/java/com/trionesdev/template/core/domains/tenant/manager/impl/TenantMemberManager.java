@@ -9,10 +9,12 @@ import com.trionesdev.template.core.domains.tenant.dao.po.TenantPO;
 import com.trionesdev.template.core.domains.tenant.internal.aggregate.entity.TenantMember;
 import com.trionesdev.template.core.domains.tenant.repository.impl.TenantMemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -106,6 +108,13 @@ public class TenantMemberManager {
 
     public Optional<TenantMember> findMemberByUserId(String tenantId, String userId) {
         return tenantMemberRepository.findMemberByUserId(tenantId, userId);
+    }
+
+    public List<TenantMember> findTenantMastersByTenantIds(List<String> tenantIds) {
+        if (CollectionUtils.isEmpty(tenantIds)) {
+            return new ArrayList<>();
+        }
+        return tenantMemberRepository.findMemberList(TenantMemberCriteria.builder().tenantIds(tenantIds).master(true).build());
     }
 
 }

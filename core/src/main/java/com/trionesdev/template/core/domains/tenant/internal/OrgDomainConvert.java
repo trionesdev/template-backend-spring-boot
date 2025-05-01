@@ -22,16 +22,20 @@ import org.mapstruct.Named;
 public interface OrgDomainConvert {
 
     //region tenant
+    TenantDTO tenantPoToDto(TenantPO tenantPO);
+
+    TenantDetailsDTO tenantPoToDetailsDto(TenantPO tenantPO);
+
     TenantMemberPO from(TenantMemberCreateCmd cmd);
 
     TenantMember memberCreateCmdToEntity(TenantMemberCreateCmd cmd);
 
     TenantMember memberUpdateCmdToEntity(TenantMemberUpdateCmd cmd);
+
     TenantMember memberProfileUpdateCmdToEntity(TenantMemberProfileUpdateCmd cmd);
 
     TenantMemberPO from(TenantMemberDetailDTO tenantMember);
 
-    TenantDTO tenantPoToDto(TenantPO tenantPO);
 
     TenantMemberDetailDTO memberPOToDTO(TenantMember record);
 
@@ -40,6 +44,7 @@ public interface OrgDomainConvert {
     TenantMember memberPoToEntity(TenantMemberPO tenantMember);
 
     TenantMemberDTO memberEntityToDTO(TenantMember record);
+
 
     TenantMemberCriteria tenantMemberQueryToCriteria(TenantMemberQuery query);
 
