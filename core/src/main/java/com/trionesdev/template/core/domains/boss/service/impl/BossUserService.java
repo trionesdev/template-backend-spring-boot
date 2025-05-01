@@ -6,11 +6,13 @@ import com.trionesdev.commons.core.jwt.JwtClaims;
 import com.trionesdev.commons.core.jwt.JwtFacade;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.core.util.PageUtils;
+import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.commons.exception.NotFoundException;
 import com.trionesdev.commons.model.ActorProfile;
 import com.trionesdev.template.core.domains.boss.dao.criteria.BossUserCriteria;
 import com.trionesdev.template.core.domains.boss.dto.user.BossUserDTO;
 import com.trionesdev.template.core.domains.boss.dto.user.cmd.BossAccountSignInCmd;
+import com.trionesdev.template.core.domains.boss.dto.user.cmd.BossActorChangePasswordCmd;
 import com.trionesdev.template.core.domains.boss.dto.user.cmd.BossUserCreateCmd;
 import com.trionesdev.template.core.domains.boss.dto.user.cmd.BossUserUpdateCmd;
 import com.trionesdev.template.core.domains.boss.internal.BossUserDomainConvert;
@@ -23,6 +25,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.trionesdev.template.core.domains.boss.internal.BossErrors.PWD_ERROR;
 import static com.trionesdev.template.core.domains.user.internal.UserErrors.ACCOUNT_OR_PWD_ERROR;
 
 @RequiredArgsConstructor
@@ -85,6 +88,22 @@ public class BossUserService {
     public PageInfo<BossUserDTO> findUserPage(BossUserCriteria criteria) {
         var pageInfo = bossUserManager.findUserPage(criteria);
         return PageUtils.of(pageInfo, assembleBossUserDTOList(pageInfo.getRows()));
+    }
+
+    public void updateActorProfile(BossUserUpdateCmd cmd) {
+        var bossUser = convert.userUpdateCmdToEntity(cmd);
+        bossUser.setId(actorContext.getUserId());
+        bossUserManager.updateById(bossUser);
+    }
+
+    public void changeActorPassword(BossActorChangePasswordCmd cmd) {
+        bossUserManager.findUserById(actorContext.getUserId()).ifPresent(user -> {
+            if (!user.passwordMatch(cmd.getOldPassword())) {
+                throw new BusinessException(PWD_ERROR);
+            }
+            user.setPassword(cmd.getPassword());
+            bossUserManager.updateById(user);
+        });
     }
 
 }

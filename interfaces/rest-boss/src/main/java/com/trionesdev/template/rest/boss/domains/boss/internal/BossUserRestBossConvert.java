@@ -6,10 +6,7 @@ import com.trionesdev.template.core.domains.boss.dto.user.cmd.BossAccountSignInC
 import com.trionesdev.template.core.domains.boss.dto.user.cmd.BossUserCreateCmd;
 import com.trionesdev.template.core.domains.boss.dto.user.cmd.BossUserUpdateCmd;
 import com.trionesdev.template.core.domains.boss.repository.aggregate.entity.BossUser;
-import com.trionesdev.template.rest.boss.domains.boss.controller.ro.user.AccountSignInRO;
-import com.trionesdev.template.rest.boss.domains.boss.controller.ro.user.BossUserCreateRO;
-import com.trionesdev.template.rest.boss.domains.boss.controller.ro.user.BossUserQueryRO;
-import com.trionesdev.template.rest.boss.domains.boss.controller.ro.user.BossUserUpdateRO;
+import com.trionesdev.template.rest.boss.domains.boss.controller.ro.user.*;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -20,6 +17,7 @@ public interface BossUserRestBossConvert {
     BossUserCreateCmd userCreateCmdFromCreateRo(BossUserCreateRO args);
 
     BossUserUpdateCmd userUpdateCmdFromUpdateRo(BossUserUpdateRO args);
+    BossUserUpdateCmd userUpdateCmdFromActorUpdateRo(BossActorProfileUpdateRO args);
 
     BossAccountSignInCmd accountSignInCmdFromRo(AccountSignInRO args);
 

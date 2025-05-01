@@ -44,8 +44,12 @@ public class BossUser {
     }
 
 
-    public Boolean passwordMatch(String encryptedPassword) {
+    public Boolean encryptedPasswordMatch(String encryptedPassword) {
         return new BCryptPasswordEncoder().matches(password, encryptedPassword);
+    }
+
+    public Boolean passwordMatch(String password) {
+        return new BCryptPasswordEncoder().matches(password, encodedPassword);
     }
 
     public AccountType getAccountType() {

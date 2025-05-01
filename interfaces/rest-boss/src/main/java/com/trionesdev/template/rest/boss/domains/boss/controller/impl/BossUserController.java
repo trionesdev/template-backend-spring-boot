@@ -3,10 +3,9 @@ package com.trionesdev.template.rest.boss.domains.boss.controller.impl;
 import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.model.ActorProfile;
 import com.trionesdev.template.core.domains.boss.dto.user.BossUserDTO;
+import com.trionesdev.template.core.domains.boss.dto.user.cmd.BossActorChangePasswordCmd;
 import com.trionesdev.template.core.domains.boss.service.impl.BossUserService;
-import com.trionesdev.template.rest.boss.domains.boss.controller.ro.user.BossUserCreateRO;
-import com.trionesdev.template.rest.boss.domains.boss.controller.ro.user.BossUserQueryRO;
-import com.trionesdev.template.rest.boss.domains.boss.controller.ro.user.BossUserUpdateRO;
+import com.trionesdev.template.rest.boss.domains.boss.controller.ro.user.*;
 import com.trionesdev.template.rest.boss.domains.boss.internal.BossUserRestBossConvert;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -69,6 +68,20 @@ public class BossUserController {
         criteria.setPageNum(pageNnm);
         criteria.setPageSize(pageSize);
         return bossUserService.findUserPage(criteria);
+    }
+
+    @Operation(summary = "需修改当前用户信息")
+    @PutMapping(value = "user/actor")
+    public void updateActorProfile(@Validated @RequestBody BossActorProfileUpdateRO args) {
+        var user = convert.userUpdateCmdFromActorUpdateRo(args);
+        bossUserService.updateActorProfile(user);
+    }
+
+    @Operation(summary = "修改当前用户密码")
+    @PutMapping(value = "user/actor/password")
+    public void actorChangePwd(@Validated @RequestBody BossActorChangePasswordRO args) {
+        var changePwd = BossActorChangePasswordCmd.builder().oldPassword(args.getOldPassword()).password(args.getPassword()).build();
+        bossUserService.changeActorPassword(changePwd);
     }
 
 }
