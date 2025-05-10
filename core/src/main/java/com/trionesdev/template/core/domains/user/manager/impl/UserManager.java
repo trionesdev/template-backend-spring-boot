@@ -1,6 +1,8 @@
 package com.trionesdev.template.core.domains.user.manager.impl;
 
+import com.trionesdev.commons.core.page.PageInfo;
 import com.trionesdev.commons.exception.DuplicatedException;
+import com.trionesdev.template.core.domains.user.dao.criteria.UserCriteria;
 import com.trionesdev.template.core.domains.user.internal.entity.User;
 import com.trionesdev.template.core.domains.user.internal.entity.User.AccountType;
 import com.trionesdev.template.core.domains.user.repository.impl.UserRepository;
@@ -99,6 +101,10 @@ public class UserManager {
     public void changeTenant(User user, String tenantId) {
         user.changeTenant(tenantId);
         userRepository.updateById(user);
+    }
+
+    public PageInfo<User> findUserPage(UserCriteria criteria){
+        return userRepository.findUserPage(criteria);
     }
 
 }

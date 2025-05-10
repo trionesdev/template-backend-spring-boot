@@ -20,12 +20,14 @@ public class OssFacade {
                 .inputStream(cmd.getInputStream())
                 .contentType(cmd.getContentType())
                 .build();
-        OssPutObjectResponse ossPutObjectResponse = ossTemplate.getIfAvailable().putObject(ossPutObjectRequest);
+        OssTemplate oss = this.ossTemplate.getObject();
+        OssPutObjectResponse ossPutObjectResponse = oss.putObject(ossPutObjectRequest);
         return ossPutObjectResponse.getUrl();
     }
 
     public String getObjectUrl(String objectName) {
         OssGetObjectUrlRequest request = OssGetObjectUrlRequest.builder().objectName(objectName).build();
-        return ossTemplate.getIfAvailable().getObjectUrl(request);
+        OssTemplate oss = this.ossTemplate.getObject();
+        return oss.getObjectUrl(request);
     }
 }

@@ -26,8 +26,9 @@ public class SmsFacade {
                 smsParams.add(SmsVariable.builder().key(entries.get(i).getKey()).value(entries.get(i).getValue()).index(i).build());
             }
         }
-        SmsSendRequest sendRequest = SmsSendRequest.builder().templateCode(smsTemplate.getIfAvailable().template(sendSmsCmd.getTemplateCode())).phoneNumbers(sendSmsCmd.getPhone()).variables(smsParams).build();
-        smsTemplate.getIfAvailable().send(sendRequest);
+        SmsTemplate sms = smsTemplate.getObject();
+        SmsSendRequest sendRequest = SmsSendRequest.builder().templateCode(sms.template(sendSmsCmd.getTemplateCode())).phoneNumbers(sendSmsCmd.getPhone()).variables(smsParams).build();
+        sms.send(sendRequest);
     }
 
 }

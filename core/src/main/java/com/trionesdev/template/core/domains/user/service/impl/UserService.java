@@ -4,11 +4,14 @@ import com.trionesdev.commons.context.actor.ActorContext;
 import com.trionesdev.commons.context.actor.ActorRoleEnum;
 import com.trionesdev.commons.core.jwt.JwtClaims;
 import com.trionesdev.commons.core.jwt.JwtFacade;
+import com.trionesdev.commons.core.page.PageInfo;
+import com.trionesdev.commons.core.util.PageUtils;
 import com.trionesdev.commons.exception.BusinessException;
 import com.trionesdev.commons.exception.NotFoundException;
 import com.trionesdev.commons.model.ActorProfile;
 import com.trionesdev.template.core.domains.notification.provider.impl.NotificationProvider;
 import com.trionesdev.template.core.domains.tenant.provider.OrgProvider;
+import com.trionesdev.template.core.domains.user.dao.criteria.UserCriteria;
 import com.trionesdev.template.core.domains.user.dto.*;
 import com.trionesdev.template.core.domains.user.dto.cmd.AccountSignInCmd;
 import com.trionesdev.template.core.domains.user.dto.cmd.ActorChangePasswordCmd;
@@ -18,10 +21,14 @@ import com.trionesdev.template.core.domains.user.internal.UserDomainConvert;
 import com.trionesdev.template.core.domains.user.internal.entity.User;
 import com.trionesdev.template.core.domains.user.manager.impl.UserManager;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.trionesdev.template.core.domains.user.internal.UserErrors.*;
 
@@ -108,5 +115,18 @@ public class UserService {
         });
     }
 
+    private List<UserDTO> assembleUserDTOList(List<User> users) {
+        if (CollectionUtils.isEmpty(users)) {
+            return new ArrayList<>();
+        }
+        return users.stream().map(user -> {
+            return convert.userEntityToDTO(user);
+        }).collect(Collectors.toList());
+    }
+
+    public PageInfo<UserDTO> findUserPage(UserCriteria criteria) {
+        var pageInfo = userManager.findUserPage(criteria);
+        return PageUtils.of(pageInfo, assembleUserDTOList(pageInfo.getRows()));
+    }
 
 }

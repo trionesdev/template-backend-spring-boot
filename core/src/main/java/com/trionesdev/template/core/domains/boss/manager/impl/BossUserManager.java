@@ -41,7 +41,7 @@ public class BossUserManager {
         } else {
             userSnap = bossUserRepository.findByUsername(user.getAccount());
         }
-        return userSnap.filter(userPO -> user.passwordMatch(userPO.getEncodedPassword()));
+        return userSnap.filter(userPO -> user.encryptedPasswordMatch(userPO.getEncodedPassword()));
     }
 
     public List<BossUser> findUserList(BossUserCriteria criteria) {
