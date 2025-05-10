@@ -43,15 +43,7 @@ public class SwaggerConfiguration {
                 .build();
     }
 
-    @Bean
-    public GroupedOpenApi contractorApi() {
-        return GroupedOpenApi.builder()
-                .group("Triones Admin Contractor API")
-                .pathsToMatch("/boss-api/**")
-                .packagesToScan("com.trionesdev.template.rest.contractor")
-                .addOpenApiCustomizer(authorizationOpenApiCustomiser())
-                .build();
-    }
+
     public OpenApiCustomizer authorizationOpenApiCustomiser() {
         return openApi -> openApi
                 .info(new Info().title("Triones Admin API"))
