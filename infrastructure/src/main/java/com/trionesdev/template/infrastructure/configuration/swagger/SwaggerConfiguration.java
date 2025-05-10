@@ -14,6 +14,16 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 public class SwaggerConfiguration {
 
     @Bean
+    public GroupedOpenApi backendApi() {
+        return GroupedOpenApi.builder()
+                .group("Triones Admin Backend API")
+                .pathsToMatch("/api/**")
+                .packagesToScan("com.trionesdev.template.rest.backend")
+                .addOpenApiCustomizer(authorizationOpenApiCustomiser())
+                .build();
+    }
+
+    @Bean
     public GroupedOpenApi tenantApi() {
         return GroupedOpenApi.builder()
                 .group("Triones Admin Tenant API")
@@ -23,6 +33,25 @@ public class SwaggerConfiguration {
                 .build();
     }
 
+    @Bean
+    public GroupedOpenApi bossApi() {
+        return GroupedOpenApi.builder()
+                .group("Triones Admin Boss API")
+                .pathsToMatch("/boss-api/**")
+                .packagesToScan("com.trionesdev.template.rest.boss")
+                .addOpenApiCustomizer(authorizationOpenApiCustomiser())
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi contractorApi() {
+        return GroupedOpenApi.builder()
+                .group("Triones Admin Contractor API")
+                .pathsToMatch("/boss-api/**")
+                .packagesToScan("com.trionesdev.template.rest.contractor")
+                .addOpenApiCustomizer(authorizationOpenApiCustomiser())
+                .build();
+    }
     public OpenApiCustomizer authorizationOpenApiCustomiser() {
         return openApi -> openApi
                 .info(new Info().title("Triones Admin API"))
