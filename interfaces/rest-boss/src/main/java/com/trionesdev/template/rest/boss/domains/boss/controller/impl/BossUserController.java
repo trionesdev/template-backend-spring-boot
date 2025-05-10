@@ -18,7 +18,7 @@ import static com.trionesdev.template.rest.boss.domains.boss.internal.BossConsta
 
 @Tag(name = "BOSS/用户")
 @RequiredArgsConstructor
-@RestController("boss_userController")
+@RestController("boss_bossUserController")
 @RequestMapping(BOSS_USER_PATH)
 public class BossUserController {
     private final BossUserRestBossConvert convert;
